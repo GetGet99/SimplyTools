@@ -22,6 +22,9 @@
                 <FeatureCard title="Cases!" href="cases">
                     Want to lowercase? UPPERCASE? swappingCASE? or raNDomcAsE? We got you covered.
                 </FeatureCard>
+                <FeatureCard title="Programmer Calculator" href="progcalc">
+                    Calculator in many number bases.
+                </FeatureCard>
             </main>
         </div>
         <footer class="m-4 md:text-center">

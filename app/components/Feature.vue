@@ -5,7 +5,7 @@
 </script>
 <template>
     <div class="flex flex-col gap-16">
-        <Control class="p-button-icon rounded-control absolute m-4 top-0 left-0">
+        <Control class="p-button-icon rounded-control absolute m-4 top-0 left-0 mt-[max(1rem,_var(--app-titlebar-height,_0px))]">
             <OurLink class="manual" tabindex="0" href="/">
                 <Icon :icon=LeftArrow alt="" />
             </OurLink>
