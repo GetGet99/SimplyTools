@@ -4,15 +4,15 @@
             Simple Tools
         </h1>
         <div>
-            <h2 class="h5 text-center">Free simple tools! No ads! No data stealing!</h2>
+            <h2 class="h5 text-center">Free simple tools locally run in your browser!</h2>
             <noscript class="h2">
                 JavaScript is required for the most part of the site. As all tools are written to work
-                    locally.
+                locally.
             </noscript>
         </div>
         <div class="flex flex-col">
             <main class="mx-30 sm:mx2 my-2 grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-                <FeatureCard title="Base 64 Converter" href="b64">
+                <FeatureCard title="Base 64 Converter" href="dev/b64">
                     A simple <code>atob</code> and <code>btoa</code> GUI wrapper
                 </FeatureCard>
                 <FeatureCard title="Random Number Generator" href="rng">
@@ -22,13 +22,11 @@
                 <FeatureCard title="Cases!" href="cases">
                     Want to lowercase? UPPERCASE? swappingCASE? or raNDomcAsE? We got you covered.
                 </FeatureCard>
-                <FeatureCard title="Programmer Calculator" href="progcalc">
+                <FeatureCard title="Programmer Calculator" href="dev/progcalc">
                     Calculator in many number bases.
                 </FeatureCard>
             </main>
         </div>
-        <footer class="m-4 md:text-center">
-            Simple Tools is open sourced on <a href="https://github.com/GetGet99/SimpleTools">GitHub</a>.
-        </footer>
+        <Footer />
     </div>
 </template>

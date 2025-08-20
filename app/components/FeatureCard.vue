@@ -3,7 +3,7 @@
 </script>
 <template>
     <OurLink :href class="manual group p-4 border control-border-control active:control-border-control-pressed bg-card rounded-2">
-        <div class="grid flex-col gap-3">
+        <div class="grid featurecard flex-col gap-3">
             <h3 class="text-card-title">{{ title }}</h3>
             <p class="card-text min-h-20">
                 <slot></slot>
@@ -18,7 +18,7 @@
     </OurLink>
 </template>
 <style lang="css" scoped>
-    .grid {
+    .featurecard {
         grid-template-rows: auto minmax(0, 1fr) auto;
     }
 </style>

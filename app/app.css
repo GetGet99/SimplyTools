@@ -61,6 +61,9 @@ body:not(.app) {
 body.app {
     --background-color-root: transparent;
 }
+body.app .app-hidden {
+    @apply hidden;
+}
 
 body {
     @variant dark {

@@ -331,14 +331,14 @@
         }
         return {}
     }
-    function displayOf(num : bigint) {
+    function displayOf(num: bigint) {
         return format(num, Number(base.value), base.value === 16n || base.value === 2n ? 4 : 3, signed.value === 'signed')
     }
     const display = computed(() => error.value || displayOf(value.value))
-    
+
 </script>
 <template>
-    <Feature tool="Programmer Calculator" class="flex justify-center">
+    <Feature category="dev" tool="Programmer Calculator" class="flex justify-center">
         <div class="flex flex-col w-screen sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
             <div class="flex flex-col text-right">
                 <span class="h2 h-5 text-subtitle uppercase mr-4">{{ expressionDisplay }}</span>
@@ -430,10 +430,33 @@
                 }}</Button>
             </div>
         </div>
+
+        <template #summary>
+            Convert numbers between decimal, hexadecimal, binary, and octal, with support for bit shifts up to 64-bits.
+        </template>
+
+        <template #details>
+            <p>
+                This calculator lets you work across multiple number systems — base 10 (decimal), base 16 (hexadecimal),
+                base 8 (octal), and base 2 (binary). It’s designed for quick conversions and bit-level operations.
+            </p>
+            <ul>
+                <li>Switch between <strong>logical</strong> and <strong>arithmetic</strong> bit shifts with the
+                    “Bit Shifts” toggle.</li>
+                <li>Choose how negative numbers appear: as raw two’s complement bits (e.g., <code>FFFF FF85</code>) or as the signed value (e.g., <code>-7B</code>).</li>
+                <li>Handle values up to <strong>64 bits</strong>, with support for QWORD (64-bit), DWORD (32-bit),
+                    WORD (16-bit), and BYTE (8-bit) modes.</li>
+            </ul>
+            <p>
+                ⚠️ Note: numbers can overflow depending on the selected size. This tool simulates real overflow
+                behavior,
+                so results match what you’d see in actual computation.
+            </p>
+        </template>
     </Feature>
 </template>
 <style lang="css" scoped>
-    @reference '../app.css';
+    @reference '../../app.css';
 
     [data-keyboardfocus="hidden"],
     [data-keyboardfocus="hidden"] * {

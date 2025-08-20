@@ -51,7 +51,7 @@
     }
 </script>
 <template>
-    <Feature tool="RNG" class="flex justify-center">
+    <Feature category="none" tool="RNG" class="flex justify-center">
         <div class="flex flex-col items-center gap-4 w-fit">
             <span>Generate me random <ToggleGroupRoot class="inline-flex" v-model="mode">
                     <ToggleGroupItem value="integer" as-child>
@@ -78,9 +78,11 @@
                     placeholder="Generate Count (Required)" /> numbers
             </span>
             <Button class="p-button rounded-control" @click="generate">Generate</Button>
-            <TextBox ref="outputTb" :model-value="output" multiline class="w-full" readonly placeholder='Press "Generate" button above!' />
+            <TextBox ref="outputTb" :model-value="output" multiline class="w-full" readonly
+                placeholder='Press "Generate" button above!' />
             <div class="w-full flex justify-end gap-2 -mt-2">
-                <Button :varient="autoClear ? 'accent' : 'control'" class="p-button rounded-control" @click="autoClear = !autoClear">
+                <Button :varient="autoClear ? 'accent' : 'control'" class="p-button rounded-control"
+                    @click="autoClear = !autoClear">
                     Auto Clear: {{ autoClear ? 'On' : 'Off' }}
                 </Button>
                 <Button title="Copy" class="p-button-icon rounded-control" @click="copy">
@@ -91,5 +93,21 @@
                 </Button>
             </div>
         </div>
+        <template #summary>
+            Generate random integers or real numbers within a custom range.
+        </template>
+
+        <template #details>
+            <p>
+                This random number generator lets you quickly produce random values for any purpose. Choose whether you
+                need whole numbers (integers) or decimal values (real numbers), then set your desired range.
+            </p>
+            <ul>
+                <li>Specify the minimum and maximum values to control the output range.</li>
+                <li>Generate multiple numbers at once by entering how many results you need.</li>
+                <li>Decide whether results replace the output (auto-clear) or get appended as a growing list.</li>
+                <li>Easily copy the results or clear them with a single click.</li>
+            </ul>
+        </template>
     </Feature>
 </template>
