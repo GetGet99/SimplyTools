@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme reference {
+    --background-color-root: #202020;
+    --color-foreground: white;
+    --background-color-card: #FFFFFF0D;
+    --fill-color-card: #00000019;
+    --color-accent: #00000019;
+    --color-accent-light-1: #fb9a44;
+    --color-accent-light-2: #fb9a44;
+    --color-accent-dark-1: #fb9a44;
+    /* --color-accent-dark-2: #fb9a44; */
+    --color-accent-primary: #fb9a44;
+    --color-accent-secondary: --alpha(#fb9a44 / 90%);
+    --color-accent-tertiary: --alpha(#fb9a44 / 80%);
+    --background-color-control-primary: #FFFFFF0F;
+    --background-color-control-secondary: #FFFFFF15;
+    --background-color-control-tertiary: #FFFFFF08;
+    --color-border-control-primary: #FFFFFF12;
+    --color-border-control-secondary: #FFFFFF18;
+    --color-border-control-on-accent-primary: #FFFFFF14;
+    --color-border-control-on-accent-secondary: #00000023;
+    --color-border-control-on-accent-tertiary: #00000037;
+    --border-color-control-strong: #FFFFFF8B;
+    --text-color-danger: #ff99a4;
+    --color-textbox-accent-highlight: #fb9a44;
+    --text-color-on-accent: white;
+    --text-color-on-accent-primary: black;
+}
+
+@theme {
+    --text-h1: var(--text-4xl);
+    --text-h2: var(--text-xl);
+    --text-card-title: var(--text-2xl);
+}
+
+body:not(.app) {
+    @variant dark {
+        --background-color-root: #202020;
+        --color-accent: #f7630c;
+        --color-accent-light-1: #fb9a44;
+        --color-accent-light-2: #fb9a44;
+        --color-accent-dark-1: #e05307;
+        --text-color-on-accent-primary: black;
+    }
+
+    @variant not-dark {
+        --background-color-root: #f3f3f3;
+        --color-accent: #f7630c;
+        --color-accent-light-1: #fb9a44;
+        --color-accent-light-2: #fb9a44;
+        --color-accent-dark-1: #e05307;
+        --text-color-on-accent-primary: white;
+    }
+}
+
+body.app {
+    --background-color-root: transparent;
+}
+
+body {
+    @variant dark {
+        --color-foreground: white;
+        --background-color-card: #FFFFFF0D;
+        --fill-color-card: #00000019;
+        --color-accent-primary: var(--color-accent-light-1);
+        --color-accent-secondary: --alpha(var(--color-accent-light-1) / 90%);
+        --color-accent-tertiary: --alpha(var(--color-accent-light-1) / 80%);
+        --background-color-control-primary: #FFFFFF0F;
+        --background-color-control-secondary: #FFFFFF15;
+        --background-color-control-tertiary: #FFFFFF08;
+        --color-border-control-primary: #FFFFFF12;
+        --color-border-control-secondary: #FFFFFF18;
+        --color-border-control-on-accent-primary: #FFFFFF14;
+        --color-border-control-on-accent-secondary: #00000023;
+        --color-border-control-on-accent-tertiary: #00000037;
+        --border-color-control-strong: #FFFFFF8B;
+        --text-color-danger: #ff99a4;
+        --color-textbox-accent-highlight: var(--color-accent-light-2);
+    }
+
+    @variant not-dark {
+        --color-foreground: black;
+        --background-color-card: #FFFFFFB3;
+        --fill-color-card: #0000000f;
+        --color-accent-primary: var(--color-accent-dark-1);
+        --color-accent-secondary: --alpha(var(--color-accent-dark-1) / 90%);
+        --color-accent-tertiary: --alpha(var(--color-accent-dark-1) / 80%);
+        --background-color-control-primary: #FFFFFFB3;
+        --background-color-control-secondary: #F9F9F980;
+        --background-color-control-tertiary: #F9F9F94D;
+        --color-border-control-primary: #0000000F;
+        --color-border-control-secondary: #00000029;
+        --color-border-control-on-accent-primary: #FFFFFF14;
+        --color-border-control-on-accent-secondary: #00000066;
+        --color-border-control-on-accent-tertiary: #00000037;
+        --border-color-control-strong: #00000072;
+        --text-color-danger: #c42b1c;
+        --color-textbox-accent-highlight: var(--color-accent-dark-1);
+    }
+}
+
+@layer base {
+    body {
+        @apply select-none selection:bg-accent selection:text-on-accent;
+    }
+
+    h1,
+    .h1 {
+        @apply text-h1 font-bold;
+    }
+
+    h2,
+    .h2 {
+        @apply text-h2;
+    }
+
+    a:not(.manual) {
+        @apply underline text-accent-primary hover:text-accent-secondary active:text-accent-tertiary cursor-pointer;
+    }
+
+    a {
+        @apply cursor-default;
+    }
+
+    button {
+        @apply p-button rounded-control border;
+    }
+}
+
+@utility border-gradient-to-b {
+    --tw-gradient-position: to bottom in oklab;
+    border-image: linear-gradient(var(--tw-gradient-stops));
+}
+
+@utility rounded-* {
+    border-radius: --spacing(--value(integer));
+}
+
+@utility border-image-none {
+    border-image: none;
+}
+
+@utility control-border-control {
+    /* @apply border-gradient-to-b from-border-control-secondary from-33% to-border-control-primary; */
+    @apply border-border-control-primary border-t-border-control-secondary;
+}
+
+@utility control-border-control-pressed {
+    @apply border-image-none border-border-control-primary;
+}
+
+@utility control-border-accent {
+    /* @apply border-gradient-to-b from-accent-secondary from-33% to-accent-primary; */
+    @apply border-accent-primary border-t-accent-secondary;
+}
+
+@utility control-border-accent-pressed {
+    @apply border-image-none border-transparent;
+}
+
+@utility p-control {
+    @apply px-2.75 py-1.25;
+    /* pt-1.25 pb-1.5; */
+}
+
+@utility p-button {
+    @apply px-2.75 py-1.25;
+    /* pt-1.25 pb-1.5; */
+}
+
+@utility p-button-icon {
+    @apply p-1.25;
+}
+
+@utility rounded-control {
+    @apply rounded-1;
+}
