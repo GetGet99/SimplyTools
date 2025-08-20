@@ -8,6 +8,7 @@
     const type2Clear = ref(false)
     const shiftMode = ref<'logical' | 'arith'>('arith')
     const hideFocus = ref(false)
+    const error = ref<string>('')
     type BinaryOp = '&' | '|' | '>>' | '<<' | '%' | '+' | '-' | '×' | '÷'
     let op: 'none' | BinaryOp = 'none'
     let prev = 0n
@@ -97,6 +98,11 @@
                 value.value = fromComplementDiscardOverflow(prev * value.value)
                 break
             case '÷':
+                if (value.value === 0n) {
+                    error.value = "Cannot divide by 0"
+                    value.value = 0n
+                    break
+                }
                 value.value = fromComplementDiscardOverflow(prev / value.value)
                 break
             case '<<':
@@ -124,7 +130,7 @@
         prev = 0n
         op = 'none'
         type2Clear.value = true
-        return "TODO"
+        return displayOf(value.value)
     }
     function bitwise_not() {
         // not possible to fell off the number of bits,
@@ -325,11 +331,15 @@
         }
         return {}
     }
-    const display = computed(() => format(value.value, Number(base.value), base.value === 16n || base.value === 2n ? 4 : 3, signed.value === 'signed'))
+    function displayOf(num : bigint) {
+        return format(num, Number(base.value), base.value === 16n || base.value === 2n ? 4 : 3, signed.value === 'signed')
+    }
+    const display = computed(() => error.value || displayOf(value.value))
+    
 </script>
 <template>
     <Feature tool="Programmer Calculator" class="flex justify-center">
-        <div class="flex flex-col min-w-100 gap-2 bg-card pt-4 rounded-4">
+        <div class="flex flex-col w-screen sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
             <div class="flex flex-col text-right">
                 <span class="h2 h-5 text-subtitle uppercase mr-4">{{ expressionDisplay }}</span>
                 <div class="h1 uppercase justify-end">
