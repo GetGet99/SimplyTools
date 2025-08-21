@@ -4,10 +4,10 @@
             SimplyTools
         </h1>
         <div>
-            <h2 class="h5 text-center">Free SimplyTools locally run in your browser!</h2>
-            <noscript class="h2">
-                JavaScript is required for the most part of the site. As all tools are written to work
-                locally.
+            <h2 class="h5 text-center">Free tools locally run in your browser!</h2>
+            <noscript class="h2 text-danger">
+                <div class="text-center">JavaScript is required for the most part of the site. All tools are written to work
+                locally via JavaScript.</div>
             </noscript>
         </div>
         <div class="flex flex-col">
@@ -24,6 +24,9 @@
                 </FeatureCard>
                 <FeatureCard title="Programmer Calculator" href="dev/progcalc">
                     Calculator in many number bases.
+                </FeatureCard>
+                <FeatureCard title="Color Playground" href="colors">
+                    Pick and play with different colors! Transform colors by inverting and more!
                 </FeatureCard>
             </main>
         </div>

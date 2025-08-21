@@ -32,7 +32,7 @@
 </script>
 <template>
     <div class="p-3 rounded-3 not-dark:bg-black bg-gradient-to-tl from-control-primary-dark to-control-primary-light border-control-strong">
-        <div class="relative w-full h-full cursor-crosshair" :style="{
+        <div class="relative w-full h-full cursor-crosshair touch-none" :style="{
             backgroundColor: `hsl(${color?.H ?? 0}, 100%, 50%)`
         }" @pointerdown="pointerDown" @pointermove="pointerMoved" @pointerup="pointerUp">
             <div

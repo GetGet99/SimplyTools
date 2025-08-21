@@ -373,6 +373,30 @@ export function getContrastOnWhiteBlack(color: Color): { 'black': number, 'white
 }
 
 export class ColorUtils {
+    static darker3(color: Color) {
+        const hsl = color.HSL
+        return new HSL(hsl.H, hsl.S, hsl.L * (1 - 0.30))
+    }
+    static darker2(color: Color) {
+        const hsl = color.HSL
+        return new HSL(hsl.H, hsl.S, hsl.L * (1 - 0.20))
+    }
+    static darker1(color: Color) {
+        const hsl = color.HSL
+        return new HSL(hsl.H, hsl.S, hsl.L * (1 - 0.10))
+    }
+    static brighter1(color: Color) {
+        const hsl = color.HSL
+        return new HSL(hsl.H, hsl.S, Math.min(hsl.L * (1 + 0.10), 1))
+    }
+    static brighter2(color: Color) {
+        const hsl = color.HSL
+        return new HSL(hsl.H, hsl.S, Math.min(hsl.L * (1 + 0.20), 1))
+    }
+    static brighter3(color: Color) {
+        const hsl = color.HSL
+        return new HSL(hsl.H, hsl.S, Math.min(hsl.L * (1 + 0.30), 1))
+    }
     static invert(color: Color) {
         const rgb = color.RGB
         return new RGB(255 - rgb.R, 255 - rgb.G, 255 - rgb.B)

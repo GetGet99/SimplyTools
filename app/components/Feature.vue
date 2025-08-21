@@ -8,7 +8,7 @@
     <div class="grid min-h-screen" style="grid-template-rows: 0px auto minmax(0, 1fr) auto;">
         <div class="sticky top-0 left-0 flex">
             <Control
-                class="p-button-icon rounded-control m-4 mt-[max(1rem,_var(--app-titlebar-height,_0px))] ml-[max(1rem,_var(--app-titlebar-height,_0px))]">
+                class="p-button-icon rounded-control m-4 mt-[max(1rem,_var(--app-titlebar-height,_0px))] ml-[max(1rem,_var(--app-titlebar-height,_0px))] h-max">
                 <OurLink class="manual" tabindex="0" href="/">
                     <Icon :icon=LeftArrow alt="" />
                 </OurLink>
@@ -20,7 +20,7 @@
                 are
                 unlikely to work correctly.</noscript>
         </div>
-        <div class="mt-16 mb-8">
+        <div class="mt-16 mb-8 w-full">
             <div :class>
                 <slot></slot>
             </div>

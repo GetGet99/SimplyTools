@@ -6,5 +6,13 @@ export default defineNuxtConfig({
     modules: ['reka-ui/nuxt'],
     vite: {
         plugins: [tailwindcss()]
+    },
+    app: {
+
+        head: {
+            meta: [
+                { name: 'color-scheme', content: 'dark light' }
+            ],
+        }
     }
 })
