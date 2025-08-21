@@ -54,10 +54,24 @@
 
         </div>
         <template #summary>
-            Easily pick a color and manipulate their properties
+            Pick a color, view contrast recommendations, and explore variations like brighter, darker, inverted, and opposite.
         </template>
+
         <template #details>
-            Unfortunately, I have not written this yet. 😅
+            <p>
+                The Color Playground helps you select and experiment with colors while checking their accessibility and
+                contrast levels. Pick any shade from the color picker and instantly see its RGB, HSL, and HSV values.
+            </p>
+            <ul>
+                <li>Preview text and background combinations with automatic WCAG contrast checks.</li>
+                <li>Generate related shades such as darker, brighter, inverted, and opposite colors.</li>
+                <li>Copy color codes or apply them instantly for quick design adjustments.</li>
+                <li>Use it directly in your browser on any device — no external servers involved.</li>
+            </ul>
+            <p>
+                Whether you’re a designer, developer, or just experimenting with palettes, this tool makes working with
+                colors faster and more accessible.
+            </p>
         </template>
     </Feature>
 </template>
