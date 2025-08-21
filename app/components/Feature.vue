@@ -27,10 +27,12 @@
         </div>
         <div class="app-hidden">
             <details v-if="!noDetails" class="text-center">
-                <summary><span class="italic">Extra Info: <slot name="summary"></slot></span></summary>
+                <summary><span class="italic">Extra Info: <slot name="summary">We are working on this tool. 🔨</slot></span></summary>
                 <div class="flex justify-center mt-2">
                     <div class="p-2 border control-border-control bg-card rounded-2 text-left max-w-max">
-                        <slot name="details"></slot>
+                        <slot name="details">
+                            That means unfortunately, I have not written the details yet. 😅
+                        </slot>
                         <p class="italic text-center mt-4">SimplyTools are tools run locally in your browser. Easily accessible from all
                             your devices
                             with
