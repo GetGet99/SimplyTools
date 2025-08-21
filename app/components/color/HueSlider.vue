@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <SliderRoot as="div" :model-value="[color?.H ?? 0]" @update:model-value="x => updateVal(x![0]!)" :min=0 :max=360 :step="0.1"
+    <SliderRoot as="div" :model-value="[color?.H ?? 0]" @update:model-value="x => updateVal(x![0]!)" :min=0 :max=360 :step="0.1" dir="ltr"
         class="relative h-4 flex touch-none">
         <SliderTrack class="relative h-4 hue grow rounded-full" :style="{
             // '--sat': `${(color?.S ?? 1) * 100}%`,

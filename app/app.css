@@ -170,7 +170,7 @@ body {
 
 @utility control-border-control {
     /* @apply border-gradient-to-b from-border-control-secondary from-33% to-border-control-primary; */
-    @apply border-border-control-primary border-t-border-control-secondary;
+    @apply border-border-control-primary dark:border-t-border-control-secondary not-dark:border-border-control-secondary;
 }
 
 @utility control-border-control-pressed {
