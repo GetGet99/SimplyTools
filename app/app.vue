@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import './app.css'
-    import 'vue-color/style.css'
     useHead({ bodyAttrs: { class: 'scheme-dark'}})
 </script>
 <template>
