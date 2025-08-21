@@ -1,10 +1,10 @@
 <template>
     <div class="w-screen min-h-screen grid grid-rows-[auto_auto_minmax(0,_1fr)_auto] gap-2">
         <h1 class="p-5 text-center">
-            Simple Tools
+            SimplyTools
         </h1>
         <div>
-            <h2 class="h5 text-center">Free simple tools locally run in your browser!</h2>
+            <h2 class="h5 text-center">Free SimplyTools locally run in your browser!</h2>
             <noscript class="h2">
                 JavaScript is required for the most part of the site. As all tools are written to work
                 locally.
