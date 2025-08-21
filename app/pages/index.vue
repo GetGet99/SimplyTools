@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen min-h-screen grid grid-rows-[auto_auto_minmax(0,_1fr)_auto] gap-2">
+    <div class="w-full min-h-screen grid grid-rows-[auto_auto_minmax(0,_1fr)_auto] gap-2">
         <h1 class="p-5 text-center">
             SimplyTools
         </h1>

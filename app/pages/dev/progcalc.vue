@@ -339,7 +339,7 @@
 </script>
 <template>
     <Feature category="dev" tool="Programmer Calculator" class="flex justify-center">
-        <div class="flex flex-col w-screen sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
+        <div class="flex flex-col w-full sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
             <div class="flex flex-col text-right">
                 <span class="h2 h-5 text-subtitle uppercase mr-4">{{ expressionDisplay }}</span>
                 <div class="h1 uppercase justify-end">

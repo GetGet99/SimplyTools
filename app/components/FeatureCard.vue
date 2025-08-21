@@ -3,7 +3,7 @@
 </script>
 <template>
     <OurLink :href class="manual group p-4 border control-border-control active:control-border-control-pressed bg-card rounded-2">
-        <div class="grid featurecard flex-col gap-3">
+        <div class="grid featurecard flex-col gap-3 h-full">
             <h3 class="text-card-title">{{ title }}</h3>
             <p class="card-text min-h-20">
                 <slot></slot>

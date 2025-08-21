@@ -7,8 +7,8 @@
     defineExpose(r)
 </script>
 <template>
-    <input v-if="!multiline" ref="tb" type="text" v-model="model" :placeholder autocomplete="off" :readonly />
-    <textarea v-else ref="tb" type="text" v-model="model" :placeholder autocomplete="off" :readonly class="h-60"></textarea>
+    <input v-if="!multiline" ref="tb" type="text" v-model="model" :placeholder autocomplete="off" :readonly v-bind="$attrs" />
+    <textarea v-else ref="tb" type="text" v-model="model" :placeholder autocomplete="off" :readonly class="h-60"  v-bind="$attrs"></textarea>
 </template>
 <style lang="css" scoped>
     @reference '../app.css';

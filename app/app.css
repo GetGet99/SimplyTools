@@ -35,6 +35,12 @@
     --text-h2: var(--text-xl);
     --text-card-title: var(--text-2xl);
     --text-body: var(--text-base);
+    --background-color-control-primary-light: #FFFFFFB3;
+    --background-color-control-secondary-light: #F9F9F980;
+    --background-color-control-tertiary-light: #F9F9F94D;
+    --background-color-control-primary-dark: #FFFFFF0F;
+    --background-color-control-secondary-dark: #FFFFFF15;
+    --background-color-control-tertiary-dark: #FFFFFF08;
 }
 
 body:not(.app) {
@@ -61,6 +67,7 @@ body:not(.app) {
 body.app {
     --background-color-root: transparent;
 }
+
 body.app .app-hidden {
     @apply hidden;
 }
@@ -136,6 +143,15 @@ body {
 
     button {
         @apply p-button rounded-control border;
+    }
+
+    ul {
+        @apply list-disc list-inside ml-1 space-y-1;
+    }
+
+    ul li {
+        @apply ml-2;
+        /* Optional: small left margin for each item */
     }
 }
 
