@@ -28,6 +28,9 @@
                 <FeatureCard title="Color Playground" href="colors">
                     Pick and play with different colors! Transform colors by inverting and more!
                 </FeatureCard>
+                <FeatureCard title="Text Compare" href="diff">
+                    Compare between two pieces of text to see what are the differences.
+                </FeatureCard>
             </main>
         </div>
         <Footer />
