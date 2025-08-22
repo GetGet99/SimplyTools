@@ -4,7 +4,7 @@
     const _border = border
 </script>
 <template>
-    <button type="button" :class="`${background(varient ?? 'control')} ${_border(varient ?? 'control')} transition-colors duration-200`" v-bind="$attrs">
+    <button type="button" :class="`${background(varient ?? 'control')} ${_border(varient ?? 'control')} transition-colors duration-200`">
         <slot />
     </button>
 </template>

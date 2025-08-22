@@ -1,7 +1,6 @@
 <script setup lang="ts">
     import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
     import ArrowSwap from '@fluentui/svg-icons/icons/arrow_swap_24_filled.svg?raw'
-    const tb = useTemplateRef('tb')
     const mode = ref<'atob' | 'btoa'>('btoa')
     const input = ref('')
     function safeBToA(val: string) {
@@ -21,9 +20,7 @@
     }
     const output = computed(() => (mode.value === 'atob' ? safeAToB : safeBToA)(input.value))
     function copy() {
-        (tb.value! as any as HTMLInputElement).focus();
-        (tb.value! as any as HTMLInputElement).select();
-        document.execCommand('copy')
+        navigator.clipboard.writeText(output.value)
     }
 </script>
 <template>
@@ -40,7 +37,7 @@
             </div>
 
             <div class="lg:w-[25vw] flex">
-                <TextBox ref="tb" :model-value="output"
+                <TextBox :model-value="output"
                     :placeholder="mode !== 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="peer grow rounded-r-none! border-r-0!" />
                 <Button

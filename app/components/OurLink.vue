@@ -7,7 +7,7 @@
     }
 </script>
 <template>
-    <NuxtLink @keydown="onKeyDown" v-bind="$attrs">
+    <NuxtLink @keydown="onKeyDown">
         <slot></slot>
     </NuxtLink>
 </template>

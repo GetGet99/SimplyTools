@@ -10,18 +10,17 @@
     const genCountTb = useTemplateRef('genCount')
     const autoClear = ref(true)
     const output = ref('')
-    const outputTb = useTemplateRef('outputTb')
     function generate() {
         if (valFrom.value === undefined) {
-            (fromTb.value! as any as HTMLInputElement).focus()
+            fromTb.value?.nbb?.tb?.focus()
             return
         }
         if (valTo.value === undefined) {
-            (toTb.value! as any as HTMLInputElement).focus()
+            toTb.value?.nbb?.tb?.focus()
             return
         }
         if (count.value === undefined) {
-            (genCountTb.value! as any as HTMLInputElement).focus()
+            genCountTb.value?.nbb?.tb?.focus()
             return
         }
         const wasEmpty = autoClear.value || output.value == ""
@@ -45,9 +44,7 @@
             output.value += outStr
     }
     function copy() {
-        (outputTb.value! as any as HTMLTextAreaElement).focus();
-        (outputTb.value! as any as HTMLTextAreaElement).select();
-        document.execCommand('copy')
+        navigator.clipboard.writeText(output.value)
     }
 </script>
 <template>
@@ -78,7 +75,7 @@
                     placeholder="Generate Count (Required)" /> numbers
             </span>
             <Button class="p-button rounded-control" @click="generate">Generate</Button>
-            <TextBox ref="outputTb" :model-value="output" multiline class="w-full" readonly
+            <TextBox :model-value="output" multiline class="w-full" readonly
                 placeholder='Press "Generate" button above!' />
             <div class="w-full flex justify-end gap-2 -mt-2">
                 <Button :varient="autoClear ? 'accent' : 'control'" class="p-button rounded-control"

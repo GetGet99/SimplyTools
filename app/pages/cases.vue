@@ -1,16 +1,13 @@
 <script setup lang="ts">
     import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
     const text = ref('')
-    const tb = useTemplateRef('tb')
     function copy() {
-        (tb.value! as any as HTMLInputElement).focus();
-        (tb.value! as any as HTMLInputElement).select();
-        document.execCommand('copy')
+        navigator.clipboard.writeText(text.value)
     }
 </script>
 <template>
     <Feature category="none" tool="Cases" class="flex flex-col caseRoot sm:justify-center sm:items-center gap-2">
-        <TextBox ref="tb" v-model="text" multiline placeholder="Type here and click the buttons below!" />
+        <TextBox v-model="text" multiline placeholder="Type here and click the buttons below!" />
         <div class="grid cases gap-2">
             <Button @click="text = cases.lowercase(text)">lowercase</Button>
             <Button @click="text = cases.uppercase(text)">UPPERCASE</Button>

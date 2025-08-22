@@ -32,7 +32,7 @@ export type SupportedBase = 16 | 10 | 8 | 2
 export type BinaryOperator = '&' | '|' | '>>' | '<<' | '%' | '+' | '-' | '×' | '÷'
 export class ProgrammerCalculator {
     base: 16n | 10n | 8n | 2n = 10n
-    private numType: 'byte' | 'word' | 'dword' | 'qword' = 'qword'
+    private numType: NumType = 'qword'
     shiftMode: 'logical' | 'arith' = 'arith'
     negativeDisplay: 'signed' | 'complement' = 'complement'
     private op: BinaryOperator | 'none' = 'none'
@@ -106,7 +106,6 @@ export class ProgrammerCalculator {
     private fromComplementDiscardOverflow(number: bigint) {
         return this.fromComplement(number & typeInfo[this.numType].mask)
     }
-    // calc
     format(number: bigint, radix: SupportedBase | SupportedBaseBigInt, complementMode?: boolean, digit?: number): string {
         if (complementMode === undefined) {
             complementMode = this.negativeDisplay === 'complement'
@@ -316,4 +315,27 @@ export class CalculatorUIInput {
             this.calc.append(keyVal)
         }
     }
+}
+export function format(number: bigint, radix: SupportedBase | SupportedBaseBigInt, digit?: number): string {
+    if (typeof radix === "bigint") {
+        radix = Number(radix) as SupportedBase
+    }
+    if (digit === undefined) {
+        digit = radix === 16 || radix === 2 ? 4 : 3
+    }
+    const neg = number < 0n;
+    let bin = (neg ? -number : number).toString(radix); // binary string without prefix
+
+    if (bin === "0") return "0";
+
+    const headLen = bin.length % digit;
+    const parts: string[] = [];
+
+    if (headLen) parts.push(bin.slice(0, headLen));
+    for (let i = headLen; i < bin.length; i += digit) {
+        parts.push(bin.slice(i, i + digit));
+    }
+
+    const formatted = parts.join(radix === 10 ? "," : " ");
+    return neg ? `-${formatted}` : formatted;
 }

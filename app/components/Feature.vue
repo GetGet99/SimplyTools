@@ -1,8 +1,12 @@
 <script setup lang="ts">
     import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
-    const props = defineProps<{ class?: string, category: 'dev' | 'none', tool: string, noDetails?: boolean }>()
-
-    useHead({ title: `${props.category === 'dev' ? 'SimplyDevTools' : 'SimplyTools'} - ${props.tool}` })
+    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'none', tool: string, noDetails?: boolean }>()
+    const ToolsMap : { [key in typeof props.category] : string } = {
+        none: 'SimplyTools',
+        dev: 'SimplyDevTools',
+        math: 'SimplyMathTools'
+    }
+    useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
 </script>
 <template>
     <div class="grid min-h-screen" style="grid-template-rows: 0px auto minmax(0, 1fr) auto;">
@@ -15,7 +19,7 @@
             </Control>
         </div>
         <div class="flex flex-col gap-16">
-            <h1 class="text-center pt-16">SimplyTools - {{ tool }}</h1>
+            <h1 class="text-center pt-16">{{ ToolsMap[props.category] }} - {{ tool }}</h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them, they
                 are
                 unlikely to work correctly.</noscript>

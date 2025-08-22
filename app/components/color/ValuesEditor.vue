@@ -34,14 +34,14 @@
     <div class="grid items-center gap-4" style="grid-template-columns: auto repeat(3, minmax(0, 1fr)) auto;">
         <span>RGB</span>
         <NumberBox :model-value="color?.RGB.R ?? undefined"
-            @update:model-value="r => rgbInputUpdate(r, undefined, undefined)" placeholder="R" mode="integer"
+            @update:model-value="r => rgbInputUpdate(r, undefined, undefined)" placeholder="R" mode="integer_positive"
             class="box rgbBG text-red-800 dark:text-red-300" :style="{ '--color-r': color?.RGB.R ?? 0 }" />
         <NumberBox :model-value="color?.RGB.G ?? undefined"
-            @update:model-value="g => rgbInputUpdate(undefined, g, undefined)" placeholder="G" mode="integer"
+            @update:model-value="g => rgbInputUpdate(undefined, g, undefined)" placeholder="G" mode="integer_positive"
             class="box rgbBG text-green-800 dark:text-green-300"
             :style="{ '--color-g': color?.RGB.G ?? 0 }" />
         <NumberBox :model-value="color?.RGB.B ?? undefined"
-            @update:model-value="b => rgbInputUpdate(undefined, undefined, b)" placeholder="B" mode="integer"
+            @update:model-value="b => rgbInputUpdate(undefined, undefined, b)" placeholder="B" mode="integer_positive"
             class="box rgbBG text-blue-800 dark:text-blue-300"
             :style="{ '--color-b': color?.RGB.B ?? 0 }" />
         <Button class="p-button-icon" title="Copy"
@@ -51,18 +51,18 @@
         </Button>
         <span>HSL</span>
         <NumberBox :model-value="color?.HSL.H ?? undefined"
-            @update:model-value="h => hslInputUpdate(h, undefined, undefined)" placeholder="H" mode="real"
+            @update:model-value="h => hslInputUpdate(h, undefined, undefined)" placeholder="H" mode="real_positive"
             class="box hslBG" :style="{
                 '--color-hue': color?.HSL.H ?? 0,
             }" />
         <NumberBox :model-value="percentShow(color?.HSL.S, 'HSL')"
-            @update:model-value="s => hslInputUpdate(undefined, (s ?? 0) / 100, undefined)" placeholder="S" mode="real"
+            @update:model-value="s => hslInputUpdate(undefined, (s ?? 0) / 100, undefined)" placeholder="S" mode="real_positive"
             class="box hslBG" :style="{
                 '--color-hue': color?.HSL.H ?? 0,
                 '--color-sat': `${(color?.HSL.S ?? 0) * 100}%`
             }" />
         <NumberBox :model-value="percentShow(color?.HSL.L, 'HSL')"
-            @update:model-value="l => hslInputUpdate(undefined, undefined, (l ?? 0) / 100)" placeholder="V" mode="real"
+            @update:model-value="l => hslInputUpdate(undefined, undefined, (l ?? 0) / 100)" placeholder="V" mode="real_positive"
             class="box hslBG" :style="{
                 '--color-hue': 0,
                 '--color-sat': '0%',
@@ -75,19 +75,19 @@
         </Button>
         <span>HSV</span>
         <NumberBox :model-value="color?.HSV.H ?? undefined"
-            @update:model-value="h => hsvInputUpdate(h, undefined, undefined)" placeholder="H" mode="real"
+            @update:model-value="h => hsvInputUpdate(h, undefined, undefined)" placeholder="H" mode="real_positive"
             class="box hslBG" :style="{
                 '--color-hue': color?.HSV.H ?? 0,
             }" />
         <NumberBox :model-value="percentShow(color?.HSV.S, 'HSV')"
-            @update:model-value="s => hsvInputUpdate(undefined, (s ?? 0) / 100, undefined)" placeholder="S" mode="real"
+            @update:model-value="s => hsvInputUpdate(undefined, (s ?? 0) / 100, undefined)" placeholder="S" mode="real_positive"
             class="box rgbBG" :style="{
                 '--color-r': hsVFULL.R,
                 '--color-g': hsVFULL.G,
                 '--color-b': hsVFULL.B
             }" />
         <NumberBox :model-value="percentShow(color?.HSV.V, 'HSV')"
-            @update:model-value="v => hsvInputUpdate(undefined, undefined, (v ?? 0) / 100)" placeholder="V" mode="real"
+            @update:model-value="v => hsvInputUpdate(undefined, undefined, (v ?? 0) / 100)" placeholder="V" mode="real_positive"
             class="box rgbBG" :style="{
                 '--color-r': vOnly.R,
                 '--color-g': vOnly.G,
