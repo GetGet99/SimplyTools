@@ -7,7 +7,6 @@
     const expressionDisplay = ref('')
     const type2Clear = ref(false)
     const shiftMode = ref<'logical' | 'arith'>('arith')
-    const hideFocus = ref(false)
     const error = ref<string>('')
     type BinaryOp = '&' | '|' | '>>' | '<<' | '%' | '+' | '-' | '×' | '÷'
     let op: 'none' | BinaryOp = 'none'
