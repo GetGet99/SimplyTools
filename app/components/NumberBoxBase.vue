@@ -27,6 +27,6 @@
         return NumberInputRegexes[mode].test(x)
     }" @update:model-value="x => {
         model = x
-    }" role="spinbutton" :aria-valuenow="model" :aria-valuemin=min :aria-valuemax=max inputmode="decimal"
+    }" role="spinbutton" :paste-preprocessor=NumberNormalizeInput[mode] :aria-valuenow="model" :aria-valuemin=min :aria-valuemax=max inputmode="decimal"
         :pattern=NumberInputRegexes[mode].source />
 </template>

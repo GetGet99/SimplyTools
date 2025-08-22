@@ -3,7 +3,7 @@
     useHead({
         bodyAttrs: {
             style: {
-                colorScheme: 'dark light'
+                'color-scheme': 'dark light'
             }
         }
     })

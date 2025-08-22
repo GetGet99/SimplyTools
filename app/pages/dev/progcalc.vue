@@ -42,11 +42,28 @@
         }
         calcInput.type(e.key)
     }
+
+    function pasteHandler(e: ClipboardEvent) {
+        e.preventDefault();
+
+        let text = e.clipboardData?.getData("text") ?? "";
+        for (const char of text) {
+            if (char === '_') {
+                // we ignore that as it will flip the sign
+                continue
+            }
+            calcInput.type(char)
+        }
+        
+
+    }
     onMounted(() => {
         window.addEventListener('keydown', keydown)
+        window.addEventListener('paste', pasteHandler)
     })
     onUnmounted(() => {
         window.removeEventListener('keydown', keydown)
+        window.removeEventListener('paste', pasteHandler)
     })
     const display = computed(() => calc.error || calc.displayOf(calc.value))
 </script>
@@ -54,7 +71,7 @@
     <Feature category="dev" tool="Programmer Calculator" class="flex justify-center">
         <div class="flex flex-col w-full sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
             <div class="flex flex-col text-right">
-                <span class="h2 h-5 text-subtitle uppercase mr-4">{{ calc.expressionDisplay }}</span>
+                <span class="h2 h-5 text-subtitle uppercase mr-4" v-html="calc.expressionDisplay"></span>
                 <div class="h1 uppercase justify-end">
                     <span class="text-right select-text">{{ display }}</span>
                     <div class="w-4 text-body text-left inline-block">

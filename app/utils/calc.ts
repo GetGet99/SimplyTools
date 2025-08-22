@@ -37,6 +37,7 @@ export class ProgrammerCalculator {
     negativeDisplay: 'signed' | 'complement' = 'complement'
     private op: BinaryOperator | 'none' = 'none'
     private prev: bigint = 0n
+    private negZero: boolean = false
     value: bigint = 0n
     error: string = ''
     private type2Clear: boolean = false
@@ -59,6 +60,10 @@ export class ProgrammerCalculator {
     backspace() {
         if (this.type2Clear)
             return
+        if (this.negZero) {
+            this.negZero = false
+            return
+        }
         if (this.base === 10n || this.negativeDisplay === 'complement') {
             this.value = (this.value - (this.value % this.base)) / this.base
         } else {
@@ -75,6 +80,7 @@ export class ProgrammerCalculator {
             this.expressionDisplay = ''
         }
         this.value = 0n
+        this.negZero = false
     }
     private mask() {
         return typeInfo[this.numType].mask
@@ -149,8 +155,11 @@ export class ProgrammerCalculator {
     binary(newOp: BinaryOperator) {
         if (this.type2Clear && this.op != 'none')
             return
-        const d = this.op === 'none' ? this.displayOf(this.value) : this.calc()
-        this.expressionDisplay = `${d} ${newOp}`
+        let display = this.op === 'none' ? this.displayOf(this.value) : this.calc()
+        if (this.base !== 10n) {
+            display = `${display}<sub>${this.base}</sub>`
+        }
+        this.expressionDisplay = `${display} ${newOp}`
         this.prev = this.value
         this.op = newOp
         this.type2Clear = true
@@ -159,7 +168,11 @@ export class ProgrammerCalculator {
     calc(): string {
         if (this.op === 'none')
             return this.displayOf(this.value)
-        this.expressionDisplay = `${this.expressionDisplay} ${this.displayOf(this.value)} =`
+        let display = this.displayOf(this.value)
+        if (this.base !== 10n) {
+            display = `${display}<sub>${this.base}</sub>`
+        }
+        this.expressionDisplay = `${this.expressionDisplay} ${display} =`
         switch (this.op) {
             case '&':
                 this.value = this.fromComplement(this.asComplement(this.prev) & this.asComplement(this.value))
@@ -264,7 +277,7 @@ export class CalculatorUIInput {
         if (key === 'Backspace') {
             this.calc.backspace()
             return
-        } else if (key === 'Enter' || key === '=') {
+        } else if (key === 'Enter' || key === '=' || key === '\n') {
             this.calc.calc()
             return
         } else if (key === '~' || key === '!') {
