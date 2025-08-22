@@ -22,6 +22,9 @@
                 <FeatureCard title="Cases!" href="cases">
                     Want to lowercase? UPPERCASE? swappingCASE? or raNDomcAsE? We got you covered.
                 </FeatureCard>
+                <FeatureCard title="Number Base Convert" href="math/numbase">
+                    Simple ways to convert bases
+                </FeatureCard>
                 <FeatureCard title="Programmer Calculator" href="dev/progcalc">
                     Calculator in many number bases.
                 </FeatureCard>
