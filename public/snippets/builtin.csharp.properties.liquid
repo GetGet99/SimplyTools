@@ -3,29 +3,49 @@ name: INotifyPropertyChanged Generator
 description: Generate INotifyPropertyChanged class
 lang: csharp
 properties:
+  fieldKeyword: boolean
+  partial: boolean
+  usings: string[]
   name: string
   props:
     type: string
     name: string
 example:
+  namespace: SimplyTools.Example
   name: Person
+  partial: true
+  fieldKeyword: false
+  usings:
+    - System
   props:
-  - type: string
-    name: FirstName
-  - type: string
-    name: LastName
-  - type: string
-    name: Age
+    - type: string
+      name: FirstName
+    - type: string
+      name: LastName
+    - type: int
+      name: Age
 {%- endmeta -%}
-class {{name}} : INotifyPropertyChanged {
-    {%- for prop in props %}
-    private {{ prop.type }} _{{ prop.name }};
-    public {{ prop.type }} {{ prop.name }} {
-        get => _{{ prop.name }};
-        set {
-            _{{ prop.name }} = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof({{prop.name}})))
+{%- for using in usings -%}
+    using {{using}};
+{% endfor -%}
+{%- if namespace -%} namespace {{ namespace }} { {%- endif %}
+    {% if partial %}partial {% endif %}class {{name}} : INotifyPropertyChanged {
+        {%- for prop in props %}
+        {% unless fieldKeyword -%}
+            private {{ prop.type }} _{{ prop.name }};
+        {% assign fieldname = "_" | append: prop.name -%}
+        {% else %}
+            {%- assign fieldname = "field" -%}
+        {%- endunless -%}
+        public {{ prop.type }} {{ prop.name }} {
+            get {
+                return {{ fieldname }};
+            }
+            set {
+                {{ fieldname }} = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof({{prop.name}})))
+            }
         }
+        {% endfor %}
     }
-    {%- endfor %}
-}
+{% if namespace -%} } {%- endif -%}

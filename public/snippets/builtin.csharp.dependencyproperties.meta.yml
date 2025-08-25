@@ -1,10 +1,10 @@
-name: INotifyPropertyChanged Generator
-description: Generate INotifyPropertyChanged class
+name: Dependency Property Generator
+description: Generate dependency properties, commonly used for platforms like WPF, WinUI, and UWP.
 lang: csharp
 properties:
-  fieldKeyword: boolean
   partial: boolean
   usings: string[]
+  DependencyPropertyClassName: string
   name: string
   props:
     type: string
@@ -13,9 +13,10 @@ example:
   namespace: SimplyTools.Example
   name: Person
   partial: true
-  fieldKeyword: false
+  DependencyPropertyClassName: DependencyProperty
   usings:
-    - System
+    - Microsoft.UI.Xaml
+    - Windows.UI.Xaml
   props:
     - type: string
       name: FirstName
