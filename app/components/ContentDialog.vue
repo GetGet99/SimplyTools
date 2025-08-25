@@ -1,29 +1,17 @@
 <template>
     <DialogRoot>
-        <slot name="trigger"></slot>
-        <DialogPortal class="ContentDialogPortal">
-            <DialogOverlay class="ContentDialogOverlay" />
-            <DialogContent class="ContentDialogContent" :class>
-                <DialogTitle class="flex">
-                    <slot name="title">
-                        {{ title }}
-                    </slot>
-                    <div class="grow"></div>
+        <ContentDialogPortal>
+            <template #title>
+                <slot name="title"></slot>
 
-                    <Control class="p-button-icon">
-                        <DialogClose as-child>
-                            <Icon alt="" :icon=CloseIcon />
-                        </DialogClose>
-                    </Control>
-                </DialogTitle>
-                <slot></slot>
-            </DialogContent>
-        </DialogPortal>
+            </template>
+        </ContentDialogPortal>
     </DialogRoot>
 </template>
 <script setup lang="ts">
-    import CloseIcon from '@fluentui/svg-icons/icons/dismiss_24_regular.svg?raw'
-    defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
+    import type { ContentDialogPortal as CDP } from '#components'
+    import type { ComponentProps } from 'vue-component-type-helpers';
+    defineProps<ComponentProps<typeof CDP>>()
 </script>
 <style>
     @reference '../app.css';

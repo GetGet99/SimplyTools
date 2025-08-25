@@ -1,5 +1,5 @@
-name: Welcome Email
-description: Sends a welcome message to new customers
+name: 'Example: Orders'
+description: Example Snippet
 properties:
   customer_name: string
   order_items:

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
-    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'none', tool: string, noDetails?: boolean, limitScreen?: boolean }>()
+    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl' }>()
     const ToolsMap: { [key in typeof props.category]: string } = {
         none: 'SimplyTools',
         dev: 'SimplyDevTools',
@@ -10,7 +10,7 @@
     useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
 </script>
 <template>
-    <div class="grid min-h-screen data-[limit-screen='true']:h-screen" :data-limit-screen=limitScreen
+    <div class="grid min-h-screen xl:data-[limit-screen='xl']:h-screen" :data-limit-screen=limitScreen
         style="grid-template-rows: 0px auto minmax(0, 1fr) auto;">
         <div class="sticky top-0 left-0 flex">
             <Control

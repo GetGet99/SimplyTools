@@ -1,22 +1,46 @@
 <script setup lang="ts">
+    import { getBuiltInSnippets } from '~/utils/snippets/manager';
+
     const url = useRoute()
     const view = computed(() => url.query.view)
 </script>
 <template>
-    <Feature category="snippets" tool="Quick Templates" class="flex flex-col gap-4" :limit-screen=!!view>
+    <Feature category="snippets" tool="Quick Templates" class="flex flex-col gap-4"
+        :limit-screen="view ? 'xl' : undefined">
         <p class="text-center">Find templates you wish to use, or
             <OurLink href="/snippets/edit">Create your own!</OurLink>
         </p>
-        <div class="mx-30 grow grid gap-4"
-            :style="view ? { gridTemplateColumns: 'calc(var(--spacing) * 80) minmax(0, 1fr)' } : {}">
-            <div class="sm:mx2 my-2 grid data-view:flex flex-col gap-4 not-data-view:lg:grid-cols-3 not-data-view:md:grid-cols-2 not-data-view:sm:grid-cols-1 data-view:overflow-y-auto"
-                :data-view="!!view">
-                <SnippetsCard snippet-key="builtin.examples.item" />
-                <SnippetsCard snippet-key="builtin.csharp.properties" />
+        <div class="snippets-root grow" :class="view ? 'view' : ''" :data-view="!!view">
+            <div class="snippets-list" :data-view="!!view">
+                <SnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
             </div>
-            <div v-if="view">
-                <SnippetsViewer class="h-full" v-if="typeof view === 'string'" :snippetKey=view />
-            </div>
+            <SnippetsViewer v-if="view" class="not-xl:-order-1 h-full" :snippetKey='(view as string)' />
         </div>
     </Feature>
 </template>
+<style scoped>
+    @reference '../../app.css';
+
+    .snippets-root {
+        @apply mx-10 lg:mx-30 grid gap-4;
+
+        @variant data-view {
+            @variant xl {
+                grid-template-columns: calc(var(--spacing) * 80) minmax(0, 1fr);
+            }
+        }
+    }
+
+    .snippets-list {
+        @apply sm:mx-1 xl:mx-2 my-2 gap-4;
+
+
+        @apply grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
+
+        @variant data-view {
+            @variant xl {
+                @apply flex flex-col overflow-y-auto;
+            }
+        }
+    }
+</style>

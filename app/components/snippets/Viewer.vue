@@ -1,62 +1,54 @@
 <template>
-    <div class="grid grid-cols-2 grid-rows-[auto_minmax(0_,2fr)_auto_minmax(0_,1fr)] gap-2 overflow-hidden">
-        <label class="font-bold flex items-center">Input</label>
-        <div class="flex gap-2 items-center">
-            <label class="font-bold">Output</label>
-            <div class="grow"></div>
-            <DialogRoot>
-                <DialogPortal class="flex w-screen h-screen justify-center items-center">
-                    <DialogOverlay class="data-[state=open]:bg-smoke absolute top-0 bottom-0 left-0 right-0" />
-                    <DialogContent
-                        class="absolute top-1/2 left-1/2 -translate-1/2 w-[70vw] h-[70vh] p-5 bg-black flex flex-col">
-                        <DialogTitle class="flex">
-                            Template Source
-                            <div class="grow"></div>
-                            <DialogClose aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </DialogClose>
-                        </DialogTitle>
-                        <SnippetsEditor readonly class="grow" v-model="snippetCode" />
-                    </DialogContent>
-                </DialogPortal>
-            </DialogRoot>
-            <ContentDialog title="Template Source" class="w-[70vw] max-w-[70vw] h-[70vh] max-h-[70vh]">
-                <template #trigger>
-                    <DialogTrigger as-child>
-                        <Button class="flex gap-1">
-                            Template Source
-                            <Icon alt="" :icon=OpenPopup />
-                        </Button>
-                    </DialogTrigger>
-                </template>
-                <SnippetsEditor readonly class="grow" v-model="snippetCode" />
-            </ContentDialog>
-            <Control varient="accent" class="hidden">
-                <OurLink class="manual" :href="`/snippets/edit?remix=${encodeURIComponent(snippetKey)}`">
-                    Remix
-                </OurLink>
-            </Control>
+    <DialogRoot>
+        <div class="snippet-viewer-root" :class>
+            <div class="flex gap-2 items-center lg:-order-1">
+                <label class="font-bold">Input</label>
+                <div class="grow"></div>
+                <SnippetsViewerButtons class="lg:hidden" :snippet-key :snippet-code />
+            </div>
+            <!-- Input -->
+            <CodeEditor lang="yaml" v-model="input" class="not-lg:min-h-50" />
+
+            <!-- Input Format -->
+            <label class="font-bold flex items-center lg:order-1">Input Format</label>
+            <CodeEditor lang="yaml" readonly :model-value="YAML.stringify(meta.properties)"
+                class="not-lg:min-h-50 lg:order-1" />
+
+            <div class="flex gap-2 items-center lg:-order-1">
+                <label class="font-bold">Output</label>
+                <div class="grow"></div>
+                <SnippetsViewerButtons class="not-lg:hidden" :snippet-key :snippet-code />
+            </div>
+            <!-- Output Preview -->
+            <CodeEditor ref="outputME" :lang="outputLang" readonly v-model="output"
+                class="row-span-3 bg-control-primary not-lg:min-h-50" />
+
         </div>
-        <!-- Test Input Editor -->
-        <CodeEditor lang="yaml" v-model="input" />
-
-        <!-- Output Preview -->
-        <CodeEditor ref="outputME" :lang="outputLang" readonly v-model="output" class="row-span-3 bg-control-primary" />
-
-        <!-- Parameters -->
-        <label class="font-bold flex items-center">Input Format</label>
-        <CodeEditor lang="yaml" readonly :model-value="YAML.stringify(meta.properties)" />
-    </div>
+        <ContentDialogPortal title="Template Source" class="w-[70vw] max-w-[70vw] h-[70vh] max-h-[70vh]">
+            <SnippetsEditor readonly class="grow" v-model="snippetCode" />
+        </ContentDialogPortal>
+    </DialogRoot>
 </template>
+<style scoped>
+    @reference '../../app.css';
+
+    .snippet-viewer-root {
+        @apply grid gap-2 overflow-hidden;
+
+        @variant lg {
+            @apply grid-cols-2;
+            grid-template-rows: auto minmax(0, 2fr) auto minmax(0, 1fr);
+        }
+    }
+</style>
 
 <script setup lang="ts">
-    import OpenPopup from '@fluentui/svg-icons/icons/open_24_regular.svg?raw'
     import * as YAML from "yaml";
     import { Liquid } from "liquidjs";
     import { extractYamlComment, type Metadata } from "~/utils/snippets/metadata";
     import { getMetadata, getSnippet } from "~/utils/snippets/manager";
 
-    const props = defineProps<{ snippetKey: string }>()
+    const props = defineProps<{ snippetKey: string, class?: string }>()
 
 
     // --------------------

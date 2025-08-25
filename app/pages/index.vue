@@ -11,7 +11,7 @@
             </noscript>
         </div>
         <div class="flex flex-col">
-            <main class="mx-30 sm:mx2 my-2 grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+            <main class="mx-2 sm:mx-30 my-2 grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
                 <FeatureCard title="Base 64 Converter" href="dev/b64">
                     A simple <code>atob</code> and <code>btoa</code> GUI wrapper
                 </FeatureCard>
