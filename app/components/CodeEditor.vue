@@ -1,6 +1,6 @@
 <template>
     <MonacoEditor ref="editorRef" :options="{
-        theme: 'simplytools',
+        theme: 'simplytools-dark',
         minimap: {
             enabled: false
         },
@@ -21,7 +21,27 @@
     function onResize() {
         editor.value?.layout({} as e.IDimension, true)
     }
+    // Function to apply the appropriate theme
+    async function applyColorScheme(scheme: 'dark' | 'light') {
+        (await useMonaco()).editor.setTheme('simplytools-' + scheme)
+    }
 
+    if (window?.matchMedia) {
+        // Detect the initial color scheme
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        applyColorScheme(prefersDarkScheme.matches ? 'dark' : 'light');
+
+        function changeHandler(event : MediaQueryListEvent) {
+            applyColorScheme(event.matches ? 'dark' : 'light');
+        }
+        // Listen for changes in the color scheme
+        onMounted(() => {
+            prefersDarkScheme.addEventListener('change', changeHandler);
+        })
+        onUnmounted(() => {
+            prefersDarkScheme.removeEventListener('change', changeHandler);
+        })
+    }
     // Editor on resize
     onMounted(() => {
         window.addEventListener('resize', onResize)
@@ -37,5 +57,20 @@
         .base-bg-control-primary {
             @apply bg-control-primary;
         }
+    }
+
+    .monaco-editor,
+    .monaco-diff-editor,
+    .monaco-component {
+        --vscode-editorStickyScroll-background: var(--background-color-control-primary) !important;
+    }
+
+    .monaco-editor {
+        width: unset !important;
+        height: unset !important;
+    }
+
+    .monaco-editor .sticky-widget {
+        backdrop-filter: blur(5px);
     }
 </style>

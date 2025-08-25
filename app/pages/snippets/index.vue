@@ -10,7 +10,7 @@
         <p class="text-center">Find templates you wish to use, or
             <OurLink href="/snippets/edit">Create your own!</OurLink>
         </p>
-        <div class="snippets-root grow" :class="view ? 'view' : ''" :data-view="!!view">
+        <div class="snippets-root grow" :data-view="!!view">
             <div class="snippets-list" :data-view="!!view">
                 <SnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
             </div>
@@ -26,6 +26,7 @@
 
         @variant data-view {
             @variant xl {
+                @apply overflow-hidden;
                 grid-template-columns: calc(var(--spacing) * 80) minmax(0, 1fr);
             }
         }

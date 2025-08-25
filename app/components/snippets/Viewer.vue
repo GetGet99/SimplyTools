@@ -36,8 +36,11 @@
         @apply grid gap-2 overflow-hidden;
 
         @variant lg {
-            @apply grid-cols-2;
+            @apply grid-cols-2 min-h-100;
             grid-template-rows: auto minmax(0, 2fr) auto minmax(0, 1fr);
+        }
+        @variant xl {
+            @apply min-h-[unset];
         }
     }
 </style>
