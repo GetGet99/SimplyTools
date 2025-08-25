@@ -1,6 +1,6 @@
 <template>
     <MonacoEditor ref="editorRef" :options="{
-        theme: 'simplytools-dark',
+        theme,
         minimap: {
             enabled: false
         },
@@ -23,9 +23,10 @@
     }
     // Function to apply the appropriate theme
     async function applyColorScheme(scheme: 'dark' | 'light') {
+        theme = 'simplytools-' + scheme;
         (await useMonaco()).editor.setTheme('simplytools-' + scheme)
     }
-
+    let theme = 'simplytools-dark'
     if (window?.matchMedia) {
         // Detect the initial color scheme
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
