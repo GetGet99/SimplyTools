@@ -31,6 +31,7 @@
     --color-textbox-accent-highlight: #fb9a44;
     --text-color-on-accent: white;
     --text-color-on-accent-primary: hsl(300, 2%, 10%);
+    --background-color-solid-primary: #202020;
 }
 
 @theme {
@@ -45,6 +46,7 @@
     --background-color-control-secondary-dark: #FFFFFF15;
     --background-color-control-tertiary-dark: #FFFFFF08;
     --background-color-smoke: #0000004D;
+    --border-color-surface: #66757575;
 }
 
 body:not(.app) {
@@ -97,6 +99,7 @@ body {
         --text-color-subtitle: #aaa3a7;
         --color-textbox-accent-highlight: var(--color-accent-light-2);
         --text-color-disabled: #767676;
+        --background-color-solid-primary: #202020;
     }
 
     @variant not-dark {
@@ -119,6 +122,7 @@ body {
         --text-color-subtitle: #616161;
         --color-textbox-accent-highlight: var(--color-accent-dark-1);
         --text-color-disabled: #9c9c9c;
+        --background-color-solid-primary: #f3f3f3;
     }
 }
 
@@ -147,6 +151,10 @@ body {
 
     button {
         @apply p-button rounded-control border;
+    }
+
+    .control {
+        @apply p-control rounded-control border;
     }
 
     ul {

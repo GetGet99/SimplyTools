@@ -5,7 +5,7 @@
 <template>
     <Feature category="snippets" tool="Quick Templates" class="flex flex-col gap-4" :limit-screen=!!view>
         <p class="text-center">Find templates you wish to use, or
-            <OurLink href="/snippets/editor">Create your own!</OurLink>
+            <OurLink href="/snippets/edit">Create your own!</OurLink>
         </p>
         <div class="mx-30 grow grid gap-4"
             :style="view ? { gridTemplateColumns: 'calc(var(--spacing) * 80) minmax(0, 1fr)' } : {}">

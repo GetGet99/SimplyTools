@@ -10,7 +10,7 @@
             </p>
             <div class="flex" aria-hidden>
                 <Control aria-hidden varient="none"
-                    class="p-button rounded-control bg-control-primary group-hover:bg-control-secondary group-active:bg-control-tertiary control-border-accent group-active:control-border-accent-pressed">
+                    class="p-button rounded-control bg-control-primary group-hover:bg-control-secondary group-active:bg-control-tertiary control-border-control group-active:control-border-control-pressed">
                     <div>Go!</div>
                 </Control>
             </div>

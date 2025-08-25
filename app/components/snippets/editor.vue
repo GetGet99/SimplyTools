@@ -1,30 +1,24 @@
 <template>
-    <MonacoEditor ref="editor" lang="liquid" :options="{
-        theme: 'simplytools',
-        minimap: {
-            enabled: false
-        },
-        readOnly: readonly
-    }" v-model="code" class="bg-control-primary" />
+    <CodeEditor ref="editor" lang="liquid" v-model="code" />
 </template>
 <script setup lang="ts">
     import * as YAML from "yaml";
     import { ref, watch } from "vue";
-    // import { registerLiquidLanguage, setModelLiquidValidation } from "monaco-liquid";
-    import { registerLiquidLanguage, setModelLiquidValidation } from "~/utils/snippets/liquid/language";
+    import { useMonacoLiquidLanguage, setModelLiquidValidation } from "~/utils/snippets/liquid/language";
     import { extractYamlComment, yamlToZod } from "~/utils/snippets/metadata";
     const props = defineProps<{ readonly?: boolean }>()
     const code = defineModel<string>()
 
     const editorRef = useTemplateRef("editor");
-    let monaco = await useMonacoWithOurTheme();
+    const monaco = useMonaco()
+    await useMonacoLiquidLanguage();
     if (monaco) {
-        registerLiquidLanguage(monaco);
+        useMonacoLiquidLanguage();
         watch(code, async (newCode) => {
             if (!newCode) {
                 return
             }
-            let editor = editorRef?.value?.$editor
+            let editor = editorRef?.value?.editor
             if (editor === undefined) {
                 return
             }

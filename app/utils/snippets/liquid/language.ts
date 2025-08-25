@@ -6,9 +6,10 @@ import type { $ZodType } from 'zod/v4/core'
 
 type ILiquidModel = monacoImport.editor.ITextModel & { schemas: Record<string, $ZodType> }
 let liquidRegistered = false
-export const registerLiquidLanguage = (monaco: typeof monacoImport) => {
+export async function useMonacoLiquidLanguage() {
     if (liquidRegistered) return
     else liquidRegistered = true
+    const monaco = await useMonaco()
     monaco.languages.register({ id: 'liquid' })
     monaco.languages.registerHoverProvider('liquid', {
         provideHover: (model: ILiquidModel, position) => {
