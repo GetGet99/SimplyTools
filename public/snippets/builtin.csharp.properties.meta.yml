@@ -1,0 +1,17 @@
+name: INotifyPropertyChanged Generator
+description: Generate INotifyPropertyChanged class
+lang: csharp
+properties:
+  name: string
+  props:
+    type: string
+    name: string
+example:
+  name: Person
+  props:
+  - type: string
+    name: FirstName
+  - type: string
+    name: LastName
+  - type: string
+    name: Age

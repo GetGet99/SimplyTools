@@ -1,0 +1,31 @@
+{%- meta -%}
+name: INotifyPropertyChanged Generator
+description: Generate INotifyPropertyChanged class
+lang: csharp
+properties:
+  name: string
+  props:
+    type: string
+    name: string
+example:
+  name: Person
+  props:
+  - type: string
+    name: FirstName
+  - type: string
+    name: LastName
+  - type: string
+    name: Age
+{%- endmeta -%}
+class {{name}} : INotifyPropertyChanged {
+    {%- for prop in props %}
+    private {{ prop.type }} _{{ prop.name }};
+    public {{ prop.type }} {{ prop.name }} {
+        get => _{{ prop.name }};
+        set {
+            _{{ prop.name }} = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof({{prop.name}})))
+        }
+    }
+    {%- endfor %}
+}
