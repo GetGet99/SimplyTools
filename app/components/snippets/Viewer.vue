@@ -20,8 +20,10 @@
                 <SnippetsViewerButtons class="not-lg:hidden" :snippet-key :snippet-code />
             </div>
             <!-- Output Preview -->
-            <CodeEditor ref="outputME" :lang="outputLang" readonly v-model="output"
-                class="row-span-3 bg-control-primary not-lg:min-h-50" />
+            <ClientOnly>
+                <CodeEditor ref="outputME" :lang="outputLang" readonly v-model="output"
+                    class="row-span-3 not-lg:min-h-50" />
+            </ClientOnly>
 
         </div>
         <ContentDialogPortal title="Template Source" class="w-[70vw] max-w-[70vw] h-[70vh] max-h-[70vh]">
@@ -39,6 +41,7 @@
             @apply grid-cols-2 min-h-100;
             grid-template-rows: auto minmax(0, 2fr) auto minmax(0, 1fr);
         }
+
         @variant xl {
             @apply min-h-[unset];
         }

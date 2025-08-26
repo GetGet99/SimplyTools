@@ -10,20 +10,14 @@
             <!-- Test Input Editor -->
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Test Input</label>
-                <MonacoEditor lang="yaml" :options="{
-                    theme: 'simplytools',
-                    minimap: { enabled: false }
-                }" v-model="input" class="grow bg-control-primary" />
+                <CodeEditor lang="yaml" v-model="input" class="grow" />
             </div>
 
             <!-- Output Preview -->
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Output</label>
-                <MonacoEditor ref="outputME" lang="plaintext" :options="{
-                    theme: 'simplytools',
-                    minimap: { enabled: false },
-                    readOnly: true
-                }" v-model="output" :model-uri="uri" class="grow bg-control-primary" />
+                <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output" :model-uri="uri"
+                    class="grow" />
             </div>
         </ClientOnly>
     </div>
@@ -45,6 +39,7 @@
 
     const input = ref(``);
     const output = ref("");
+    const outputLang = ref("plaintext");
 
     // --------------------
     // Liquid Engine
@@ -104,8 +99,7 @@
             try {
                 const yaml = extractYamlComment(code.value)
                 const meta = YAML.parse(yaml ?? '') as Metadata
-
-                monaco.editor.setModelLanguage(outputME.value?.$editor?.getModel()!, meta.lang)
+                outputLang.value = meta.lang
             } catch {
 
             }

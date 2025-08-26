@@ -1,5 +1,5 @@
 <template>
-    <DialogPortal class="ContentDialogPortal">
+    <DialogPortal>
         <DialogOverlay class="ContentDialogOverlay">
             <div class="child"></div>
         </DialogOverlay>
