@@ -11,7 +11,7 @@
 
             <!-- Input Format -->
             <label class="font-bold flex items-center lg:order-1">Input Format</label>
-            <CodeEditor lang="yaml" readonly :model-value="YAML.stringify(meta.properties)"
+            <CodeEditor lang="yaml" readonly :model-value="String(new YAML.Document(metaRaw?.get('properties')))"
                 class="not-lg:min-h-50 lg:order-1" />
 
             <div class="flex gap-2 items-center lg:-order-1">
@@ -52,7 +52,7 @@
     import * as YAML from "yaml";
     import { Liquid } from "liquidjs";
     import { type Metadata } from "~/utils/snippets/metadata";
-    import { getMetadata, getSnippet, useSavedInput } from "~/utils/snippets/manager";
+    import { getMetadata, getMetadataSchema, getSnippet, useSavedInput } from "~/utils/snippets/manager";
 
     const props = defineProps<{ snippetKey: string, class?: string }>()
 
@@ -63,19 +63,23 @@
     const outputME = useTemplateRef("outputME")
     const snippetCode = ref("");
     const meta = ref<Metadata>({} as Metadata)
+    const metaRaw = ref<YAML.Document | undefined>(undefined)
     const snippetKeyRef = ref(props.snippetKey)
     watch(() => props.snippetKey, () => snippetKeyRef.value = props.snippetKey)
-    const input = await useSavedInput(snippetKeyRef);
+    const input = import.meta.client ? await useSavedInput(snippetKeyRef) : ref("");
     const output = ref("");
     const outputLang = ref("plaintext");
 
     // Watch
     watch(() => props.snippetKey, async () => {
+        if (!import.meta.client) return
         const snippet = await getSnippet(props.snippetKey)
-        const initialMeta = await getMetadata(props.snippetKey)
+        const metaNewRaw = await getMetadataSchema(props.snippetKey)
+        const metaNew = await getMetadata(props.snippetKey)
         snippetCode.value = snippet
-        outputLang.value = initialMeta.lang
-        meta.value = initialMeta
+        outputLang.value = metaNew.lang
+        meta.value = metaNew
+        metaRaw.value = metaNewRaw
     }, { immediate: true })
 
     // --------------------

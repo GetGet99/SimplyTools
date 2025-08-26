@@ -3,8 +3,8 @@
         <DialogOverlay class="ContentDialogOverlay">
             <div class="child"></div>
         </DialogOverlay>
-        <DialogContent class="ContentDialogContent" :class>
-            <DialogTitle class="flex">
+        <DialogContent class="ContentDialogContent flex flex-col gap-2" :class>
+            <DialogTitle class="flex gap-1 items-center">
                 <slot name="title">
                     {{ title }}
                 </slot>
@@ -16,13 +16,19 @@
                     </DialogClose>
                 </Control>
             </DialogTitle>
-            <slot></slot>
+            <div>
+                <slot></slot>
+            </div>
+            <div v-if="slots.footer" class="flex justify-end">
+                <slot name="footer"></slot>
+            </div>
         </DialogContent>
     </DialogPortal>
 </template>
 <script setup lang="ts">
     import CloseIcon from '@fluentui/svg-icons/icons/dismiss_24_regular.svg?raw'
     defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
+    const slots = useSlots()
 </script>
 <style>
     @reference '../app.css';

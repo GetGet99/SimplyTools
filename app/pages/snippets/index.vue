@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { getBuiltInSnippets } from '~/utils/snippets/manager';
+    import { getBuiltInSnippets, getLocalSnippets } from '~/utils/snippets/manager';
 
     const url = useRoute()
     const view = computed(() => url.query.view)
@@ -8,10 +8,13 @@
     <Feature category="snippets" tool="Quick Templates" class="flex flex-col gap-4"
         :limit-screen="view ? 'xl' : undefined">
         <p class="text-center">Find templates you wish to use, or
-            <OurLink href="/snippets/edit">Create your own!</OurLink>
+            <OurLink href="/snippets/new">Create your own!</OurLink>
         </p>
         <div class="snippets-root grow" :data-view="!!view">
             <div class="snippets-list" :data-view="!!view">
+                <ClientOnly>
+                    <SnippetsCard v-for="key in getLocalSnippets()" :snippet-key="key" />
+                </ClientOnly>
                 <SnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
             </div>
             <SnippetsViewer v-if="view" class="not-xl:-order-1 h-full" :snippetKey='(view as string)' />

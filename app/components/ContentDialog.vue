@@ -1,17 +1,26 @@
 <template>
     <DialogRoot>
-        <ContentDialogPortal>
-            <template #title>
-                <slot name="title"></slot>
+        <slot name="trigger">
 
+        </slot>
+        <ContentDialogPortal>
+            <template v-if="slots.title" #title>
+                <slot name="title"></slot>
+            </template>
+            <template v-if="slots.default" #default>
+                <slot></slot>
+            </template>
+            <template v-if="slots.footer" #footer>
+                <slot name="footer"></slot>
             </template>
         </ContentDialogPortal>
     </DialogRoot>
 </template>
 <script setup lang="ts">
-    import type { ContentDialogPortal as CDP } from '#components'
-    import type { ComponentProps } from 'vue-component-type-helpers';
-    defineProps<ComponentProps<typeof CDP>>()
+    // import type { ContentDialogPortal as CDP } from '#components'
+    // import type { ComponentProps } from 'vue-component-type-helpers';
+    // defineProps<ComponentProps<typeof CDP>>()
+    const slots = useSlots()
 </script>
 <style>
     @reference '../app.css';

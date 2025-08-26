@@ -1,45 +1,66 @@
 <template>
-    <div class="grid grid-cols-2 grid-rows-2 gap-2 h-screen overflow-hidden">
-        <ClientOnly>
-            <!-- Template Editor -->
-            <div class="flex flex-col gap-2 row-span-2">
-                <label class="font-bold">Template</label>
-                <SnippetsEditor class="grow" v-model="code" />
-            </div>
+    <div class="grid grid-cols-2 grid-rows-2 gap-4 h-screen overflow-hidden p-2">
+        <!-- Template Editor -->
+        <div class="flex flex-col gap-2 row-span-2">
+            <label class="font-bold p-button px-0">Template (autosaved)</label>
+            <SnippetsEditor class="grow" v-model="code" />
+        </div>
 
-            <!-- Test Input Editor -->
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Test Input</label>
-                <CodeEditor lang="yaml" v-model="input" class="grow" />
+        <!-- Test Input Editor -->
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-1">
+                <label class="font-bold">Test Input (won't be saved)</label>
+                <div class="grow"></div>
+                <Control>
+                    <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/?view=${id}`">
+                        <Icon alt="" :icon=View />
+                        View in Main App
+                    </OurLink>
+                </Control>
             </div>
+            <CodeEditor lang="yaml" v-model="input" class="grow" />
+        </div>
 
-            <!-- Output Preview -->
-            <div class="flex flex-col gap-2">
-                <label class="font-bold">Output</label>
-                <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output" :model-uri="uri"
-                    class="grow" />
-            </div>
-        </ClientOnly>
+        <!-- Output Preview -->
+        <div class="flex flex-col gap-2">
+            <label class="font-bold p-button px-0">Preview Output using Test Input</label>
+            <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output" :model-uri="uri" class="grow" />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+    import View from '@fluentui/svg-icons/icons/eye_24_regular.svg?raw'
     import * as YAML from "yaml";
-    import { Context, Liquid, Tag, TagToken, type TopLevelToken } from "liquidjs";
-    import { extractYamlComment, yamlToZod, type Metadata } from "~/utils/snippets/metadata";
+    import { Liquid } from "liquidjs";
+    import { extractYamlComment, type Metadata } from "~/utils/snippets/metadata";
     import type { Uri } from "monaco-editor";
+    import { getMetadataExample, useLocalSnippetRef } from "~/utils/snippets/manager";
     // --------------------
     // Refs
     // --------------------
     let uri = undefined
-    if (import.meta.client)
+    if (import.meta.client) {
         uri = 'inmemory://index.liquid' as any as Uri
+    }
     const outputME = useTemplateRef("outputME")
-    const code = ref(``);
+    let code: Ref<string>;
 
     const input = ref(``);
     const output = ref("");
     const outputLang = ref("plaintext");
+
+    // Client Only Area
+    const id = useRequestURL().searchParams.get('id')
+    if (import.meta.client) {
+        if (id === null) {
+            throw createError({ status: 404, statusText: 'Snippet not found' })
+        }
+        code = useLocalSnippetRef(id)
+        input.value = await getMetadataExample(id)
+    } else {
+        code = ref('')
+    }
 
     // --------------------
     // Liquid Engine
