@@ -78,7 +78,8 @@
 
     .monaco-editor .sticky-widget {
         backdrop-filter: blur(2em);
-        background-color: var(--background-color-control-primary) !important;
+        /* background-color: var(--background-color-control-primary) !important; */
+        background: transparent;
     }
 
     .monaco-editor .sticky-line-content {
