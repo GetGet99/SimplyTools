@@ -21,7 +21,7 @@
             </div>
             <!-- Output Preview -->
             <ClientOnly>
-                <CodeEditor ref="outputME" :lang="outputLang" readonly v-model="output"
+                <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output"
                     class="row-span-3 not-lg:min-h-50" />
             </ClientOnly>
 
@@ -130,18 +130,4 @@
 
     // Watch editors
     watch([snippetCode, input], render, { immediate: true });
-    if (import.meta.client) {
-        const monaco = await useMonaco()
-        watch(outputLang, () => {
-            monaco.editor.setModelLanguage(outputME.value?.editor?.getModel()!, outputLang.value)
-        })
-        watch(snippetCode, async () => {
-            try {
-                const yaml = extractYamlComment(snippetCode.value)
-                const meta = YAML.parse(yaml ?? '') as Metadata
-            } catch {
-
-            }
-        }, { immediate: true });
-    }
 </script>
