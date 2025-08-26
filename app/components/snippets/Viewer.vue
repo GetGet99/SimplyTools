@@ -51,8 +51,8 @@
 <script setup lang="ts">
     import * as YAML from "yaml";
     import { Liquid } from "liquidjs";
-    import { extractYamlComment, type Metadata } from "~/utils/snippets/metadata";
-    import { getMetadata, getSnippet } from "~/utils/snippets/manager";
+    import { type Metadata } from "~/utils/snippets/metadata";
+    import { getMetadata, getSnippet, useSavedInput } from "~/utils/snippets/manager";
 
     const props = defineProps<{ snippetKey: string, class?: string }>()
 
@@ -63,8 +63,9 @@
     const outputME = useTemplateRef("outputME")
     const snippetCode = ref("");
     const meta = ref<Metadata>({} as Metadata)
-
-    const input = ref("");
+    const snippetKeyRef = ref(props.snippetKey)
+    watch(() => props.snippetKey, () => snippetKeyRef.value = props.snippetKey)
+    const input = await useSavedInput(snippetKeyRef);
     const output = ref("");
     const outputLang = ref("plaintext");
 
@@ -75,7 +76,6 @@
         snippetCode.value = snippet
         outputLang.value = initialMeta.lang
         meta.value = initialMeta
-        input.value = YAML.stringify(initialMeta.example)
     }, { immediate: true })
 
     // --------------------
