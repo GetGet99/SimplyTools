@@ -1,11 +1,11 @@
 <script setup lang="ts">
     import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
-    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl' }>()
+    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl', kind?: 'app' | 'tool' }>()
     const ToolsMap: { [key in typeof props.category]: string } = {
         none: 'SimplyTools',
         dev: 'SimplyDevTools',
         math: 'SimplyMathTools',
-        snippets: 'SimplySnippets (Alpha)'
+        snippets: 'SimplySnippets (Beta)'
     }
     useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
 </script>
@@ -20,7 +20,7 @@
                 </OurLink>
             </Control>
         </div>
-        <div class="flex flex-col gap-16">
+        <div class="flex flex-col" :class="kind === 'app' ? 'gap-8' : 'gap-16'">
             <h1 class="text-center pt-16">{{ ToolsMap[props.category] }} - {{ tool }}</h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them, they
                 are

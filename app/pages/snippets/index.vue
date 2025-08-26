@@ -5,7 +5,7 @@
     const view = computed(() => url.query.view)
 </script>
 <template>
-    <Feature category="snippets" tool="Quick Templates" class="flex flex-col gap-4"
+    <Feature category="snippets" tool="Quick Templates" kind="app" class="flex flex-col gap-4"
         :limit-screen="view ? 'xl' : undefined">
         <p class="text-center">Find templates you wish to use, or
             <OurLink href="/snippets/new">Create your own!</OurLink>
