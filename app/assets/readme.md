@@ -1,0 +1,1 @@
+Some media assets used in this project are from [Pixabay](https://pixabay.com/?utm_source=chatgpt.com) and licensed under the Pixabay Content License

@@ -8,7 +8,7 @@
         if (base === undefined) {
             base = calc.base
         }
-        const disabled: ComponentProps<typeof Button> & ComponentAttrs<typeof Button> = { 'varient': 'none', class: 'border-transparent text-disabled', disabled: true }
+        const disabled: ComponentProps<typeof Button> & ComponentAttrs<typeof Button> = { 'variant': 'none', class: 'border-transparent text-disabled', disabled: true }
         if (key === '(' || key === ')')
             return disabled
         let keyAscii = key.charCodeAt(0)
@@ -144,8 +144,8 @@
                     @click="calcInput.type(c)">{{ c }}</Button>
                 <Button class="key" v-for="c in ['F', '+/-', '0']" v-bind="postprocessNumberKey(c)"
                     @click="calcInput.type(c)">{{ c }}</Button>
-                <Button varient="none" class="key border-transparent text-disabled" disabled>.</Button>
-                <Button class="key rounded-br-[calc(2_*_0.25rem)]" varient="accent" @click="calcInput.type('=')">{{ "="
+                <Button variant="none" class="key border-transparent text-disabled" disabled>.</Button>
+                <Button class="key rounded-br-[calc(2_*_0.25rem)]" variant="accent" @click="calcInput.type('=')">{{ "="
                 }}</Button>
             </div>
         </div>

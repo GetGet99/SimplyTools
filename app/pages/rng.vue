@@ -52,11 +52,11 @@
         <div class="flex flex-col items-center gap-4 w-fit">
             <span>Generate me random <ToggleGroupRoot class="inline-flex" v-model="mode">
                     <ToggleGroupItem value="integer" as-child>
-                        <Button :varient="mode === 'integer' ? 'accent' : 'control'"
+                        <Button :variant="mode === 'integer' ? 'accent' : 'control'"
                             class="p-button inline-block rounded-r-none" @click="mode = 'integer'">Integer</Button>
                     </ToggleGroupItem>
                     <ToggleGroupItem value="real" as-child>
-                        <Button :varient="mode === 'real' ? 'accent' : 'control'"
+                        <Button :variant="mode === 'real' ? 'accent' : 'control'"
                             class="p-button inline-block rounded-l-none" @click="mode = 'real'">Real Number</Button>
                     </ToggleGroupItem>
                 </ToggleGroupRoot>
@@ -78,7 +78,7 @@
             <TextBox :model-value="output" multiline class="w-full" readonly
                 placeholder='Press "Generate" button above!' />
             <div class="w-full flex justify-end gap-2 -mt-2">
-                <Button :varient="autoClear ? 'accent' : 'control'" class="p-button rounded-control"
+                <Button :variant="autoClear ? 'accent' : 'control'" class="p-button rounded-control"
                     @click="autoClear = !autoClear">
                     Auto Clear: {{ autoClear ? 'On' : 'Off' }}
                 </Button>

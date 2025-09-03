@@ -49,19 +49,7 @@
 </script>
 <template>
     <input v-if="!multiline" ref="tb" type="text" :value="model" @input="update" :placeholder autocomplete="off"
-        :readonly @paste="pasteHandler" />
-    <textarea v-else ref="tb" v-model="model" :placeholder autocomplete="off" :readonly class="h-60" @input="update"
+        :readonly @paste="pasteHandler" class="style-textbox" />
+    <textarea v-else ref="tb" v-model="model" :placeholder autocomplete="off" :readonly class="h-60 style-textbox" @input="update"
         @paste="pasteHandler"></textarea>
 </template>
-<style lang="css" scoped>
-    @reference '../app.css';
-
-    input,
-    textarea {
-        @apply outline-0 border px-2.25 pt-1 pb-0.75 rounded-control;
-        @apply border-border-control-primary;
-        /* @apply border control-border-control focus:control-border-control-pressed; */
-        @apply bg-control-primary hover:bg-control-secondary focus:bg-transparent;
-        @apply border-b-2 border-b-control-strong focus:border-b-textbox-accent-highlight;
-    }
-</style>

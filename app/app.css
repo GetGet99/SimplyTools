@@ -39,6 +39,7 @@
     --text-h2: var(--text-xl);
     --text-card-title: var(--text-2xl);
     --text-body: var(--text-base);
+    --text-color-placeholder: #AB000000;
     --background-color-control-primary-light: #FFFFFFB3;
     --background-color-control-secondary-light: #F9F9F980;
     --background-color-control-tertiary-light: #F9F9F94D;
@@ -167,6 +168,8 @@ body {
     }
 }
 
+
+
 @utility border-gradient-to-b {
     --tw-gradient-position: to bottom in oklab;
     border-image: linear-gradient(var(--tw-gradient-stops));
@@ -214,4 +217,22 @@ body {
 
 @utility rounded-control {
     @apply rounded-1;
+}
+
+@utility utils-style-textbox-focus {
+        @apply bg-transparent;
+        @apply border-b-textbox-accent-highlight;
+    }
+
+@layer components {
+    .style-textbox {
+        @apply outline-0 border px-2.25 pt-1 pb-0.75 rounded-control;
+        @apply border-border-control-primary;
+        /* @apply border control-border-control focus:control-border-control-pressed; */
+        @apply bg-control-primary hover:bg-control-secondary focus:bg-transparent;
+        @apply border-b-2 border-b-control-strong focus:border-b-textbox-accent-highlight;
+    }
+    .style-textbox-focus {
+        @apply utils-style-textbox-focus;
+    }
 }
