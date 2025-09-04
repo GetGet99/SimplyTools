@@ -6,43 +6,59 @@ import aud from '~/assets/beep-313342.mp3'
 import { ref, computed, watch } from 'vue'
 
 const MODES = [
-    { name: 'Pomodoro', duration: 25 * 60 },
-    { name: 'Short Break', duration: 5 * 60 },
-    { name: 'Long Break', duration: 15 * 60 },
-    // { name: 'Test', duration: 3 },
+    { name: 'Pomodoro', duration: 25 * 60 * 1000 },
+    { name: 'Short Break', duration: 5 * 60 * 1000 },
+    { name: 'Long Break', duration: 15 * 60 * 1000 },
+    // { name: 'Test', duration: 3 * 1000 },
 ]
 
 const modeIdx = ref(0)
-const secondsLeft = ref(MODES[modeIdx.value]!.duration)
+const timeLeftMs = ref(MODES[modeIdx.value]!.duration)
 const running = ref(false)
-let timer: NodeJS.Timeout | null = null
+let rafId: number | null = null
+let startTimestamp = 0
+let endTimestamp = 0
 let audioPlayer = import.meta.client ? new Audio(aud) : null
 if (audioPlayer) audioPlayer.loop = true
+
+function tick() {
+    if (!running.value) return
+    const now = performance.now()
+    const remaining = Math.max(endTimestamp - now, 0)
+    timeLeftMs.value = remaining
+    if (remaining > 0) {
+        rafId = requestAnimationFrame(tick)
+    } else {
+        timeLeftMs.value = 0
+        audioPlayer?.play()
+        running.value = false
+    }
+}
+
 function start() {
     if (!running.value) {
         running.value = true
-        timer = setInterval(() => {
-            if (secondsLeft.value > 0) {
-                secondsLeft.value--
-            } else {
-                audioPlayer!.play()
-            }
-        }, 1000)
+        startTimestamp = performance.now()
+        endTimestamp = startTimestamp + timeLeftMs.value
+        rafId = requestAnimationFrame(tick)
     }
 }
 
 function stop() {
     running.value = false
-    audioPlayer!.pause()
-    if (timer) {
-        clearInterval(timer)
-        timer = null
+    audioPlayer?.pause()
+    if (rafId) {
+        cancelAnimationFrame(rafId)
+        rafId = null
     }
+    // Update timeLeftMs to current remaining time
+    const now = performance.now()
+    timeLeftMs.value = Math.max(endTimestamp - now, 0)
 }
 
 function reset() {
     stop()
-    secondsLeft.value = MODES[modeIdx.value]!.duration
+    timeLeftMs.value = MODES[modeIdx.value]!.duration
 }
 
 function switchMode(idx: number) {
@@ -51,11 +67,50 @@ function switchMode(idx: number) {
 }
 
 watch(modeIdx, () => {
-    secondsLeft.value = MODES[modeIdx.value]!.duration
+    timeLeftMs.value = MODES[modeIdx.value]!.duration
 })
 
-const minutes = computed(() => Math.floor(secondsLeft.value / 60).toString().padStart(2, '0'))
-const seconds = computed(() => (secondsLeft.value % 60).toString().padStart(2, '0'))
+const minutes = computed(() => Math.floor(timeLeftMs.value / 60000).toString().padStart(2, '0'))
+const seconds = computed(() => Math.floor((timeLeftMs.value % 60000) / 1000).toString().padStart(2, '0'))
+const thousands = computed(() => Math.floor((timeLeftMs.value % 1000)).toString().padStart(3, '0'))
+
+const router = useRouter()
+let removeNuxtGuard: (() => void) | null = null
+
+function beforeUnloadHandler(e: BeforeUnloadEvent) {
+    if (running.value) {
+        e.preventDefault()
+        e.returnValue = 'Timer is running. Are you sure you want to leave?'
+        return 'Timer is running. Are you sure you want to leave?'
+    }
+}
+
+function nuxtNavigationGuard(to: any, from: any, next: any) {
+    if (running.value) {
+        if (confirm('Timer is running. Are you sure you want to leave?')) {
+            next()
+        } else {
+            next(false)
+        }
+    } else {
+        next()
+    }
+}
+
+onMounted(() => {
+    window.addEventListener('beforeunload', beforeUnloadHandler)
+    // Add Nuxt navigation guard
+    removeNuxtGuard = router.beforeEach(nuxtNavigationGuard)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('beforeunload', beforeUnloadHandler)
+    // Remove Nuxt navigation guard
+    if (removeNuxtGuard) {
+        removeNuxtGuard()
+        removeNuxtGuard = null
+    }
+})
 </script>
 
 <template>
@@ -69,7 +124,7 @@ const seconds = computed(() => (secondsLeft.value % 60).toString().padStart(2, '
             </div>
             <div class="flex flex-col items-center gap-4">
                 <div class="text-6xl sm:text-9xl">
-                    {{ minutes }}:{{ seconds }}
+                    {{ minutes }}:{{ seconds }}<span class="text-4xl sm:text-6xl">.</span><span class="text-4xl">{{ thousands }}</span>
                 </div>
                 <div class="flex gap-4">
                     <Button variant="accent" v-if="!running" @click="start" :disabled="running" title="Start" class="p-4 rounded-full">
@@ -82,6 +137,17 @@ const seconds = computed(() => (secondsLeft.value % 60).toString().padStart(2, '
                         <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
                     </Button>
                 </div>
+            </div>
+            <div class="text-center mt-4 text-lg text-placeholder">
+                <span class="font-semibold">Recommended Flow:</span>
+                <span>
+                    Pomodoro <span class="mx-1">&rarr;</span>
+                    Short Break <span class="mx-1">&rarr;</span>
+                    Pomodoro <span class="mx-1">&rarr;</span>
+                    Short Break <span class="mx-1">&rarr;</span>
+                    Pomodoro <span class="mx-1">&rarr;</span>
+                    Long Break
+                </span>
             </div>
         </div>
         <template #summary>

@@ -32,6 +32,7 @@
     --text-color-on-accent: white;
     --text-color-on-accent-primary: hsl(300, 2%, 10%);
     --background-color-solid-primary: #202020;
+    --text-color-placeholder: #000000AB;
 }
 
 @theme {
@@ -39,7 +40,6 @@
     --text-h2: var(--text-xl);
     --text-card-title: var(--text-2xl);
     --text-body: var(--text-base);
-    --text-color-placeholder: #AB000000;
     --background-color-control-primary-light: #FFFFFFB3;
     --background-color-control-secondary-light: #F9F9F980;
     --background-color-control-tertiary-light: #F9F9F94D;
@@ -58,6 +58,7 @@ body:not(.app) {
         --color-accent-light-2: #fb9a44;
         --color-accent-dark-1: #e05307;
         --text-color-on-accent-primary: hsl(300, 2%, 10%);
+        --text-color-placeholder: #FFFFFFAB;
     }
 
     @variant not-dark {
@@ -68,6 +69,7 @@ body:not(.app) {
         --color-accent-dark-1: #e05307;
         --text-color-on-accent-primary: white;
         --text-color-disabled: #9c9c9c;
+        --text-color-placeholder: #000000AB;
     }
 }
 
@@ -220,9 +222,9 @@ body {
 }
 
 @utility utils-style-textbox-focus {
-        @apply bg-transparent;
-        @apply border-b-textbox-accent-highlight;
-    }
+    @apply bg-transparent;
+    @apply border-b-textbox-accent-highlight;
+}
 
 @layer components {
     .style-textbox {
@@ -232,6 +234,7 @@ body {
         @apply bg-control-primary hover:bg-control-secondary focus:bg-transparent;
         @apply border-b-2 border-b-control-strong focus:border-b-textbox-accent-highlight;
     }
+
     .style-textbox-focus {
         @apply utils-style-textbox-focus;
     }
