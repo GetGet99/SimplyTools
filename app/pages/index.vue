@@ -34,6 +34,9 @@
                 <FeatureCard title="Text Compare" href="diff">
                     Compare between two pieces of text to see what are the differences.
                 </FeatureCard>
+                <FeatureCard title="Quick Templates (Snippets)" href="snippets">
+                    Quickly find and use code templates for your projects, or create your own custom snippets.
+                </FeatureCard>
                 <FeatureCard title="Timestamp Converter" href="timestamp">
                     Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.
                 </FeatureCard>
