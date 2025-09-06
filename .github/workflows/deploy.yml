@@ -13,22 +13,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Set up Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "pnpm" # enables caching for pnpm
+          cache: "pnpm"
 
-      - run: corepack enable
+      # Enable Corepack and activate pnpm
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
 
+      # Install dependencies with pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Build Nuxt app
       - name: Build Nuxt app
         run: |
           REPO_NAME=${GITHUB_REPOSITORY#*/}
           echo "Building with base URL: /$REPO_NAME/"
           NUXT_APP_BASE_URL=/$REPO_NAME/ pnpm exec nuxt build --preset github_pages
 
+      # Upload build output for deployment
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
