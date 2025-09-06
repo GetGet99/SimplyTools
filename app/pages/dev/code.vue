@@ -1,4 +1,18 @@
+<script lang="ts">
+    // throw createError({
+    //     statusCode: 404,
+    //     message: 'This page is under construction. Please check back later!'
+    // })
+</script>
 <template>
+    <Feature category="dev" tool="Under Construction">
+        <div class="flex flex-col items-center justify-center gap-4 p-8">
+            <h2 class="text-2xl font-bold">This page is under construction.</h2>
+            <p class="text-center max-w-lg">We're working hard to bring you this feature. Please check back later!</p>
+        </div>
+    </Feature>
+</template>
+<!-- <template>
     <div class="blockly-container" ref="blocklyDiv" style="height: 100vh; width: 100vw;"></div>
 </template>
 
@@ -54,4 +68,4 @@ onMounted(() => {
     fill: transparent !important;
     backdrop-filter: blur(16px);
 }
-</style>
+</style> -->
