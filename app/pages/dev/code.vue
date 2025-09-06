@@ -1,9 +1,3 @@
-<script lang="ts">
-    // throw createError({
-    //     statusCode: 404,
-    //     message: 'This page is under construction. Please check back later!'
-    // })
-</script>
 <template>
     <Feature category="dev" tool="Under Construction">
         <div class="flex flex-col items-center justify-center gap-4 p-8">
