@@ -1,11 +1,12 @@
 <script setup lang="ts">
     import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
-    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl', kind?: 'app' | 'tool' }>()
+    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'sounds' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl', kind?: 'app' | 'tool' }>()
     const ToolsMap: { [key in typeof props.category]: string } = {
         none: 'SimplyTools',
         dev: 'SimplyDevTools',
         math: 'SimplyMathTools',
-        snippets: 'SimplySnippets (Beta)'
+        snippets: 'SimplySnippets (Beta)',
+        sounds: 'SimplySounds (Beta)'
     }
     useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
 </script>
