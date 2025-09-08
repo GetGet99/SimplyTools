@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import Button from '~/components/Button.vue'
 import TextBox from '~/components/TextBox.vue'
-
+import type { } from '~/types/prompt.d.ts'
 const userInput = ref('')
 const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])
 const loading = ref(false)
@@ -14,7 +14,7 @@ const systemPrompt = ref(
 )
 const { accepted } = useAIPolicyStatus()
 
-let session: LanguageModel.Session | null = null
+let session: LanguageModel | null = null
 
 function detectBrowser(): 'edge' | 'chrome' | 'other' {
     const ua = navigator.userAgent.toLowerCase()
@@ -71,15 +71,30 @@ async function sendMessage() {
     messages.value.push(reactive({ role: 'assistant', content: '' }));
 
     // Get the reference to the last message, which is now reactive
-    const assistantMessage = messages.value[messages.value.length - 1];
+    const assistantMessage = messages.value[messages.value.length - 1]!;
 
     loading.value = true;
 
-    try {
-        session = session || (await LanguageModel.create({ prompt: systemPrompt.value || undefined }));
+    const input = userInput.value
+    userInput.value = ''
 
-        const stream = await session.promptStreaming(userInput.value);
-        userInput.value = '';
+    try {
+        if (!session) {
+            assistantMessage.content = 'Initializing chat... please be patient'
+            session = (await LanguageModel.create({
+                initialPrompts: [
+                    { role: 'system', content: systemPrompt.value }
+                ],
+                monitor(m: EventTarget) {
+                    m.addEventListener('downloadprogress', <T extends { loaded: number } & EventTarget>(e: T) => {
+                        assistantMessage.content = `Your browser is downloading model: ${e.loaded * 100}% completed`;
+                    });
+                }
+            }));
+            assistantMessage.content = ''
+        }
+        const stream = session.promptStreaming(input);
+        //@ts-ignore
         for await (const chunk of stream) {
             // Vue will detect this change and re-render only the part of the component that uses assistantMessage.content
             assistantMessage.content += chunk;
@@ -100,14 +115,10 @@ function clearChat() {
 </script>
 
 <template>
-    <Feature category="AI" tool="Prompt API" class="flex justify-center">
+    <Feature category="AI" tool="Chat" class="flex justify-center">
         <div class="w-full md:w-[70vw] flex flex-col gap-6">
             <div v-if="availabilityStatus !== 'available'" class="w-full p-3 font-bold rounded-md text-sm">
                 {{ availabilityStatus }}
-            </div>
-
-            <div class="text-center">
-                By using this tool, you agree to our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink>.
             </div>
 
             <details class="flex flex-col gap-2 w-full">
@@ -117,11 +128,12 @@ function clearChat() {
             </details>
             <div class="flex flex-col gap-2">
                 <div v-for="(msg, idx) in messages" :key="idx"
-                    :class="msg.role === 'user' ? 'text-right' : 'text-left'">
+                    :class="msg.role === 'user' ? 'items-end' : 'items-start'" class="flex flex-col gap-1">
                     <span :class="msg.role === 'user' ? 'font-bold' : 'italic'">
                         {{ msg.role === 'user' ? 'You' : msg.role === 'assistant' ? 'Assistant' : 'System' }}:
                     </span>
-                    <pre class="font-[system-ui] select-text text-wrap">{{ msg.content }}</pre>
+                    <pre
+                        class="p-2 bg-control-primary border-border-control-primary rounded-1 w-fit font-[system-ui] select-text text-wrap">{{ msg.content }}</pre>
                 </div>
             </div>
 
@@ -151,7 +163,7 @@ function clearChat() {
                         </Button>
                     </template>
                 </ClientOnly>
-                <Button variant="destructive" @click="clearChat">Clear Chat</Button>
+                <Button @click="clearChat">Clear Chat</Button>
             </div>
         </div>
 

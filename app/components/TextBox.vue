@@ -50,6 +50,6 @@ defineExpose({ focus })
 <template>
     <input v-if="!multiline" ref="tb" type="text" :value="model" @input="update" :placeholder autocomplete="off"
         :readonly @paste="pasteHandler" class="style-textbox" />
-    <textarea v-else ref="tb" :value="model" :placeholder autocomplete="off" :readonly class="h-60 style-textbox"
+    <textarea v-else ref="tb" :value="model" :placeholder autocomplete="nope" :readonly class="h-60 style-textbox"
         @input="update" @paste="pasteHandler"></textarea>
 </template>

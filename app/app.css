@@ -226,6 +226,10 @@ body {
     @apply border-b-textbox-accent-highlight;
 }
 
+@utility acrylic-default {
+    @apply bg-[#2C2C2CCC] backdrop-blur-lg
+}
+
 @layer components {
     .style-textbox {
         @apply outline-0 border px-2.25 pt-1 pb-0.75 rounded-control;

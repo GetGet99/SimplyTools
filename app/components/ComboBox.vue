@@ -1,14 +1,16 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends AcceptableValue | AcceptableValue[]">
 import { ref, computed, watch, onMounted } from 'vue'
 import Control from './Control.vue'
 import ChevronDown from '@fluentui/svg-icons/icons/chevron_down_24_regular.svg?raw'
+import type { AcceptableValue } from 'reka-ui';
 
 const props = defineProps<{
-    modelValue?: string
-    options: string[]
+    modelValue?: T
+    options: readonly T[]
     label?: string
     placeholder?: string
     disabled?: boolean
+    class?: string
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -20,22 +22,20 @@ watch(() => props.modelValue, val => {
     selected.value = val ?? ''
 })
 
-function selectOption(option: string) {
+function selectOption(option: T) {
     selected.value = option
     emit('update:modelValue', option)
     open.value = false
 }
-
-const filteredOptions = computed(() =>
-    props.options.filter(opt =>
-        !selected.value || opt.toLowerCase().includes(selected.value.toLowerCase())
-    )
-)
-
-function onInput(e: Event) {
-    selected.value = (e.target as HTMLInputElement).value
-    emit('update:modelValue', selected.value)
-}
+const selectedIndex = computed(() => {
+    const idx = props.options.indexOf(selected.value)
+    if (idx <= -1) {
+        return 0
+    }
+    return idx
+})
+const comboboxWidth = ref(0)
+const btn = useTemplateRef('btn')
 </script>
 
 <template>
@@ -53,26 +53,28 @@ function onInput(e: Event) {
                     autocomplete="off"
                     tabindex="0"
                 /> -->
-                <Button class="flex gap-2 items-center" title="Select option" :disabled="disabled">
-                    {{ selected }}
+                <Button ref="btn" class="flex gap-2 items-center justify-between" :class title="Select option" :disabled="disabled" @click="comboboxWidth = btn?.button?.clientWidth ?? 0">
+                    <slot :option="selected">
+                        {{ selected }}
+                    </slot>
                     <Icon :icon="ChevronDown" alt="" class="w-2 scale-50" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuPortal>
-                <DropdownMenuContent class="backdrop-blur-lg bg-control-primary border border-border-control-primary rounded-control shadow-lg max-h-60 overflow-auto w-full">
+                <DropdownMenuContent
+                    class="acrylic-default border border-border-control-primary rounded-2 shadow-lg max-h-60 overflow-auto w-full" :style="{
+                        translate: `0px calc(-1 * ${selectedIndex + 1}/${options.length} * 100% + 4px)`,
+                        minWidth: `${comboboxWidth}px`
+                    }">
                     <DropdownMenuGroup>
-                        <DropdownMenuItem
-                            v-for="option in filteredOptions"
-                            :key="option"
-                            @select="selectOption(option)"
-                            class="cursor-pointer pl-2 pr-3 py-2 flex items-center gap-2 hover:bg-control-secondary"
-                            :data-selected='option === selected'
-                        >
-                            <span
-                                class="w-1 h-4 rounded-full mr-2"
-                                :class="option === selected ? 'bg-accent-primary' : 'bg-control-secondary'"
-                            ></span>
-                            {{ option }}
+                        <DropdownMenuItem v-for="option in options" :key="option" @select="selectOption(option)"
+                            class="pl-0 m-1 pr-3 py-2 rounded-1 flex items-center gap-2 hover:bg-control-secondary data-[selected='true']:bg-control-secondary data-[selected='true']:hover:bg-control-primary"
+                            :data-selected='option === selected'>
+                            <span class="w-1 h-5 rounded-full mr-0"
+                                :class="option === selected ? 'bg-accent-primary' : ''"></span>
+                            <slot :option>
+                                {{ option }}
+                            </slot>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                 </DropdownMenuContent>

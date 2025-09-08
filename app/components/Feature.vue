@@ -29,6 +29,11 @@ useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
                 unlikely to work correctly.</noscript>
         </div>
         <div v-if="!limitScreen" class="mt-16 mb-8 w-full">
+            <div v-if="category === 'AI'" class="text-center mb-8">
+                Note: This tool is powered by browsers' built-in AI.<br />
+                As with many AI tools, mistakes and hallucinations can happen.<br/>
+                By using this tool, you agree to our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink> and comply with your browsers' AI terms.
+            </div>
             <div :class>
                 <slot></slot>
             </div>
@@ -55,7 +60,8 @@ useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
                             </template><template v-else>
                                 We do not collect, transmit, or store any of the content you input into or the output
                                 you receive from these AI APIs. All processing of your data for these features happens
-                                with browsers' built-in APIs, which may have their own data collection practices. Please refer to
+                                with browsers' built-in APIs, which may have their own data collection practices. Please
+                                refer to
                                 our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink> and your browser's
                                 privacy policy for more details.
                             </template></p>
