@@ -27,7 +27,7 @@
     <Feature category="dev" tool="Base 64 Converter" class="flex justify-center">
         <div class="flex flex-col lg:flex-row gap-15">
             <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
-                class="lg:w-[25vw]" />
+                class="lg:w-[25vw] min-h-50" multiline />
 
             <div class="flex items-center justify-center">
                 <Button class="w-fit p-button-icon" @click="mode = mode === 'atob' ? 'btoa' : 'atob'"

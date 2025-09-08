@@ -1,14 +1,15 @@
 <script setup lang="ts">
-    import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
-    const props = defineProps<{ class?: string, category: 'dev' | 'math' | 'snippets' | 'sounds' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl', kind?: 'app' | 'tool' }>()
-    const ToolsMap: { [key in typeof props.category]: string } = {
-        none: 'SimplyTools',
-        dev: 'SimplyDevTools',
-        math: 'SimplyMathTools',
-        snippets: 'SimplySnippets (Beta)',
-        sounds: 'SimplySounds (Beta)'
-    }
-    useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
+import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
+const props = defineProps<{ class?: string, category: 'dev' | 'AI' | 'math' | 'snippets' | 'sounds' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl', kind?: 'app' | 'tool' }>()
+const ToolsMap: { [key in typeof props.category]: string } = {
+    none: 'SimplyTools',
+    dev: 'SimplyDevTools',
+    math: 'SimplyMathTools',
+    AI: 'SimplyAITools',
+    snippets: 'SimplySnippets (Beta)',
+    sounds: 'SimplySounds (Beta)'
+}
+useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
 </script>
 <template>
     <div class="grid min-h-screen xl:data-[limit-screen='xl']:h-screen" :data-limit-screen=limitScreen
@@ -48,8 +49,16 @@
                             accessible from all
                             your devices
                             with
-                            internet connections.<br />Whatever data you input here stays within your device. No ads and
-                            none of your data are being sent out to the internet.</p>
+                            internet connections.<br /><template v-if="category !== 'AI'">
+                                Whatever data you input here stays within your device. No ads and
+                                none of your data are being sent out to the internet.
+                            </template><template v-else>
+                                We do not collect, transmit, or store any of the content you input into or the output
+                                you receive from these AI APIs. All processing of your data for these features happens
+                                with browsers' built-in APIs, which may have their own data collection practices. Please refer to
+                                our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink> and your browser's
+                                privacy policy for more details.
+                            </template></p>
                     </div>
                 </div>
             </details>
