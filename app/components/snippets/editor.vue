@@ -10,7 +10,7 @@
     const code = defineModel<string>()
 
     const editorRef = useTemplateRef("editor");
-    const monaco = useMonaco()
+    const monaco = useMonacoWithOurTheme()
     await useMonacoLiquidLanguage();
     if (monaco) {
         useMonacoLiquidLanguage();

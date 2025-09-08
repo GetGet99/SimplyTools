@@ -18,7 +18,7 @@ const tool = usePageInfo()
                 <Icon :icon=ChevronRight alt="to" />
                 <OurLink class="manual p-2 pointer-events-none"
                     :href="`/${tool.catPath}`">
-                    {{ tool.appName }}
+                    {{ tool.breadcrumb[0] }}
                 </OurLink>
             </template>
             <template v-if="tool.breadcrumb.length >= 1">

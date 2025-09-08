@@ -6,7 +6,7 @@
             New Text goes to the right!
         </div>
         <MonacoDiffEditor ref="editor"
-            :options="{ originalEditable: true, readOnly: false, theme: 'simplytools', diffWordWrap: 'on', renderOverviewRuler: false }"
+            :options="{ originalEditable: true, readOnly: false, theme, diffWordWrap: 'on', renderOverviewRuler: false }"
             class="w-full grow bg-control-primary">
 
         </MonacoDiffEditor>
@@ -23,4 +23,26 @@
 import { Uncategorized } from '~/utils/pages/uncategorized'
 usePageInfo(Uncategorized.pages.find(x => x.path === 'diff'))
 await useMonacoWithOurTheme()
+// Function to apply the appropriate theme
+async function applyColorScheme(scheme: 'dark' | 'light') {
+    theme = 'simplytools-' + scheme;
+    (await useMonaco()).editor.setTheme('simplytools-' + scheme)
+}
+let theme = 'simplytools-dark'
+if (window?.matchMedia) {
+    // Detect the initial color scheme
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    applyColorScheme(prefersDarkScheme.matches ? 'dark' : 'light');
+
+    function changeHandler(event: MediaQueryListEvent) {
+        applyColorScheme(event.matches ? 'dark' : 'light');
+    }
+    // Listen for changes in the color scheme
+    onMounted(() => {
+        prefersDarkScheme.addEventListener('change', changeHandler);
+    })
+    onUnmounted(() => {
+        prefersDarkScheme.removeEventListener('change', changeHandler);
+    })
+}
 </script>

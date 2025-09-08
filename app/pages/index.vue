@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Categories } from '~/utils/pages/info';
-
+useHead({
+    title: 'SimplyTools'
+})
 </script>
 
 <template>

@@ -9,19 +9,19 @@ const ToolsMap: { [key in typeof props.category]: string } = {
     snippets: 'SimplySnippets (Beta)',
     sounds: 'SimplySounds (Beta)'
 }
-useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
+const tool = usePageInfo()
+useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
 <template>
-    <div class="grid min-h-screen xl:data-[limit-screen='xl']:h-screen" :data-limit-screen=limitScreen
-        style="grid-template-rows: 0px auto minmax(0, 1fr) auto;">
+    <div class="feature-root grid min-h-screen xl:data-[limit-screen='xl']:h-screen" :data-limit-screen=limitScreen>
         <TitleBar />
         <div class="flex flex-col app:hidden" :class="kind === 'app' ? 'gap-8' : 'gap-16'">
-            <h1 class="text-center pt-16">{{ ToolsMap[props.category] }} - {{ tool }}</h1>
+            <h1 class="text-center pt-16">{{ tool.appName }} - {{ tool.toolName }}</h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them, they
                 are
                 unlikely to work correctly.</noscript>
         </div>
-        <div v-if="!limitScreen" class="mt-16 mb-8 w-full">
+        <div v-if="!limitScreen" class="mt-16 app:mt-8 mb-8 w-full">
             <div v-if="category === 'AI'" class="text-center mb-8">
                 <span class="app:hidden">Note: This tool is powered by browsers' built-in AI.<br /></span>
                 <span class="app:inline">Note: This tool is powered by WebView2 browser's built-in AI.<br /></span>
@@ -33,10 +33,10 @@ useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
                 <slot></slot>
             </div>
         </div>
-        <div v-else class="mt-16 mb-8 w-full" :class>
+        <div v-else class="mt-16 app:mt-8 not-app:mb-8 w-full" :class>
             <slot></slot>
         </div>
-        <div class="app-hidden">
+        <div class="app:hidden">
             <details v-if="!noDetails" class="text-center">
                 <summary><span class="italic">Extra Info: <slot name="summary">We are working on this tool. 🔨</slot>
                     </span></summary>
@@ -67,3 +67,14 @@ useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
         </div>
     </div>
 </template>
+<style>
+@reference '../app.css';
+.feature-root {
+    @variant app {
+        grid-template-rows: 0px minmax(0, 1fr);
+    }
+    @variant not-app {
+        grid-template-rows: 0px auto minmax(0, 1fr) auto;
+    }
+}
+</style>

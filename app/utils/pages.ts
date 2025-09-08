@@ -31,14 +31,14 @@ export function usePageInfo(page?: Page) {
                 breadcrumb = [appName, toolName]
             }
             else if (pageRef.value.parent !== Uncategorized) {
-                appName = pageRef.value.parent.name
+                appName = pageRef.value.parent.shortName
                 breadcrumb = [appName, toolName]
             } else {
                 breadcrumb = [toolName]
             }
             return {
                 breadcrumb,
-                appName: breadcrumb.length === 2 ? breadcrumb[0]! : pageRef.value.parent.name,
+                appName: pageRef.value.parent.name,
                 toolName,
                 catPath: pageRef.value.parent.path,
                 toolPath: `${pageRef.value.parent.path}/${pageRef.value.path}`
