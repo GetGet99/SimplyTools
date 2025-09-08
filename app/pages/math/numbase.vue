@@ -1,5 +1,8 @@
 <script setup lang="ts">
-    const value = ref<bigint | undefined>(undefined)
+import { MathCategory } from '~/utils/pages/math';
+
+usePageInfo(MathCategory.pages.find(x => x.path === 'numbase'))
+const value = ref<bigint | undefined>(undefined)
 </script>
 <template>
     <Feature category="math" tool="Base Converter" class="flex flex-col px-4 sm:items-center gap-8">
@@ -40,6 +43,5 @@
     </Feature>
 </template>
 <style lang="css" scoped>
-    @reference '../../app.css';
-
+@reference '../../app.css';
 </style>

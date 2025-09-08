@@ -1,48 +1,29 @@
+<script setup lang="ts">
+import { Categories } from '~/utils/pages/info';
+
+</script>
+
 <template>
     <div class="w-full min-h-screen grid grid-rows-[auto_auto_minmax(0,_1fr)_auto] gap-2">
-        <h1 class="p-5 text-center">
+        <TitleBar />
+        <h1 class="p-5 text-center app:hidden">
             SimplyTools
         </h1>
-        <div>
+        <div class="app:hidden">
             <h2 class="h5 text-center">Free tools locally run in your browser!</h2>
             <noscript class="h2 text-danger">
-                <div class="text-center">JavaScript is required for the most part of the site. All tools are written to work
-                locally via JavaScript.</div>
+                <div class="text-center">JavaScript is required for the most part of the site. All tools are written to
+                    work
+                    locally via JavaScript.</div>
             </noscript>
         </div>
         <div class="flex flex-col">
             <main class="mx-2 sm:mx-30 my-2 grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-                <FeatureCard title="Base 64 Converter" href="dev/b64">
-                    A simple <code>atob</code> and <code>btoa</code> GUI wrapper
-                </FeatureCard>
-                <FeatureCard title="Random Number Generator" href="rng">
-                    A simple RNG (Random Number Generator) that can
-                    generate numbers between a given range, either integers or real numbers
-                </FeatureCard>
-                <FeatureCard title="Cases!" href="cases">
-                    Want to lowercase? UPPERCASE? swappingCASE? or raNDomcAsE? We got you covered.
-                </FeatureCard>
-                <FeatureCard title="Number Base Convert" href="math/numbase">
-                    Simple ways to convert bases
-                </FeatureCard>
-                <FeatureCard title="Programmer Calculator" href="dev/progcalc">
-                    Calculator in many number bases.
-                </FeatureCard>
-                <FeatureCard title="Color Playground" href="colors">
-                    Pick and play with different colors! Transform colors by inverting and more!
-                </FeatureCard>
-                <FeatureCard title="Text Compare" href="diff">
-                    Compare between two pieces of text to see what are the differences.
-                </FeatureCard>
-                <FeatureCard title="Quick Templates (Snippets)" href="snippets">
-                    Quickly find and use code templates for your projects, or create your own custom snippets.
-                </FeatureCard>
-                <FeatureCard title="Timestamp Converter" href="timestamp">
-                    Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.
-                </FeatureCard>
-                <FeatureCard title="Pomodoro Timer" href="pomodoro">
-                    Simple Pomodoro timer to boost your productivity with work and break intervals.
-                </FeatureCard>
+                <template v-for="cat in Categories">
+                    <FeatureCard v-for="page in cat.pages" :title="page.title" :href="`${cat.path}/${page.path}`">
+                        <span v-html="page.desc"></span>
+                    </FeatureCard>
+                </template>
             </main>
         </div>
         <Footer />

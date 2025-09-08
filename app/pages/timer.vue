@@ -3,6 +3,9 @@ import PlayIcon from '@fluentui/svg-icons/icons/play_24_regular.svg?raw'
 import PauseIcon from '@fluentui/svg-icons/icons/pause_24_regular.svg?raw'
 import ResetIcon from '@fluentui/svg-icons/icons/arrow_clockwise_24_regular.svg?raw'
 import EditIcon from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
+
+import { Uncategorized } from '~/utils/pages/uncategorized'
+usePageInfo(Uncategorized.pages.find(x => x.path === 'timer'))
 const DEFAULT_HOURS = 0
 const DEFAULT_MINUTES = 5
 const DEFAULT_SECONDS = 0

@@ -1,10 +1,13 @@
 <script setup lang="ts">
-    const color = ref<Color>(HEX.fromString("7b2929")!) as Ref<Color>
+import { Uncategorized } from '~/utils/pages/uncategorized'
+usePageInfo(Uncategorized.pages.find(x => x.path === 'colors'))
+const color = ref<Color>(HEX.fromString("7b2929")!) as Ref<Color>
 </script>
 <template>
     <Feature category="none" tool="Color Playground" class="not-sm:w-full not-sm:h-full sm:flex sm:justify-center">
         <div class="flex flex-col gap-4">
-            <div class="grid md:grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto_auto] justify-center gap-4">
+            <div
+                class="grid md:grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto_auto] justify-center gap-4">
                 <div class="flex items-start">
                     <div class="grid gap-4">
                         <h2 class="text-h2 text-center">Color Picker</h2>
@@ -41,12 +44,14 @@
                             <ColorAlternateDisplay name="Darker 3" :processor=ColorUtils.darker3 v-model="color" />
                             <ColorAlternateDisplay name="Darker 2" :processor=ColorUtils.darker2 v-model="color" />
                             <ColorAlternateDisplay name="Darker 1" :processor=ColorUtils.darker1 v-model="color" />
-                            <ColorAlternateDisplay class="not-sm:-order-1" name="Inverted" :processor=ColorUtils.invert v-model="color" />
-                            <ColorAlternateDisplay class="not-sm:-order-1" name="Opposite" :processor=ColorUtils.opposite v-model="color" />
+                            <ColorAlternateDisplay class="not-sm:-order-1" name="Inverted" :processor=ColorUtils.invert
+                                v-model="color" />
+                            <ColorAlternateDisplay class="not-sm:-order-1" name="Opposite"
+                                :processor=ColorUtils.opposite v-model="color" />
                             <ColorAlternateDisplay name="Brighter 1" :processor=ColorUtils.brighter1 v-model="color" />
                             <ColorAlternateDisplay name="Brighter 2" :processor=ColorUtils.brighter2 v-model="color" />
                             <ColorAlternateDisplay name="Brighter 3" :processor=ColorUtils.brighter3 v-model="color" />
-                            
+
                         </div>
                     </div>
                 </div>
@@ -54,7 +59,8 @@
 
         </div>
         <template #summary>
-            Pick a color, view contrast recommendations, and explore variations like brighter, darker, inverted, and opposite.
+            Pick a color, view contrast recommendations, and explore variations like brighter, darker, inverted, and
+            opposite.
         </template>
 
         <template #details>

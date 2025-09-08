@@ -14,15 +14,8 @@ useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
 <template>
     <div class="grid min-h-screen xl:data-[limit-screen='xl']:h-screen" :data-limit-screen=limitScreen
         style="grid-template-rows: 0px auto minmax(0, 1fr) auto;">
-        <div class="sticky top-0 left-0 flex">
-            <Control
-                class="p-button-icon rounded-control m-4 mt-[max(1rem,_var(--app-titlebar-height,_0px))] ml-[max(1rem,_var(--app-titlebar-height,_0px))] h-max">
-                <OurLink class="manual" tabindex="0" href="/">
-                    <Icon :icon=LeftArrow alt="" />
-                </OurLink>
-            </Control>
-        </div>
-        <div class="flex flex-col" :class="kind === 'app' ? 'gap-8' : 'gap-16'">
+        <TitleBar />
+        <div class="flex flex-col app:hidden" :class="kind === 'app' ? 'gap-8' : 'gap-16'">
             <h1 class="text-center pt-16">{{ ToolsMap[props.category] }} - {{ tool }}</h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them, they
                 are
@@ -30,9 +23,11 @@ useHead({ title: `${ToolsMap[props.category]} - ${props.tool}` })
         </div>
         <div v-if="!limitScreen" class="mt-16 mb-8 w-full">
             <div v-if="category === 'AI'" class="text-center mb-8">
-                Note: This tool is powered by browsers' built-in AI.<br />
-                As with many AI tools, mistakes and hallucinations can happen.<br/>
-                By using this tool, you agree to our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink> and comply with your browsers' AI terms.
+                <span class="app:hidden">Note: This tool is powered by browsers' built-in AI.<br /></span>
+                <span class="app:inline">Note: This tool is powered by WebView2 browser's built-in AI.<br /></span>
+                As with many AI tools, mistakes and hallucinations can happen.<br />
+                By using this tool, you agree to our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink> and
+                comply with your browsers' AI terms.
             </div>
             <div :class>
                 <slot></slot>

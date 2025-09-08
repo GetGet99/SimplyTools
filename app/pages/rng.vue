@@ -1,51 +1,53 @@
 <script setup lang="ts">
-    import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-    import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
-    const mode = ref<'integer' | 'real'>('integer')
-    const valFrom = ref<number | undefined>(1)
-    const valTo = ref<number | undefined>(10)
-    const count = ref(1)
-    const fromTb = useTemplateRef('from')
-    const toTb = useTemplateRef('to')
-    const genCountTb = useTemplateRef('genCount')
-    const autoClear = ref(true)
-    const output = ref('')
-    function generate() {
-        if (valFrom.value === undefined) {
-            fromTb.value?.nbb?.tb?.focus()
-            return
-        }
-        if (valTo.value === undefined) {
-            toTb.value?.nbb?.tb?.focus()
-            return
-        }
-        if (count.value === undefined) {
-            genCountTb.value?.nbb?.tb?.focus()
-            return
-        }
-        const wasEmpty = autoClear.value || output.value == ""
-        let outStr = ""
-        if (mode.value === "integer") {
-            for (let i = 0; i < count.value; i++) {
-                outStr += "\n" + rng.randrangeint(valFrom.value, valTo.value).toString()
-            }
-        } else {
-            for (let i = 0; i < count.value; i++) {
-                outStr += "\n" + rng.randrangefloat(valFrom.value, valTo.value).toString()
-            }
-        }
-        if (wasEmpty) {
-            // removes the first \n
-            outStr = outStr.substring(1)
-        }
-        if (autoClear.value)
-            output.value = outStr
-        else
-            output.value += outStr
+import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
+import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
+import { Uncategorized } from '~/utils/pages/uncategorized'
+usePageInfo(Uncategorized.pages.find(x => x.path === 'rng'))
+const mode = ref<'integer' | 'real'>('integer')
+const valFrom = ref<number | undefined>(1)
+const valTo = ref<number | undefined>(10)
+const count = ref(1)
+const fromTb = useTemplateRef('from')
+const toTb = useTemplateRef('to')
+const genCountTb = useTemplateRef('genCount')
+const autoClear = ref(true)
+const output = ref('')
+function generate() {
+    if (valFrom.value === undefined) {
+        fromTb.value?.nbb?.tb?.focus()
+        return
     }
-    function copy() {
-        navigator.clipboard.writeText(output.value)
+    if (valTo.value === undefined) {
+        toTb.value?.nbb?.tb?.focus()
+        return
     }
+    if (count.value === undefined) {
+        genCountTb.value?.nbb?.tb?.focus()
+        return
+    }
+    const wasEmpty = autoClear.value || output.value == ""
+    let outStr = ""
+    if (mode.value === "integer") {
+        for (let i = 0; i < count.value; i++) {
+            outStr += "\n" + rng.randrangeint(valFrom.value, valTo.value).toString()
+        }
+    } else {
+        for (let i = 0; i < count.value; i++) {
+            outStr += "\n" + rng.randrangefloat(valFrom.value, valTo.value).toString()
+        }
+    }
+    if (wasEmpty) {
+        // removes the first \n
+        outStr = outStr.substring(1)
+    }
+    if (autoClear.value)
+        output.value = outStr
+    else
+        output.value += outStr
+}
+function copy() {
+    navigator.clipboard.writeText(output.value)
+}
 </script>
 <template>
     <Feature category="none" tool="RNG" class="flex justify-center">

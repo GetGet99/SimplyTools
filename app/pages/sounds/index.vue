@@ -68,6 +68,8 @@
 </template>
 
 <script setup lang="ts">
+import { Apps } from '~/utils/pages/app';
+usePageInfo(Apps.pages.find(x => x.path === 'sounds'))
 import { ref, computed, provide } from 'vue'
 import * as Tone from 'tone'
 import * as Sounds from '~/utils/sounds/sounds';

@@ -1,9 +1,11 @@
 <script setup lang="ts">
-    import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-    const text = ref('')
-    function copy() {
-        navigator.clipboard.writeText(text.value)
-    }
+import { Uncategorized } from '~/utils/pages/uncategorized'
+usePageInfo(Uncategorized.pages.find(x => x.path === 'cases'))
+import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
+const text = ref('')
+function copy() {
+    navigator.clipboard.writeText(text.value)
+}
 </script>
 <template>
     <Feature category="none" tool="Cases" class="flex flex-col caseRoot sm:justify-center sm:items-center gap-2">
@@ -34,24 +36,25 @@
                 <li><strong>rANdOmcAse</strong> – randomize the case of every letter for fun or stylistic text.</li>
             </ul>
             <p>
-                This is useful for editing documents, preparing social media posts, or experimenting with different text styles.
+                This is useful for editing documents, preparing social media posts, or experimenting with different text
+                styles.
             </p>
         </template>
     </Feature>
 </template>
 <style lang="css" scoped>
-    @reference '../app.css';
+@reference '../app.css';
 
-    .cases {
-        grid-template-rows: repeat(5, minmax(0, 1fr));
+.cases {
+    grid-template-rows: repeat(5, minmax(0, 1fr));
 
-        @variant sm {
-            grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
-        }
+    @variant sm {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
     }
+}
 
 
-    textarea {
-        @apply w-full sm:w-[50vw];
-    }
+textarea {
+    @apply w-full sm:w-[50vw];
+}
 </style>

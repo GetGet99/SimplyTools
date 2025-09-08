@@ -5,6 +5,8 @@ import ResetIcon from '@fluentui/svg-icons/icons/arrow_clockwise_24_regular.svg?
 import aud from '~/assets/beep-313342.mp3'
 import { ref, computed, watch } from 'vue'
 
+import { Uncategorized } from '~/utils/pages/uncategorized'
+usePageInfo(Uncategorized.pages.find(x => x.path === 'pomodoro'))
 const MODES = [
     { name: 'Pomodoro', duration: 25 * 60 * 1000 },
     { name: 'Short Break', duration: 5 * 60 * 1000 },

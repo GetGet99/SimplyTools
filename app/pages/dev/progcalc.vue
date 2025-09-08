@@ -1,71 +1,73 @@
 <script setup lang="ts">
-    import type { ComponentAttrs, ComponentProps } from 'vue-component-type-helpers'
-    import type { Button } from '#components'
-    const calc = reactive(new ProgrammerCalculator())
-    const calcInput = new CalculatorUIInput(calc)
+import type { ComponentAttrs, ComponentProps } from 'vue-component-type-helpers'
+import type { Button } from '#components'
+import { DevCategory } from '~/utils/pages/dev'
+usePageInfo(DevCategory.pages.find(x => x.path === 'progcalc'))
+const calc = reactive(new ProgrammerCalculator())
+const calcInput = new CalculatorUIInput(calc)
 
-    function postprocessNumberKey(key: string, base?: bigint): ComponentProps<typeof Button> & ComponentAttrs<typeof Button> {
-        if (base === undefined) {
-            base = calc.base
-        }
-        const disabled: ComponentProps<typeof Button> & ComponentAttrs<typeof Button> = { 'variant': 'none', class: 'border-transparent text-disabled', disabled: true }
-        if (key === '(' || key === ')')
-            return disabled
-        let keyAscii = key.charCodeAt(0)
-        let keyVal = BigInt(-1)
-        if (keyAscii >= 48 && keyAscii <= 57) {
-            keyVal = BigInt(keyAscii - 48)
-        }
-        else if (keyAscii >= 65 && keyAscii <= 70) {
-            keyVal = BigInt(keyAscii - 65 + 10)
-        }
-        else if (keyAscii >= 97 && keyAscii <= 102) {
-            keyVal = BigInt(keyAscii - 97 + 10)
-        } else {
-            return {}
-        }
-        let className = 'key-number'
-        if (keyVal >= 10 && base <= 10n) {
-            return disabled
-        }
-        if (keyVal >= 8 && base <= 8n) {
-            return disabled
-        }
-        if (keyVal >= 2 && base === 2n) {
-            return disabled
-        }
+function postprocessNumberKey(key: string, base?: bigint): ComponentProps<typeof Button> & ComponentAttrs<typeof Button> {
+    if (base === undefined) {
+        base = calc.base
+    }
+    const disabled: ComponentProps<typeof Button> & ComponentAttrs<typeof Button> = { 'variant': 'none', class: 'border-transparent text-disabled', disabled: true }
+    if (key === '(' || key === ')')
+        return disabled
+    let keyAscii = key.charCodeAt(0)
+    let keyVal = BigInt(-1)
+    if (keyAscii >= 48 && keyAscii <= 57) {
+        keyVal = BigInt(keyAscii - 48)
+    }
+    else if (keyAscii >= 65 && keyAscii <= 70) {
+        keyVal = BigInt(keyAscii - 65 + 10)
+    }
+    else if (keyAscii >= 97 && keyAscii <= 102) {
+        keyVal = BigInt(keyAscii - 97 + 10)
+    } else {
         return {}
     }
-    function keydown(e: KeyboardEvent) {
-        if (e.key === 'Enter') {
-            e.preventDefault()
+    let className = 'key-number'
+    if (keyVal >= 10 && base <= 10n) {
+        return disabled
+    }
+    if (keyVal >= 8 && base <= 8n) {
+        return disabled
+    }
+    if (keyVal >= 2 && base === 2n) {
+        return disabled
+    }
+    return {}
+}
+function keydown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+    }
+    calcInput.type(e.key)
+}
+
+function pasteHandler(e: ClipboardEvent) {
+    e.preventDefault();
+
+    let text = e.clipboardData?.getData("text") ?? "";
+    for (const char of text) {
+        if (char === '_') {
+            // we ignore that as it will flip the sign
+            continue
         }
-        calcInput.type(e.key)
+        calcInput.type(char)
     }
 
-    function pasteHandler(e: ClipboardEvent) {
-        e.preventDefault();
 
-        let text = e.clipboardData?.getData("text") ?? "";
-        for (const char of text) {
-            if (char === '_') {
-                // we ignore that as it will flip the sign
-                continue
-            }
-            calcInput.type(char)
-        }
-        
-
-    }
-    onMounted(() => {
-        window.addEventListener('keydown', keydown)
-        window.addEventListener('paste', pasteHandler)
-    })
-    onUnmounted(() => {
-        window.removeEventListener('keydown', keydown)
-        window.removeEventListener('paste', pasteHandler)
-    })
-    const display = computed(() => calc.error || calc.displayOf(calc.value))
+}
+onMounted(() => {
+    window.addEventListener('keydown', keydown)
+    window.addEventListener('paste', pasteHandler)
+})
+onUnmounted(() => {
+    window.removeEventListener('keydown', keydown)
+    window.removeEventListener('paste', pasteHandler)
+})
+const display = computed(() => calc.error || calc.displayOf(calc.value))
 </script>
 <template>
     <Feature category="dev" tool="Programmer Calculator" class="flex justify-center">
@@ -146,7 +148,7 @@
                     @click="calcInput.type(c)">{{ c }}</Button>
                 <Button variant="none" class="key border-transparent text-disabled" disabled>.</Button>
                 <Button class="key rounded-br-[calc(2_*_0.25rem)]" variant="accent" @click="calcInput.type('=')">{{ "="
-                }}</Button>
+                    }}</Button>
             </div>
         </div>
 
@@ -176,28 +178,28 @@
     </Feature>
 </template>
 <style lang="css" scoped>
-    @reference '../../app.css';
+@reference '../../app.css';
 
-    [data-keyboardfocus="hidden"],
-    [data-keyboardfocus="hidden"] * {
-        outline: none;
-    }
+[data-keyboardfocus="hidden"],
+[data-keyboardfocus="hidden"] * {
+    outline: none;
+}
 
-    .baseDisplay {
-        @apply grid gap-2 relative;
-        grid-template-columns: auto auto minmax(0, 1fr);
-    }
+.baseDisplay {
+    @apply grid gap-2 relative;
+    grid-template-columns: auto auto minmax(0, 1fr);
+}
 
-    .baseDisplay.selected {
-        @apply bg-control-primary;
-    }
+.baseDisplay.selected {
+    @apply bg-control-primary;
+}
 
-    .label {
-        @apply px-2 w-10;
-    }
+.label {
+    @apply px-2 w-10;
+}
 
-    .label.selected::before {
-        @apply absolute top-1/2 left-1 -translate-y-1/2 w-1 h-5 rounded-full bg-accent-primary;
-        content: "";
-    }
+.label.selected::before {
+    @apply absolute top-1/2 left-1 -translate-y-1/2 w-1 h-5 rounded-full bg-accent-primary;
+    content: "";
+}
 </style>

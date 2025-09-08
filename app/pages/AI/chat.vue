@@ -3,6 +3,8 @@ import { ref, onMounted } from 'vue'
 import Button from '~/components/Button.vue'
 import TextBox from '~/components/TextBox.vue'
 import type { } from '~/types/prompt.d.ts'
+import { AICategory } from '~/utils/pages/ai'
+usePageInfo(AICategory.pages.find(x => x.path === 'chat'))
 const userInput = ref('')
 const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])
 const loading = ref(false)
@@ -117,7 +119,7 @@ function clearChat() {
 <template>
     <Feature category="AI" tool="Chat" class="flex justify-center">
         <div class="w-full md:w-[70vw] flex flex-col gap-6">
-            <div v-if="availabilityStatus !== 'available'" class="w-full p-3 font-bold rounded-md text-sm">
+            <div v-if="availabilityStatus !== 'available' && availabilityStatus !== 'downloadable'" class="w-full p-3 font-bold rounded-md text-sm">
                 {{ availabilityStatus }}
             </div>
 

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant data-view (&[data-view="true"]);
+@custom-variant app (body.app &);
 /* @custom-variant not-data-view (&:not([data-view="true"])); */
 
 @theme reference {

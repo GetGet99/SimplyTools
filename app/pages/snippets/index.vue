@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { Apps } from '~/utils/pages/app';
 import { getBuiltInSnippets, getLocalSnippets } from '~/utils/snippets/manager';
-
+usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
 const url = useRoute()
 const view = computed(() => url.query.view)
 </script>
