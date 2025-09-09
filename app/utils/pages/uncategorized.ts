@@ -52,8 +52,8 @@ export const Uncategorized = createCategory({
 
 // don't include as tools
 export const PrivacyPage = {
-    title: 'Privacy',
-    path: 'privacy',
-    desc: 'Privacy policy',
+    title: 'Terms of service and Privacy Policy',
+    path: 'terms-and-privacy',
+    desc: 'Terms of service and Privacy Policy',
     parent: Uncategorized
 } satisfies Page
