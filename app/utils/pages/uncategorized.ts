@@ -1,4 +1,4 @@
-import { createCategory } from "./_helper";
+import { createCategory, type Page } from "./_helper";
 
 export const Uncategorized = createCategory({
     type: 'category',
@@ -49,3 +49,11 @@ export const Uncategorized = createCategory({
         desc: 'Quickly find and use code templates for your projects, or create your own custom snippets.'
     },
 ])
+
+// don't include as tools
+export const PrivacyPage = {
+    title: 'Privacy',
+    path: 'privacy',
+    desc: 'Privacy policy',
+    parent: Uncategorized
+} satisfies Page
