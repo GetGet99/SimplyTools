@@ -1,40 +1,33 @@
 <script setup lang="ts">
 import LeftArrow from '@fluentui/svg-icons/icons/arrow_left_24_filled.svg?raw'
-const props = defineProps<{ class?: string, category: 'dev' | 'AI' | 'math' | 'snippets' | 'sounds' | 'none', tool: string, noDetails?: boolean, limitScreen?: 'xl', kind?: 'app' | 'tool' }>()
-const ToolsMap: { [key in typeof props.category]: string } = {
-    none: 'SimplyTools',
-    dev: 'SimplyDevTools',
-    math: 'SimplyMathTools',
-    AI: 'SimplyAITools',
-    snippets: 'SimplySnippets (Beta)',
-    sounds: 'SimplySounds (Beta)'
-}
+import { AICategory } from '~/utils/pages/ai';
+const props = defineProps<{ class?: string, noDetails?: boolean, limitScreen?: 'xl', app?: 'do-not-center' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
 <template>
     <div class="feature-root grid min-h-screen xl:data-[limit-screen='xl']:h-screen" :data-limit-screen=limitScreen>
         <TitleBar />
-        <div class="flex flex-col app:hidden" :class="kind === 'app' ? 'gap-8' : 'gap-16'">
+        <div class="flex flex-col app:hidden" :class="tool.isApp ? 'gap-8' : 'gap-16'">
             <h1 class="text-center pt-16">{{ tool.appName }} - {{ tool.toolName }}</h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them, they
                 are
                 unlikely to work correctly.</noscript>
         </div>
-        <div v-if="!limitScreen" class="mt-16 app:mt-8 mb-8 w-full">
-            <div v-if="category === 'AI'" class="text-center mb-8">
+        <div class="mt-16 app:mt-8 not-app:mb-8 w-full"
+            :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']">
+            <div v-if="tool.category === AICategory" class="text-center mb-8">
                 <span class="app:hidden">Note: This tool is powered by browsers' built-in AI.<br /></span>
-                <span class="hidden app:inline">Note: This tool is powered by WebView2 browser's built-in AI.<br /></span>
+                <span class="hidden app:inline">Note: This tool is powered by WebView2 browser's built-in
+                    AI.<br /></span>
                 As with many AI tools, mistakes and hallucinations can happen.<br />
                 By using this tool, you agree to our <OurLink href="/ai/policy" target="_blank">AI Policy</OurLink> and
                 comply with your browsers' AI terms.
             </div>
-            <div :class>
+            <div v-if="!limitScreen" :class>
                 <slot></slot>
             </div>
-        </div>
-        <div v-else class="mt-16 app:mt-8 not-app:mb-8 w-full" :class>
-            <slot></slot>
+            <slot v-else></slot>
         </div>
         <div class="app:hidden">
             <details v-if="!noDetails" class="text-center">
@@ -49,7 +42,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                             accessible from all
                             your devices
                             with
-                            internet connections.<br /><template v-if="category !== 'AI'">
+                            internet connections.<br /><template v-if="tool.category !== AICategory">
                                 Whatever data you input here stays within your device. No ads and
                                 none of your data are being sent out to the internet.
                             </template><template v-else>
@@ -69,10 +62,12 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </template>
 <style>
 @reference '../app.css';
+
 .feature-root {
     @variant app {
         grid-template-rows: 0px minmax(0, 1fr);
     }
+
     @variant not-app {
         grid-template-rows: 0px auto minmax(0, 1fr) auto;
     }

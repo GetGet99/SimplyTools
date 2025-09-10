@@ -20,15 +20,21 @@ export function usePageInfo(page?: Page) {
             return {
                 breadcrumb: [],
                 appName: 'SimplyTools',
-                toolName: 'Home'
+                toolName: 'Home',
+                category: Uncategorized,
+                catPath: Uncategorized.path,
+                toolPath: '/',
+                isApp: false
             }
         } else {
             let toolName = pageRef.value.inPageTitle ?? pageRef.value.title
             let appName
             let breadcrumb
+            let isApp = false
             if (pageRef.value.parent === Apps) {
                 appName = (pageRef.value as AppPage).appName
                 breadcrumb = [appName, toolName]
+                isApp = true
             }
             else if (pageRef.value.parent !== Uncategorized) {
                 appName = pageRef.value.parent.shortName
@@ -40,8 +46,10 @@ export function usePageInfo(page?: Page) {
                 breadcrumb,
                 appName: pageRef.value.parent.name,
                 toolName,
+                category: pageRef.value.parent,
                 catPath: pageRef.value.parent.path,
-                toolPath: `${pageRef.value.parent.path}/${pageRef.value.path}`
+                toolPath: `${pageRef.value.parent.path}/${pageRef.value.path}`,
+                isApp
             }
         }
     })

@@ -48,6 +48,11 @@ export const Uncategorized = createCategory({
         path: 'snippets',
         desc: 'Quickly find and use code templates for your projects, or create your own custom snippets.'
     },
+    {
+        title: 'QR Code Generator',
+        path: 'qr',
+        desc: 'Quickly create a QR code.'
+    },
 ])
 
 // don't include as tools
