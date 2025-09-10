@@ -60,7 +60,6 @@
 <script setup lang="ts">
 import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
 import DownloadIcon from '@fluentui/svg-icons/icons/arrow_download_24_regular.svg?raw'
-import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 
 
