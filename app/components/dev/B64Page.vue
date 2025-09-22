@@ -62,7 +62,7 @@ const w = window
         <div class="flex flex-col items-center gap-5">
             <Button @click="mode = mode === 'atob' ? 'btoa' : 'atob'; w.location">Switch to Base 64 {{ mode !== 'atob' ? 'decoder' : 'encoder' }}</Button>
         </div>
-        <div class="grow grid not-lg:grid-rows-2 lg:grid-cols-2 gap-15 mx-2 lg:mx-10">
+        <div class="grow grid not-lg:grid-rows-2 lg:grid-cols-2 gap-15 mx-2 lg:mx-10 app:mb-4">
             <div class="grid" style="grid-template-columns: minmax(0, 1fr) auto;">
                 <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none"
