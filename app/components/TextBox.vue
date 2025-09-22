@@ -18,6 +18,18 @@ function update() {
 function focus() {
     inputRef.value?.focus()
 }
+function getSelectionText() : string {
+    return inputRef.value?.value.substring(inputRef.value.selectionStart ?? 0, inputRef.value.selectionEnd ?? 0) ?? ''
+}
+function setSelectionText(value : string) {
+    const input = inputRef.value
+    if (!input) return
+    const { selectionStart, selectionEnd, value: currentValue } = input
+    if (selectionStart == null || selectionEnd == null) return
+    input.value = currentValue.slice(0, selectionStart) + value + currentValue.slice(selectionEnd)
+    const pos = selectionStart + value.length
+    input.setSelectionRange(pos, pos)
+}
 function pasteHandler(e: ClipboardEvent) {
     if (props.pastePreprocessor) {
         e.preventDefault();
@@ -45,11 +57,16 @@ function pasteHandler(e: ClipboardEvent) {
         input.dispatchEvent(new Event("input", { bubbles: true }));
     }
 }
-defineExpose({ focus })
+defineExpose({ focus, getSelectionText, setSelectionText })
 </script>
 <template>
     <input v-if="!multiline" ref="tb" type="text" :value="model" @input="update" :placeholder autocomplete="off"
         :readonly @paste="pasteHandler" class="style-textbox" />
-    <textarea v-else ref="tb" :value="model" :placeholder autocomplete="nope" :readonly class="h-60 style-textbox"
+    <textarea v-else ref="tb" :value="model" :placeholder autocomplete="nope" :readonly class="no-toolbox-h-60 style-textbox"
         @input="update" @paste="pasteHandler"></textarea>
 </template>
+<style lang="css">
+.no-toolbox-h-60:not(.style-textbox-group > .no-toolbox-h-60) {
+    height: 15rem;
+}
+</style>

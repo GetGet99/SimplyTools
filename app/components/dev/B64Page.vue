@@ -64,10 +64,7 @@ const w = window
         </div>
         <div class="grow grid not-lg:grid-rows-2 lg:grid-cols-2 gap-15 mx-2 lg:mx-10 app:mb-4">
             <div class="grid" style="grid-template-columns: minmax(0, 1fr) auto;">
-                <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
-                    class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none"
-                    multiline />
-                <div class="flex flex-col b64-textbox-controls overflow-hidden">
+                <div class="flex flex-col b64-textbox-controls overflow-hidden order-1">
                     <Button class="b64-textbox-button bg-transparent" @click="paste">
                         <Icon :icon=PasteIcon alt="Paste" />
                     </Button>
@@ -75,6 +72,9 @@ const w = window
                         <Icon :icon=FileIcon alt="From file" />
                     </Button>
                 </div>
+                <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
+                    class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none"
+                    multiline />
             </div>
 
             <!-- <div class="flex items-center justify-center">

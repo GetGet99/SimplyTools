@@ -278,11 +278,16 @@ body {
 }
 
 @layer components {
-    .style-textbox {
-        @apply utils-style-textbox;
+    .style-textbox-group > .style-textbox {
+        outline: none;
+        min-height: 100%;
+        @apply px-2.25 pt-1 pb-0.75;
+    }
+    .style-textbox:not(.style-textbox-group > .style-textbox) {
+        @apply utils-style-textbox focus:utils-style-textbox-focus;
     }
 
-    .style-textbox-focus {
+    .style-textbox-focus:not(.style-textbox-group > .style-textbox-focus) {
         @apply utils-style-textbox-focus;
     }
 }
