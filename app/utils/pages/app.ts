@@ -23,4 +23,10 @@ export const Apps = createCategory({
         path: 'sounds',
         desc: 'Quickly create sounds from notes and loops'
     },
+    {
+        title: 'Notes',
+        appName: 'SimplyNotes',
+        path: 'notes',
+        desc: 'Taking down notes!'
+    },
 ] as AppPage[])

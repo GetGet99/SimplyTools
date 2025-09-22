@@ -1,3 +1,4 @@
+export type PageInfo = Page | (Omit<Page, 'title'> & { title: Ref<string> })
 export type Page = PageWithoutParent & { parent: Category }
 export type PageWithoutParent = {
     path: string

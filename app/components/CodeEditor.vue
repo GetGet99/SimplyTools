@@ -7,12 +7,26 @@
             },
             readOnly: readonly,
             scrollBeyondLastLine: false,
-        }" v-model="code" class="base-bg-control-primary" />
+        }" v-model="code" class="base-bg-control-primary" v-get-element="disableContrlP" />
     </ClientOnly>
 </template>
 <script setup lang="ts">
 import type { editor as e } from 'monaco-editor';
-
+function disableContrlP(el: HTMLElement) {
+    el.addEventListener('keypress', function (event) {
+        //@ts-ignore
+        if (event.keyCode === 80 && (event.ctrlKey || event.metaKey) && !event.altKey && (!event.shiftKey || window.chrome || window.opera)) {
+            event.preventDefault();
+            if (event.stopImmediatePropagation) {
+                event.stopImmediatePropagation();
+            } else {
+                event.stopPropagation();
+            }
+            editor.value?.trigger('ctrl-shift-p', 'editor.action.quickCommand', null)
+            return;
+        }
+    }, true)
+}
 await useMonacoWithOurTheme();
 const code = defineModel<string>()
 const props = defineProps<{ readonly?: boolean, lang: string }>()
@@ -24,7 +38,7 @@ function onResize() {
     editor.value?.layout({} as e.IDimension, true)
 }
 let scheme = useColorScheme()
-let theme = `simplytools-${scheme}`
+let theme = `simplytools-${scheme.value}`
 watch(scheme, async () => {
     theme = `simplytools-${scheme.value}`;
     (await useMonaco()).editor.setTheme('simplytools-' + scheme)

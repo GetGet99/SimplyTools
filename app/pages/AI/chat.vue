@@ -46,7 +46,7 @@ onMounted(async () => {
         }
     }
 });
-
+const toasts = useToasts()
 async function sendMessage() {
     if (!accepted.value) {
         messages.value.push({
@@ -83,16 +83,24 @@ async function sendMessage() {
     try {
         if (!session) {
             assistantMessage.content = 'Initializing chat... please be patient'
+            let progressRef : undefined | Ref<number> = undefined
             session = (await LanguageModel.create({
                 initialPrompts: [
                     { role: 'system', content: systemPrompt.value }
                 ],
                 monitor(m: EventTarget) {
                     m.addEventListener('downloadprogress', <T extends { loaded: number } & EventTarget>(e: T) => {
-                        assistantMessage.content = `Your browser is downloading model: ${e.loaded * 100}% completed`;
+                        if (progressRef === undefined) {
+                            progressRef = ref(e.loaded)
+                            toasts.pushProgress('Downloading Model', progressRef)
+                        }
+                        progressRef.value = e.loaded
                     });
                 }
             }));
+            if (progressRef !== undefined) {
+                (progressRef as Ref<number>).value = 1
+            }
             assistantMessage.content = ''
         }
         const stream = session.promptStreaming(input);

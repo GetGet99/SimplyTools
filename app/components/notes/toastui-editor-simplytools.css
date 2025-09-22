@@ -1,0 +1,663 @@
+@charset "utf-8";
+@reference '../../app.css';
+
+@utility fluent-icon-img-* {
+    background-image: none;
+    -webkit-mask: --value([*]) no-repeat center;
+    mask: --value([*]) no-repeat center;
+    mask-size: contain;
+}
+
+@utility fluent-icon-img-before-* {
+    @apply relative;
+
+    &::before {
+        @apply absolute top-1/2 left-1/2 -translate-1/2 w-6 h-6;
+        background-image: none;
+        -webkit-mask: --value([*]) no-repeat center;
+        mask: --value([*]) no-repeat center;
+        mask-size: contain;
+    }
+}
+
+@utility toolbar-fluent-icon-* {
+    @apply relative;
+    background-image: none;
+
+    &::before {
+        content: "";
+        @apply bg-foreground absolute top-1/2 left-1/2 -translate-1/2 w-6 h-6;
+        background-image: none;
+        -webkit-mask: --value([*]) no-repeat center;
+        mask: --value([*]) no-repeat center;
+        mask-size: contain;
+    }
+
+    &.active::before {
+        @apply bg-foreground-on-accent-primary;
+    }
+}
+
+/* Meta Layout and overrides */
+.toastui-editor-simplytools {
+    &.toastui-editor-defaultUI {
+        @apply grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    &.toastui-editor-main {
+        @apply overflow-y-scroll;
+    }
+
+    /* app.css override */
+    & ul {
+        @apply space-y-0;
+    }
+
+    & ul li {
+        @apply ml-0;
+    }
+}
+
+/* Colors */
+.toastui-editor-simplytools {
+
+    &.toastui-editor-defaultUI,
+    & .ProseMirror,
+    & .toastui-editor-md-table .toastui-editor-md-table-cell,
+    & .toastui-editor-tooltip,
+    & .toastui-editor-tooltip .arrow,
+    & .toastui-editor-popup,
+    & .toastui-editor-context-menu,
+    & .tab-item,
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item,
+    & .toastui-editor-defaultUI-toolbar .scroll-sync::before,
+    & .toastui-editor-popup-body label,
+    & .toastui-editor-context-menu .menu-group,
+    & .toastui-editor-popup-add-table .toastui-editor-table-description {
+        @apply text-foreground;
+    }
+
+    & .toastui-editor-contents {
+
+        & p,
+        & h1,
+        & h2,
+        & h3,
+        & h4,
+        & h5,
+        & h6,
+        & table th,
+        & table td,
+        & table td p,
+        & ol>li::before,
+        & pre,
+        & code,
+        & pre code,
+        & div,
+        & .task-list-item::before,
+        & th.toastui-editor-md-preview-highlight & td.toastui-editor-md-preview-highlight {
+            @apply text-foreground;
+        }
+    }
+
+    & .toastui-editor-md-meta,
+    & .toastui-editor-md-html,
+    & .toastui-editor-md-code-block .toastui-editor-md-meta,
+    & .toastui-editor-md-link.toastui-editor-md-link-url.toastui-editor-md-marked-text,
+    & .toastui-editor-md-delimiter,
+    & .toastui-editor-md-code.toastui-editor-md-delimiter,
+    & .toastui-editor-md-thematic-break,
+    & .toastui-editor-md-link,
+    & .toastui-editor-md-table,
+    & .toastui-editor-md-block-quote,
+    & .toastui-editor-md-list-item .toastui-editor-md-meta,
+    & .toastui-editor-contents del {
+        @apply text-foreground-secondary;
+    }
+
+    & .toastui-editor-context-menu .menu-group li.disabled {
+        @apply text-disabled;
+    }
+
+    & .toastui-editor-toolbar,
+    & .toastui-editor-mode-switch,
+    & .toastui-editor-md-code,
+    & .toastui-editor-md-code-block-line-background,
+    & .toastui-editor-popup-add-table .toastui-editor-table-cell.header {
+        @apply bg-control-primary;
+    }
+
+    & .toastui-editor-contents {
+
+        & table th,
+        & .toastui-editor-md-preview-highlight::after,
+        & td.toastui-editor-md-preview-highlight,
+        & pre,
+        & code {
+            @apply bg-control-primary;
+        }
+    }
+
+    & .toastui-editor-popup-add-heading ul li:hover,
+    & .toastui-editor-context-menu .menu-group li:not(.disabled):hover {
+        @apply bg-control-secondary;
+    }
+
+    & .toastui-editor-md-container,
+    & .toastui-editor-ww-container,
+    & .toastui-editor-defaultUI-toolbar,
+    & .toastui-editor-md-tab-container,
+    & .tab-item,
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item,
+    & .toastui-editor-contents pre code,
+    & .toastui-editor-ww-code-block-language,
+    & .toastui-editor-contents .toastui-editor-ww-code-block::after {
+        @apply bg-transparent;
+    }
+    
+
+    & .toastui-editor-toolbar-divider {
+        @apply bg-divider;
+    }
+
+    & .toastui-editor-context-menu .menu-group,
+    & .toastui-editor-contents hr {
+        @apply border-divider;
+    }
+
+    & .toastui-editor-md-link.toastui-editor-md-link-desc.toastui-editor-md-marked-text,
+    & .toastui-editor-md-list-item-style.toastui-editor-md-list-item-odd {
+        @apply text-accent-primary;
+    }
+
+    & .toastui-editor-md-list-item-style.toastui-editor-md-list-item-even {
+        @apply text-accent-primary hue-rotate-90;
+    }
+
+    /* `Inline Code` */
+    & .toastui-editor-md-code.toastui-editor-md-marked-text {
+        @apply text-accent-primary -hue-rotate-90;
+    }
+
+    & .toastui-editor-tooltip,
+    & .toastui-editor-tooltip .arrow,
+    & .toastui-editor-popup,
+    & .toastui-editor-context-menu {
+        @apply acrylic-default;
+    }
+
+
+    & .toastui-editor-contents {
+
+        & ul>li::before {
+            @apply bg-foreground
+        }
+
+        & table,
+        & table th,
+        & table td {
+            @apply border-control-strong;
+        }
+
+        & h1,
+        & h2 {
+            @apply border-foreground;
+        }
+
+        & blockquote {
+            --color-foreground: var(--color-foreground-secondary);
+            @apply border-foreground-secondary;
+        }
+
+        & a {
+            @apply underline text-accent-primary hover:text-accent-secondary active:text-accent-tertiary cursor-pointer;
+        }
+
+        & .task-list-item::before {
+            @apply w-6 h-6 fluent-icon-img-[url('@fluentui/svg-icons/icons/checkbox_unchecked_24_filled.svg')];
+        }
+
+        & .task-list-item.checked::before {
+            @apply bg-accent-primary fluent-icon-img-[url('@fluentui/svg-icons/icons/checkbox_checked_24_filled.svg')];
+        }
+
+        & th.toastui-editor-md-preview-highlight {
+            @apply bg-accent-primary/25;
+        }
+
+
+        & td.toastui-editor-md-preview-highlight {
+            @apply bg-accent-primary/15;
+        }
+    }
+
+    & .toastui-editor-popup-add-table {
+        & .toastui-editor-table-cell {
+            @apply border-control-strong bg-transparent;
+        }
+
+        & .toastui-editor-table-selection-layer {
+            @apply border-accent-primary/40 bg-accent-primary/10;
+        }
+    }
+}
+
+/* Controls */
+.toastui-editor-simplytools {
+    /* Remove hand cursor */
+    & .toastui-editor-defaultUI-toolbar .scroll-sync,
+    & .tab-item,
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item,
+    & .toastui-editor-defaultUI-toolbar button,
+    & .toastui-editor-context-menu .menu-group li {
+        @apply cursor-default;
+    }
+
+    /* Button */
+    & .toastui-editor-close-button,
+    & .toastui-editor-popup-body .toastui-editor-file-select-button,
+    & .toastui-editor-toolbar-icons {
+        @apply text-foreground rounded-1;
+        @apply bg-control-primary border-border-control-primary;
+
+        &:not(.disabled) {
+            @apply hover:bg-control-secondary active:bg-control-tertiary;
+            @apply hover:border-border-control-secondary active:border-border-control-secondary;
+        }
+    }
+
+    /* Accent Button */
+    & .toastui-editor-ok-button,
+    & .toastui-editor-toolbar-icons:not(.disabled).active {
+        @apply text-on-accent-primary rounded-1;
+        @apply bg-accent-primary border-border-control-on-accent-primary;
+
+        &:not(.disabled) {
+            @apply hover:bg-accent-secondary active:bg-accent-tertiary;
+            @apply hover:border-border-control-on-accent-secondary active:border-border-control-on-accent-tertiary;
+        }
+    }
+
+    /* Textbox */
+    & .toastui-editor-contents .toastui-editor-ww-code-block::after,
+    & .toastui-editor-popup-body input[type='text'],
+    & .toastui-editor-ww-code-block-language input {
+        @apply text-foreground utils-style-textbox focus:utils-style-textbox;
+    }
+
+    & .toastui-editor-popup-body input[type='text'].disabled,
+    & .toastui-editor-file-name {
+        @apply utils-style-textbox bg-control-secondary hover:bg-control-secondary text-disabled;
+    }
+
+    /* ToggleSwitch */
+    & .toastui-editor-defaultUI-toolbar .scroll-sync {
+        width: 125px;
+        @apply flex h-full items-center justify-center;
+
+        &::before {
+            content: "Sync Scroll";
+            width: max-content;
+        }
+
+        & .switch {
+            left: unset;
+            right: 0px;
+            width: 25px;
+            @apply top-1/2 -translate-y-1/2 w-10 h-5 border bg-transparent;
+
+            &::before {
+                @apply bg-foreground-secondary w-3 h-3 top-1/2 bottom-[unset] -translate-y-1/2 left-1;
+            }
+        }
+
+        & input:checked+.switch {
+            @apply bg-accent-primary;
+
+            &::before {
+                background-color: var(--color-foreground-on-accent-primary, var(--text-color-on-accent-primary, hsl(300, 2%, 10%)));
+                @apply left-[unset] right-4;
+            }
+        }
+    }
+    
+    /* NavigationView Horizontal Tabs */
+    & .tab-item,
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item {
+        @apply relative;
+
+        &.active {
+            /* ensure things are not modified by the main styles */
+            @apply bg-transparent border-0 text-foreground;
+        }
+
+        &.active::before {
+            content: '';
+            @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-1 rounded-full bg-accent-primary;
+        }
+    }
+}
+
+/* Fonts and font sizes */
+.toastui-editor-simplytools {
+
+    &.toastui-editor-defaultUI,
+    & .ProseMirror,
+    & .toastui-editor-tooltip,
+    & .toastui-editor-contents,
+    & .toastui-editor-md-table .toastui-editor-md-table-cell {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    }
+
+    & .toastui-editor-md-table {
+        @apply font-mono;
+    }
+
+    & .toastui-editor-mode-switch .tab-item,
+    & .toastui-editor-md-tab-container .tab-item,
+    /* unsure */
+    /* & .toastui-editor-popup-body label */
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item,
+    & .toastui-editor-contents table th,
+    & .toastui-editor-custom-block-view .info,
+    & .toastui-editor-contents .toastui-editor-ww-code-block:after {
+        @apply font-normal;
+    }
+
+    /* Originally 13px */
+    & .toastui-editor-defaultUI button,
+    & .toastui-editor-defaultUI .toastui-editor-md-tab-container,
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item,
+    & .toastui-editor-context-menu .menu-group,
+    & .ProseMirror,
+    & .toastui-editor-contents,
+    & .toastui-editor-custom-block-view .info,
+    & .toastui-editor-contents .toastui-editor-ww-code-block:after,
+    & .toastui-editor-popup-body .toastui-editor-file-select-button,
+    & .toastui-editor-ok-button,
+    & .toastui-editor-close-button,
+    /* End Originally 13px */
+    /* Originally 12px */
+    & .toastui-editor-mode-switch,
+    & .toastui-editor-md-tab-container .tab-item,
+    & .toastui-editor-popup-body,
+    & .toastui-editor-tooltip,
+    /* End Originally 12px */
+    /* Originally 14px */
+    .toastui-editor-defaultUI-toolbar .scroll-sync::before {
+        font-size: var(--text-base);
+    }
+
+    & .toastui-editor-popup-body .toastui-editor-file-name {
+        line-height: unset;
+    }
+}
+
+/* Borders and sizes */
+.toastui-editor-simplytools {
+
+    &.toastui-editor-defaultUI,
+    & .tab-item,
+    & .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item,
+    & .toastui-editor-mode-switch,
+    & .toastui-editor-ww-code-block-language {
+        @apply border-0;
+    }
+
+    & .toastui-editor-defaultUI-toolbar,
+    & .toastui-editor-md-tab-container {
+        @apply border-b-0;
+    }
+
+    & .toastui-editor-popup-body .toastui-editor-file-select-button,
+    & .toastui-editor-ok-button,
+    & .toastui-editor-close-button,
+    & .toastui-editor-ww-code-block-language {
+        @apply p-button h-[unset];
+    }
+
+    & .toastui-editor-mode-switch,
+    & .toastui-editor-mode-switch .tab-item {
+        @apply h-auto;
+    }
+    & .toastui-editor-contents .toastui-editor-ww-code-block::after, 
+    & .toastui-editor-popup-body input[type='text'],
+    & .toastui-editor-popup-body .toastui-editor-file-name
+    {
+        @apply h-[unset];
+    }
+
+    & .toastui-editor-mode-switch .tab-item {
+        @apply py-2;
+    }
+
+    & .toastui-editor-contents {
+
+        & code {
+            @apply px-1.5;
+        }
+
+        & pre,
+        & code {
+            @apply rounded-1;
+        }
+
+        & .task-list-item {
+            @apply pl-8 -ml-8;
+        }
+    }
+    
+    & .toastui-editor-contents .toastui-editor-ww-code-block::after {
+        @apply pr-10;
+    }
+}
+
+.toastui-editor-simplytools {
+
+    & .toastui-editor-popup,
+    & .toastui-editor-context-menu {
+        /* TODO */
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+        @apply rounded-2 border-border-control-primary;
+    }
+
+    & .toastui-editor-contents {
+        /* TODO: FIX THIS */
+        & ul>li::before {
+            @apply mt-[unset] top-1/2 -translate-y-1/2;
+        }
+    }
+    
+    & .toastui-editor-ww-code-block-language input {
+        @apply text-left;
+    }
+
+    & :has(.toastui-editor-ww-code-block-language) .toastui-editor-ww-code-block::after {
+        content: unset;
+    }
+}
+
+/* Icons */
+.toastui-editor-simplytools {
+    & .toastui-editor-toolbar-icons {
+        /* Fallback Icons */
+        --icon-theme-position-y: 0px;
+        background-position-y: var(--icon-theme-position-y);
+
+        @variant dark {
+            --icon-theme-position-y: -49px;
+        }
+
+        @variant not-dark {
+            --icon-theme-position-y: 3px;
+        }
+
+        &:not(.disabled).active {
+            /* TODO: Adjust theme based on real accent foreground */
+            --icon-theme-position-y: 3px;
+
+            /* do not change to blue icon */
+            background-position-y: var(--icon-theme-position-y);
+        }
+
+        /* Icons from Fluent UI */
+
+        &.bold {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_bold_24_regular.svg')];
+        }
+
+        &.italic {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_italic_24_regular.svg')];
+        }
+
+        &.strike {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_strikethrough_24_regular.svg')];
+        }
+
+        &.quote {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_quote_24_regular.svg')];
+        }
+
+        &.bullet-list {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_bullet_list_ltr_24_regular.svg')];
+        }
+
+        &.ordered-list {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_number_list_ltr_24_regular.svg')];
+        }
+
+        &.task-list {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/checkbox_checked_24_regular.svg')];
+        }
+
+        &.indent {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_indent_increase_24_regular.svg')];
+        }
+
+        &.outdent {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/text_indent_decrease_24_regular.svg')];
+        }
+
+        &.table {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/table_add_24_regular.svg')];
+        }
+
+        &.image {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/image_add_24_regular.svg')];
+        }
+
+        &.link {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/link_add_24_regular.svg')];
+        }
+
+        &.code {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/code_24_regular.svg')];
+        }
+
+        &.codeblock {
+            @apply toolbar-fluent-icon-[url('@fluentui/svg-icons/icons/code_block_24_regular.svg')];
+        }
+    }
+
+    & .toastui-editor-context-menu {
+        & .menu-group {
+            & span::before {
+                @variant dark {
+                    background-position-y: -126px;
+                }
+
+                @variant not-dark {
+                    background-position-y: -104px;
+                }
+            }
+        }
+    }
+}
+
+.toastui-editor-simplytools:not(.unsure) {
+    & .toastui-editor-contents {
+        & td.toastui-editor-cell-selected {
+            @apply bg-accent-primary/50;
+        }
+
+        & th.toastui-editor-cell-selected {
+            @apply bg-accent-primary/30;
+        }
+
+        & .toastui-editor-custom-block-editor {
+            background: #392d31;
+            color: #fff;
+            border-color: #327491;
+
+            & ul,
+            & menu,
+            & ol,
+            & dir {
+                color: #55575f;
+            }
+        }
+
+        & .image-link:hover::before {
+            border-color: #393b42;
+            background-color: #232428;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgICAgICA8ZyBzdHJva2U9IiNFRUUiIHN0cm9rZS13aWR0aD0iMS41Ij4KICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNy42NjUgMTUuMDdsLTEuODE5LS4wMDJjLTEuNDg2IDAtMi42OTItMS4yMjgtMi42OTItMi43NDR2LS4xOTJjMC0xLjUxNSAxLjIwNi0yLjc0NCAyLjY5Mi0yLjc0NGgzLjg0NmMxLjQ4NyAwIDIuNjkyIDEuMjI5IDIuNjkyIDIuNzQ0di4xOTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDQ1IC0xNzQzKSB0cmFuc2xhdGUoMTA0MCAxNzM4KSB0cmFuc2xhdGUoNSA1KSBzY2FsZSgxIC0xKSByb3RhdGUoNDUgMzcuMjkzIDApIi8+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTEyLjMyNiA0LjkzNGwxLjgyMi4wMDJjMS40ODcgMCAyLjY5MyAxLjIyOCAyLjY5MyAyLjc0NHYuMTkyYzAgMS41MTUtMS4yMDYgMi43NDQtMi42OTMgMi43NDRoLTMuODQ1Yy0xLjQ4NyAwLTIuNjkyLTEuMjI5LTIuNjkyLTIuNzQ0VjcuNjgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDQ1IC0xNzQzKSB0cmFuc2xhdGUoMTA0MCAxNzM4KSB0cmFuc2xhdGUoNSA1KSBzY2FsZSgxIC0xKSByb3RhdGUoNDUgMzAuOTk2IDApIi8+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=');
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    & .toastui-editor-main .toastui-editor-md-splitter {
+        @apply bg-divider;
+    }
+
+    & .toastui-editor-dropdown-toolbar {
+        border-color: #494c56;
+        background-color: #232428;
+    }
+
+
+    & table.ProseMirror-selectednode {
+        outline-color: #67ccff;
+    }
+
+    & .html-block.ProseMirror-selectednode {
+        outline-color: #67ccff;
+    }
+
+
+    & .toastui-editor-custom-block.ProseMirror-selectednode .toastui-editor-custom-block-view {
+        @apply text-foreground;
+        border-color: #327491;
+    }
+
+    & .toastui-editor-custom-block-view button {
+        background-color: #232428;
+        border-color: #393b42;
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IuugiOydtOyWtF8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiCgkgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAgMzAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMwIDMwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6I2ZmZjt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGc+CgkJCTxnPgoJCQkJPGc+CgkJCQkJPHBhdGggY2xhc3M9InN0MCIgZD0iTTE1LjUsMTIuNWwyLDJMMTIsMjBoLTJ2LTJMMTUuNSwxMi41eiBNMTgsMTBsMiwybC0xLjUsMS41bC0yLTJMMTgsMTB6Ii8+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==');
+    }
+
+    & .toastui-editor-custom-block-view button:hover {
+        background-color: #232428;
+        border-color: #595c68;
+    }
+
+    & .toastui-editor-custom-block-view .info {
+        color: #65acca;
+    }
+
+    & .toastui-editor-md-custom-block {
+        @apply text-foreground;
+    }
+
+    & .toastui-editor-md-custom-block-line-background {
+        background-color: #392d31;
+    }
+
+    & .toastui-editor-md-custom-block .toastui-editor-md-delimiter {
+        color: #327491;
+    }
+
+    & .toastui-editor-md-custom-block .toastui-editor-md-meta {
+        color: #65acca;
+    }
+}

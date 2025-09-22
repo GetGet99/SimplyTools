@@ -6,9 +6,14 @@ export const DevCategory = createCategory({
     path: '/dev'
 }, [
     {
-        title: 'Base 64 Converter',
-        path: 'b64',
-        desc: 'A simple <code>atob</code> and <code>btoa</code> GUI wrapper'
+        title: 'Base 64 Encoder',
+        path: 'b64/encoder',
+        desc: 'A simple base64 encoder.'
+    },
+    {
+        title: 'Base 64 Decoder',
+        path: 'b64/decoder',
+        desc: 'A simple base64 decoder.'
     },
     {
         title: 'Programmer Calculator',

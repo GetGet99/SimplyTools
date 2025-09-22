@@ -14,5 +14,9 @@ export default defineNuxtConfig({
                 { name: 'color-scheme', content: 'dark light' }
             ],
         }
-    }
+    },
+    // Important: make Nuxt aware of the custom types
+    imports: {
+        dirs: ['types'],
+    },
 })

@@ -110,7 +110,7 @@ async function copyQr() {
             await navigator.clipboard.writeText(qrCode.value.svg);
         }
     } catch (err) {
-        alert(`Failed to copy QR code: ${err}`);
+        useToasts().pushError(`Failed to copy QR code: ${err}`);
     }
 }
 
@@ -124,7 +124,7 @@ async function copyQrData() {
             await navigator.clipboard.writeText(qrCode.value.pngData);
         }
     } catch (err) {
-        alert(`Failed to copy QR code: ${err}`);
+        useToasts().pushError(`Failed to copy QR code: ${err}`);
     }
 }
 

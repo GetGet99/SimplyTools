@@ -1,10 +1,10 @@
 import type { ShallowRef } from "vue"
-import type { Page } from "./pages/_helper"
+import type { Page, PageInfo } from "./pages/_helper"
 import { Categories } from "./pages/info"
 import { Uncategorized } from "./pages/uncategorized"
 import { Apps, type AppPage } from "./pages/app"
 
-export function usePageInfo(page?: Page) {
+export function usePageInfo(page?: PageInfo) {
     let pageRef
     if (page) {
         pageRef = shallowRef(page)
@@ -33,18 +33,19 @@ export function usePageInfo(page?: Page) {
             let isApp = false
             if (pageRef.value.parent === Apps) {
                 appName = (pageRef.value as AppPage).appName
-                breadcrumb = [appName, toolName]
+                breadcrumb = [appName, toolName] as [string, string | Ref<string>]
                 isApp = true
             }
             else if (pageRef.value.parent !== Uncategorized) {
-                appName = pageRef.value.parent.shortName
-                breadcrumb = [appName, toolName]
+                appName = pageRef.value.parent.name
+                breadcrumb = [pageRef.value.parent.shortName, toolName] as [string, string | Ref<string>]
             } else {
+                appName = 'SimplyTools'
                 breadcrumb = [toolName]
             }
             return {
                 breadcrumb,
-                appName: pageRef.value.parent.name,
+                appName: appName,
                 toolName,
                 category: pageRef.value.parent,
                 catPath: pageRef.value.parent.path,

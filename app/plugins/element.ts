@@ -1,7 +1,7 @@
 import type { Directive } from "vue";
 import { isRef } from "vue";
 
-export const vElement : Directive<HTMLElement> = {
+export const vGetElement : Directive<HTMLElement> = {
   mounted(el, binding) {
     const target = binding.value;
     if (isRef(target)) {
@@ -29,5 +29,5 @@ export const vElement : Directive<HTMLElement> = {
 };
 
 export default defineNuxtPlugin(nuxtApp => {
-    nuxtApp.vueApp.directive('element', vElement)
+    nuxtApp.vueApp.directive('get-element', vGetElement)
 });
