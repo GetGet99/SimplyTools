@@ -1,11 +1,11 @@
 <template>
     <DialogRoot>
-        <div class="snippet-viewer-root" :class>
-            <div class="flex gap-2 items-center lg:-order-1">
+        <Grid class="snippet-viewer-root gap-2 overflow-hidden" :class>
+            <Flex class="gap-2 items-center lg:-order-1">
                 <label class="font-bold">Input</label>
-                <div class="grow"></div>
+                <Grow />
                 <SnippetsViewerButtons class="lg:hidden" :snippet-key :snippet-code />
-            </div>
+            </Flex>
             <!-- Input -->
             <CodeEditor lang="yaml" v-model="input" class="not-lg:min-h-50" />
 
@@ -14,18 +14,18 @@
             <CodeEditor lang="yaml" readonly :model-value="String(new YAML.Document(metaRaw?.get('properties')))"
                 class="not-lg:min-h-50 lg:order-1" />
 
-            <div class="flex gap-2 items-center lg:-order-1">
+            <Flex class="gap-2 items-center lg:-order-1">
                 <label class="font-bold">Output</label>
-                <div class="grow"></div>
+                <Grow />
                 <SnippetsViewerButtons class="not-lg:hidden" :snippet-key :snippet-code />
-            </div>
+            </Flex>
             <!-- Output Preview -->
             <ClientOnly>
                 <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output"
                     class="row-span-3 not-lg:min-h-50" />
             </ClientOnly>
 
-        </div>
+        </Grid>
         <ContentDialogPortal title="Template Source" class="w-[70vw] max-w-[70vw] h-[70vh] max-h-[70vh]">
             <SnippetsEditor readonly class="grow" v-model="snippetCode" />
         </ContentDialogPortal>
@@ -35,8 +35,6 @@
     @reference '../../app.css';
 
     .snippet-viewer-root {
-        @apply grid gap-2 overflow-hidden;
-
         @variant lg {
             @apply grid-cols-2 min-h-100;
             grid-template-rows: auto minmax(0, 2fr) auto minmax(0, 1fr);

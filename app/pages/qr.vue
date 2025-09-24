@@ -1,11 +1,11 @@
 <template>
     <Feature category="none" tool="QRCode" class="flex justify-center">
-        <div
-            class="bg-control-primary border-border-control-primary w-fit p-4 rounded-2 flex flex-col gap-3 lg:flex-row">
-            <div class="flex flex-col gap-2">
+        <Flex column
+            class="bg-control-primary border-border-control-primary w-fit p-4 rounded-2 gap-3 lg:flex-row">
+            <Flex column class="gap-2">
                 <div>QR Code Content</div>
                 <TextBox multiline class="w-min-100" v-model="value" placeholder="Add text or link here!" />
-                <div class="grid grid-cols-2 gap-2 justify-center items-center">
+                <Grid :columns="2" class="gap-2 justify-center items-center">
                     <div>Foreground Color</div>
                     <div>Background Color</div>
                     <ColorHexEditorShared v-model="foreground" />
@@ -21,21 +21,21 @@
                             <template v-if="option === 'svg'">SVG</template>
                         </template>
                     </ComboBox>
-                </div>
-            </div>
-            <div class="flex flex-col gap-2">
-                <div class="flex">
+                </Grid>
+            </Flex>
+            <Flex column class="gap-2">
+                <Flex>
                     <div>Preview</div>
-                    <div class="grow"></div>
+                    <Grow />
                     <Button :variant="constraint ? 'accent' : 'control'" @click="constraint = !constraint">Constrain
                         Size Preview: {{ constraint ?
                             'On' : 'Off' }}</Button>
-                </div>
+                </Flex>
                 <QRCodeRenderer ref="qrCode" class="rounded-2 border border-control-strong"
                     :class="constraint ? 'w-100 h-100' : ''" alt="" :value :mode :foreground :background :size
                     :padding />
-                <div class="flex gap-2">
-                    <div class="grow"></div>
+                <Flex class="gap-2">
+                    <Grow />
                     <Button @click="downloadQr" title="Download" class="pl-1.5 flex gap-1">
                         <Icon :icon="DownloadIcon" alt="" />
                         Download
@@ -52,9 +52,9 @@
                         <Icon :icon="CopyIcon" alt="Copy" />
                         Image
                     </Button>
-                </div>
-            </div>
-        </div>
+                </Flex>
+            </Flex>
+        </Flex>
     </Feature>
 </template>
 <script setup lang="ts">

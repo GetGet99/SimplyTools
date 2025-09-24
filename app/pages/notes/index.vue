@@ -21,22 +21,3 @@ usePageInfo(Apps.pages.find(x => x.path === 'notes'))
         <div class="hidden app:block grow"></div>
     </Feature>
 </template>
-<style scoped>
-@reference '../../app.css';
-
-.snippets-root {
-    @apply mx-10 lg:mx-30 grid gap-4;
-
-    @variant data-view {
-        @variant xl {
-            @apply overflow-hidden;
-            grid-template-columns: calc(var(--spacing) * 80) minmax(0, 1fr);
-        }
-    }
-}
-
-.snippets-list {
-    @apply sm:mx-1 xl:mx-2 my-2 gap-4;
-    @apply grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
-}
-</style>

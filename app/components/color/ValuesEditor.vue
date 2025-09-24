@@ -31,7 +31,7 @@
     const vOnly = computed(() => new HSV(0, 0, color.value?.HSV.V ?? 0).RGB)
 </script>
 <template>
-    <div class="grid items-center gap-4" style="grid-template-columns: auto repeat(3, minmax(0, 1fr)) auto;">
+    <Grid class="items-center gap-4" columns="auto grow grow grow auto">
         <span>RGB</span>
         <NumberBox :model-value="color?.RGB.R ?? undefined"
             @update:model-value="r => rgbInputUpdate(r, undefined, undefined)" placeholder="R" mode="integer_positive"
@@ -98,7 +98,7 @@
         >
             <Icon :icon=CopyIcon alt="" />
         </Button>
-    </div>
+    </Grid>
 </template>
 <style lang="css" scoped>
     @reference '../../app.css';

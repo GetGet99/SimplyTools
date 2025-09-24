@@ -1,13 +1,13 @@
 <template>
     <Feature category="sounds" tool="Make your own sounds!">
-        <div class="flex flex-col gap-8 group" :data-touch="toolsExpanded">
-            <div class="flex flex-col items-center gap-6 w-full p-8">
+        <Flex column class="gap-8 group" :data-touch="toolsExpanded">
+            <Flex column class="items-center gap-6 w-full p-8">
                 <div class="mb-4">Make Sounds! Add notes! Make loops! And listen!</div>
                 <!-- Playing Context controls -->
                 <div class="w-full mb-6">
                     <SoundsContextBlocks v-model:statements="playingContext.statements" />
                 </div>
-                <div class="flex flex-col gap-2 items-center">
+                <div class="gap-2 items-center">
                     <Button v-if="!isPlaying" class="pl-1.25 flex gap-1" @click="Sounds.playContext"
                         :disabled="playingContext.statements.length === 0">
                         <Icon :icon=PlayIcon alt="" />
@@ -22,13 +22,13 @@
                         Export
                     </Button>
                 </div>
-            </div>
-        </div>
+            </Flex>
+        </Flex>
 
         <!-- Floating tools using Tailwind & Button.vue component -->
-        <div
-            class="fixed right-6 bottom-7 z-40 flex gap-2 items-end backdrop-blur-lg p-2 border rounded-lg border-border-control-primary">
-            <div v-show="toolsExpanded" class="flex gap-2 items-center shadow-lg">
+        <Flex
+            class="fixed right-6 bottom-7 z-40 gap-2 items-end backdrop-blur-lg p-2 border rounded-lg border-border-control-primary">
+            <Flex v-show="toolsExpanded" class="gap-2 items-center shadow-lg">
                 <Button :variant="previewMode ? 'accent' : 'control'"
                     class="flex items-center gap-1 text-base min-w-[40px]" @click="previewMode = !previewMode"
                     :aria-pressed="previewMode">
@@ -36,13 +36,13 @@
                     Tap to Preview Notes
                 </Button>
                 <!-- Add more tool buttons here -->
-            </div>
+            </Flex>
             <Button :variant="toolsExpanded ? 'accent' : 'control'" @click="toolsExpanded = !toolsExpanded"
                 :aria-label="toolsExpanded ? 'Close Tools' : 'Open Tools'" class="pl-1.25 flex gap-1">
                 <Icon :icon="TouchIcon" alt="" />
                 Touchscreen Compatibility
             </Button>
-            <div class="flex gap-2">
+            <Flex class="gap-2">
                 <Button v-if="!isPlaying" class="pl-1.25 flex gap-1 border-accent-primary" @click="Sounds.playContext"
                     :disabled="playingContext.statements.length === 0">
                     <Icon :icon=PlayIcon alt="Play Sound" />
@@ -53,8 +53,8 @@
                     <Icon :icon=StopIcon alt="Stop Playback" />
                     Stop
                 </Button>
-            </div>
-        </div>
+            </Flex>
+        </Flex>
 
         <template #summary>
             Play notes and sequences with customizable synth types.

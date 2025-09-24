@@ -7,9 +7,9 @@ const tool = usePageInfo()
 </script>
 <template>
     <div class="h-[max(30px,_var(--app-titlebar-height,_0px))]"></div>
-    <div class="titlebar fixed top-0 left-0 right-0 flex h-[max(30px,_var(--app-titlebar-height,_0px))]">
+    <Flex class="titlebar fixed top-0 left-0 right-0 h-[max(30px,_var(--app-titlebar-height,_0px))]">
         <div style="width: var(--app-titlebar-reserved-area-left, 0px);" v-titlebar-draggable></div>
-        <div class="flex gap-1 items-center backdrop-blur-lg rounded-br-md pr-2">
+        <Flex class="gap-1 items-center backdrop-blur-lg rounded-br-md pr-2">
             <Control class="p-button-icon py-[3px] bg-transparent border-transparent flex gap-2 rounded-0">
                 <OurLink class="manual" tabindex="0" href="/">
                     <Icon :icon=Home alt="Home" />
@@ -28,9 +28,9 @@ const tool = usePageInfo()
                     {{ tool.breadcrumb[tool.breadcrumb.length - 1]! }}
                 </OurLink>
             </template>
-        </div>
+        </Flex>
         <div class="grow h-full" v-titlebar-draggable></div>
-        <div class="backdrop-blur-lg flex rounded-bl-md "> <!--pl-2-->
+        <Flex class="backdrop-blur-lg rounded-bl-md"> <!--pl-2-->
             <SettingsDialog>
                 <template #trigger>
                     <DialogTrigger as-child>
@@ -41,6 +41,6 @@ const tool = usePageInfo()
                 </template>
             </SettingsDialog>
             <div class="app:w-60" style="width: var(--app-titlebar-reserved-area-right, 250px);" v-titlebar-draggable></div>
-        </div>
-    </div>
+        </Flex>
+    </Flex>
 </template>

@@ -102,8 +102,8 @@ async function generateSummary() {
             multiline />
 
         <!-- Option Controls -->
-        <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4 w-full lg:w-3/4">
-            <div class="flex flex-col md:flex-row md:items-end gap-4">
+        <Flex column class="md:flex-row md:justify-between md:items-end gap-4 w-full lg:w-3/4">
+            <Flex column class="md:flex-row md:items-end gap-4">
                 <!-- Type -->
                 <div class="w-30">
                     <label class="block text-sm font-medium mb-2">Summary Type</label>
@@ -129,7 +129,7 @@ async function generateSummary() {
                         <span class="capitalize">{{ option }}</span>
                     </ComboBox>
                 </div>
-            </div>
+            </Flex>
             <!-- Generate Button -->
             <ClientOnly>
                 <Button v-if="agreementAccepted"
@@ -153,7 +153,7 @@ async function generateSummary() {
                     </Button>
                 </template>
             </ClientOnly>
-        </div>
+        </Flex>
 
 
 

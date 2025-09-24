@@ -8,7 +8,7 @@
                 <slot name="title">
                     {{ title }}
                 </slot>
-                <div class="grow"></div>
+                <Grow />
 
                 <Control class="p-button-icon">
                     <DialogClose as-child>
@@ -19,29 +19,29 @@
             <div>
                 <slot></slot>
             </div>
-            <div v-if="slots.footer" class="flex justify-end">
+            <Flex v-if="slots.footer" class="justify-end">
                 <slot name="footer"></slot>
-            </div>
+            </Flex>
         </DialogContent>
     </DialogPortal>
 </template>
 <script setup lang="ts">
-    import CloseIcon from '@fluentui/svg-icons/icons/dismiss_24_regular.svg?raw'
-    defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
-    const slots = useSlots()
+import CloseIcon from '@fluentui/svg-icons/icons/dismiss_24_regular.svg?raw'
+defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
+const slots = useSlots()
 </script>
 <style>
-    @reference '../app.css';
+@reference '../app.css';
 
-    @layer components {
-        .ContentDialogOverlay {
-            @apply z-100 data-[state=open]:bg-smoke fixed inset-0;
-        }
-
-        .ContentDialogContent {
-            @apply z-100 fixed top-1/2 left-1/2 -translate-1/2 min-w-80 min-h-46 max-w-137 max-h-189;
-            @apply bg-solid-primary border border-surface rounded-2;
-            @apply p-5 flex flex-col;
-        }
+@layer components {
+    .ContentDialogOverlay {
+        @apply z-100 data-[state=open]:bg-smoke fixed inset-0;
     }
+
+    .ContentDialogContent {
+        @apply z-100 fixed top-1/2 left-1/2 -translate-1/2 min-w-80 min-h-46 max-w-137 max-h-189;
+        @apply bg-solid-primary border border-surface rounded-2;
+        @apply p-5 flex flex-col;
+    }
+}
 </style>

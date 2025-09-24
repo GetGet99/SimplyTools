@@ -1,9 +1,9 @@
 <template>
     <Feature category="dev" tool="Under Construction">
-        <div class="flex flex-col items-center justify-center gap-4 p-8">
+        <Flex column class="items-center justify-center gap-4 p-8">
             <h2 class="text-2xl font-bold">This page is under construction.</h2>
             <p class="text-center max-w-lg">We're working hard to bring you this feature. Please check back later!</p>
-        </div>
+        </Flex>
     </Feature>
 </template>
 <!-- <template>

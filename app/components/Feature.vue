@@ -6,14 +6,14 @@ const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
 <template>
-    <div class="feature-root grid min-h-screen xl:data-[limit-screen='xl']:h-screen data-[limit-screen='all']:h-screen" :data-limit-screen=limitScreen>
+    <Grid class="feature-root min-h-screen xl:data-[limit-screen='xl']:h-screen data-[limit-screen='all']:h-screen" :data-limit-screen=limitScreen>
         <TitleBar />
-        <div class="flex flex-col app:hidden" :class="tool.isApp ? 'gap-8' : 'gap-16'">
+        <Flex column class="app:hidden" :class="tool.isApp ? 'gap-8' : 'gap-16'">
             <h1 class="text-center pt-16">{{ tool.appName }} - {{ tool.toolName }}</h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them, they
                 are
                 unlikely to work correctly.</noscript>
-        </div>
+        </Flex>
         <div class="mt-16 app:mt-8 not-app:mb-8 w-full"
             :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']">
             <div v-if="tool.category === AICategory" class="text-center mb-8">
@@ -33,7 +33,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
             <details v-if="!noDetails" class="text-center">
                 <summary><span class="italic">Extra Info: <slot name="summary">We are working on this tool. 🔨</slot>
                     </span></summary>
-                <div class="flex justify-center mt-2">
+                <Flex class="justify-center mt-2">
                     <div class="p-2 border control-border-control bg-card rounded-2 text-left max-w-max">
                         <slot name="details">
                             That means unfortunately, I have not written the details yet. 😅
@@ -54,11 +54,11 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                                 privacy policy for more details.
                             </template></p>
                     </div>
-                </div>
+                </Flex>
             </details>
             <Footer class="mt-1!" />
         </div>
-    </div>
+    </Grid>
 </template>
 <style>
 @reference '../app.css';

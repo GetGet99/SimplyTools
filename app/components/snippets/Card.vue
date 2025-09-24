@@ -9,10 +9,10 @@
     <OurLink :href='`/snippets?view=${snippetKey}`'
         class="manual group p-4 border control-border-control active:control-border-control-pressed bg-card rounded-2"
         :class="isDeleted ? 'hidden' : ''">
-        <div class="grid featurecard flex-col gap-3 h-full">
-            <div class="flex gap-1 items-start">
+        <Grid rows="auto grow auto" class="gap-3 h-full">
+            <Flex class="gap-1 items-start">
                 <h3 class="text-card-title">{{ meta?.name }} {{ meta?.lang ? `(${meta?.lang})` : '' }}</h3>
-                <div class="grow"></div>
+                <Grow />
                 <ContentDialog v-if="snippetKey.startsWith('local.')">
                     <template #trigger>
                         <DialogTrigger as-child>
@@ -40,21 +40,16 @@
                         </DialogClose>
                     </template>
                 </ContentDialog>
-            </div>
+            </Flex>
             <p class="card-text min-h-20">
                 {{ meta?.description }}
             </p>
-            <div class="flex" aria-hidden>
+            <Flex aria-hidden>
                 <Control aria-hidden varient="none"
                     class="p-button rounded-control bg-control-primary group-hover:bg-control-secondary group-active:bg-control-tertiary control-border-control group-active:control-border-control-pressed">
                     <div>Use</div>
                 </Control>
-            </div>
-        </div>
+            </Flex>
+        </Grid>
     </OurLink>
 </template>
-<style lang="css" scoped>
-    .featurecard {
-        grid-template-rows: auto minmax(0, 1fr) auto;
-    }
-</style>

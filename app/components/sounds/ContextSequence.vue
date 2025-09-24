@@ -1,25 +1,25 @@
 <template>
-  <div class="flex flex-col gap-2 rounded-md border border-control-primary bg-card p-3 shadow-sm">
-    <div class="flex flex-col lg:flex-row items-center justify-between">
-      <div class="flex gap-2">
+  <Flex column class="gap-2 rounded-md border border-control-primary bg-card p-3 shadow-sm">
+    <Flex column class="lg:flex-row items-center justify-between">
+      <Flex class="gap-2">
         <div class="font-semibold text-nowrap">Play Notes</div>
         <div v-if="!previewMode" class="italic">Tap/Left click to remove. Right click to preview notes.</div>
         <div v-else class="italic">Tap/Left click to preview notes.</div>
-      </div>
-      <div class="flex items-center gap-2">
+      </Flex>
+      <Flex class="items-center gap-2">
         <Button size="xs" @click="$emit('select', index)">{{ isSelected ? 'Hide Keyboard' : 'Add Notes' }}</Button>
         <SoundsContextTools @duplicate="$emit('duplicate', index)" @wrap-in-loop="$emit('wrap-in-loop', index)"
           @remove="$emit('remove', index)" />
-      </div>
-    </div>
-    <!-- <div class="mt-1 flex flex-wrap gap-1">
+      </Flex>
+    </Flex>
+    <!-- <Flex class="mt-1 flex-wrap gap-1">
       <button v-for="(sn, i) in stmt.sequence" :key="i"
         class="px-2 py-0.5 rounded border text-xs select-none transition-transform cursor-pointer"
         :class="[chipClass(sn), { jumping: isChipJumping(i) }]" @click.stop="handleRemoveNote(i)"
         @contextmenu.prevent.stop="handlePreviewNote(sn, i)" :title="'Left click: remove | Right click: preview'">
         {{ renderItem(sn) }}
       </button>
-    </div> -->
+    </Flex> -->
     <VueDraggable v-model="stmt.sequence" tag="div" class="mt-1 flex flex-wrap gap-1 bg-transparent" :animation="150">
       <button v-for="(element, index) in stmt.sequence" :key="index"
         class="px-4 py-2 md:px-2 md:py-0.5 md:group-data-[touch='true']:px-4 md:group-data-[touch='true']:py-2 rounded border text-xs select-none transition-transform cursor-move bg-transparent"
@@ -30,10 +30,10 @@
         {{ renderItem(element) }}
       </button>
     </VueDraggable>
-    <div v-if="isSelected" class="flex flex-col items-center justify-center">
+    <Flex column v-if="isSelected" class="items-center justify-center">
       <SoundsNotes />
-    </div>
-  </div>
+    </Flex>
+  </Flex>
 </template>
 
 <script setup lang="ts">

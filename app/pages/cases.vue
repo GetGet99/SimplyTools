@@ -47,7 +47,7 @@ const tbref = useTemplateRef('tbref')
                     <div class="w-6 h-6">rA</div>
                     <span>rANdOmcAse</span>
                 </Button>
-                <div class="grow"></div>
+                <Grow />
                 <Button class="bg-transparent border-0 p-button-icon pr-[11px] flex gap-1 justify-center" @click="copy"
                     title="Copy">
                     <Icon alt="" :icon=CopyIcon />
@@ -55,7 +55,7 @@ const tbref = useTemplateRef('tbref')
                 </Button>
             </template>
         </TextBoxTools>
-        <!-- <div class="grid cases gap-2">
+        <!-- <Grid class="cases gap-2">
             <Button @click="text = cases.lowercase(text)">lowercase</Button>
             <Button @click="text = cases.uppercase(text)">UPPERCASE</Button>
             <Button @click="text = cases.swappingcase(text)">swappingCASE</Button>
@@ -64,7 +64,7 @@ const tbref = useTemplateRef('tbref')
                 <Icon alt="" :icon=CopyIcon />
                 <span class="sm:hidden">Copy</span>
             </Button>
-        </div> -->
+        </Grid> -->
         <template #summary>
             Convert text to UPPERCASE, lowercase, swap case, or random case instantly.
         </template>

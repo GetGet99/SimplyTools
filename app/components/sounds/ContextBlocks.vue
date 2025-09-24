@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3">
+  <Flex column class="gap-3">
     <ContextInsertBar :index="0" @insert-sequence="i => insertAt(i, createSequenceStatement())"
       @insert-loop="i => insertAt(i, createLoopStatement())" />
 
@@ -19,7 +19,7 @@
       <ContextInsertBar :index="idx + 1" @insert-sequence="i => insertAt(i, createSequenceStatement())"
         @insert-loop="i => insertAt(i, createLoopStatement())" />
     </template>
-  </div>
+  </Flex>
 </template>
 
 <script setup lang="ts">

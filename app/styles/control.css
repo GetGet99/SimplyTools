@@ -1,0 +1,54 @@
+
+@utility utils-control {
+    @apply p-control rounded-control border transition-colors duration-200;
+}
+@utility utils-control-icon {
+    @apply p-1.25;
+}
+@utility utils-control-icon-l {
+    @apply pl-1.25;
+}
+@utility utils-control-icon-r {
+    @apply pr-1.25;
+}
+@utility utils-bg-control-regular {
+    @apply bg-control-primary hover:bg-control-secondary active:bg-control-tertiary;
+}
+@utility utils-bg-control-ghost {
+    @apply bg-transparent hover:bg-control-secondary active:bg-control-tertiary;
+}
+@utility utils-bg-control-accent {
+    @apply bg-accent-primary hover:bg-accent-secondary active:bg-accent-tertiary;
+}
+@utility utils-border-control-regular {
+    @apply border-border-control-primary hover:border-border-control-secondary active:border-border-control-secondary;
+}
+@utility utils-border-control-ghost {
+    @apply border-border-control-primary hover:border-border-control-secondary active:border-border-control-secondary;
+}
+@utility utils-border-control-accent {
+    @apply border-border-control-on-accent-primary hover:border-border-control-on-accent-secondary active:border-border-control-on-accent-tertiary;
+}
+@layer components {
+    .control {
+        @apply utils-control;
+    }
+    .control-icon {
+        @apply utils-control-icon;
+    }
+    .control-icon-l {
+        @apply utils-control-icon-l;
+    }
+    .control-icon-r {
+        @apply utils-control-icon-r;
+    }
+    .control-regular {
+        @apply utils-bg-control-regular utils-border-control-regular;
+    }
+    .control-ghost {
+        @apply utils-bg-control-ghost utils-border-control-ghost;
+    }
+    .control-accent {
+        @apply utils-bg-control-accent utils-border-control-accent;
+    }
+}

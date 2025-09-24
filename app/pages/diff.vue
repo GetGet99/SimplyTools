@@ -1,10 +1,10 @@
 <template>
     <Feature category="none" tool="Text Compare" class="flex flex-col h-full">
-        <div class="flex p-4">
+        <Flex class="p-4">
             Old Text goes to the left!
-            <div class="grow"></div>
+            <Grow />
             New Text goes to the right!
-        </div>
+        </Flex>
         <MonacoDiffEditor ref="editor"
             :options="{ originalEditable: true, readOnly: false, theme, diffWordWrap: 'on', renderOverviewRuler: false }"
             class="w-full grow bg-control-primary">

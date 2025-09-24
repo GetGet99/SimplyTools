@@ -41,7 +41,7 @@ const view = computed(() => url.query.view)
 @reference '../../app.css';
 
 .snippets-root {
-    @apply mx-10 lg:mx-30 grid gap-4;
+    @apply grid mx-10 lg:mx-30 gap-4;
 
     @variant data-view {
         @variant xl {

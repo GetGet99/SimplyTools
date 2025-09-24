@@ -5,9 +5,9 @@ defineProps<{
 </script>
 <template>
     <div class="style-textbox-group" :class="`style-textbox-group-${toolbarPosition ?? 'top'}`">
-        <div class="flex" :class="`${toolbarPosition === 'left' || toolbarPosition === 'right' ? 'flex-col overflow-y-auto' : 'flex-row overflow-x-auto'}`">
+        <Flex :class="`${toolbarPosition === 'left' || toolbarPosition === 'right' ? 'flex-col overflow-y-auto' : 'flex-row overflow-x-auto'}`">
             <slot name="tools" />
-        </div>
+        </Flex>
         <Primitive as-child>
             <slot />
         </Primitive>

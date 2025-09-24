@@ -14,7 +14,9 @@ useHead({
             <ToastsGenerator>
                 <NuxtPage />
             </ToastsGenerator>
-            <ToastViewport class="fixed bottom-0 right-0 flex flex-col gap-2 p-6" />
+            <Flex as-child column class="fixed bottom-0 right-0 gap-2 p-6">
+                <ToastViewport />
+            </Flex>
         </ToastProvider>
     </div>
 </template>

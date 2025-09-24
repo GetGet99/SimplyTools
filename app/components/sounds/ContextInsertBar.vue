@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center justify-center gap-2 my-1">
+  <Flex class="items-center justify-center gap-2 my-1">
     Add
     <Button class="text-xs" @click="$emit('insert-sequence', index)">Notes</Button>
     <Button class="text-xs" variant="control" @click="$emit('insert-loop', index)">Loop</Button>
     <!-- Potentially add remove-below later -->
-  </div>
+  </Flex>
 </template>
 
 <script setup lang="ts">

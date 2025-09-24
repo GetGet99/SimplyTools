@@ -6,7 +6,7 @@ useHead({
 </script>
 
 <template>
-    <div class="w-full min-h-screen grid grid-rows-[auto_auto_minmax(0,_1fr)_auto] gap-2">
+    <Grid rows="auto auto grow auto" class="w-full min-h-screen gap-2">
         <TitleBar />
         <h1 class="p-5 text-center app:hidden">
             SimplyTools
@@ -19,15 +19,15 @@ useHead({
                     locally via JavaScript.</div>
             </noscript>
         </div>
-        <div class="flex flex-col">
-            <main class="mx-2 sm:mx-30 my-2 grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+        <Flex column>
+            <Grid as="main" :columns="1" :md-columns="2" :lg-columns="3" class="mx-2 sm:mx-30 my-2 gap-4">
                 <template v-for="cat in Categories">
                     <FeatureCard v-for="page in cat.pages" :title="page.title" :href="`${cat.path}/${page.path}`">
                         <span v-html="page.desc"></span>
                     </FeatureCard>
                 </template>
-            </main>
-        </div>
+            </Grid>
+        </Flex>
         <Footer />
-    </div>
+    </Grid>
 </template>

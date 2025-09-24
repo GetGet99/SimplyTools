@@ -71,8 +71,8 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
 </script>
 <template>
     <Feature category="dev" tool="Programmer Calculator" class="flex justify-center">
-        <div class="flex flex-col w-full sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
-            <div class="flex flex-col text-right">
+        <Flex column class="w-full sm:w-[unset] sm:min-w-100 gap-2 bg-card pt-4 rounded-4">
+            <Flex column class="text-right">
                 <span class="h2 h-5 text-subtitle uppercase mr-4" v-html="calc.expressionDisplay"></span>
                 <div class="h1 uppercase justify-end">
                     <span class="text-right select-text">{{ display }}</span>
@@ -80,7 +80,7 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
                         <sub>{{ calc.base !== 10n ? calc.base : '' }}</sub>
                     </div>
                 </div>
-            </div>
+            </Flex>
             <Button v-if="calc.negativeDisplay === 'signed'" class="bg-transparent border-transparent"
                 @click="calc.negativeDisplay = 'complement'">
                 Negative Display: NUMBER
@@ -104,7 +104,7 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
                     </Button>
                 </ToggleGroupItem>
             </ToggleGroupRoot>
-            <div class="flex">
+            <Flex>
                 <!-- <Button class="uppercase w-25 bg-transparent border-transparent" @click="() => {
                     if (signed === 'signed') {
                         signed = 'unsigned'
@@ -130,8 +130,8 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
                         calc.shiftMode = 'arith'
                     }
                 }">Shift mode: {{ calc.shiftMode.toUpperCase() }}</Button>
-            </div>
-            <div class="grid grid-cols-5 grid-row-6 gap-1 p-2" :data-num="calc.base">
+            </Flex>
+            <Grid :columns="5" :rows="6" class="gap-1 p-2" :data-num="calc.base">
                 <Button class="key" v-for="c in ['A', '<<', '>>']" v-bind="postprocessNumberKey(c)"
                     @click="calcInput.type(c)">{{ c }}</Button>
                 <Button class="key" @click="calc.clear()">{{ calc.value === 0n ? 'C' : 'CE' }}</Button>
@@ -149,8 +149,8 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
                 <Button variant="none" class="key border-transparent text-disabled" disabled>.</Button>
                 <Button class="key rounded-br-[calc(2_*_0.25rem)]" variant="accent" @click="calcInput.type('=')">{{ "="
                     }}</Button>
-            </div>
-        </div>
+            </Grid>
+        </Flex>
 
         <template #summary>
             Convert numbers between decimal, hexadecimal, binary, and octal, with support for bit shifts up to 64-bits.

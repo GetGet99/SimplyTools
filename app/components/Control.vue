@@ -1,9 +1,9 @@
 <script setup lang="ts">
-    const props = defineProps<{ varient?: Varients, bg?: BackgroundVarients, border?: BorderVarients }>()
-    const _border = border
+defineProps<{ varient?: Varients, icon?: boolean | 'left' | 'right' }>()
 </script>
 <template>
-    <primitive as-child :class="`control ${background(varient ?? 'control')} ${_border(varient ?? 'control')} transition-colors duration-200`">
+    <primitive as-child class="control"
+        :class="[icon === true ? `control-icon` : (icon ? `control-icon-${icon[0]}` : undefined), varient ? `control-${varient}` : '']">
         <slot></slot>
     </primitive>
 </template>

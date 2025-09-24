@@ -126,7 +126,7 @@ function clearChat() {
 
 <template>
     <Feature category="AI" tool="Chat" class="flex justify-center">
-        <div class="w-full md:w-[70vw] flex flex-col gap-6">
+        <Flex column class="w-full md:w-[70vw] gap-6">
             <div v-if="availabilityStatus !== 'available' && availabilityStatus !== 'downloadable'" class="w-full p-3 font-bold rounded-md text-sm">
                 {{ availabilityStatus }}
             </div>
@@ -136,20 +136,20 @@ function clearChat() {
                 <TextBox v-model="systemPrompt" placeholder="Optional system prompt" :readonly="messages.length > 0"
                     style="height: unset;" class="w-full" multiline />
             </details>
-            <div class="flex flex-col gap-2">
-                <div v-for="(msg, idx) in messages" :key="idx"
-                    :class="msg.role === 'user' ? 'items-end' : 'items-start'" class="flex flex-col gap-1">
+            <Flex column class="gap-2">
+                <Flex column v-for="(msg, idx) in messages" :key="idx"
+                    :class="msg.role === 'user' ? 'items-end' : 'items-start'" class="gap-1">
                     <span :class="msg.role === 'user' ? 'font-bold' : 'italic'">
                         {{ msg.role === 'user' ? 'You' : msg.role === 'assistant' ? 'Assistant' : 'System' }}:
                     </span>
                     <pre
                         class="p-2 bg-control-primary border-border-control-primary rounded-1 w-fit font-[system-ui] select-text text-wrap">{{ msg.content }}</pre>
-                </div>
-            </div>
+                </Flex>
+            </Flex>
 
             <TextBox v-model="userInput" placeholder="Type a message..." class="w-full min-h-[50px]" multiline />
 
-            <div class="flex gap-2 w-full lg:w-3/4">
+            <Flex class="gap-2 w-full lg:w-3/4">
                 <ClientOnly>
                     <Button v-if="accepted" :disabled="loading || !supported || availabilityStatus === 'unavailable'"
                         @click="sendMessage">
@@ -174,8 +174,8 @@ function clearChat() {
                     </template>
                 </ClientOnly>
                 <Button @click="clearChat">Clear Chat</Button>
-            </div>
-        </div>
+            </Flex>
+        </Flex>
 
         <template #summary>
             AI-powered streaming chat using the Prompt API. System prompts and conversation context are supported.

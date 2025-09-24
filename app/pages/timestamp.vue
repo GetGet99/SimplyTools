@@ -49,7 +49,7 @@
                             </Button>
                         </DatePickerNext>
                     </DatePickerHeader>
-                    <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+                    <Flex column class="space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                         <DatePickerGrid v-for="month in grid" :key="month.value.toString()"
                             class="w-full border-collapse select-none space-y-1">
                             <DatePickerGridHead>
@@ -71,25 +71,25 @@
                                 </DatePickerGridRow>
                             </DatePickerGridBody>
                         </DatePickerGrid>
-                    </div>
+                    </Flex>
                 </DatePickerCalendar>
             </DatePickerContent>
         </DatePickerRoot>
-        <!-- <div class="mb-4 flex items-center">
+        <!-- <Flex class="mb-4 items-center">
             <label class="mr-2 font-medium">UNIX Timestamp:</label>
             <TextBox :model-value="unixTimestamp.toString()" readonly class="w-24 mr-2 px-2 py-1 border rounded" />
             <Button class="p-button-icon" @click="copyToClipboard(unixTimestamp)">
                 <Icon :icon="CopyIcon" alt="Copy" />
             </Button>
-        </div> -->
+        </Flex> -->
         <h2 class="font-semibold">Timestamp Formats</h2>
-        <div class="grid grid-cols-[auto_auto_auto] gap-4 justify-center items-center">
+        <Grid columns="auto auto auto" class="gap-4 justify-center items-center">
             <div>Format</div>
             <div>Preview</div>
             <div>Other Options</div>
             <template v-for="option in discordOptions" :key="option.discordFormat">
                 <div>{{ option.label }}</div>
-                <div class="flex gap-2 items-center">
+                <Flex class="gap-2 items-center">
                     <div class="select-text">
                         <span class="bg-control-primary w-min p-1 rounded-1">
                             <ClientOnly>
@@ -104,17 +104,17 @@
                         class="p-button-icon" title="Copy Preview Text">
                         <Icon alt="Copy Preview Text" :icon="CopyIcon" />
                     </Button>
-                </div>
-                <div class="flex gap-2">
+                </Flex>
+                <Flex class="gap-2">
                     <Button v-if="option.discordCode" @click="copyToClipboard(option.discordCode)" class="flex gap-1">
                         Discord
                     </Button>
                     <Button v-if="option.js" @click="copyToClipboard(option.js)" class="flex gap-1">
                         JS
                     </Button>
-                </div>
+                </Flex>
             </template>
-        </div>
+        </Grid>
         <template #summary>
             Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.
         </template>

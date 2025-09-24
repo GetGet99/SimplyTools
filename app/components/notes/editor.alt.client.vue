@@ -1,7 +1,7 @@
 <template>
-    <div class="grid" style="grid-template-rows: auto minmax(0, 1fr) auto;">
+    <Grid rows="auto grow auto">
         <!-- Toolbar -->
-        <div class="flex">
+        <Flex>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarToggle('markdown.bold', OurSchema.marks.strong)">
                 <Icon :icon="BoldIcon" alt="" />
@@ -27,7 +27,7 @@
                 <Icon :icon="QuoteIcon" alt="" />
             </Button>
             
-        </div>
+        </Flex>
         <div class="grid data-[view=markdown]:grid-cols-2 overflow-y-hidden" :data-view="view">
             <div :class="view === 'markdown' ? '' : 'hidden'">
                 <CodeEditor ref="editor" lang="markdown" class="h-full" v-model="model" />
@@ -37,12 +37,12 @@
                 :spellcheck="view === 'rich'">
             </div>
         </div>
-        <div class="flex">
+        <Flex>
             <div>Footer</div>
-            <div class="grow"></div>
+            <Grow />
             <NavigationTabs v-model="view" :options="['markdown', 'rich']" />
-        </div>
-    </div>
+        </Flex>
+    </Grid>
 </template>
 <script setup lang="ts">
 import BoldIcon from '@fluentui/svg-icons/icons/text_bold_24_regular.svg?raw'

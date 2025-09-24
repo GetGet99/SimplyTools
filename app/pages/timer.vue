@@ -116,10 +116,10 @@ watch(minutesInput, (val, oldVal) => {
 
 <template>
     <Feature category="none" tool="Timer" class="flex justify-center">
-        <div class="flex flex-col items-center gap-8 w-full">
-            <div v-if="editing" class="flex flex-col items-center gap-6 w-full max-w-xs">
+        <Flex column class="items-center gap-8 w-full">
+            <Flex column v-if="editing" class="items-center gap-6 w-full max-w-xs">
                 <div class="text-lg font-semibold mb-2">Set Timer</div>
-                <div class="flex gap-4 justify-center">
+                <Flex class="gap-4 justify-center">
                     <NumberBox
                         placeholder="Hours"
                         mode='integer_positive'
@@ -147,17 +147,17 @@ watch(minutesInput, (val, oldVal) => {
                         placeholder="Seconds"
                         class="w-20"
                     />
-                </div>
+                </Flex>
                 <Button variant="accent" @click="start" :disabled="timeLeftMs <= 0" class="mt-4 flex">
                     <Icon :icon="PlayIcon" alt="Start" class="w-5 h-5 mr-2" />
                     Start Timer
                 </Button>
-            </div>
-            <div v-else class="flex flex-col items-center gap-6 w-full max-w-xs">
+            </Flex>
+            <Flex column v-else class="items-center gap-6 w-full max-w-xs">
                 <div class="text-6xl sm:text-8xl">
                     {{ minutes }}:{{ seconds }}<span class="text-3xl sm:text-5xl">.</span><span class="text-3xl">{{ thousands }}</span>
                 </div>
-                <div class="flex gap-4 mt-2">
+                <Flex class="gap-4 mt-2">
                     <Button v-if="!running" @click="reset" title="Reset" class="p-4 rounded-full">
                         <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
                     </Button>
@@ -170,9 +170,9 @@ watch(minutesInput, (val, oldVal) => {
                     <Button v-if="!running" @click="editing = true" title="Edit Time" class="p-4 rounded-full">
                         <Icon :icon="EditIcon" alt="Edit" class="w-5 h-5" />
                     </Button>
-                </div>
-            </div>
-        </div>
+                </Flex>
+            </Flex>
+        </Flex>
         <template #summary>
             Simple timer with customizable time.
         </template>

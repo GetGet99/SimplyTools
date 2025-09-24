@@ -1,33 +1,33 @@
 <template>
     <TitleBar/>
-    <div class="grid grid-cols-2 grid-rows-2 gap-4 h-screen overflow-hidden p-2">
+    <Grid :columns="2" :rows="2" class="gap-4 h-screen overflow-hidden p-2">
         <!-- Template Editor -->
-        <div class="flex flex-col gap-2 row-span-2">
+        <Flex column class="gap-2 row-span-2">
             <label class="font-bold p-button px-0">Template (autosaved)</label>
             <SnippetsEditor class="grow" v-model="code" />
-        </div>
+        </Flex>
 
         <!-- Test Input Editor -->
-        <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-1">
+        <Flex column class="gap-2">
+            <Flex class="items-center gap-1">
                 <label class="font-bold">Test Input (won't be saved)</label>
-                <div class="grow"></div>
+                <Grow />
                 <Control>
                     <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/?view=${id}`">
                         <Icon alt="" :icon=View />
                         View in Main App
                     </OurLink>
                 </Control>
-            </div>
+            </Flex>
             <CodeEditor lang="yaml" v-model="input" class="grow" />
-        </div>
+        </Flex>
 
         <!-- Output Preview -->
-        <div class="flex flex-col gap-2">
+        <Flex column class="gap-2">
             <label class="font-bold p-button px-0">Preview Output using Test Input</label>
             <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output" :model-uri="uri" class="grow" />
-        </div>
-    </div>
+        </Flex>
+    </Grid>
 </template>
 
 <script setup lang="ts">

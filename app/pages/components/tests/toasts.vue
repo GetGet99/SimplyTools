@@ -9,7 +9,7 @@ function delay(ms: number) {
 }
 </script>
 <template>
-    <div class="w-screen h-screen flex flex-col justify-center items-center gap-5">
+    <Flex column class="w-screen h-screen justify-center items-center gap-5">
         <Button @click="toasts.pushError('Example Error')">
             Send Error
         </Button>
@@ -23,5 +23,5 @@ function delay(ms: number) {
         }">
             Send Progress
         </Button>
-    </div>
+    </Flex>
 </template>

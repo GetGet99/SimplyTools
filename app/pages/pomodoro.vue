@@ -117,18 +117,18 @@ onUnmounted(() => {
 
 <template>
     <Feature category="none" tool="Pomodoro Timer" class="flex justify-center">
-        <div class="flex flex-col items-center gap-8 w-full">
-            <div class="flex gap-4">
+        <Flex column class="items-center gap-8 w-full">
+            <Flex class="gap-4">
                 <Button v-for="(m, idx) in MODES" :key="m.name"
                     :variant="modeIdx === idx ? 'accent' : 'control'" @click="switchMode(idx)">
                     {{ m.name }}
                 </Button>
-            </div>
-            <div class="flex flex-col items-center gap-4">
+            </Flex>
+            <Flex column class="items-center gap-4">
                 <div class="text-6xl sm:text-9xl">
                     {{ minutes }}:{{ seconds }}<span class="text-4xl sm:text-6xl">.</span><span class="text-4xl">{{ thousands }}</span>
                 </div>
-                <div class="flex gap-4">
+                <Flex class="gap-4">
                     <Button variant="accent" v-if="!running" @click="start" :disabled="running" title="Start" class="p-4 rounded-full">
                         <Icon :icon="PlayIcon" alt="Start" class="w-5 h-5" />
                     </Button>
@@ -138,8 +138,8 @@ onUnmounted(() => {
                     <Button @click="reset" title="Reset" class="p-4 rounded-full">
                         <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
                     </Button>
-                </div>
-            </div>
+                </Flex>
+            </Flex>
             <div class="text-center mt-4 text-lg text-placeholder">
                 <span class="font-semibold">Recommended Flow:</span>
                 <span>
@@ -151,7 +151,7 @@ onUnmounted(() => {
                     Long Break
                 </span>
             </div>
-        </div>
+        </Flex>
         <template #summary>
             Simple Pomodoro timer to boost your productivity.
         </template>

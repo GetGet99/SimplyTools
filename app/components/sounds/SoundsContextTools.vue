@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center gap-2">
+  <Flex class="items-center gap-2">
     <Button size="xs" variant="control" @click="$emit('duplicate')">Duplicate</Button>
     <Button size="xs" variant="control" @click="$emit('wrap-in-loop')">Wrap in Loop</Button>
     <Button size="xs" variant="control" @click="$emit('remove')">Remove</Button>
-  </div>
+  </Flex>
 </template>
 
 <script setup lang="ts">

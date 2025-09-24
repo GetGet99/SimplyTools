@@ -17,14 +17,14 @@
         </template>
 
         <template #footer>
-            <div class="flex justify-end gap-2">
+            <Flex class="justify-end gap-2">
                 <DialogClose as-child>
                     <Button class="px-4 py-2">Cancel</Button>
                 </DialogClose>
                 <DialogClose as-child>
                     <Button class="px-4 py-2" variant="accent" @click="accept">I Agree</Button>
                 </DialogClose>
-            </div>
+            </Flex>
         </template>
     </ContentDialog>
 </template>

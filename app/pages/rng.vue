@@ -51,7 +51,7 @@ function copy() {
 </script>
 <template>
     <Feature category="none" tool="RNG" class="flex justify-center">
-        <div class="flex flex-col items-center gap-4 w-fit">
+        <Flex column class="items-center gap-4 w-fit">
             <span>Generate me random <ToggleGroupRoot class="inline-flex" v-model="mode">
                     <ToggleGroupItem value="integer" as-child>
                         <Button :variant="mode === 'integer' ? 'accent' : 'control'"
@@ -63,14 +63,14 @@ function copy() {
                     </ToggleGroupItem>
                 </ToggleGroupRoot>
             </span>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="flex gap-1 items-center">From:
+            <Grid :columns="2" class="gap-4">
+                <Flex class="gap-1 items-center">From:
                     <NumberBox ref="from" :mode v-model="valFrom" class="grow w-full" placeholder="From (Required)" />
-                </div>
-                <div class="flex gap-1 items-center">To:
+                </Flex>
+                <Flex class="gap-1 items-center">To:
                     <NumberBox ref="to" :mode v-model="valTo" class="grow w-full" placeholder="To (Required)" />
-                </div>
-            </div>
+                </Flex>
+            </Grid>
             <span>
                 Generate me
                 <NumberBox ref="genCount" :mode v-model="count" class="inline-block w-fit"
@@ -79,7 +79,7 @@ function copy() {
             <Button class="p-button rounded-control" @click="generate">Generate</Button>
             <TextBox :model-value="output" multiline class="w-full" readonly
                 placeholder='Press "Generate" button above!' />
-            <div class="w-full flex justify-end gap-2 -mt-2">
+            <Flex class="w-full justify-end gap-2 -mt-2">
                 <Button :variant="autoClear ? 'accent' : 'control'" class="p-button rounded-control"
                     @click="autoClear = !autoClear">
                     Auto Clear: {{ autoClear ? 'On' : 'Off' }}
@@ -90,8 +90,8 @@ function copy() {
                 <Button title="Clear" class="p-button-icon rounded-control" @click="output = ''">
                     <Icon alt="" :icon=DeleteIcon />
                 </Button>
-            </div>
-        </div>
+            </Flex>
+        </Flex>
         <template #summary>
             Generate random integers or real numbers within a custom range.
         </template>

@@ -59,44 +59,44 @@ const w = window
 </script>
 <template>
     <Feature category="dev" tool="Base 64 Converter" class="flex flex-col gap-5" limit-screen="xl">
-        <div class="flex flex-col items-center gap-5">
+        <Flex column class="items-center gap-5">
             <Button @click="mode = mode === 'atob' ? 'btoa' : 'atob'; w.location">Switch to Base 64 {{ mode !== 'atob' ? 'decoder' : 'encoder' }}</Button>
-        </div>
-        <div class="grow grid not-lg:grid-rows-2 lg:grid-cols-2 gap-15 mx-2 lg:mx-10 app:mb-4">
-            <div class="grid" style="grid-template-columns: minmax(0, 1fr) auto;">
-                <div class="flex flex-col b64-textbox-controls overflow-hidden order-1">
+        </Flex>
+        <Grid :rows=2 :lg-rows=1 :lg-columns=2 class="grow gap-15 mx-2 lg:mx-10 app:mb-4">
+            <Grid columns="grow auto">
+                <Flex column class="b64-textbox-controls overflow-hidden order-1">
                     <Button class="b64-textbox-button bg-transparent" @click="paste">
                         <Icon :icon=PasteIcon alt="Paste" />
                     </Button>
                     <Button class="b64-textbox-button bg-transparent" @click="fromFile">
                         <Icon :icon=FileIcon alt="From file" />
                     </Button>
-                </div>
+                </Flex>
                 <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none"
                     multiline />
-            </div>
+            </Grid>
 
-            <!-- <div class="flex items-center justify-center">
+            <!-- <Flex class="items-center justify-center">
                 <Button class="w-fit p-button-icon" @click="mode = mode === 'atob' ? 'btoa' : 'atob'"
                     :title="`Swap to ${mode === 'atob' ? 'Normal to Base64' : 'Base64 to Normal'} mode`">
                     <Icon :icon=ArrowSwap alt="" />
                 </Button>
-            </div> -->
+            </Flex> -->
 
-            <div class="grid" style="grid-template-columns: minmax(0, 1fr) auto;">
+            <Grid columns="grow auto">
                 <TextBox :model-value="output" :placeholder="mode !== 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none" multiline />
-                <div class="flex flex-col b64-textbox-controls overflow-hidden">
+                <Flex column class="b64-textbox-controls overflow-hidden">
                     <Button class="b64-textbox-button bg-transparent" @click="copy">
                         <Icon :icon=CopyIcon alt="Copy" />
                     </Button>
                     <Button class="b64-textbox-button bg-transparent" @click="toFile">
                         <Icon :icon=SaveFileIcon alt="Save file" />
                     </Button>
-                </div>
-            </div>
-        </div>
+                </Flex>
+            </Grid>
+        </Grid>
         <template #summary>
             Encoding and decoding base64 without opening DevTools.
         </template>
