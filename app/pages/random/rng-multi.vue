@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
 import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
-import { Uncategorized } from '~/utils/pages/uncategorized'
-usePageInfo(Uncategorized.pages.find(x => x.path === 'rng'))
+import { RandomCategory } from '~/utils/pages/random'
+usePageInfo(RandomCategory.pages.find(x => x.path === 'rng-multi'))
 const mode = ref<'integer' | 'real'>('integer')
 const valFrom = ref<number | undefined>(1)
 const valTo = ref<number | undefined>(10)
@@ -12,6 +12,7 @@ const toTb = useTemplateRef('to')
 const genCountTb = useTemplateRef('genCount')
 const autoClear = ref(true)
 const output = ref('')
+const latestNumber = ref(0)
 function generate() {
     if (valFrom.value === undefined) {
         fromTb.value?.nbb?.tb?.focus()
@@ -29,11 +30,13 @@ function generate() {
     let outStr = ""
     if (mode.value === "integer") {
         for (let i = 0; i < count.value; i++) {
-            outStr += "\n" + rng.randrangeint(valFrom.value, valTo.value).toString()
+            latestNumber.value = rng.randrangeint(valFrom.value, valTo.value)
+            outStr += "\n" + latestNumber.value.toString()
         }
     } else {
         for (let i = 0; i < count.value; i++) {
-            outStr += "\n" + rng.randrangefloat(valFrom.value, valTo.value).toString()
+            latestNumber.value = rng.randrangefloat(valFrom.value, valTo.value)
+            outStr += "\n" + latestNumber.value.toString()
         }
     }
     if (wasEmpty) {

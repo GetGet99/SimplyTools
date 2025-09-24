@@ -28,12 +28,6 @@ export const Uncategorized = createCategory({
         desc: 'Simple Pomodoro timer to boost your productivity with work and break intervals.'
     },
     {
-        title: 'Random Number Generator',
-        inPageTitle: 'RNG',
-        path: 'rng',
-        desc: 'A simple RNG (Random Number Generator) that can generate numbers between a given range, either integers or real numbers'
-    },
-    {
         title: 'Timer',
         path: 'timer',
         desc: 'Simple timer'
