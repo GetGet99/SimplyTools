@@ -3,8 +3,8 @@
     <Flex class="lg:flex-row items-center justify-between">
       <div class="font-semibold">Repeat {{ stmt.iterations }} time{{ stmt.iterations === 1 ? '' : 's' }}</div>
       <Flex class="items-center gap-2">
-        <Button size="xs" variant="control" @click="$emit('update-iterations', index, Math.max(1, stmt.iterations - 1))" :disabled="stmt.iterations <= 1">-</Button>
-        <Button size="xs" variant="control" @click="$emit('update-iterations', index, stmt.iterations + 1)">+</Button>
+        <Button size="xs" variant="regular" @click="$emit('update-iterations', index, Math.max(1, stmt.iterations - 1))" :disabled="stmt.iterations <= 1">-</Button>
+        <Button size="xs" variant="regular" @click="$emit('update-iterations', index, stmt.iterations + 1)">+</Button>
         <SoundsContextTools
           @duplicate="$emit('duplicate', index)"
           @wrap-in-loop="$emit('wrap-in-loop', index)"

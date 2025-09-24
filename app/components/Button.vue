@@ -1,12 +1,10 @@
 <script setup lang="ts">
-    
-    const props = defineProps<{ variant?: Varients, bg?: BackgroundVarients, border?: BorderVarients }>()
-    const _border = border
-    const button = useTemplateRef('button')
-    defineExpose({ button })
+defineProps<{ variant?: Variants, icon?: boolean | 'left' | 'right', iconNoFlex?: boolean }>()
+const button = useTemplateRef('button')
+defineExpose({ button })
 </script>
 <template>
-    <button ref="button" type="button" :class="`${background(variant ?? 'control')} ${_border(variant ?? 'control')} transition-colors duration-200`">
+    <button ref="button" type="button" :class="[icon === true ? `control-icon` : (icon ? `control-icon-${icon[0]}` : undefined), variant ? `control-${variant}` : 'control-regular', icon && !iconNoFlex ? 'flex gap-2' : '']">
         <slot />
     </button>
 </template>

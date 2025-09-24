@@ -6,7 +6,7 @@
         <Flex class="gap-4 items-center justify-center flex-wrap">
             <Flex class="gap-2">
                 <Button v-for="type in Sounds.synthTypes" :key="type"
-                    :variant="synthType === type ? 'accent' : 'control'" @click="synthType = type">
+                    :variant="synthType === type ? 'accent' : 'regular'" @click="synthType = type">
                     {{ type }}
                 </Button>
             </Flex>

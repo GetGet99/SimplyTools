@@ -45,7 +45,7 @@
                 {{ meta?.description }}
             </p>
             <Flex aria-hidden>
-                <Control aria-hidden varient="none"
+                <Control aria-hidden variant="none"
                     class="p-button rounded-control bg-control-primary group-hover:bg-control-secondary group-active:bg-control-tertiary control-border-control group-active:control-border-control-pressed">
                     <div>Use</div>
                 </Control>

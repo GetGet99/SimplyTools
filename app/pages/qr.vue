@@ -27,7 +27,7 @@
                 <Flex>
                     <div>Preview</div>
                     <Grow />
-                    <Button :variant="constraint ? 'accent' : 'control'" @click="constraint = !constraint">Constrain
+                    <Button :variant="constraint ? 'accent' : 'regular'" @click="constraint = !constraint">Constrain
                         Size Preview: {{ constraint ?
                             'On' : 'Off' }}</Button>
                 </Flex>

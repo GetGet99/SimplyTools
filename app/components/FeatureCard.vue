@@ -9,7 +9,7 @@
                 <slot></slot>
             </p>
             <Flex aria-hidden>
-                <Control aria-hidden varient="none"
+                <Control aria-hidden variant="none"
                     class="bg-control-primary group-hover:bg-control-secondary group-active:bg-control-tertiary control-border-control group-active:control-border-control-pressed">
                     <div>Go!</div>
                 </Control>

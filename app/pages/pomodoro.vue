@@ -120,7 +120,7 @@ onUnmounted(() => {
         <Flex column class="items-center gap-8 w-full">
             <Flex class="gap-4">
                 <Button v-for="(m, idx) in MODES" :key="m.name"
-                    :variant="modeIdx === idx ? 'accent' : 'control'" @click="switchMode(idx)">
+                    :variant="modeIdx === idx ? 'accent' : 'regular'" @click="switchMode(idx)">
                     {{ m.name }}
                 </Button>
             </Flex>

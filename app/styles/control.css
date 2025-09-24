@@ -20,6 +20,9 @@
 @utility utils-bg-control-accent {
     @apply bg-accent-primary hover:bg-accent-secondary active:bg-accent-tertiary;
 }
+@utility utils-text-on-control-accent {
+    @apply text-on-accent-primary;
+}
 @utility utils-border-control-regular {
     @apply border-border-control-primary hover:border-border-control-secondary active:border-border-control-secondary;
 }
@@ -49,6 +52,6 @@
         @apply utils-bg-control-ghost utils-border-control-ghost;
     }
     .control-accent {
-        @apply utils-bg-control-accent utils-border-control-accent;
+        @apply utils-bg-control-accent utils-border-control-accent utils-text-on-control-accent;
     }
 }

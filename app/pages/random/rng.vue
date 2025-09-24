@@ -57,11 +57,11 @@ function copy() {
         <Flex column class="items-center gap-4 w-fit">
             <span>Generate me random <ToggleGroupRoot class="inline-flex" v-model="mode">
                     <ToggleGroupItem value="integer" as-child>
-                        <Button :variant="mode === 'integer' ? 'accent' : 'control'"
+                        <Button :variant="mode === 'integer' ? 'accent' : 'regular'"
                             class="p-button inline-block rounded-r-none" @click="mode = 'integer'">Integer</Button>
                     </ToggleGroupItem>
                     <ToggleGroupItem value="real" as-child>
-                        <Button :variant="mode === 'real' ? 'accent' : 'control'"
+                        <Button :variant="mode === 'real' ? 'accent' : 'regular'"
                             class="p-button inline-block rounded-l-none" @click="mode = 'real'">Real Number</Button>
                     </ToggleGroupItem>
                 </ToggleGroupRoot>

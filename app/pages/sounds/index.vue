@@ -13,7 +13,7 @@
                         <Icon :icon=PlayIcon alt="" />
                         Play Sound
                     </Button>
-                    <Button v-else variant="control" title="Stop Playback" class="pl-1.25 flex gap-1"
+                    <Button v-else variant="regular" title="Stop Playback" class="pl-1.25 flex gap-1"
                         @click="Sounds.stopSequence">
                         <Icon :icon=StopIcon alt="" />
                         Stop Sound
@@ -29,7 +29,7 @@
         <Flex
             class="fixed right-6 bottom-7 z-40 gap-2 items-end backdrop-blur-lg p-2 border rounded-lg border-border-control-primary">
             <Flex v-show="toolsExpanded" class="gap-2 items-center shadow-lg">
-                <Button :variant="previewMode ? 'accent' : 'control'"
+                <Button :variant="previewMode ? 'accent' : 'regular'"
                     class="flex items-center gap-1 text-base min-w-[40px]" @click="previewMode = !previewMode"
                     :aria-pressed="previewMode">
                     <Icon :icon=PlayIcon alt="Play Sound" />
@@ -37,7 +37,7 @@
                 </Button>
                 <!-- Add more tool buttons here -->
             </Flex>
-            <Button :variant="toolsExpanded ? 'accent' : 'control'" @click="toolsExpanded = !toolsExpanded"
+            <Button :variant="toolsExpanded ? 'accent' : 'regular'" @click="toolsExpanded = !toolsExpanded"
                 :aria-label="toolsExpanded ? 'Close Tools' : 'Open Tools'" class="pl-1.25 flex gap-1">
                 <Icon :icon="TouchIcon" alt="" />
                 Touchscreen Compatibility
@@ -48,7 +48,7 @@
                     <Icon :icon=PlayIcon alt="Play Sound" />
                     Play
                 </Button>
-                <Button v-else variant="control" title="Stop Playback" class="pl-1.25 flex gap-1"
+                <Button v-else variant="regular" title="Stop Playback" class="pl-1.25 flex gap-1"
                     @click="Sounds.stopSequence">
                     <Icon :icon=StopIcon alt="Stop Playback" />
                     Stop
