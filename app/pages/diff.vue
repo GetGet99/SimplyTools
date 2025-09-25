@@ -21,7 +21,7 @@
 </template>
 <script setup lang="ts">
 import { Uncategorized } from '~/utils/pages/uncategorized'
-usePageInfo(Uncategorized.pages.find(x => x.path === 'diff'))
+setPageInfo(Uncategorized.pages.find(x => x.path === 'diff'))
 await useMonacoWithOurTheme()
 // Function to apply the appropriate theme
 async function applyColorScheme(scheme: 'dark' | 'light') {

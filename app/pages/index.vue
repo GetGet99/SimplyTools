@@ -3,11 +3,11 @@ import { Categories } from '~/utils/pages/info';
 useHead({
     title: 'SimplyTools'
 })
+setPageInfo()
 </script>
 
 <template>
-    <Grid rows="auto auto grow auto" class="w-full min-h-screen gap-2">
-        <TitleBar />
+    <Grid rows="auto grow auto" class="w-full min-h-screen gap-2">
         <h1 class="p-5 text-center app:hidden">
             SimplyTools
         </h1>

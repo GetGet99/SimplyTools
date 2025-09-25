@@ -64,7 +64,7 @@ import DownloadIcon from '@fluentui/svg-icons/icons/arrow_download_24_regular.sv
 
 
 import { Uncategorized } from '~/utils/pages/uncategorized';
-usePageInfo(Uncategorized.pages.find(x => x.path === 'qr'))
+setPageInfo(Uncategorized.pages.find(x => x.path === 'qr'))
 const value = ref('Add text or link here!')
 const constraint = ref(true)
 const foreground = ref('#ffffffff')

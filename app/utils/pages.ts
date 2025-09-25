@@ -4,56 +4,70 @@ import { Categories } from "./pages/info"
 import { Uncategorized } from "./pages/uncategorized"
 import { Apps, type AppPage } from "./pages/app"
 
-export function usePageInfo(page?: PageInfo) {
-    let pageRef
-    if (page) {
-        pageRef = shallowRef(page)
-        provide('metadata.page', pageRef)
+const currentPage = shallowRef<PageInfo | undefined>(undefined)
+const pageInfo = computed(() => {
+    if (!currentPage.value) {
+        return {
+            breadcrumb: [],
+            appName: 'SimplyTools',
+            toolName: 'Home',
+            category: Uncategorized,
+            catPath: Uncategorized.path,
+            toolPath: '/',
+            isApp: false
+        }
     } else {
-        pageRef = inject<ShallowRef<Page> | undefined>('metadata.page', undefined)
-        if (pageRef === undefined) {
-            pageRef = ref(undefined)
+        let toolName = currentPage.value.inPageTitle ?? currentPage.value.title
+        let appName
+        let breadcrumb
+        let isApp = false
+        if (currentPage.value.parent === Apps) {
+            appName = (currentPage.value as AppPage).appName
+            breadcrumb = [appName, toolName] as [string, string | Ref<string>]
+            isApp = true
+        }
+        else if (currentPage.value.parent !== Uncategorized) {
+            appName = currentPage.value.parent.name
+            breadcrumb = [currentPage.value.parent.shortName, toolName] as [string, string | Ref<string>]
+        } else {
+            appName = 'SimplyTools'
+            breadcrumb = [toolName]
+        }
+        return {
+            breadcrumb,
+            appName: appName,
+            toolName,
+            category: currentPage.value.parent,
+            catPath: currentPage.value.parent.path,
+            toolPath: `${currentPage.value.parent.path}/${currentPage.value.path}`,
+            isApp
         }
     }
-    return computed(() => {
-        if (!pageRef.value) {
-            return {
-                breadcrumb: [],
-                appName: 'SimplyTools',
-                toolName: 'Home',
-                category: Uncategorized,
-                catPath: Uncategorized.path,
-                toolPath: '/',
-                isApp: false
-            }
-        } else {
-            let toolName = pageRef.value.inPageTitle ?? pageRef.value.title
-            let appName
-            let breadcrumb
-            let isApp = false
-            if (pageRef.value.parent === Apps) {
-                appName = (pageRef.value as AppPage).appName
-                breadcrumb = [appName, toolName] as [string, string | Ref<string>]
-                isApp = true
-            }
-            else if (pageRef.value.parent !== Uncategorized) {
-                appName = pageRef.value.parent.name
-                breadcrumb = [pageRef.value.parent.shortName, toolName] as [string, string | Ref<string>]
-            } else {
-                appName = 'SimplyTools'
-                breadcrumb = [toolName]
-            }
-            return {
-                breadcrumb,
-                appName: appName,
-                toolName,
-                category: pageRef.value.parent,
-                catPath: pageRef.value.parent.path,
-                toolPath: `${pageRef.value.parent.path}/${pageRef.value.path}`,
-                isApp
-            }
-        }
-    })
+})
+
+export function setPageInfo(page?: PageInfo) {
+    currentPage.value = page
+    return pageInfo
+}
+export function useCurrentPage() {
+    return currentPage
+}
+export function usePageInfo(page?: PageInfo) {
+    // let currentPage
+    // if (page) {
+    //     currentPage = shallowRef(page)
+    //     provide('metadata.page', currentPage)
+    // } else {
+    //     currentPage = inject<ShallowRef<Page> | undefined>('metadata.page', undefined)
+    //     if (currentPage === undefined) {
+    //         currentPage = ref(undefined)
+    //     }
+    // }
+    // const currentPage = currentPage
+    if (page) {
+        currentPage.value = page
+    }
+    return pageInfo
 }
 // export function usePageInfo() {
 //     const routes = useRoute()

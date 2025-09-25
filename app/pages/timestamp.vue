@@ -142,7 +142,7 @@ import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
 import { ZonedDateTime, now, getLocalTimeZone } from '@internationalized/date'
 
 import { Uncategorized } from '~/utils/pages/uncategorized'
-usePageInfo(Uncategorized.pages.find(x => x.path === 'timestamp'))
+setPageInfo(Uncategorized.pages.find(x => x.path === 'timestamp'))
 
 interface Time {
     hours: number

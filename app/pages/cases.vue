@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Uncategorized } from '~/utils/pages/uncategorized'
-usePageInfo(Uncategorized.pages.find(x => x.path === 'cases'))
+setPageInfo(Uncategorized.pages.find(x => x.path === 'cases'))
 import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
 import Lowercase from '@fluentui/svg-icons/icons/text_case_lowercase_24_regular.svg?raw'
 import Uppercase from '@fluentui/svg-icons/icons/text_case_uppercase_24_regular.svg?raw'
