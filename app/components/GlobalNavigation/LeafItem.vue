@@ -10,7 +10,7 @@ const route = useRoute()
 const isSelected = computed(() => route.path.startsWith(`${category.value.path}/${props.page.path}`))
 </script>
 <template>
-    <li class="list-none w-full h-10 mx-0 flex">
+    <li class="list-none w-full h-10 mx-0 flex" :id="isSelected ? 'selected-navigation-item' : undefined">
         <Control variant="ghost" class="w-full text-left grow"
             :class="isSelected ? 'bg-control-secondary hover:bg-control-tertiary' : ''">
             <OurLink :to="`${category.path}/${page.path}`"
@@ -19,5 +19,6 @@ const isSelected = computed(() => route.path.startsWith(`${category.value.path}/
                 {{ page.parent === Apps ? (page as AppPage).appName : page.title }}
             </OurLink>
         </Control>
+        <SkipLink to="main" v-if="isSelected" />
     </li>
 </template>

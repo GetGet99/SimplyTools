@@ -10,16 +10,15 @@ useHead({
 </script>
 <template>
     <Grid columns="auto grow" rows="auto grow" class="w-full h-screen bg-root text-foreground">
-        <Control variant="regular"
-            class="col-span-2 fixed z-1000 bg-solid-primary border-accent-primary top-titlebar-height -left-100 -translate-x-1/2 focus:left-1/2 transition-transform duration-100">
-            <OurLink not-nuxt-link href="#main" class="manual">Press Enter or Space to skip to main content.</OurLink>
-        </Control>
+        <SkipLink to="main" />
+        <SkipLink to="selected-navigation-item" />
         <div class="col-span-2">
             <TitleBar />
         </div>
         <div class="w-80">
             <GlobalNavigationView />
         </div>
+        <SkipLink to="selected-navigation-item" />
         <div class="w-full h-full bg-control-primary rounded-tl-lg">
             <ToastProvider :duration="7500">
                 <ToastsGenerator>

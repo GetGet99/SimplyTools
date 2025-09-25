@@ -24,7 +24,7 @@ import { Apps } from '~/utils/pages/app';
                         <summary>
                             <Control variant="ghost"
                                 class="h-10 w-full text-left grow border-transparent! items-center flex">
-                                <div class="pl-3 w-full">
+                                <div class="pl-4 w-full">
                                     {{ category.shortName }}
                                     <Grow />
                                     <div class="group-open:-rotate-180 transition-transform duration-300">
