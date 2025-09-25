@@ -12,25 +12,25 @@
     @apply pr-1.25;
 }
 @utility utils-bg-control-regular {
-    @apply bg-control-primary hover:bg-control-secondary active:bg-control-tertiary;
+    @apply bg-control-primary not-disabled:hover:bg-control-secondary not-disabled:active:bg-control-tertiary;
 }
 @utility utils-bg-control-ghost {
-    @apply bg-transparent hover:bg-control-secondary active:bg-control-tertiary;
+    @apply bg-transparent not-disabled:hover:bg-control-secondary not-disabled:active:bg-control-tertiary;
 }
 @utility utils-bg-control-accent {
-    @apply bg-accent-primary hover:bg-accent-secondary active:bg-accent-tertiary;
+    @apply bg-accent-primary not-disabled:hover:bg-accent-secondary not-disabled:active:bg-accent-tertiary;
 }
 @utility utils-text-on-control-accent {
     @apply text-on-accent-primary;
 }
 @utility utils-border-control-regular {
-    @apply border-border-control-primary hover:border-border-control-secondary active:border-border-control-secondary;
+    @apply border-border-control-primary not-disabled:hover:border-border-control-secondary not-disabled:active:border-border-control-secondary;
 }
 @utility utils-border-control-ghost {
-    @apply border-border-control-primary hover:border-border-control-secondary active:border-border-control-secondary;
+    @apply border-transparent not-disabled:hover:border-border-control-secondary not-disabled:active:border-border-control-secondary;
 }
 @utility utils-border-control-accent {
-    @apply border-border-control-on-accent-primary hover:border-border-control-on-accent-secondary active:border-border-control-on-accent-tertiary;
+    @apply border-border-control-on-accent-primary not-disabled:hover:border-border-control-on-accent-secondary not-disabled:active:border-border-control-on-accent-tertiary;
 }
 @layer components {
     .control {
@@ -46,7 +46,7 @@
         @apply utils-control-icon-r;
     }
     .control-regular {
-        @apply utils-bg-control-regular utils-border-control-regular;
+        @apply utils-bg-control-regular utils-border-control-regular disabled:text-placeholder;
     }
     .control-ghost {
         @apply utils-bg-control-ghost utils-border-control-ghost;

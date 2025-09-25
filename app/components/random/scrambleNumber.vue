@@ -33,6 +33,12 @@ function animateNumber(oldVal: number, newVal: number) {
         }
     }, 50);
 }
+function animateSameNumber() {
+    if (!isAnimating.value) {
+        animateNumber(props.number, props.number);
+    }
+}
+defineExpose({ animateSameNumber })
 </script>
 
 <template>

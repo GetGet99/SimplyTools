@@ -6,7 +6,6 @@ const props = defineProps<{
     label?: string
     placeholder?: string
     disabled?: boolean
-    class?: string
     orientation?: 'horizontal' | 'vertical'
 }>()
 const selected = defineModel<T>({ required: true })
