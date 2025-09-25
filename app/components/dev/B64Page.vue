@@ -60,10 +60,11 @@ const w = window
 <template>
     <Feature category="dev" tool="Base 64 Converter" class="flex flex-col gap-5" limit-screen="xl">
         <Flex column class="items-center gap-5">
-            <Button @click="mode = mode === 'atob' ? 'btoa' : 'atob'; w.location">Switch to Base 64 {{ mode !== 'atob' ? 'decoder' : 'encoder' }}</Button>
+            <Button @click="mode = mode === 'atob' ? 'btoa' : 'atob'; w.location">Switch to Base 64 {{ mode !== 'atob' ?
+                'decoder' : 'encoder' }}</Button>
         </Flex>
         <Grid :rows=2 :lg-rows=1 :lg-columns=2 class="grow gap-15 mx-2 lg:mx-10 app:mb-4">
-            <Grid columns="grow auto">
+            <!-- <Grid columns="grow auto">
                 <Flex column class="b64-textbox-controls overflow-hidden order-1">
                     <Button class="b64-textbox-button bg-transparent" @click="paste">
                         <Icon :icon=PasteIcon alt="Paste" />
@@ -73,9 +74,20 @@ const w = window
                     </Button>
                 </Flex>
                 <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
-                    class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none"
-                    multiline />
-            </Grid>
+                    class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none" multiline />
+            </Grid> -->
+            <TextBoxTools toolbar-position="right">
+                <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
+                    class="resize-none" multiline />
+                <template #tools>
+                    <Button variant="ghost" icon class="b64-textbox-button" @click="paste">
+                        <Icon :icon=PasteIcon alt="Paste" />
+                    </Button>
+                    <Button variant="ghost" icon @click="fromFile">
+                        <Icon :icon=FileIcon alt="From file" />
+                    </Button>
+                </template>
+            </TextBoxTools>
 
             <!-- <Flex class="items-center justify-center">
                 <Button class="w-fit p-button-icon" @click="mode = mode === 'atob' ? 'btoa' : 'atob'"
@@ -84,7 +96,7 @@ const w = window
                 </Button>
             </Flex> -->
 
-            <Grid columns="grow auto">
+            <!-- <Grid columns="grow auto">
                 <TextBox :model-value="output" :placeholder="mode !== 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none" multiline />
                 <Flex column class="b64-textbox-controls overflow-hidden">
@@ -95,7 +107,20 @@ const w = window
                         <Icon :icon=SaveFileIcon alt="Save file" />
                     </Button>
                 </Flex>
-            </Grid>
+            </Grid> -->
+            
+            <TextBoxTools toolbar-position="right">
+                <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
+                    class="resize-none" multiline />
+                <template #tools>
+                    <Button variant="ghost" icon class="b64-textbox-button" @click="copy">
+                        <Icon :icon=CopyIcon alt="Copy" />
+                    </Button>
+                    <Button variant="ghost" icon @click="toFile">
+                        <Icon :icon=SaveFileIcon alt="Save file" />
+                    </Button>
+                </template>
+            </TextBoxTools>
         </Grid>
         <template #summary>
             Encoding and decoding base64 without opening DevTools.

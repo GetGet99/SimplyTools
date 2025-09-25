@@ -5,7 +5,10 @@ defineProps<{
 </script>
 <template>
     <div class="style-textbox-group" :class="`style-textbox-group-${toolbarPosition ?? 'top'}`">
-        <Flex :class="`${toolbarPosition === 'left' || toolbarPosition === 'right' ? 'flex-col overflow-y-auto' : 'flex-row overflow-x-auto'}`">
+        <Flex :class="[
+            toolbarPosition === 'left' || toolbarPosition === 'right' ? 'flex-col overflow-y-auto' : 'flex-row overflow-x-auto',
+            toolbarPosition === 'right' || toolbarPosition === 'bottom' ? 'order-1' : undefined,
+        ]">
             <slot name="tools" />
         </Flex>
         <Primitive as-child>
@@ -15,6 +18,7 @@ defineProps<{
 </template>
 <style>
 @reference '~/app.css';
+
 .style-textbox-group {
     @apply grid utils-style-textbox p-0 focus-within:utils-style-textbox-focus;
 }
@@ -25,7 +29,6 @@ defineProps<{
 
 .style-textbox-group-right {
     grid-template-columns: minmax(0, 1fr) auto;
-    @apply nth-[1]:order-1;
 }
 
 .style-textbox-group-top {
@@ -34,6 +37,5 @@ defineProps<{
 
 .style-textbox-group-bottom {
     grid-template-rows: minmax(0, 1fr) auto;
-    @apply nth-[1]:order-1;
 }
 </style>

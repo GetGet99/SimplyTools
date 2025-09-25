@@ -6,7 +6,7 @@ const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
 <template>
-    <Grid class="feature-root min-h-screen xl:data-[limit-screen='xl']:h-screen data-[limit-screen='all']:h-screen"
+    <Grid class="feature-root min-h-full xl:data-[limit-screen='xl']:h-full data-[limit-screen='all']:h-full"
         :data-limit-screen=limitScreen>
         <Flex column class="app:hidden" :class="tool.isApp ? 'gap-8' : 'gap-16'">
             <h1 class="text-center pt-16">{{ tool.appName }} - {{ tool.toolName }}</h1>
@@ -15,7 +15,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                 are
                 unlikely to work correctly.</noscript>
         </Flex>
-        <div class="mt-16 app:mt-8 not-app:mb-8 w-full"
+        <div class="mt-16 app:mt-0 not-app:mb-8 w-full"
             :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']">
             <div v-if="tool.category === AICategory" class="text-center mb-8">
                 <span class="app:hidden">Note: This tool is powered by browsers' built-in AI.<br /></span>

@@ -15,7 +15,7 @@
             <Flex class="justify-center">
                 {{ newColor.HEX.HexCodeWithHash }}
             </Flex>
-            <Button @click="color = newColor">Apply</Button>
+            <Button variant="regular" @click="color = newColor">Apply</Button>
         </Flex>
     </Flex>
 </template>

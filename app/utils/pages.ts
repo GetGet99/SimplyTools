@@ -69,6 +69,7 @@ export function usePageInfo(page?: PageInfo) {
     }
     return pageInfo
 }
+// Old implementation
 // export function usePageInfo() {
 //     const routes = useRoute()
 //     const paths = computed(() => {

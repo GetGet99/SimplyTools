@@ -38,11 +38,6 @@ export const Uncategorized = createCategory({
         desc: 'Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.'
     },
     {
-        title: 'Quick Templates (Snippets)',
-        path: 'snippets',
-        desc: 'Quickly find and use code templates for your projects, or create your own custom snippets.'
-    },
-    {
         title: 'QR Code Generator',
         path: 'qr',
         desc: 'Quickly create a QR code.'

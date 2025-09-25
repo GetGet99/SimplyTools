@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
     devtools: { enabled: true },
     modules: ['reka-ui/nuxt', 'nuxt-monaco-editor'],
+    css: [
+        '~/app.css'
+    ],
     vite: {
         plugins: [tailwindcss()]
     },

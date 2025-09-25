@@ -1,5 +1,5 @@
+@layer properties, base, components, theme, utilities;
 @import "tailwindcss";
-
 @source 'error.vue';
 @custom-variant data-view (&[data-view="true"]);
 @custom-variant app (body.app &);
@@ -47,6 +47,8 @@
     --background-color-caution: #433519;
     --background-color-critical: #442726;
     --color-divider: #FFFFFF15;
+    --spacing-titlebar-height: max(30px, var(--app-titlebar-height, 0px));
+    --spacing-mainarea-height: 100vh - var(--spacing-titlebar-height);
 }
 
 @theme {
@@ -164,6 +166,11 @@ body {
     }
 }
 
+body {
+    --spacing-titlebar-height: max(30px, var(--app-titlebar-height, 0px));
+    --spacing-mainarea-height: 100vh - var(--spacing-titlebar-height);
+}
+
 @layer base {
     body {
         @apply select-none selection:bg-accent selection:text-on-accent;
@@ -278,11 +285,12 @@ body {
 }
 
 @layer components {
-    .style-textbox-group > .style-textbox {
+    .style-textbox-group>.style-textbox {
         outline: none;
         min-height: 100%;
         @apply px-2.25 pt-1 pb-0.75;
     }
+
     .style-textbox:not(.style-textbox-group > .style-textbox) {
         @apply utils-style-textbox focus:utils-style-textbox-focus;
     }
@@ -291,5 +299,4 @@ body {
         @apply utils-style-textbox-focus;
     }
 }
-
-@import './styles/control.css'
+@import './styles/control.css';

@@ -2,12 +2,13 @@
 import { Categories } from '~/utils/pages/info';
 const curPage = useCurrentPage()
 import ChevronUp from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
+import { Apps } from '~/utils/pages/app';
 </script>
 <template>
-    <nav class="fixed h-[calc(100vh-max(30px,_var(--app-titlebar-height,_0px)))] w-80 pr-2">
+    <nav class="fixed h-mainarea-height w-80 pr-2">
         <ul>
             <template v-for="category in Categories" :key="category.name">
-                <template v-if="!category.shortName">
+                <template v-if="!category.shortName && category !== Apps">
                     <!-- <li class="list-none w-full h-10 mx-0 flex">
                         <Control variant="ghost" class="w-full text-left grow" :class="curPage?.path === page.path && curPage.parent === category ? 'bg-control-secondary hover:bg-control-tertiary' : ''">
                             <OurLink :to="`${category.path}/${page.path}`" class="manual border-transparent! pl-3 py-0 flex items-center">{{ page.title }}</OurLink>
@@ -18,7 +19,7 @@ import ChevronUp from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
                 </template>
             </template>
             <template v-for="category in Categories" :key="category.name">
-                <li v-if="category.shortName" class="list-none w-full mx-0 flex flex-col">
+                <li v-if="category.shortName && category !== Apps" class="list-none w-full mx-0 flex flex-col">
                     <details class="no-marker group">
                         <summary>
                             <Control variant="ghost"
@@ -34,11 +35,13 @@ import ChevronUp from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
                         </summary>
                         <ul>
                             <GlobalNavigationLeafItem v-for="page in category.pages" :key="page.path"
-                                :cur-page="curPage" :page="page" inner-class="pl-8" />
+                                :cur-page="curPage" :page="page" inner-class="pl-6" />
                         </ul>
                     </details>
                 </li>
             </template>
+            <GlobalNavigationLeafItem v-for="page in Apps.pages" :key="page.path" :cur-page="curPage"
+                :page="page" />
         </ul>
     </nav>
 </template>

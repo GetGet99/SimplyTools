@@ -27,28 +27,28 @@ const tbref = useTemplateRef('tbref')
         <TextBoxTools class="m-4 mb-4">
             <TextBox ref="tbref" v-model="text" multiline placeholder="Type here and click the buttons above!" />
             <template #tools>
-                <Button class="bg-transparent border-0 p-button-icon flex gap-1 justify-center" @click="apply(cases.lowercase)"
+                <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.lowercase)"
                     title="lowercase">
                     <Icon alt="" :icon=Lowercase />
                     <span>lowercase</span>
                 </Button>
-                <Button class="bg-transparent border-0 p-button-icon flex gap-1 justify-center" @click="apply(cases.uppercase)"
+                <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.uppercase)"
                     title="UPPERCASE">
                     <Icon alt="" :icon=Uppercase />
                     <span>UPPERCASE</span>
                 </Button>
-                <Button class="bg-transparent border-0 p-button-icon flex gap-1 justify-center" @click="apply(cases.swappingcase)"
+                <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.swappingcase)"
                     title="swappingCASE">
                     <Icon alt="" :icon=Swappingcase />
                     <span>swappingCASE</span>
                 </Button>
-                <Button class="bg-transparent border-0 p-button-icon flex gap-1 justify-center" @click="apply(cases.randomcase)"
+                <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.randomcase)"
                     title="rANdOmcAse">
                     <div class="w-6 h-6">rA</div>
                     <span>rANdOmcAse</span>
                 </Button>
                 <Grow />
-                <Button class="bg-transparent border-0 p-button-icon pr-[11px] flex gap-1 justify-center" @click="copy"
+                <Button variant="ghost" class="border-0 pr-[11px] flex gap-1 justify-center" @click="copy"
                     title="Copy">
                     <Icon alt="" :icon=CopyIcon />
                     <span>Copy</span>
@@ -60,7 +60,7 @@ const tbref = useTemplateRef('tbref')
             <Button @click="text = cases.uppercase(text)">UPPERCASE</Button>
             <Button @click="text = cases.swappingcase(text)">swappingCASE</Button>
             <Button @click="text = cases.randomcase(text)">rANdOmcAse</Button>
-            <Button @click="copy" class="p-button-icon flex gap-1 sm:block justify-center" title="Copy">
+            <Button @click="copy" class="flex gap-1 sm:block justify-center" title="Copy">
                 <Icon alt="" :icon=CopyIcon />
                 <span class="sm:hidden">Copy</span>
             </Button>
@@ -87,19 +87,3 @@ const tbref = useTemplateRef('tbref')
         </template>
     </Feature>
 </template>
-<style lang="css" scoped>
-@reference '../app.css';
-
-.cases {
-    grid-template-rows: repeat(5, minmax(0, 1fr));
-
-    @variant sm {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
-    }
-}
-
-
-/* textarea {
-    @apply w-full sm:w-[50vw];
-} */
-</style>
