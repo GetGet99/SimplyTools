@@ -12,7 +12,7 @@
         </OurLink>
     </Control>
     <Control v-if="snippetKey.startsWith('local.')" :class>
-        <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/edit?id=${snippetKey}`">
+        <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/${snippetKey}/edit`">
             <Icon alt="" :icon=Edit />
             Edit
         </OurLink>

@@ -1,5 +1,4 @@
 <template>
-    <TitleBar/>
     <Grid :columns="2" :rows="2" class="gap-4 h-screen overflow-hidden p-2">
         <!-- Template Editor -->
         <Flex column class="gap-2 row-span-2">
@@ -13,7 +12,7 @@
                 <label class="font-bold">Test Input (won't be saved)</label>
                 <Grow />
                 <Control>
-                    <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/?view=${id}`">
+                    <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/${id}`">
                         <Icon alt="" :icon=View />
                         View in Main App
                     </OurLink>
@@ -32,13 +31,12 @@
 
 <script setup lang="ts">
 import { Apps } from '~/utils/pages/app';
-usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
 import View from '@fluentui/svg-icons/icons/eye_24_regular.svg?raw'
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
 import { extractYamlComment, type Metadata } from "~/utils/snippets/metadata";
 import type { Uri } from "monaco-editor";
-import { getMetadataExample, useLocalSnippetRef } from "~/utils/snippets/manager";
+import { getMetadata, getMetadataExample, useLocalSnippetRef } from "~/utils/snippets/manager";
 // --------------------
 // Refs
 // --------------------
@@ -52,15 +50,36 @@ let code: Ref<string>;
 const input = ref(``);
 const output = ref("");
 const outputLang = ref("plaintext");
+let isMounted = true
 
+
+const url = useRoute()
+const view = computed(() => url.params.view as string)
+onUnmounted(() => {
+    isMounted = false
+})
+const item = Apps.pages.find(x => x.path === 'snippets')!
+usePageInfo(item)
+getMetadata(view.value).then(x => {
+    if (!isMounted) return
+    usePageInfo({
+        ...item,
+        breadcrumb: [
+            {
+                type: 'link',
+                href: `/snippets/${view.value}`,
+                text: x.name
+            }
+        ]
+    })
+})
 // Client Only Area
-const id = useRequestURL().searchParams.get('id')
 if (import.meta.client) {
-    if (id === null) {
+    if (view.value === null) {
         throw createError({ status: 404, statusText: 'Snippet not found' })
     }
-    code = useLocalSnippetRef(id)
-    input.value = await getMetadataExample(id)
+    code = useLocalSnippetRef(view.value)
+    input.value = await getMetadataExample(view.value)
 } else {
     code = ref('')
 }

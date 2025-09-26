@@ -19,19 +19,35 @@ const pageInfo = computed(() => {
     } else {
         let toolName = currentPage.value.inPageTitle ?? currentPage.value.title
         let appName
-        let breadcrumb
+        let breadcrumb: TitleBarBreadcrumbItem[]
         let isApp = false
         if (currentPage.value.parent === Apps) {
-            appName = (currentPage.value as AppPage).appName
-            breadcrumb = [appName, toolName] as [string, string | Ref<string>]
+            const appPage = currentPage.value as AppPage
+            appName = appPage.appName
+            breadcrumb = [{
+                type: 'link',
+                text: appName,
+                href: `/${appPage.path}`
+            }, ...(currentPage.value.breadcrumb ?? [])]
             isApp = true
         }
         else if (currentPage.value.parent !== Uncategorized) {
             appName = currentPage.value.parent.name
-            breadcrumb = [currentPage.value.parent.shortName, toolName] as [string, string | Ref<string>]
+            breadcrumb = [{
+                type: 'text',
+                text: currentPage.value.parent.shortName
+            }, {
+                type: 'link',
+                text: toolName,
+                href: `${currentPage.value.parent.path}/${currentPage.value.path}`
+            }, ...(currentPage.value.breadcrumb ?? [])]
         } else {
             appName = 'SimplyTools'
-            breadcrumb = [toolName]
+            breadcrumb = [{
+                type: 'link',
+                text: toolName,
+                href: `${currentPage.value.parent.path}/${currentPage.value.path}`
+            }, ...(currentPage.value.breadcrumb ?? [])]
         }
         return {
             breadcrumb,
@@ -53,21 +69,22 @@ export function useCurrentPage() {
     return currentPage
 }
 export function usePageInfo(page?: PageInfo) {
-    // let currentPage
-    // if (page) {
-    //     currentPage = shallowRef(page)
-    //     provide('metadata.page', currentPage)
-    // } else {
-    //     currentPage = inject<ShallowRef<Page> | undefined>('metadata.page', undefined)
-    //     if (currentPage === undefined) {
-    //         currentPage = ref(undefined)
-    //     }
-    // }
-    // const currentPage = currentPage
     if (page) {
         currentPage.value = page
     }
     return pageInfo
+}
+
+export type TitleBarBreadcrumbItem = {
+    type: 'link'
+    href: string
+    text: string | Ref<string>
+} | {
+    type: 'text'
+    text: string | Ref<string>
+} | {
+    type: 'textbox'
+    text: Ref<string>
 }
 // Old implementation
 // export function usePageInfo() {

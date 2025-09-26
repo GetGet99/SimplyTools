@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { createNewNote, getNotes, getNoteTitle } from '~/utils/notes/manager';
 import { Apps } from '~/utils/pages/app';
-import { getLocalSnippets } from '~/utils/snippets/manager';
 usePageInfo(Apps.pages.find(x => x.path === 'notes'))
 </script>
 <template>

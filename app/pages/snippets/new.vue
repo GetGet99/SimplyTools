@@ -5,7 +5,7 @@ import { createNewSnippet } from '~/utils/snippets/manager';
 if (import.meta.client) {
 
     const remix = useRequestURL().searchParams.get('remix') ?? 'builtin.examples.item'
-    navigateTo(`/snippets/edit?id=${encodeURIComponent(await createNewSnippet(remix))}`, { replace: true })
+    navigateTo(`/snippets/${encodeURIComponent(await createNewSnippet(remix))}/edit`, { replace: true })
 }
 </script>
 <template>

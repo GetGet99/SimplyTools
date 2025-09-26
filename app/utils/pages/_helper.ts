@@ -1,4 +1,4 @@
-export type PageInfo = Page | (Omit<Page, 'title'> & { title: Ref<string> })
+export type PageInfo = Omit<Page, 'title'> & { title: string | Ref<string>, breadcrumb?: TitleBarBreadcrumbItem[] }
 export type Page = PageWithoutParent & { parent: Category }
 export type PageWithoutParent = {
     path: string

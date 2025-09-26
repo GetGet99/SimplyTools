@@ -3,6 +3,7 @@ import Home from '@fluentui/svg-icons/icons/home_24_regular.svg?raw'
 import ChevronRight from '@fluentui/svg-icons/icons/chevron_right_24_regular.svg?raw'
 import SettingsIcon from '@fluentui/svg-icons/icons/settings_24_regular.svg?raw'
 import { Categories } from '~/utils/pages/info'
+import { Apps } from '~/utils/pages/app'
 const tool = usePageInfo()
 </script>
 <template>
@@ -11,24 +12,39 @@ const tool = usePageInfo()
         <Flex class="titlebar fixed top-0 left-0 right-0 h-titlebar-height">
             <div style="width: var(--app-titlebar-reserved-area-left, 0px);" v-titlebar-draggable></div>
             <Flex class="gap-1 items-center backdrop-blur-lg rounded-br-md pr-2">
-                <Control class="p-button-icon py-[3px] bg-transparent border-transparent flex gap-2 rounded-0">
+                <Control variant="ghost" class="px-2 py-0 h-full flex gap-1 items-center rounded-0 border-transparent">
                     <OurLink class="manual" tabindex="0" href="/">
                         <Icon :icon=Home alt="Home" />
                         SimplyTools
                     </OurLink>
                 </Control>
-                <template v-if="tool.breadcrumb.length >= 2 && tool.toolName">
+                <template v-for="(breadcrumbItem, index) in tool.breadcrumb" :key="index">
                     <Icon :icon=ChevronRight alt="to" />
-                    <OurLink class="manual p-2 pointer-events-none" :href="`/${tool.catPath}`">
+                    <Control variant="ghost" v-if="breadcrumbItem.type === 'link'" class="px-2 py-0 h-full flex items-center rounded-0 border-transparent">
+                        <OurLink class="manual" :href="breadcrumbItem.href">
+                            {{ breadcrumbItem.text }}
+                        </OurLink>
+                    </Control>
+                    <div v-else-if="breadcrumbItem.type === 'text'" class="p-2">
+                        {{ breadcrumbItem.text }}
+                    </div>
+                    <TextBox v-else-if="breadcrumbItem.type === 'textbox'" v-model="breadcrumbItem.text.value"
+                        class="mx-1 px-1 py-0 flex items-center" />
+
+                </template>
+                <!-- <template v-if="tool.breadcrumb.length >= 2 && tool.toolName">
+                    <Icon :icon=ChevronRight alt="to" />
+                    <OurLink class="manual p-2" :class="tool.category === Apps ? undefined : 'pointer-events-none'"
+                        :href="tool.category === Apps ? `${tool.catPath}/${tool.toolPath}` : `${tool.catPath}`">
                         {{ tool.breadcrumb[0] }}
                     </OurLink>
                 </template>
                 <template v-if="tool.breadcrumb.length >= 1">
                     <Icon :icon=ChevronRight alt="to" />
-                    <OurLink class="manual p-2 pointer-events-none" :href="`/${tool.toolPath}`">
+                    <OurLink class="manual p-2" :href="`${tool.catPath}/${tool.toolPath}`">
                         {{ tool.breadcrumb[tool.breadcrumb.length - 1]! }}
                     </OurLink>
-                </template>
+                </template> -->
             </Flex>
             <div class="grow h-full" v-titlebar-draggable></div>
             <Flex class="backdrop-blur-lg rounded-bl-md"> <!--pl-2-->

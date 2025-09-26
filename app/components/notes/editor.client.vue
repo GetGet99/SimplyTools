@@ -34,23 +34,23 @@ onMounted(async () => {
                 }
             }
         },
-        widgetRules: [
-            {
-                rule: /__(\S+)__/,
-                toDOM(text) {
-                    const rule = /__(\S+)__/;
-                    const matched = text.match(rule)!;
-                    const u = document.createElement('u');
-                    u.innerHTML = `<u>${matched[1]}</u>`;
-                    return u;
-                },
-            },
-        ],
-        plugins: [
-            () => ({
+        // widgetRules: [
+        //     {
+        //         rule: /__(\S+)__/,
+        //         toDOM(text) {
+        //             const rule = /__(\S+)__/;
+        //             const matched = text.match(rule)!;
+        //             const u = document.createElement('u');
+        //             u.innerHTML = `<u>${matched[1]}</u>`;
+        //             return u;
+        //         },
+        //     },
+        // ],
+        // plugins: [
+        //     (pc : typeof EditorOptions.plugins) => ({
                 
-            })
-        ]
+        //     })
+        // ]
     });
     underline(editor)
 })
@@ -65,7 +65,7 @@ function underline(editor: Editor) {
         editor.setSelection(sel[0])
         editor.replaceSelection(`STARTUNDERLINE${uuid}`)
         let md = editor.getHTML()
-        md = md.replaceAll(`STARTUNDERLINE${uuid}`, `<span style="text-decoration: underline">`).replaceAll(`ENDUNDERLINE${uuid}`, `</span>`)
+        md = md.replaceAll(`STARTUNDERLINE${uuid}`, `<u>`).replaceAll(`ENDUNDERLINE${uuid}`, `</u>`)
         editor.setHTML(md)
         return true;
     });

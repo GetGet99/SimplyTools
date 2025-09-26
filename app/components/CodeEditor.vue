@@ -12,7 +12,8 @@
 </template>
 <script setup lang="ts">
 import type { editor as e } from 'monaco-editor';
-function disableContrlP(el: HTMLElement) {
+function disableContrlP(el: HTMLElement | null) {
+    if (!el) return
     el.addEventListener('keypress', function (event) {
         //@ts-ignore
         if (event.keyCode === 80 && (event.ctrlKey || event.metaKey) && !event.altKey && (!event.shiftKey || window.chrome || window.opera)) {

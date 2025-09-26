@@ -1,12 +1,12 @@
 <script setup lang="ts">
-    import Delete from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
-    import { deleteSnippet, getMetadata, getSnippet } from '~/utils/snippets/manager';
-    const props = defineProps<{ snippetKey: string }>()
-    const meta = await getMetadata(props.snippetKey)
-    const isDeleted = ref(false)
+import Delete from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
+import { deleteSnippet, getMetadata, getSnippet } from '~/utils/snippets/manager';
+const props = defineProps<{ snippetKey: string }>()
+const meta = await getMetadata(props.snippetKey)
+const isDeleted = ref(false)
 </script>
 <template>
-    <OurLink :href='`/snippets?view=${snippetKey}`'
+    <OurLink :href='`/snippets/${snippetKey}`'
         class="manual group p-4 border control-border-control active:control-border-control-pressed bg-card rounded-2"
         :class="isDeleted ? 'hidden' : ''">
         <Grid rows="auto grow auto" class="gap-3 h-full">

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Apps, type AppPage } from '~/utils/pages/app';
 import { Categories } from '~/utils/pages/info';
 useHead({
     title: 'SimplyTools'
@@ -22,10 +23,15 @@ setPageInfo()
         <Flex column>
             <Grid as="main" :columns="1" :md-columns="2" :lg-columns="3" class="mx-2 sm:mx-30 my-2 gap-4">
                 <template v-for="cat in Categories">
-                    <FeatureCard v-for="page in cat.pages" :title="page.title" :href="`${cat.path}/${page.path}`">
+                    <FeatureCard v-if="cat !== Apps" v-for="page in cat.pages" :title="page.title"
+                        :href="`${cat.path}/${page.path}`">
                         <span v-html="page.desc"></span>
                     </FeatureCard>
                 </template>
+                <FeatureCard v-for="page in Apps.pages" :title="(page as AppPage).appName"
+                    :href="`${Apps.path}/${page.path}`">
+                    <span v-html="page.desc"></span>
+                </FeatureCard>
             </Grid>
         </Flex>
         <Footer />
