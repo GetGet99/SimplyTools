@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ placeholder?: string, multiline?: boolean, readonly?: boolean, validate?: (x: string) => boolean, pastePreprocessor?: (x: string) => string }>()
+const props = defineProps<{ placeholder?: string, multiline?: boolean, readonly?: boolean, validate?: (x: string) => boolean, rawPastePreprocessor?: (x: ClipboardEvent) => void, pastePreprocessor?: (x: string) => string }>()
 const inputRef = useTemplateRef('tb')
 const model = defineModel<string>()
 function update() {
@@ -18,10 +18,10 @@ function update() {
 function focus() {
     inputRef.value?.focus()
 }
-function getSelectionText() : string {
+function getSelectionText(): string {
     return inputRef.value?.value.substring(inputRef.value.selectionStart ?? 0, inputRef.value.selectionEnd ?? 0) ?? ''
 }
-function setSelectionText(value : string) {
+function setSelectionText(value: string) {
     const input = inputRef.value
     if (!input) return
     const { selectionStart, selectionEnd, value: currentValue } = input
@@ -31,6 +31,11 @@ function setSelectionText(value : string) {
     input.setSelectionRange(pos, pos)
 }
 function pasteHandler(e: ClipboardEvent) {
+    if (props.rawPastePreprocessor) {
+        props.rawPastePreprocessor(e)
+        if (e.defaultPrevented)
+            return
+    }
     if (props.pastePreprocessor) {
         e.preventDefault();
 
@@ -62,8 +67,8 @@ defineExpose({ focus, getSelectionText, setSelectionText })
 <template>
     <input v-if="!multiline" ref="tb" type="text" :value="model" @input="update" :placeholder autocomplete="off"
         :readonly @paste="pasteHandler" class="style-textbox" />
-    <textarea v-else ref="tb" :value="model" :placeholder autocomplete="nope" :readonly class="no-toolbox-h-60 style-textbox"
-        @input="update" @paste="pasteHandler"></textarea>
+    <textarea v-else ref="tb" :value="model" :placeholder autocomplete="nope" :readonly
+        class="no-toolbox-h-60 style-textbox" @input="update" @paste="pasteHandler"></textarea>
 </template>
 <style lang="css">
 .no-toolbox-h-60:not(.style-textbox-group > .no-toolbox-h-60) {

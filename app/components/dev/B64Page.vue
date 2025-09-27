@@ -88,6 +88,9 @@ const w = window
                     </Button>
                 </template>
             </TextBoxTools>
+            <!-- <BinaryInput placeholder="Test" :model-value="{ editingType: 'utf8', value: '' }">
+
+            </BinaryInput> -->
 
             <!-- <Flex class="items-center justify-center">
                 <Button class="w-fit p-button-icon" @click="mode = mode === 'atob' ? 'btoa' : 'atob'"
@@ -108,7 +111,7 @@ const w = window
                     </Button>
                 </Flex>
             </Grid> -->
-            
+
             <TextBoxTools toolbar-position="right">
                 <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="resize-none" multiline />
