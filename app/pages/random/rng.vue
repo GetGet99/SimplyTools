@@ -2,7 +2,7 @@
 import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
 import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
 import { RandomCategory } from '~/utils/pages/random'
-usePageInfo(RandomCategory.pages.find(x => x.path === 'rng-multi'))
+usePageInfo(RandomCategory.pages.find(x => x.path === 'rng'))
 const mode = ref<'integer' | 'real'>('integer')
 const valFrom = ref<number | undefined>(1)
 const valTo = ref<number | undefined>(10)
@@ -63,9 +63,9 @@ const displayRef = useTemplateRef('display')
 <template>
     <Feature category="none" tool="RNG" class="flex justify-center">
         <div class="p-5 bg-control-primary rounded-lg">
-            <Grid columns="auto 200px" class="gap-2">
+            <Grid columns="auto" md-columns="auto 200px" class="gap-2">
                 <!-- NavigationTabs -->
-                <NavigationTabs v-model="mode" :options="['integer', 'real']" class="col-span-2" />
+                <NavigationTabs v-model="mode" :options="['integer', 'real']" class="md:col-span-2" />
                 <Grid columns="200px auto" class="gap-2 items-center h-min">
                     <span>From:</span>
                     <NumberBox ref="from" :mode v-model="valFrom" class="grow w-20 ml-auto"
