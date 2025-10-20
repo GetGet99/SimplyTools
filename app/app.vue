@@ -19,7 +19,7 @@ useHead({
             <GlobalNavigationView />
         </div>
         <SkipLink to="selected-navigation-item" />
-        <div class="w-full h-full bg-control-primary rounded-tl-lg not-lg:col-span-2">
+        <div class="w-full h-full bg-control-primary lg:rounded-tl-lg not-lg:col-span-2">
             <ToastProvider :duration="7500">
                 <ToastsGenerator>
                     <main id="main" class="w-full h-full overflow-scroll rounded-tl-lg">
