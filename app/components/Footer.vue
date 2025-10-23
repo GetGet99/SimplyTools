@@ -1,7 +1,7 @@
 <template>
     <footer class="flex flex-col gap-1 my-4 text-center items-center justify-center">
         <p>Copyright © {{ new Date(Date.now()).getFullYear() }} SimplyTools</p>
-        <p>Open sourced on <a href="https://github.com/GetGet99/SimplyTools">GitHub</a>.
+        <p>Open sourced on <OurLink href="https://github.com/GetGet99/SimplyTools">GitHub</OurLink>.
             Licensed under GPL-2.0-or-later.
         </p>
         <p class="app:hidden">
