@@ -3,9 +3,10 @@ import { Categories } from '~/utils/pages/info';
 const curPage = useCurrentPage()
 import ChevronUp from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
 import { Apps } from '~/utils/pages/app';
+import { isMobileNavVisible } from '~/utils/navigation/mobile';
 </script>
 <template>
-    <nav class="fixed h-mainarea-height w-80 pr-2">
+    <nav class="global-nav-view fixed h-mainarea-height w-80 pr-2 min-h-full" :data-mobile-nav-visible="isMobileNavVisible">
         <ul>
             <template v-for="category in Categories" :key="category.name">
                 <template v-if="!category.shortName && category !== Apps">
@@ -46,11 +47,24 @@ import { Apps } from '~/utils/pages/app';
     </nav>
 </template>
 <style lang="css">
+@reference "~/app.css";
 details.no-marker>summary {
     list-style: none;
 }
 
 details.no-marker>summary::-webkit-details-marker {
     display: none;
+}
+.global-nav-view {
+    @apply transition-transform duration-500 overflow-y-auto;
+    @variant not-lg {
+        @apply bg-solid-primary -translate-x-full mt-titlebar-height top-0 bottom-0;
+        @variant data-[mobile-nav-visible=true] {
+            @apply translate-x-0;
+        }
+        @variant not-data-[mobile-nav-visible=true] {
+            @apply pointer-events-none;
+        }
+    }
 }
 </style>

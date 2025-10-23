@@ -21,7 +21,7 @@ setPageInfo()
             </noscript>
         </div>
         <Flex column>
-            <Grid as="main" :columns="1" :md-columns="2" :xl-columns="3" class="mx-2 md:mx-30 my-2 gap-4">
+            <Grid as="main" :columns="1" :md-columns="2" :xl-columns="3" class="mx-4 md:mx-30 my-2 gap-4">
                 <template v-for="cat in Categories">
                     <FeatureCard v-if="cat !== Apps" v-for="page in cat.pages" :title="page.title"
                         :href="`${cat.path}/${page.path}`">

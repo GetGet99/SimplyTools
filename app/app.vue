@@ -15,7 +15,7 @@ useHead({
         <div class="col-span-2">
             <TitleBar />
         </div>
-        <div class="w-80 not-lg:hidden">
+        <div class="w-80 not-lg:contents">
             <GlobalNavigationView />
         </div>
         <SkipLink to="selected-navigation-item" />

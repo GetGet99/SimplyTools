@@ -2,8 +2,8 @@
 import Home from '@fluentui/svg-icons/icons/home_24_regular.svg?raw'
 import ChevronRight from '@fluentui/svg-icons/icons/chevron_right_24_regular.svg?raw'
 import SettingsIcon from '@fluentui/svg-icons/icons/settings_24_regular.svg?raw'
-import { Categories } from '~/utils/pages/info'
-import { Apps } from '~/utils/pages/app'
+import NavigationIcon from '@fluentui/svg-icons/icons/navigation_24_regular.svg?raw'
+import { isMobileNavVisible } from '~/utils/navigation/mobile'
 const tool = usePageInfo()
 </script>
 <template>
@@ -12,9 +12,12 @@ const tool = usePageInfo()
         <Flex class="titlebar fixed top-0 left-0 right-0 h-titlebar-height">
             <div style="width: var(--app-titlebar-reserved-area-left, 0px);" v-titlebar-draggable></div>
             <Flex class="gap-1 items-center backdrop-blur-lg rounded-br-md pr-2">
+                <Button @click="isMobileNavVisible = !isMobileNavVisible" variant="ghost" class="px-2 py-0 h-full flex gap-1 items-center rounded-0 border-transparent lg:hidden">
+                    <Icon :icon=NavigationIcon alt="Toggle navigation sidebar" />
+                </Button>
                 <Control variant="ghost" class="px-2 py-0 h-full flex gap-1 items-center rounded-0 border-transparent">
                     <OurLink class="manual" tabindex="0" href="/">
-                        <Icon :icon=Home alt="Home" />
+                        <Icon :icon=Home alt="Home" class="not-lg:hidden" />
                         SimplyTools
                     </OurLink>
                 </Control>
