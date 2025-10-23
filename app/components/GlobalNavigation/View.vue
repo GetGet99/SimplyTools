@@ -58,7 +58,7 @@ details.no-marker>summary::-webkit-details-marker {
 .global-nav-view {
     @apply transition-transform duration-500 overflow-y-auto;
     @variant not-lg {
-        @apply bg-solid-primary -translate-x-full mt-titlebar-height top-0 bottom-0;
+        @apply bg-solid-primary -translate-x-full mt-titlebar-height top-0 bottom-0 z-100;
         @variant data-[mobile-nav-visible=true] {
             @apply translate-x-0;
         }
