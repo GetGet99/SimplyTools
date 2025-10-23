@@ -5,7 +5,10 @@ useHead({
             'color-scheme': 'dark light',
             'overflow': 'hidden'
         }
-    }
+    },
+    link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
 })
 </script>
 <template>
