@@ -18,8 +18,9 @@ const { accepted } = useAIPolicyStatus()
 
 let session: LanguageModel | null = null
 
-function detectBrowser(): 'edge' | 'chrome' | 'other' {
+function detectBrowser(): 'app' | 'edge' | 'chrome' | 'other' {
     const ua = navigator.userAgent.toLowerCase()
+    if (ua.includes('simplytools/')) return 'app'
     if (ua.includes('edg/')) return 'edge'
     if (ua.includes('chrome/')) return 'chrome'
     return 'other'
@@ -28,8 +29,15 @@ function detectBrowser(): 'edge' | 'chrome' | 'other' {
 onMounted(async () => {
     if (!('LanguageModel' in self)) {
         supported.value = false
-        availabilityStatus.value =
-            'Your browser does not support the Prompt API. Please use Chrome 138+ or Edge 138+.';
+        const browser = detectBrowser();
+        if (browser === 'app') {
+            availabilityStatus.value = 'Prompt API is not currently available in the Simply Tools app. Please use Chrome 138+ or Edge 138+.';
+        } else if (browser === 'edge') {
+            availabilityStatus.value =
+                'Prompt API is available in Microsoft Edge 138+, but it must be manually enabled in edge://flags.';
+        } else {
+            availabilityStatus.value = 'Your browser does not support the Prompt API. Please use Chrome 138+ or Edge 138+.';
+        }
         return;
     }
 
@@ -38,11 +46,10 @@ onMounted(async () => {
 
     if (availabilityStatus.value === 'unavailable') {
         const browser = detectBrowser();
-        if (browser === 'edge') {
-            availabilityStatus.value =
-                'Prompt API is available in Microsoft Edge 138+, but it must be manually enabled in edge://flags.';
+        if (browser === 'app') {
+            availabilityStatus.value = 'Prompt API is not currently available in the Simply Tools app. Please use Chrome 138+ or Edge 138+.';
         } else {
-            availabilityStatus.value = 'Prompt API is currently unavailable in this browser.';
+            availabilityStatus.value = 'Prompt API is not available in your browser.';
         }
     }
 });
@@ -55,8 +62,8 @@ async function sendMessage() {
         });
         return;
     }
-
-    if (!supported.value || availabilityStatus.value === 'unavailable') {
+    // only unavailable has space in it because we post process the message
+    if (!supported.value || availabilityStatus.value.includes(' ')) {
         messages.value.push({
             role: 'assistant',
             content: 'Prompt API not available in your environment.',
@@ -83,7 +90,7 @@ async function sendMessage() {
     try {
         if (!session) {
             assistantMessage.content = 'Initializing chat... please be patient'
-            let progressRef : undefined | Ref<number> = undefined
+            let progressRef: undefined | Ref<number> = undefined
             session = (await LanguageModel.create({
                 initialPrompts: [
                     { role: 'system', content: systemPrompt.value }
@@ -127,7 +134,8 @@ function clearChat() {
 <template>
     <Feature category="AI" tool="Chat" class="flex justify-center">
         <Flex column class="w-full md:w-[70vw] gap-6">
-            <div v-if="availabilityStatus !== 'available' && availabilityStatus !== 'downloadable'" class="w-full p-3 font-bold rounded-md text-sm">
+            <div v-if="availabilityStatus !== 'available' && availabilityStatus !== 'downloadable'"
+                class="w-full p-3 font-bold rounded-md text-sm">
                 {{ availabilityStatus }}
             </div>
 
