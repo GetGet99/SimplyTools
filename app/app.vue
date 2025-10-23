@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import simplyToolsIcon from '~/assets/SimplyToolsIcon.png';
 useHead({
     bodyAttrs: {
         style: {
@@ -7,7 +8,7 @@ useHead({
         }
     },
     link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/png', href: simplyToolsIcon }
     ]
 })
 </script>
