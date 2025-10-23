@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Apps, type AppPage } from '~/utils/pages/app';
 import { Categories } from '~/utils/pages/info';
+import simplyToolsIcon from '~/assets/SimplyToolsIcon.png';
 useHead({
     title: 'SimplyTools'
 })
@@ -9,8 +10,9 @@ setPageInfo()
 
 <template>
     <Grid rows="auto grow auto" class="w-full min-h-screen gap-2">
-        <h1 class="p-5 text-center app:hidden">
-            SimplyTools
+        <h1 class="pt-5 pb-3 text-center app:hidden flex gap-0.5 justify-center items-center">
+            <img :src="simplyToolsIcon" alt="" class="w-15 h-15" />
+            <span style="line-height: 1em;" class="-translate-y-0.5">SimplyTools</span>
         </h1>
         <div class="app:hidden">
             <h2 class="h5 text-center">Free tools locally run in your browser!</h2>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { AICategory } from '~/utils/pages/ai';
+import simplyToolsIcon from '~/assets/SimplyToolsIcon.png';
 const props = defineProps<{ class?: string, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
@@ -8,7 +9,10 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
     <Grid class="feature-root min-h-full xl:data-[limit-screen='xl']:h-full data-[limit-screen='all']:h-full"
         :data-limit-screen=limitScreen>
         <Flex column class="app:hidden gap-4">
-            <h1 class="text-center pt-4">{{ tool.appName }} - {{ tool.toolName }}</h1>
+            <h1 class="pt-4 -mb-1 text-center app:hidden flex gap-0.5 justify-center items-center">
+                <img :src="simplyToolsIcon" alt="" class="w-15 h-15" />
+                <span style="line-height: 1em;" class="-translate-y-0.5">{{ tool.appName }} - {{ tool.toolName }}</span>
+            </h1>
             <noscript class="text-danger text-center">JavaScript is required for many of our tools. Without them,
                 they
                 are
