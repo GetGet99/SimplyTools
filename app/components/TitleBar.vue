@@ -19,7 +19,7 @@ const tool = usePageInfo()
                 <Button @click="isMobileNavVisible = !isMobileNavVisible" variant="ghost" class="app:-ml-1 px-0 py-0 h-full flex gap-1 items-center rounded-0 border-transparent lg:hidden w-8 justify-center">
                     <Icon :icon=NavigationIcon alt="Toggle navigation sidebar" class="scale-[87.5%]" />
                 </Button>
-                <Control variant="ghost" class="not-app:-ml-1 app:not-lg:-ml-1 px-2 py-0 h-full flex gap-1 items-center rounded-0 border-transparent">
+                <Control variant="ghost" class="not-app:-ml-1 app:not-lg:-ml-1 px-2 app:pl-1 py-0 h-full flex gap-1 items-center rounded-0 border-transparent">
                     <OurLink class="manual flex gap-1 not-lg:pl-1" tabindex="0" href="/">
                         <Icon :icon=Home alt="Home" class="scale-[87.5%] not-lg:hidden app:hidden" />
                         <img :src="simplyToolsIcon" alt="" class="w-5.25 h-5.25 not-app:hidden not-lg:hidden" />
