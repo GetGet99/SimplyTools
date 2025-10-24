@@ -56,7 +56,7 @@ details.no-marker>summary::-webkit-details-marker {
     display: none;
 }
 .global-nav-view {
-    @apply transition-transform duration-500 overflow-y-auto;
+    @apply transition-transform duration-500 overflow-y-auto ease-theme;
     @variant not-lg {
         @apply bg-solid-primary -translate-x-full mt-titlebar-height top-0 bottom-0 z-100;
         @variant data-[mobile-nav-visible=true] {

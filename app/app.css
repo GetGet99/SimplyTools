@@ -64,6 +64,7 @@
     --background-color-control-tertiary-dark: #FFFFFF08;
     --background-color-smoke: #0000004D;
     --border-color-surface: #66757575;
+    --ease-theme: cubic-bezier(0.41, 0.52, 0, 0.94);
 }
 
 body:not(.app) {
