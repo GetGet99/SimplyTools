@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import simplyToolsIcon from '~/assets/SimplyToolsIcon.png';
+import simplyToolsIconFit from '~/assets/SimplyToolsIcon_fit.png';
 useHead({
     bodyAttrs: {
         style: {
@@ -8,7 +8,7 @@ useHead({
         }
     },
     link: [
-        { rel: 'icon', type: 'image/png', href: simplyToolsIcon }
+        { rel: 'icon', type: 'image/png', href: simplyToolsIconFit }
     ]
 })
 </script>
