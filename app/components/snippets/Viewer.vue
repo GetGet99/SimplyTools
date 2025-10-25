@@ -50,7 +50,7 @@
     import * as YAML from "yaml";
     import { Liquid } from "liquidjs";
     import { type Metadata } from "~/utils/snippets/metadata";
-    import { getMetadata, getMetadataSchema, getSnippet, useSavedInput } from "~/utils/snippets/manager";
+    import { getMetadataAsync, getMetadataSchemaAsync, getSnippetAsync, useSavedInput } from "~/utils/snippets/manager";
 
     const props = defineProps<{ snippetKey: string, class?: string }>()
 
@@ -71,9 +71,9 @@
     // Watch
     watch(() => props.snippetKey, async () => {
         if (!import.meta.client) return
-        const snippet = await getSnippet(props.snippetKey)
-        const metaNewRaw = await getMetadataSchema(props.snippetKey)
-        const metaNew = await getMetadata(props.snippetKey)
+        const snippet = await getSnippetAsync(props.snippetKey)
+        const metaNewRaw = await getMetadataSchemaAsync(props.snippetKey)
+        const metaNew = await getMetadataAsync(props.snippetKey)
         snippetCode.value = snippet
         outputLang.value = metaNew.lang
         meta.value = metaNew

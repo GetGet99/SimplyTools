@@ -102,49 +102,58 @@ const KeyValueStorage = {
     isAvaliableAsNativeAPI() {
         return Features.isAvaliable('storage.keyval')
     },
-    async getValueAsStringAsync(key: string): Promise<string | null> {
-        if (await this.isAvaliableAsNativeAPI()) {
-            const output = await nativeCallAsync<string>("storage.keyval.get", { key });
-            if (output === null) {
-                // part of migration: use item from local storage
-                return localStorage.getItem(key);
-            } else {
-                return output;
-            }
-        }
-        else
-            return localStorage.getItem(key);
+    async getStringAsync(key: string): Promise<string | null> {
+        // if (await this.isAvaliableAsNativeAPI()) {
+        //     const output = await nativeCallAsync<string>("storage.keyval.get", { key });
+        //     if (output === null) {
+        //         // part of migration: use item from local storage
+        //         return localStorage.getItem(key);
+        //     } else {
+        //         return output;
+        //     }
+        // }
+        // else
+        return localStorage.getItem(key);
     },
-    async storeValueAsStringAsync(key: string, value: string): Promise<void> {
-        if (await this.isAvaliableAsNativeAPI()) {
-            // part of migration: remove item from local storage
-            localStorage.removeItem(key);
-            return await nativeCallAsync<void>("storage.keyval.store", { key, value });
-        }
-        else
-            localStorage.setItem(key, value);
+    async setStringAsync(key: string, value: string): Promise<void> {
+        // if (await this.isAvaliableAsNativeAPI()) {
+        //     // part of migration: remove item from local storage
+        //     localStorage.removeItem(key);
+        //     return await nativeCallAsync<void>("storage.keyval.store", { key, value });
+        // }
+        // else
+        localStorage.setItem(key, value);
     },
-    async getValueAsync<T>(key: string): Promise<T | null> {
-        if (await this.isAvaliableAsNativeAPI()) {
-            const output = await nativeCallAsync<T>("storage.keyval.get", { key });
-            if (output === null) {
-                // part of migration: use item from local storage
-                return JSON.parse(localStorage.getItem(key) ?? 'null') as T | null;
-            } else {
-                return output;
-            }
-        }
-        else
-            return JSON.parse(localStorage.getItem(key) ?? 'null') as T | null;
+    async getAsync<T>(key: string): Promise<T | null> {
+        // if (await this.isAvaliableAsNativeAPI()) {
+        //     const output = await nativeCallAsync<T>("storage.keyval.get", { key });
+        //     if (output === null) {
+        //         // part of migration: use item from local storage
+        //         return JSON.parse(localStorage.getItem(key) ?? 'null') as T | null;
+        //     } else {
+        //         return output;
+        //     }
+        // }
+        // else
+        return JSON.parse(localStorage.getItem(key) ?? 'null') as T | null;
     },
-    async storeValueAsync<T>(key: string, value: T): Promise<void> {
-        if (await this.isAvaliableAsNativeAPI()) {
-            // part of migration: remove item from local storage
-            localStorage.removeItem(key);
-            return nativeCallAsync<void>("storage.keyval.store", { key, value });
-        }
-        else
-            localStorage.setItem(key, JSON.stringify(value));
+    async setAsync<T>(key: string, value: T): Promise<void> {
+        // if (await this.isAvaliableAsNativeAPI()) {
+        //     // part of migration: remove item from local storage
+        //     localStorage.removeItem(key);
+        //     return nativeCallAsync<void>("storage.keyval.store", { key, value });
+        // }
+        // else
+        localStorage.setItem(key, JSON.stringify(value));
+    },
+    async removeAsync(key: string): Promise<void> {
+        // if (await this.isAvaliableAsNativeAPI()) {
+        //     // part of migration: remove item from local storage
+        //     localStorage.removeItem(key);
+        //     return nativeCallAsync<void>("storage.keyval.store", { key, value: null });
+        // }
+        // else
+        localStorage.removeItem(key);
     }
 } as const
 export const Native = {

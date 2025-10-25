@@ -24,7 +24,7 @@ const type = ref<SummaryType>('key-points')
 const format = ref<SummaryFormat>('plain-text')
 const length = ref<SummaryLength>('short')
 
-const accepted = useAIPolicyStatus()
+const accepted = await useAIPolicyStatusAsync()
 
 let summarizer: Summarizer | null = null
 
@@ -56,7 +56,7 @@ onMounted(async () => {
         }
     }
 })
-const { accepted: agreementAccepted } = useAIPolicyStatus()
+const { accepted: agreementAccepted } = await useAIPolicyStatusAsync()
 async function generateSummary() {
 
     if (!agreementAccepted.value) {

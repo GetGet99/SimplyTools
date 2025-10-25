@@ -14,7 +14,7 @@ const availabilityStatus = ref<string>('')
 const systemPrompt = ref(
     "You are a helpful assistant that provides clear and concise answers. Be polite, informative, and concise. Ask clarifying questions if necessary."
 )
-const { accepted } = useAIPolicyStatus()
+const { accepted } = await useAIPolicyStatusAsync()
 
 let session: LanguageModel | null = null
 

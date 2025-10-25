@@ -1,43 +1,43 @@
 import * as YAML from 'yaml'
 import type { UUID } from '../types'
 export type NoteFileName = `${UUID}.toast-md`
-export function getNotes(): NoteFileName[] {
+export async function getNotesAsync(): Promise<NoteFileName[]> {
     if (!import.meta.client) {
         return []
     }
-    return localStorage.getItem('/notes/items')?.split(',') as NoteFileName[] ?? []
+    return (await Native.KeyValueStorage.getStringAsync('/notes/items'))?.split(',') as NoteFileName[] ?? []
 }
 
-export function getNote(key: NoteFileName): string {
+export async function getNoteAsync(key: NoteFileName): Promise<string> {
     if (!import.meta.client)
         return ''
-    return localStorage.getItem(`/notes/notes/${key}`) ?? ''
+    return (await Native.KeyValueStorage.getStringAsync(`/notes/notes/${key}`)) ?? ''
 }
-export function getNoteTitle(key: NoteFileName): string {
+export async function getNoteTitleAsync(key: NoteFileName): Promise<string> {
     if (!import.meta.client)
         return ''
-    return localStorage.getItem(`/notes/title/${key}`) ?? ''
+    return (await Native.KeyValueStorage.getStringAsync(`/notes/title/${key}`)) ?? ''
 }
 
-export async function createNewNote() {
+export async function createNewNoteAsync() {
     if (import.meta.client) {
         let key = crypto.randomUUID()
-        if (localStorage.getItem(`/notes/notes/${key}`) !== null) {
+        if (await Native.KeyValueStorage.getStringAsync(`/notes/notes/${key}`) !== null) {
             throw createError({ status: 500, statusMessage: 'UUID collision. Please try again' })
         }
-        localStorage.setItem(`/notes/notes/${key}`, '')
-        localStorage.setItem(`/notes/title/${key}`, 'Untitled Note')
-        let items = localStorage.getItem('/notes/items')?.split(',') ?? []
+        await Native.KeyValueStorage.setStringAsync(`/notes/notes/${key}`, '')
+        await Native.KeyValueStorage.setStringAsync(`/notes/title/${key}`, 'Untitled Note')
+        let items = (await Native.KeyValueStorage.getStringAsync('/notes/items'))?.split(',') ?? []
         items.push(key)
-        localStorage.setItem('/notes/items', items.join(','))
+        await Native.KeyValueStorage.setStringAsync('/notes/items', items.join(','))
         return key
     }
     return ''
 }
-export function useNote(key: NoteFileName): Ref<string> {
+export async function useNoteAsync(key: NoteFileName): Promise<Ref<string>> {
     let val: Ref<string>
     if (import.meta.client) {
-        const code = localStorage.getItem(`/notes/notes/${key}`)
+        const code = await Native.KeyValueStorage.getStringAsync(`/notes/notes/${key}`)
         if (code === null) {
             throw createError({ status: 404, statusText: 'Note not found' })
         }
@@ -45,15 +45,15 @@ export function useNote(key: NoteFileName): Ref<string> {
     } else {
         val = ref('')
     }
-    watch(val, () => {
-        localStorage.setItem(`/notes/notes/${key}`, val.value)
+    watch(val, async () => {
+        await Native.KeyValueStorage.setStringAsync(`/notes/notes/${key}`, val.value)
     })
     return val
 }
-export function useNoteTitle(key: NoteFileName): Ref<string> {
+export async function useNoteTitleAsync(key: NoteFileName): Promise<Ref<string>> {
     let val: Ref<string>
     if (import.meta.client) {
-        const code = localStorage.getItem(`/notes/title/${key}`)
+        const code = await Native.KeyValueStorage.getStringAsync(`/notes/title/${key}`)
         if (code === null) {
             throw createError({ status: 404, statusText: 'Note not found' })
         }
@@ -61,8 +61,8 @@ export function useNoteTitle(key: NoteFileName): Ref<string> {
     } else {
         val = ref('')
     }
-    watch(val, () => {
-        localStorage.setItem(`/notes/title/${key}`, val.value)
+    watch(val, async () => {
+        await Native.KeyValueStorage.setStringAsync(`/notes/title/${key}`, val.value)
     })
     return val
 }

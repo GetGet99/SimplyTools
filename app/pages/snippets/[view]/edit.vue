@@ -12,7 +12,7 @@
                 <label class="font-bold">Test Input (won't be saved)</label>
                 <Grow />
                 <Control>
-                    <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/${id}`">
+                    <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/${view}`">
                         <Icon alt="" :icon=View />
                         View in Main App
                     </OurLink>
@@ -36,7 +36,7 @@ import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
 import { extractYamlComment, type Metadata } from "~/utils/snippets/metadata";
 import type { Uri } from "monaco-editor";
-import { getMetadata, getMetadataExample, useLocalSnippetRef } from "~/utils/snippets/manager";
+import { getMetadataAsync, getMetadataExampleAsync, useLocalSnippetRefAsync } from "~/utils/snippets/manager";
 // --------------------
 // Refs
 // --------------------
@@ -60,7 +60,7 @@ onUnmounted(() => {
 })
 const item = Apps.pages.find(x => x.path === 'snippets')!
 usePageInfo(item)
-getMetadata(view.value).then(x => {
+getMetadataAsync(view.value).then(x => {
     if (!isMounted) return
     usePageInfo({
         ...item,
@@ -78,8 +78,8 @@ if (import.meta.client) {
     if (view.value === null) {
         throw createError({ status: 404, statusText: 'Snippet not found' })
     }
-    code = useLocalSnippetRef(view.value)
-    input.value = await getMetadataExample(view.value)
+    code = await useLocalSnippetRefAsync(view.value)
+    input.value = await getMetadataExampleAsync(view.value)
 } else {
     code = ref('')
 }

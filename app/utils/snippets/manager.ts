@@ -3,17 +3,17 @@ import { extractYamlComment, type Metadata } from './metadata';
 const builtinSnippets = import.meta.glob('~/../public/snippets/*.liquid', { query: '?raw', import: 'default' });
 const builtinMeta = import.meta.glob('~/../public/snippets/*.meta.yml', { query: '?raw', import: 'default' });
 const regex = /\.\.\/public\/snippets\/(.+)\.liquid/
-export function getLocalSnippets(): string[] {
+export async function getLocalSnippetsAsync(): Promise<string[]> {
     if (!import.meta.client) {
         return []
     }
-    return localStorage.getItem('/snippets/items')?.split(',') ?? []
+    return (await Native.KeyValueStorage.getStringAsync('/snippets/items'))?.split(',') ?? []
 }
 export function getBuiltInSnippets(): string[] {
     return Object.keys(builtinSnippets).map(x => x.slice("../public/snippets/".length).slice(undefined, -('.liquid'.length)))
 }
 
-export async function getSnippet(key: string): Promise<string> {
+export async function getSnippetAsync(key: string): Promise<string> {
     if (key.startsWith('builtin.')) {
         let txt
         try {
@@ -25,23 +25,23 @@ export async function getSnippet(key: string): Promise<string> {
     } else if (key.startsWith('local.')) {
         if (!import.meta.client)
             return ''
-        return localStorage.getItem(`/snippets/snippets/${key}`) ?? ''
+        return (await Native.KeyValueStorage.getStringAsync(`/snippets/snippets/${key}`)) ?? ''
     }
     return ''
 }
-export async function getMetadata(key: string): Promise<Metadata> {
-    return YAML.parse(await getMetadataString(key))
+export async function getMetadataAsync(key: string): Promise<Metadata> {
+    return YAML.parse(await getMetadataStringAsync(key))
 }
-export async function getMetadataSchema(key: string) {
-    return YAML.parseDocument(await getMetadataString(key))
+export async function getMetadataSchemaAsync(key: string) {
+    return YAML.parseDocument(await getMetadataStringAsync(key))
 }
-export async function getMetadataExample(key: string) {
-    return String(new YAML.Document((await getMetadataSchema(key)).get('example')))
+export async function getMetadataExampleAsync(key: string) {
+    return String(new YAML.Document((await getMetadataSchemaAsync(key)).get('example')))
 }
-export async function getMetadataProperties(key: string) {
-    return String(new YAML.Document((await getMetadataSchema(key)).get('properties')))
+export async function getMetadataPropertiesAsync(key: string) {
+    return String(new YAML.Document((await getMetadataSchemaAsync(key)).get('properties')))
 }
-export async function getMetadataString(key: string) {
+export async function getMetadataStringAsync(key: string) {
     let txt: Promise<string> | string = ''
     if (key.startsWith('builtin.')) {
         try {
@@ -53,7 +53,7 @@ export async function getMetadataString(key: string) {
         if (!import.meta.client) {
             txt = ''
         } else {
-            txt = localStorage.getItem(`/snippets/metadata/${key}`)!
+            txt = await Native.KeyValueStorage.getStringAsync(`/snippets/metadata/${key}`)! ?? ''
         }
         if (txt === null) {
             throw createError({ status: 404, statusText: 'Snippet Not Found' })
@@ -61,67 +61,67 @@ export async function getMetadataString(key: string) {
     }
     return txt
 }
-function getSavedInput(key: string): string | null {
+async function getSavedInputAsync(key: string): Promise<string | null> {
     if (import.meta.client) {
-        return localStorage.getItem(`/snippets/input/${key}`) ?? ''
+        return await Native.KeyValueStorage.getStringAsync(`/snippets/input/${key}`) ?? ''
     } else {
         return ''
     }
 }
-export function setSavedInput(key: string, val: string) {
+async function setSavedInputAsync(key: string, val: string) {
     if (import.meta.client) {
-        localStorage.setItem(`/snippets/input/${key}`, val)
+        await Native.KeyValueStorage.setStringAsync(`/snippets/input/${key}`, val)
     }
 }
 export async function useSavedInput(key: Ref<string>): Promise<Ref<string>> {
-    let val = ref(getSavedInput(key.value) || await getExampleFromMetadata())
+    let val = ref(await getSavedInputAsync(key.value) || await getExampleFromMetadata())
     watch(key, async () => {
-        val.value = getSavedInput(key.value) || await getExampleFromMetadata()
+        val.value = await getSavedInputAsync(key.value) || await getExampleFromMetadata()
     }, { immediate: true })
-    watch(val, () => {
-        setSavedInput(key.value, val.value)
+    watch(val, async () => {
+        await setSavedInputAsync(key.value, val.value)
     })
     async function getExampleFromMetadata() {
-        const initialMeta = await getMetadata(key.value)
+        const initialMeta = await getMetadataAsync(key.value)
         return YAML.stringify(initialMeta.example)
     }
     return val
 }
-export async function createNewSnippet(remixKey: string) {
+export async function createNewSnippetAsync(remixKey: string) {
     if (import.meta.client) {
         let key = `local.${crypto.randomUUID()}`
-        if (localStorage.getItem(`/snippets/snippets/${key}`) !== null) {
+        if (await Native.KeyValueStorage.getStringAsync(`/snippets/snippets/${key}`) !== null) {
             throw createError({ status: 500, statusMessage: 'UUID collision. Please try again' })
         }
-        let snippet =  await getSnippet(remixKey)
-        let meta = await getMetadataSchema(remixKey)
+        let snippet =  await getSnippetAsync(remixKey)
+        let meta = await getMetadataSchemaAsync(remixKey)
         meta.set('name', "Remix: " + (meta.get('name')?.toString() ?? ''))
         snippet = replaceMetaContent(snippet, String(meta))
-        localStorage.setItem(`/snippets/snippets/${key}`, snippet)
-        localStorage.setItem(`/snippets/metadata/${key}`, String(meta))
-        let items = localStorage.getItem('/snippets/items')?.split(',') ?? []
+        await Native.KeyValueStorage.setStringAsync(`/snippets/snippets/${key}`, snippet)
+        await Native.KeyValueStorage.setStringAsync(`/snippets/metadata/${key}`, String(meta))
+        let items = (await Native.KeyValueStorage.getStringAsync('/snippets/items'))?.split(',') ?? []
         items.push(key)
-        localStorage.setItem('/snippets/items', items.join(','))
+        await Native.KeyValueStorage.setStringAsync('/snippets/items', items.join(','))
         return key
     }
     return ''
 }
-export async function deleteSnippet(key: string) {
+export async function deleteSnippetAsync(key: string) {
     if (import.meta.client) {
         if (!key.startsWith('local.'))
             throw new Error(`Cannot delete ${key}: not local`)
-        localStorage.removeItem(`/snippets/snippets/${key}`)
-        localStorage.removeItem(`/snippets/metadata/${key}`)
+        await Native.KeyValueStorage.removeAsync(`/snippets/snippets/${key}`)
+        await Native.KeyValueStorage.removeAsync(`/snippets/metadata/${key}`)
     }
     return ''
 }
-export function useLocalSnippetRef(key: string): Ref<string> {
+export async function useLocalSnippetRefAsync(key: string): Promise<Ref<string>> {
     if (!key.startsWith('local.')) {
         createError({ status: 400, statusText: "Forbidden: Not allowed to edit non local snippet." })
     }
     let val : Ref<string>
     if (import.meta.client) {
-        const code = localStorage.getItem(`/snippets/snippets/${key}`)
+        const code = await Native.KeyValueStorage.getStringAsync(`/snippets/snippets/${key}`)
         if (code === null) {
             throw createError({ status: 404, statusText: 'Snippet not found' })
         }
@@ -129,9 +129,9 @@ export function useLocalSnippetRef(key: string): Ref<string> {
     } else {
         val = ref('')
     }
-    watch(val, () => {
-        localStorage.setItem(`/snippets/snippets/${key}`, val.value)
-        localStorage.setItem(`/snippets/metadata/${key}`, extractYamlComment(val.value) ?? '')
+    watch(val, async () => {
+        await Native.KeyValueStorage.setStringAsync(`/snippets/snippets/${key}`, val.value)
+        await Native.KeyValueStorage.setStringAsync(`/snippets/metadata/${key}`, extractYamlComment(val.value) ?? '')
     })
     return val
 }

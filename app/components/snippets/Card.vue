@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Delete from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
-import { deleteSnippet, getMetadata, getSnippet } from '~/utils/snippets/manager';
+import { deleteSnippetAsync, getMetadataAsync, getSnippetAsync } from '~/utils/snippets/manager';
 const props = defineProps<{ snippetKey: string }>()
-const meta = await getMetadata(props.snippetKey)
+const meta = await getMetadataAsync(props.snippetKey)
 const isDeleted = ref(false)
 </script>
 <template>
@@ -31,7 +31,7 @@ const isDeleted = ref(false)
                     <template #footer>
                         <DialogClose as-child>
                             <Button class="text-danger" @click="() => {
-                                deleteSnippet(snippetKey)
+                                deleteSnippetAsync(snippetKey)
                                 isDeleted = true
                                 if (useRequestURL().searchParams.get('view') === snippetKey) {
                                     navigateTo('/snippets', { replace: true })

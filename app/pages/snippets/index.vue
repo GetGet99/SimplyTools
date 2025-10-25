@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Apps } from '~/utils/pages/app';
-import { getBuiltInSnippets, getLocalSnippets } from '~/utils/snippets/manager';
+import { getBuiltInSnippets, getLocalSnippetsAsync } from '~/utils/snippets/manager';
 usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
 </script>
 <template>
@@ -12,7 +12,7 @@ usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
         <div class="snippets-root grow">
             <div class="snippets-list">
                 <ClientOnly>
-                    <SnippetsCard v-for="key in getLocalSnippets()" :snippet-key="key" />
+                    <SnippetsCard v-for="key in await getLocalSnippetsAsync()" :snippet-key="key" />
                     <template #fallback>
                         <div>Loading...</div>
                     </template>

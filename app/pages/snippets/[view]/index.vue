@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Apps } from '~/utils/pages/app';
-import { getBuiltInSnippets, getLocalSnippets, getMetadata } from '~/utils/snippets/manager';
+import { getBuiltInSnippets, getLocalSnippetsAsync, getMetadataAsync } from '~/utils/snippets/manager';
 const url = useRoute()
 const view = computed(() => url.params.view as string)
 const item = Apps.pages.find(x => x.path === 'snippets')!
@@ -9,7 +9,7 @@ let isMounted = true
 onUnmounted(() => {
     isMounted = false
 })
-getMetadata(view.value).then(x => {
+getMetadataAsync(view.value).then(x => {
     if (!isMounted) return
     usePageInfo({
         ...item,
@@ -31,7 +31,7 @@ getMetadata(view.value).then(x => {
         <div class="snippets-root grow">
             <div class="snippets-list">
                 <ClientOnly>
-                    <SnippetsCard v-for="key in getLocalSnippets()" :snippet-key="key" />
+                    <SnippetsCard v-for="key in await getLocalSnippetsAsync()" :snippet-key="key" />
                 </ClientOnly>
                 <SnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
             </div>
