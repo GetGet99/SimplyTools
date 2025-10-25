@@ -131,5 +131,6 @@ export const Native = {
     isAvaliable: isNativeAvaliable,
     nativeCallNoResult,
     nativeCall,
-    TitleBar
+    TitleBar,
+    KeyValueStorage
 } as const
