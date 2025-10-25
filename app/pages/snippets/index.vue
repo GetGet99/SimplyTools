@@ -5,6 +5,7 @@ usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
 </script>
 <template>
     <Feature category="snippets" tool="Quick Templates" kind="app" class="flex flex-col gap-4">
+        <AppSaveWarning class="w-fit m-4" />
         <p class="text-center">Find templates you wish to use, or
             <OurLink href="/snippets/new">Create your own!</OurLink>
         </p>
