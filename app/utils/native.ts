@@ -49,7 +49,7 @@ if (isNativeAvaliable) {
         if ('$request' in ev.data) {
             let req = _nativeCalls[ev.data.$request]
             if (req === undefined) {
-                console.log("Unknown request %o for native message %o", ev.data.$request, ev.data)
+                console.warn("Unknown request %o for native message %o", ev.data.$request, ev.data)
             } else {
                 const [resolve, reject] = req
                 if ('error' in ev.data) {
