@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html {{ HTML_ATTRS }}>
+  <head {{ HEAD_ATTRS }}>
+    {{ HEAD }}
+    <script>
+      (function() {
+        try {
+          var ua = navigator.userAgent;
+          if (ua.indexOf('SimplyTools/Windows') !== -1) {
+            document.documentElement.classList.add('app');
+            document.body.classList.add('app');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body {{ BODY_ATTRS }}>
+    {{ APP }}
+  </body>
+</html>
