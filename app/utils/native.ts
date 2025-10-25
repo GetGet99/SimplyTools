@@ -14,7 +14,7 @@ interface API<APIName extends NativeFeatures> {
 const isNativeAvaliable = nativeLowLevelAPIMessager !== undefined
 type UUID = ReturnType<typeof crypto.randomUUID>
 const _nativeCalls: { [key in UUID]: [(value: any | PromiseLike<any>) => void, (reason?: any) => void] } = {}
-function nativeCall<T>($api: NativeFeatures, args: any): Promise<T> {
+function nativeCallAsync<T>($api: NativeFeatures, args: any): Promise<T> {
     if (!import.meta.client) {
         return Promise.reject('Native API cannot be called on server.')
     }
@@ -33,10 +33,10 @@ function nativeCall<T>($api: NativeFeatures, args: any): Promise<T> {
 }
 function nativeCallNoResult($api: NativeFeatures, args: any) {
     if (!import.meta.client) {
-        return Promise.reject('Native API cannot be called on server.')
+        throw new Error('Native API cannot be called on server.')
     }
     if (!Native.isAvaliable) {
-        return Promise.reject('Native API is not avaliable.')
+        throw new Error('Native API is not avaliable.')
     }
     let $request = crypto.randomUUID()
     nativeLowLevelAPIMessager({
@@ -72,13 +72,13 @@ const TitleBar = {
 } as const
 
 const Features = {
-    async isAvaliable(feature : NativeFeatures) {
+    async isAvaliable(feature: NativeFeatures) {
         let isAvaliable = this.$avaliableFeatures.get(feature)
         if (isAvaliable !== undefined) {
             return isAvaliable
         }
         try {
-            isAvaliable = await nativeCall('features.isAvaliable', { feature }) as boolean
+            isAvaliable = await nativeCallAsync('features.isAvaliable', { feature }) as boolean
         } catch {
             isAvaliable = false
         }
@@ -102,27 +102,47 @@ const KeyValueStorage = {
     isAvaliableAsNativeAPI() {
         return Features.isAvaliable('storage.keyval')
     },
-    async getValueAsStringAsync(key: string) : Promise<string | null> {
-        if (await this.isAvaliableAsNativeAPI())
-            return nativeCall<string>("storage.keyval.get", { key });
+    async getValueAsStringAsync(key: string): Promise<string | null> {
+        if (await this.isAvaliableAsNativeAPI()) {
+            const output = await nativeCallAsync<string>("storage.keyval.get", { key });
+            if (output === null) {
+                // part of migration: use item from local storage
+                return localStorage.getItem(key);
+            } else {
+                return output;
+            }
+        }
         else
             return localStorage.getItem(key);
     },
-    async storeValueAsStringAsync(key: string, value: string) : Promise<void> {
-        if (await this.isAvaliableAsNativeAPI())
-            return nativeCall<void>("storage.keyval.store", { key, value });
+    async storeValueAsStringAsync(key: string, value: string): Promise<void> {
+        if (await this.isAvaliableAsNativeAPI()) {
+            // part of migration: remove item from local storage
+            localStorage.removeItem(key);
+            return await nativeCallAsync<void>("storage.keyval.store", { key, value });
+        }
         else
             localStorage.setItem(key, value);
     },
-    async getValueAsync<T>(key: string) : Promise<T | null> {
-        if (await this.isAvaliableAsNativeAPI())
-            return nativeCall<T>("storage.keyval.get", { key });
+    async getValueAsync<T>(key: string): Promise<T | null> {
+        if (await this.isAvaliableAsNativeAPI()) {
+            const output = await nativeCallAsync<T>("storage.keyval.get", { key });
+            if (output === null) {
+                // part of migration: use item from local storage
+                return JSON.parse(localStorage.getItem(key) ?? 'null') as T | null;
+            } else {
+                return output;
+            }
+        }
         else
             return JSON.parse(localStorage.getItem(key) ?? 'null') as T | null;
     },
-    async storeValueAsync<T>(key: string, value: T) : Promise<void> {
-        if (await this.isAvaliableAsNativeAPI())
-            return nativeCall<void>("storage.keyval.store", { key, value });
+    async storeValueAsync<T>(key: string, value: T): Promise<void> {
+        if (await this.isAvaliableAsNativeAPI()) {
+            // part of migration: remove item from local storage
+            localStorage.removeItem(key);
+            return nativeCallAsync<void>("storage.keyval.store", { key, value });
+        }
         else
             localStorage.setItem(key, JSON.stringify(value));
     }
@@ -130,7 +150,7 @@ const KeyValueStorage = {
 export const Native = {
     isAvaliable: isNativeAvaliable,
     nativeCallNoResult,
-    nativeCall,
+    nativeCallAsync,
     TitleBar,
     KeyValueStorage
 } as const
