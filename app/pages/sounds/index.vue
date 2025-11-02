@@ -7,7 +7,7 @@
                 <div class="w-full mb-6">
                     <SoundsContextBlocks v-model:statements="playingContext.statements" />
                 </div>
-                <div class="gap-2 items-center">
+                <Flex class="gap-2 items-center">
                     <Button v-if="!isPlaying" class="pl-1.25 flex gap-1" @click="Sounds.playContext"
                         :disabled="playingContext.statements.length === 0">
                         <Icon :icon=PlayIcon alt="" />
@@ -21,7 +21,7 @@
                     <Button class="flex gap-1" @click="Sounds.exportAsWAV()">
                         Export
                     </Button>
-                </div>
+                </Flex>
             </Flex>
         </Flex>
 
