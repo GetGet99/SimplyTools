@@ -2,6 +2,7 @@
 import { Apps } from '~/utils/pages/app';
 import { getBuiltInSnippets, getLocalSnippetsAsync } from '~/utils/snippets/manager';
 usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
+const snippets = await getLocalSnippetsAsync()
 </script>
 <template>
     <Feature category="snippets" tool="Quick Templates" kind="app" class="flex flex-col gap-4">
@@ -12,7 +13,7 @@ usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
         <div class="snippets-root grow">
             <div class="snippets-list">
                 <ClientOnly>
-                    <SnippetsCard v-for="key in await getLocalSnippetsAsync()" :snippet-key="key" />
+                    <SnippetsCard v-for="key in snippets" :snippet-key="key" />
                     <template #fallback>
                         <div>Loading...</div>
                     </template>
