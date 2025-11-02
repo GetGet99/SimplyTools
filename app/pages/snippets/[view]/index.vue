@@ -22,6 +22,7 @@ getMetadataAsync(view.value).then(x => {
         ]
     })
 })
+const snippets = await getLocalSnippetsAsync()
 </script>
 <template>
     <Feature category="snippets" tool="Quick Templates" kind="app" class="flex flex-col gap-4" limit-screen='xl'>
@@ -31,7 +32,7 @@ getMetadataAsync(view.value).then(x => {
         <div class="snippets-root grow">
             <div class="snippets-list">
                 <ClientOnly>
-                    <SnippetsCard v-for="key in await getLocalSnippetsAsync()" :snippet-key="key" />
+                    <SnippetsCard v-for="key in snippets" :snippet-key="key" />
                 </ClientOnly>
                 <SnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
             </div>
