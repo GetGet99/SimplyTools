@@ -110,6 +110,11 @@ export async function deleteSnippetAsync(key: string) {
     if (import.meta.client) {
         if (!key.startsWith('local.'))
             throw new Error(`Cannot delete ${key}: not local`)
+        
+        let items = (await Native.KeyValueStorage.getStringAsync('/snippets/items'))?.split(',') ?? []
+        items = items.filter(x => x !== key)
+        await Native.KeyValueStorage.setStringAsync('/snippets/items', items.join(','))
+        
         await Native.KeyValueStorage.removeAsync(`/snippets/snippets/${key}`)
         await Native.KeyValueStorage.removeAsync(`/snippets/metadata/${key}`)
     }

@@ -13,8 +13,8 @@ export const RandomCategory = createCategory({
         desc: 'A simple RNG (Random Number Generator) that can generate numbers between a given range, either integers or real numbers'
     },
     {
-        title: 'List',
-        inPageTitle: 'List',
+        title: 'List (Alpha)',
+        inPageTitle: 'List (Alpha)',
         path: 'list',
         desc: 'Randomly picking items from a provided list'
     },

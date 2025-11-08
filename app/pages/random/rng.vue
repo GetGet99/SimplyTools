@@ -11,7 +11,7 @@ const fromTb = useTemplateRef('from')
 const toTb = useTemplateRef('to')
 const genCountTb = useTemplateRef('genCount')
 const autoClear = ref(false)
-const output = ref('')
+const history = ref('')
 const latestNumber = ref(undefined as number | undefined)
 watch(mode , () => {
     latestNumber.value = undefined
@@ -29,7 +29,7 @@ function generate() {
         genCountTb.value?.nbb?.tb?.focus()
         return
     }
-    const wasEmpty = autoClear.value || output.value == ""
+    const wasEmpty = autoClear.value || history.value == ""
     let outStr = ""
     if (mode.value === "integer") {
         for (let i = 0; i < count.value; i++) {
@@ -48,15 +48,12 @@ function generate() {
         outStr = outStr.substring(1)
     }
     if (autoClear.value)
-        output.value = outStr
+        history.value = outStr
     else
-        output.value += outStr
+        history.value += outStr
 }
 function copyValue() {
     navigator.clipboard.writeText(latestNumber.value?.toString() ?? '')
-}
-function copyHistory() {
-    navigator.clipboard.writeText(output.value)
 }
 const displayRef = useTemplateRef('display')
 </script>
@@ -94,25 +91,7 @@ const displayRef = useTemplateRef('display')
                     </Flex>
                 </Flex>
             </Grid>
-            <details class="w-full">
-                <summary class="mt-4">History</summary>
-                <Flex column class="w-full gap-2 mt-2">
-                    <TextBoxTools class="min-h-48">
-                        <TextBox :model-value="output" multiline readonly
-                            placeholder='Press "Generate" button above!' />
-                        <template #tools>
-                            <Button icon="left" title="Copy" variant="ghost" @click="copyHistory">
-                                <Icon alt="" :icon=CopyIcon />
-                                Copy All
-                            </Button>
-                            <Button icon="left" title="Clear" variant="ghost" @click="output = ''">
-                                <Icon alt="" :icon=DeleteIcon />
-                                Clear History
-                            </Button>
-                        </template>
-                    </TextBoxTools>
-                </Flex>
-            </details>
+            <RandomHistory v-model="history" />
         </div>
         <template #summary>
             Generate random integers or real numbers within a custom range.
