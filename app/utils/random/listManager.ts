@@ -128,3 +128,7 @@ export async function useRandomListItemPageAsync(forPage: 'viewer' | 'editor' | 
     }
     return key
 }
+export function useRandomNewListPage(forPage: RandomListTools) {
+    const page = RandomCategory.pages.find(x => x.path === forPage)!
+    return usePageInfo(page)
+}

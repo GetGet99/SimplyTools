@@ -18,4 +18,16 @@ export const RandomCategory = createCategory({
         path: 'list',
         desc: 'Randomly picking items from a provided list'
     },
+    {
+        title: 'Spinner (Alpha)',
+        inPageTitle: 'Spinner (Alpha)',
+        path: 'spinner',
+        desc: 'Randomly picking items with a spinner'
+    },
+    {
+        title: 'Wheel (Alpha)',
+        inPageTitle: 'Wheel (Alpha)',
+        path: 'wheel',
+        desc: 'Randomly picking items with a wheel'
+    },
 ])
