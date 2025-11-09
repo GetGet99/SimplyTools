@@ -3,7 +3,7 @@ import { useRandomNewListPage, createNewListAsync, type RandomListTools } from '
 const props = defineProps<{ toolname: RandomListTools }>()
 const toolname: RandomListTools = props.toolname
 useRandomNewListPage(toolname)
-const defaultDescription = `# Add your list items here, separate them by new lines.\n# "#" at the beginning of the line is comment. These items won\'t be included`
+const defaultDescription = `# Add your list items here, separate them by new lines.\n# "#" at the beginning of the line means skip this line`
 const defaultList = ['Sunny Meadow', 'Maple Grove', 'Blueberry Hill', 'Crimson Oak', 'Silver Lake', 'Golden Harbor', 'Whispering Pines', 'Starlit Cove', 'Sunnybrook', 'Cedar Ridge']
 const newListText = ref(`${defaultDescription}\n${defaultList.join('\n')}`)
 </script>
