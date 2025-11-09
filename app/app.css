@@ -23,6 +23,9 @@
     --background-color-control-primary: #FFFFFF0F;
     --background-color-control-secondary: #FFFFFF15;
     --background-color-control-tertiary: #FFFFFF08;
+    --fill-control-primary: #FFFFFF0F;
+    --fill-control-secondary: #FFFFFF15;
+    --fill-control-tertiary: #FFFFFF08;
     --color-border-control-primary: #FFFFFF12;
     --color-border-control-secondary: #FFFFFF18;
     --color-border-control-on-accent-primary: #FFFFFF14;
@@ -62,6 +65,12 @@
     --background-color-control-primary-dark: #FFFFFF0F;
     --background-color-control-secondary-dark: #FFFFFF15;
     --background-color-control-tertiary-dark: #FFFFFF08;
+    --fill-control-primary-light: #FFFFFFB3;
+    --fill-control-secondary-light: #F9F9F980;
+    --fill-control-tertiary-light: #F9F9F94D;
+    --fill-control-primary-dark: #FFFFFF0F;
+    --fill-control-secondary-dark: #FFFFFF15;
+    --fill-control-tertiary-dark: #FFFFFF08;
     --background-color-smoke: #0000004D;
     --border-color-surface: #66757575;
     --ease-theme: cubic-bezier(0.41, 0.52, 0, 0.94);
@@ -108,6 +117,9 @@ body {
         --background-color-control-primary: #FFFFFF0F;
         --background-color-control-secondary: #FFFFFF15;
         --background-color-control-tertiary: #FFFFFF08;
+        --fill-control-primary: #FFFFFF0F;
+        --fill-control-secondary: #FFFFFF15;
+        --fill-control-tertiary: #FFFFFF08;
         --color-border-control-primary: #FFFFFF12;
         --color-border-control-secondary: #FFFFFF18;
         --color-border-control-on-accent-primary: #FFFFFF14;
@@ -142,6 +154,9 @@ body {
         --background-color-control-primary: #FFFFFFB3;
         --background-color-control-secondary: #F9F9F980;
         --background-color-control-tertiary: #F9F9F94D;
+        --fill-control-primary: #FFFFFFB3;
+        --fill-control-secondary: #F9F9F980;
+        --fill-control-tertiary: #F9F9F94D;
         --color-border-control-primary: #0000000F;
         --color-border-control-secondary: #00000029;
         --color-border-control-on-accent-primary: #FFFFFF14;

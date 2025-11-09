@@ -90,7 +90,7 @@ export async function deleteListAsync(key: UUID) {
         await Native.KeyValueStorage.removeAsync(`/random/list/${key}/name`)
     }
 }
-export type RandomListTools = 'spinner'
+export type RandomListTools = 'spinner' | 'wheel'
 export async function useRandomListItemPageAsync(forPage: 'viewer' | 'editor' | RandomListTools) {
     const key = useRoute().params.fileName as UUID
     const name = await useListNameEditable(key)

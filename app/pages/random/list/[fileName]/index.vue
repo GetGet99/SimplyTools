@@ -1,12 +1,23 @@
 <template>
-    <feature class="flex flex-col items-center justify-center">
+    <feature class="flex flex-col gap-2 items-center justify-center">
+        <Flex column class="gap-2 bg-card border rounded-control control-border-control max-h-40 overflow-y-auto">
+            <div v-for="item in list" class="h-16 p-control min-w-40 flex items-center justify-center">{{ item }}</div>
+        </Flex>
         Select the tools you would like to use.
-        <LinkButton :href="`/random/list/${id}/spinner`">
-            Spinner
-        </LinkButton>
+        <Flex class="gap-2">
+            <LinkButton icon="left" :href="`/random/list/${id}/spinner`">
+                <RandomSpinnerIcon />
+                Spinner
+            </LinkButton>
+            <LinkButton icon="left" :href="`/random/list/${id}/wheel`">
+                <RandomWheelIcon />
+                Wheel
+            </LinkButton>
+        </Flex>
     </feature>
 </template>
 <script setup lang="ts">
-import { useRandomListItemPageAsync } from "~/utils/random/listManager";
+import { getListAsync, useRandomListItemPageAsync } from "~/utils/random/listManager";
 const id = await useRandomListItemPageAsync('viewer')
+const list = await getListAsync(id)
 </script>

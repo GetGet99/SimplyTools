@@ -125,7 +125,6 @@ const finalTranslation = computed(() => {
   } else if (translation > MAXTRANSLATION) {
     debugger
   }
-  console.log(translation)
   return translation
 })
 </script>

@@ -13,11 +13,14 @@ import Edit from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
         <Flex class="gap-2 items-start">
             <h3 class="text-card-title">{{ name }}</h3>
             <Grow />
-            <Control>
-                <OurLink class="manual flex gap-1 pl-2" :href="`/random/list/${id}/spinner`">
-                    Spinner
-                </OurLink>
-            </Control>
+            <LinkButton icon="left" class="manual flex gap-1 pl-2" :href="`/random/list/${id}/spinner`">
+                <RandomSpinnerIcon />
+                Spinner
+            </LinkButton>
+            <LinkButton icon="left" :href="`/random/list/${id}/wheel`">
+                <RandomWheelIcon />
+                Wheel
+            </LinkButton>
             <Control>
                 <OurLink class="manual flex gap-1 pl-2" :href="`/random/list/${id}/edit`">
                     <Icon alt="" :icon=Edit />
