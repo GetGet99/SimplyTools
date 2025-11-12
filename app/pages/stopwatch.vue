@@ -124,14 +124,14 @@ onUnmounted(() => {
                     {{ hours }}:{{ minutes }}:{{ seconds }}<span class="text-3xl sm:text-5xl">.</span><span class="text-3xl">{{ thousands }}</span>
                 </div>
                 <Flex class="gap-4 mt-2">
-                    <Button :disabled="!running" @click="lap" title="Lap" class="p-4 rounded-full">
-                        <Icon :icon="LapIcon" alt="Lap" class="w-5 h-5" />
-                    </Button>
                     <Button v-if="!running" variant="accent" @click="start" title="Start" class="p-4 rounded-full">
                         <Icon :icon="PlayIcon" alt="Start" class="w-5 h-5" />
                     </Button>
                     <Button v-else variant="accent" @click="stop" title="Pause" class="p-4 rounded-full">
                         <Icon :icon="PauseIcon" alt="Pause" class="w-5 h-5" />
+                    </Button>
+                    <Button :disabled="!running" @click="lap" title="Lap" class="p-4 rounded-full">
+                        <Icon :icon="LapIcon" alt="Lap" class="w-5 h-5" />
                     </Button>
                     <Button @click="reset" title="Reset" class="p-4 rounded-full">
                         <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
