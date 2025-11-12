@@ -29,8 +29,8 @@ const len = computed(() => props.list.length)
 const sliceAngle = computed(() => (len.value ? 360 / len.value : 360))
 const radius = computed(() => SIZE / 2)
 
-function easeOutQuint(t: number) {
-    return 1 - Math.pow(1 - t, 5);
+function easeOutQuad(t: number) {
+    return 1 - Math.pow(1 - t, 4);
 }
 function easeOutCubic(t: number) {
     return 1 - Math.pow(1 - t, 3)
@@ -51,7 +51,7 @@ function rollForItem(target: number | undefined = undefined): number | undefined
 
     rolling.value = true
 
-    const TOTAL_DURATION = 10_000
+    const TOTAL_DURATION = 9_000
     const spinDuration = TOTAL_DURATION
     const minItemsPassed = 30
     const fullSpins = 8
@@ -82,7 +82,7 @@ function rollForItem(target: number | undefined = undefined): number | undefined
         function spinAnimate(now: number) {
             const elapsed = now - start
             const t = Math.min(elapsed / spinDuration, 1)
-            const eased = easeOutQuint(t)
+            const eased = easeOutQuad(t)
             // decrease fractional value during animation (spin in opposite direction)
             spinningIndex.value = startOffset - totalDistance * eased
 
