@@ -33,6 +33,11 @@ export const Uncategorized = createCategory({
         desc: 'Simple timer'
     },
     {
+        title: 'Stopwatch',
+        path: 'stopwatch',
+        desc: 'Simple Stopwatch'
+    },
+    {
         title: 'Timestamp Converter',
         path: 'timestamp',
         desc: 'Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.'
