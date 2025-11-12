@@ -5,7 +5,15 @@ const props = defineProps<{
     list: string[]
     size?: number
     innerRadius?: number
+    colors?: string[]
 }>()
+
+// default palette (Tailwind fill classes) — can be overridden via props.colors
+const DEFAULT_COLORS = ['fill-blue-500', 'fill-red-500', 'fill-green-500', 'fill-yellow-500']
+
+const colorsArray = computed(() => {
+    return (props.colors && props.colors.length > 0) ? props.colors : DEFAULT_COLORS
+})
 
 const emit = defineEmits<{
     (e: 'select', index: number): void
@@ -142,7 +150,7 @@ function itemAngle(i: number) {
                                     }
                                     return `M ${oS.x} ${oS.y} A ${rOuter} ${rOuter} 0 ${large} 1 ${oE.x} ${oE.y} L ${iE.x} ${iE.y} A ${rInner} ${rInner} 0 ${large} 0 ${iS.x} ${iS.y} Z`
                                 })()"
-                                :class="i % 2 === 0 ? 'fill-control-primary' : 'fill-control-tertiary'"
+                                :class="colorsArray[i % colorsArray.length]"
                                 stroke="rgba(0,0,0,0.2)"
                                 stroke-width="1"
                             />
