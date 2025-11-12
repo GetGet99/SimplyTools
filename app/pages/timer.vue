@@ -158,8 +158,8 @@ watch(minutesInput, (val, oldVal) => {
                     {{ minutes }}:{{ seconds }}<span class="text-3xl sm:text-5xl">.</span><span class="text-3xl">{{ thousands }}</span>
                 </div>
                 <Flex class="gap-4 mt-2">
-                    <Button v-if="!running" @click="reset" title="Reset" class="p-4 rounded-full">
-                        <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
+                    <Button v-if="!running" @click="editing = true" title="Edit Time" class="p-4 rounded-full">
+                        <Icon :icon="EditIcon" alt="Edit" class="w-5 h-5" />
                     </Button>
                     <Button v-if="!running" variant="accent" @click="start" title="Continue Timer" class="p-4 rounded-full">
                         <Icon :icon="PlayIcon" alt="Continue" class="w-5 h-5" />
@@ -167,8 +167,8 @@ watch(minutesInput, (val, oldVal) => {
                     <Button v-else variant="accent" @click="stop" title="Pause" class="p-4 rounded-full">
                         <Icon :icon="PauseIcon" alt="Pause" class="w-5 h-5" />
                     </Button>
-                    <Button v-if="!running" @click="editing = true" title="Edit Time" class="p-4 rounded-full">
-                        <Icon :icon="EditIcon" alt="Edit" class="w-5 h-5" />
+                    <Button v-if="!running" @click="reset" title="Reset" class="p-4 rounded-full">
+                        <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
                     </Button>
                 </Flex>
             </Flex>
