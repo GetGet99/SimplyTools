@@ -9,7 +9,7 @@ const props = defineProps<{
 }>()
 
 // default palette (Tailwind fill classes) — can be overridden via props.colors
-const DEFAULT_COLORS = ['fill-blue-500', 'fill-red-500', 'fill-green-500', 'fill-yellow-500']
+const DEFAULT_COLORS = ['fill-blue-600', 'fill-red-600', 'fill-green-700', 'fill-yellow-600']
 
 const colorsArray = computed(() => {
     return (props.colors && props.colors.length > 0) ? props.colors : DEFAULT_COLORS
