@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AICategory } from '~/utils/pages/ai';
 import simplyToolsIcon from '~/assets/SimplyToolsIcon.png';
-const props = defineProps<{ class?: string, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center' }>()
+const props = defineProps<{ class?: string, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
@@ -34,8 +34,8 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
             </div>
             <slot v-else></slot>
         </div>
-        <div class="app:hidden">
-            <details v-if="!noDetails" class="text-center">
+        <div :class="detailsVisible ? (detailsVisible === 'no-app' ? 'app:hidden' : '') : 'hidden'">
+            <details v-if="!noDetails" class="text-center app:mb-2">
                 <summary><span class="italic">Extra Info: <slot name="summary">We are working on this tool. 🔨
                         </slot>
                     </span></summary>
@@ -44,7 +44,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                         <slot name="details">
                             That means unfortunately, I have not written the details yet. 😅
                         </slot>
-                        <p class="italic text-center mt-4">SimplyTools are tools run locally in your browser. Easily
+                        <p class="italic text-center mt-4 app:hidden">SimplyTools are tools run locally in your browser. Easily
                             accessible from all
                             your devices
                             with
@@ -66,7 +66,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                     </div>
                 </Flex>
             </details>
-            <Footer class="mt-1!" />
+            <Footer class="mt-1! app:hidden" />
         </div>
     </Grid>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <Feature category="sounds" tool="Make your own sounds!">
+    <Feature category="sounds" tool="Make your own sounds!" details-visible>
         <Flex column class="gap-8 group" :data-touch="toolsExpanded">
             <Flex column class="items-center gap-6 w-full p-8">
                 <div class="mb-4">Make Sounds! Add notes! Make loops! And listen!</div>
@@ -63,6 +63,19 @@
             <p>
                 Select a synth type and note, play individual notes or build a sequence. Powered by Tone.js.
             </p>
+            <div class="mt-4 space-y-2">
+                <p class="font-semibold">Keyboard Navigation:</p>
+                <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Tab</kbd> / <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Arrow Keys</kbd> - Navigate between notes</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Space</kbd> / <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - Preview/Activate note</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Delete</kbd> / <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Backspace</kbd> - Remove note</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">D</kbd> - Duplicate note</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Left/Right</kbd> - Adjust note length</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Up/Down</kbd> - Adjust note pitch</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Alt</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Left/Right</kbd> - Reorder notes</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Scroll</kbd> - Adjust note length</li>
+                </ul>
+            </div>
         </template>
     </Feature>
 </template>

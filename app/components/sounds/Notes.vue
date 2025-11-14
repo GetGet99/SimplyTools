@@ -1,6 +1,5 @@
 <template>
-    <Flex column
-        class="gap-2 items-center border border-border-control-primary p-2 rounded bg-control-primary w-fit">
+    <Flex column class="gap-2 items-center border border-border-control-primary p-2 rounded bg-control-primary w-fit">
         <div v-if="!previewMode" class="italic">Tap/Left click to add. Right click to preview notes.</div>
         <div v-else class="italic">Tap/Left click to preview notes.</div>
         <Flex class="gap-4 items-center justify-center flex-wrap">
@@ -22,11 +21,13 @@
             </Button>
         </Flex>
         <Grid :columns="7" class="gap-2 max-h-35 overflow-auto">
-            <Button v-for="n in Sounds.notes" :key="n" :class="{ jumping: jumpingNote === n }"
-                @click="previewMode ? Sounds.playSpecificNote(n) : (Sounds.addItemToSelected(n), Sounds.playSpecificNote(n, undefined, undefined, false))"
-                @contextmenu.prevent="Sounds.playSpecificNote(n)">
-                {{ n }}
-            </Button>
+            <template v-for="n in Sounds.notes" :key="n">
+                <Button v-if="!n.includes('#')" :class="{ jumping: jumpingNote === n }"
+                    @click="previewMode ? Sounds.playSpecificNote(n) : (Sounds.addItemToSelected(n), Sounds.playSpecificNote(n, undefined, undefined, false))"
+                    @contextmenu.prevent="Sounds.playSpecificNote(n)">
+                    {{ n }}
+                </Button>
+            </template>
         </Grid>
     </Flex>
 </template>

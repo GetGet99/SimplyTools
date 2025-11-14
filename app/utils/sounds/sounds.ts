@@ -3,20 +3,20 @@ export const synthTypes = ['Synth', 'AMSynth', 'FMSynth', 'DuoSynth', 'MonoSynth
 export type SynthType = typeof synthTypes[number]
 
 export const notes = [
-    'C1', 'D1', 'E1', 'F1', 'G1', 'A1', 'B1',
-    'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2',
-    'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3',
-    'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4',
-    'C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B5',
-    'C6', 'D6', 'E6', 'F6', 'G6', 'A6', 'B6',
-    'C7', 'D7', 'E7', 'F7', 'G7', 'A7', 'B7',
-    'C8', 'D8', 'E8', 'F8', 'G8', 'A8', 'B8',
-    'C9', 'D9', 'E9', 'F9', 'G9', 'A9', 'B9',
-    'C10', 'D10', 'E10', 'F10', 'G10', 'A10', 'B10'
+    'C1', 'C#1', 'D1', 'D#1', 'E1', 'F1', 'F#1', 'G1', 'G#1', 'A1', 'A#1', 'B1',
+    'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2',
+    'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3',
+    'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4',
+    'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5', 'A5', 'A#5', 'B5',
+    'C6', 'C#6', 'D6', 'D#6', 'E6', 'F6', 'F#6', 'G6', 'G#6', 'A6', 'A#6', 'B6',
+    'C7', 'C#7', 'D7', 'D#7', 'E7', 'F7', 'F#7', 'G7', 'G#7', 'A7', 'A#7', 'B7',
+    'C8', 'C#8', 'D8', 'D#8', 'E8', 'F8', 'F#8', 'G8', 'G#8', 'A8', 'A#8', 'B8',
+    'C9', 'C#9', 'D9', 'D#9', 'E9', 'F9', 'F#9', 'G9', 'G#9', 'A9', 'A#9', 'B9',
+    'C10', 'C#10', 'D10', 'D#10', 'E10', 'F10', 'F#10', 'G10', 'G#10', 'A10', 'A#10', 'B10'
 ] as const
 export type Note = typeof notes[number]
 export type Special = 'Silent' | 'Hold'
-export type SequenceNote = { note: SequenceItem; synthType: SynthType, id: ReturnType<typeof crypto.randomUUID> }
+export type SequenceNote = { note: SequenceItem; synthType: SynthType, id: ReturnType<typeof crypto.randomUUID>, length?: number }
 export type SequenceItem = Note | Special
 export type SequenceStatement = { kind: 'sequence'; sequence: SequenceNote[] }
 export type LoopStatement = { kind: 'loop'; iterations: number; statements: Statement[] }
@@ -29,14 +29,14 @@ export const playingContext: Ref<PlayingContext> = ref({
         {
             kind: 'sequence', sequence:
                 [
-                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() },
-                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() },
+                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
+                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
                     { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'G4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'C4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() },
-                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() },
+                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 4 },
                     { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() },
-                    { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() },
+                    { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
                     { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() },
-                    { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'Hold', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'G4', synthType: 'Synth', id: crypto.randomUUID() }
+                    { note: 'D4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 }, { note: 'G4', synthType: 'Synth', id: crypto.randomUUID() }
                 ]
         }
     ]
@@ -62,7 +62,7 @@ function createSynthReturn(type: SynthType): Tone.AMSynth | Tone.FMSynth | Tone.
         default: return new Tone.Synth().toDestination()
     }
 }
-export function playSpecificNote(note: SequenceItem, synthT?: SynthType, idx?: number, jump = true) {
+export function playSpecificNote(note: SequenceItem, synthT?: SynthType, idx?: number, jump = true, length?: number) {
     if (jump) {
         if (typeof idx === 'number') {
             jumpingIndex.value = idx
@@ -86,7 +86,9 @@ export function playSpecificNote(note: SequenceItem, synthT?: SynthType, idx?: n
         s = createSynthReturn(t)
         synthMap[t] = s
     }
-    s.triggerAttackRelease(note as Note, '8n')
+    const noteLength = length ?? 1
+    const duration = stepSeconds * noteLength
+    s.triggerAttackRelease(note as Note, duration)
 }
 export let synth: Tone.AMSynth | Tone.FMSynth | Tone.DuoSynth | Tone.MonoSynth | Tone.Synth | null = null
 // Helper to memoize synth per type
@@ -174,8 +176,9 @@ function scheduleStatements(stmts: Statement[], startOffset: number, path: numbe
 function scheduleSequenceEvents(seq: SequenceNote[], startOffset: number, perStep?: (idx: number, time: number) => void, transport?: typeof Tone.Transport): number {
     let offset = startOffset
     for (let i = 0; i < seq.length; i++) {
-        const { note, synthType: nSynthType } = seq[i]!
+        const { note, synthType: nSynthType, length } = seq[i]!
         const idx = i
+        const noteLength = length ?? 1
         const id = (transport ?? Tone.getTransport()).schedule((time) => {
             if (!transport && perStep) {
                 Tone.getDraw().schedule(() => {
@@ -183,13 +186,16 @@ function scheduleSequenceEvents(seq: SequenceNote[], startOffset: number, perSte
                 }, time)
             }
             if (note !== 'Silent' && note !== 'Hold') {
+                // Support legacy Hold notes: count consecutive Holds after this note
                 let holdCount = 0
                 let j = idx + 1
                 while (j < seq.length && seq[j]?.note === 'Hold') {
                     holdCount++
                     j++
                 }
-                const duration = stepSeconds * (1 + holdCount)
+                // Use length property if explicitly set (including 0.5), otherwise fall back to holdCount for backward compatibility
+                const effectiveLength = (length !== undefined && length !== 1) ? length : (1 + holdCount)
+                const duration = stepSeconds * effectiveLength
                 let s = synthMap[nSynthType]
                 if (!s) {
                     s = createSynthReturn(nSynthType)
@@ -201,7 +207,8 @@ function scheduleSequenceEvents(seq: SequenceNote[], startOffset: number, perSte
         }, offset)
         if (!transport)
             scheduledIds.push(id)
-        offset += stepSeconds
+        // Advance offset by the note's length (or 1 if not specified)
+        offset += stepSeconds * noteLength
     }
     return offset
 }
@@ -221,7 +228,7 @@ function getStatementByPath(path: number[]): Statement | undefined {
     return current
 }
 
-export function contextPreview(note: string, synthType: SynthType, path: number[], index: number) {
+export function contextPreview(note: string, synthType: SynthType, path: number[], index: number, length?: number) {
     // schedule highlight on Draw to sync with RAF
     Tone.getDraw().schedule(() => {
         highlightPath.value = path
@@ -235,18 +242,94 @@ export function contextPreview(note: string, synthType: SynthType, path: number[
     }, Tone.now())
 
     if (note === 'Hold' || note === 'Silent') return
-    playSpecificNote(note as Note, synthType)
+    playSpecificNote(note as Note, synthType, undefined, true, length)
 }
 export function contextRemove(path: number[], index: number) {
     const stmt = getStatementByPath(path)
     if (!stmt || stmt.kind !== 'sequence') return
     stmt.sequence.splice(index, 1)
 }
+
+export function contextDuplicate(path: number[], index: number) {
+    const stmt = getStatementByPath(path)
+    if (!stmt || stmt.kind !== 'sequence') return
+    const note = stmt.sequence[index]
+    if (!note) return
+    // Create a duplicate with a new ID
+    const duplicate: SequenceNote = {
+        ...note,
+        id: crypto.randomUUID()
+    }
+    // Insert at the next index
+    stmt.sequence.splice(index + 1, 0, duplicate)
+    return index + 1 // Return the new index
+}
 export function addItemToSelected(n: SequenceItem) {
     if (!selectedSequencePath.value) return
     const stmt = getStatementByPath(selectedSequencePath.value)
     if (!stmt || stmt.kind !== 'sequence') return
-    stmt.sequence.push({ note: n, synthType: synthType.value, id: crypto.randomUUID() })
+    stmt.sequence.push({ note: n, synthType: synthType.value, id: crypto.randomUUID(), length: 1 })
+}
+
+export function adjustNoteLength(path: number[], index: number, delta: number) {
+    const stmt = getStatementByPath(path)
+    if (!stmt || stmt.kind !== 'sequence') return
+    const note = stmt.sequence[index]
+    if (!note) return
+    const currentLength = note.length || 1
+    const isHoldNote = note.note === 'Hold'
+    
+    let newLength: number
+    
+    // Special transition: 1 <-> 0.5
+    if (currentLength === 1 && delta < 0) {
+        newLength = 0.5
+    } else if (currentLength === 0.5 && delta > 0) {
+        newLength = 1
+    } else if (currentLength === 0.5 && delta < 0) {
+        // Stay at minimum (0.5)
+        newLength = 0.5
+    } else if (currentLength < 1) {
+        // If somehow below 0.5, clamp to 0.5
+        newLength = 0.5
+    } else {
+        // For Hold notes, allow fractional increments (0.5 steps)
+        // For other notes, only integer steps
+        if (isHoldNote) {
+            newLength = Math.max(0.5, currentLength + (delta * 0.5))
+            // Round to nearest 0.5 for cleaner values
+            newLength = Math.round(newLength * 2) / 2
+        } else {
+            // For values >= 1, adjust by integer steps
+            newLength = Math.max(0.5, Math.round(currentLength + delta))
+        }
+        // If we end up at 1, we can keep it as 1 (will be stored as undefined)
+    }
+    
+    // Store as undefined if 1 (default), otherwise store the value
+    note.length = newLength === 1 ? undefined : newLength
+}
+
+export function adjustNotePitch(path: number[], index: number, direction: number) {
+    const stmt = getStatementByPath(path)
+    if (!stmt || stmt.kind !== 'sequence') return
+    const note = stmt.sequence[index]
+    if (!note) return
+    
+    // Only adjust pitch for actual notes (not Silent or Hold)
+    if (note.note === 'Silent' || note.note === 'Hold') return
+    
+    const currentNote = note.note as Note
+    const currentIndex = notes.indexOf(currentNote)
+    
+    if (currentIndex === -1) return
+    
+    const newIndex = currentIndex + direction
+    
+    // Check bounds
+    if (newIndex >= 0 && newIndex < notes.length) {
+        note.note = notes[newIndex] as Note
+    }
 }
 
 if (import.meta.client) {
