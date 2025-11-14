@@ -1,7 +1,7 @@
 <template>
     <feature class="flex flex-col gap-2 items-center justify-center">
         <Flex column class="gap-2 bg-card border rounded-control control-border-control max-h-40 overflow-y-auto">
-            <div v-for="item in list" class="h-16 p-control min-w-40 flex items-center justify-center">{{ item }}</div>
+            <div v-for="item in list" class="h-16 p-control min-w-40 flex items-center justify-center select-text">{{ item }}</div>
         </Flex>
         Select the tools you would like to use.
         <Flex class="gap-2">
