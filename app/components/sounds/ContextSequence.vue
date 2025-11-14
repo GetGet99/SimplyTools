@@ -21,11 +21,11 @@
       </button>
     </Flex> -->
     <VueDraggable v-model="stmt.sequence" tag="div" class="mt-1 flex flex-wrap gap-1 bg-transparent" :animation="150">
-      <button v-for="(element, index) in stmt.sequence" :key="index"
+      <button v-for="(element, index) in stmt.sequence" :key="element.id"
         class="px-4 py-2 md:px-2 md:py-0.5 md:group-data-[touch='true']:px-4 md:group-data-[touch='true']:py-2 rounded border text-xs select-none transition-transform cursor-move bg-transparent"
         :class="[chipClass(element), { jumping: isChipJumping(index) }]"
         @click="previewMode ? handlePreviewNote(element, index) : handleRemoveNote(index)"
-        @contextmenu.prevent="handlePreviewNote(element, index)" draggable type="button"
+        @contextmenu.prevent="handlePreviewNote(element, index)" type="button"
         :title="'Drag to reorder | Left click: remove | Right click: preview'">
         {{ renderItem(element) }}
       </button>
@@ -41,6 +41,7 @@ import { reactive, inject } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import SoundsContextTools from './SoundsContextTools.vue'
 import * as Sounds from '~/utils/sounds/sounds';
+import { arraysEqual } from '~/utils/arrays';
 
 const previewMode = Sounds.previewMode
 
