@@ -5,6 +5,7 @@ import { DevCategory } from "./dev"
 import { MathCategory } from "./math"
 import { Uncategorized } from "./uncategorized"
 import { RandomCategory } from "./random"
+import { TimeCategory } from "./time"
 
 export const Categories = {
     uncategorized: Uncategorized,
@@ -13,4 +14,5 @@ export const Categories = {
     apps: Apps,
     AI: AICategory,
     random: RandomCategory,
-} satisfies { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random']: Category } as { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI']: Category }
+    time: TimeCategory,
+} satisfies { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time']: Category } as { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time']: Category }

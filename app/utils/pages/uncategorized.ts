@@ -28,21 +28,6 @@ export const Uncategorized = createCategory({
         desc: 'Simple Pomodoro timer to boost your productivity with work and break intervals.'
     },
     {
-        title: 'Timer',
-        path: 'timer',
-        desc: 'Simple timer'
-    },
-    {
-        title: 'Stopwatch',
-        path: 'stopwatch',
-        desc: 'Simple Stopwatch'
-    },
-    {
-        title: 'Timestamp Converter',
-        path: 'timestamp',
-        desc: 'Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.'
-    },
-    {
         title: 'QR Code Generator',
         path: 'qr',
         desc: 'Quickly create a QR code.'
