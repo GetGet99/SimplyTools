@@ -52,6 +52,7 @@
     --color-divider: #FFFFFF15;
     --spacing-titlebar-height: max(30px, var(--app-titlebar-height, 0px));
     --spacing-mainarea-height: 100vh - var(--spacing-titlebar-height);
+    --color-txt-fill-color-secondary: #FFFFFFC5;
 }
 
 @theme {
@@ -88,6 +89,7 @@ body:not(.app) {
         --color-accent-dark-1: #e05307;
         --text-color-on-accent-primary: hsl(300, 2%, 10%);
         --color-foreground-on-accent-primary: hsl(300, 2%, 10%);
+        --color-txt-fill-color-secondary: #FFFFFFC5;
     }
 
     @variant not-dark {
@@ -98,6 +100,7 @@ body:not(.app) {
         --color-accent-dark-1: #e05307;
         --text-color-on-accent-primary: white;
         --color-foreground-on-accent-primary: white;
+        --color-txt-fill-color-secondary: #0000009E;
     }
 }
 

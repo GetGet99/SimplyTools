@@ -29,19 +29,18 @@
         <Flex
             class="fixed right-6 bottom-7 z-40 gap-2 items-end backdrop-blur-lg p-2 border rounded-lg border-border-control-primary">
             <Flex v-show="toolsExpanded" class="gap-2 items-center shadow-lg">
-                <Button :variant="previewMode ? 'accent' : 'regular'"
-                    class="flex items-center gap-1 text-base min-w-[40px]" @click="previewMode = !previewMode"
+                <ToggleButton v-model="previewMode" class="flex items-center gap-1 text-base min-w-[40px]"
                     :aria-pressed="previewMode">
                     <Icon :icon=PlayIcon alt="Play Sound" />
                     Tap to Preview Notes
-                </Button>
+                </ToggleButton>
                 <!-- Add more tool buttons here -->
             </Flex>
-            <Button :variant="toolsExpanded ? 'accent' : 'regular'" @click="toolsExpanded = !toolsExpanded"
-                :aria-label="toolsExpanded ? 'Close Tools' : 'Open Tools'" class="pl-1.25 flex gap-1">
+            <ToggleButton v-model="toolsExpanded" :aria-label="toolsExpanded ? 'Close Tools' : 'Open Tools'"
+                class="pl-1.25 flex gap-1">
                 <Icon :icon="TouchIcon" alt="" />
                 Touchscreen Compatibility
-            </Button>
+            </ToggleButton>
             <Flex class="gap-2">
                 <Button v-if="!isPlaying" class="pl-1.25 flex gap-1 border-accent-primary" @click="Sounds.playContext"
                     :disabled="playingContext.statements.length === 0">
@@ -66,14 +65,22 @@
             <div class="mt-4 space-y-2">
                 <p class="font-semibold">Keyboard Navigation:</p>
                 <ul class="list-disc list-inside space-y-1 text-sm">
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Tab</kbd> / <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Arrow Keys</kbd> - Navigate between notes</li>
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Space</kbd> / <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - Preview/Activate note</li>
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Delete</kbd> / <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Backspace</kbd> - Remove note</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Tab</kbd> / <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Arrow Keys</kbd> - Navigate between notes
+                    </li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Space</kbd> / <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - Preview/Activate note</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Delete</kbd> / <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Backspace</kbd> - Remove note</li>
                     <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">D</kbd> - Duplicate note</li>
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Left/Right</kbd> - Adjust note length</li>
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Up/Down</kbd> - Adjust note pitch</li>
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Alt</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Left/Right</kbd> - Reorder notes</li>
-                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Scroll</kbd> - Adjust note length</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Left/Right</kbd> - Adjust note length</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Up/Down</kbd> - Adjust note pitch</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Alt</kbd> + <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Left/Right</kbd> - Reorder notes</li>
+                    <li><kbd class="px-1.5 py-0.5 bg-muted rounded text-xs">Shift</kbd> + <kbd
+                            class="px-1.5 py-0.5 bg-muted rounded text-xs">Scroll</kbd> - Adjust note length</li>
                 </ul>
             </div>
         </template>

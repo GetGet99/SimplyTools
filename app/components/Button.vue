@@ -1,5 +1,6 @@
 <script setup lang="ts">
-defineProps<{ variant?: Variants, icon?: boolean | 'left' | 'right', iconNoFlex?: boolean }>()
+export type ButtonProps = { variant?: Variants, icon?: boolean | 'left' | 'right', iconNoFlex?: boolean }
+defineProps<ButtonProps>()
 const button = useTemplateRef('button')
 defineExpose({ button })
 </script>

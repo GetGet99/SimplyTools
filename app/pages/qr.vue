@@ -1,7 +1,6 @@
 <template>
     <Feature category="none" tool="QRCode" class="flex justify-center">
-        <Flex column
-            class="bg-control-primary border-border-control-primary w-fit p-4 rounded-2 gap-3 lg:flex-row">
+        <Flex column class="bg-control-primary border-border-control-primary w-fit p-4 rounded-2 gap-3 lg:flex-row">
             <Flex column class="gap-2">
                 <div>QR Code Content</div>
                 <TextBox multiline class="w-min-100" v-model="value" placeholder="Add text or link here!" />
@@ -27,9 +26,9 @@
                 <Flex>
                     <div>Preview</div>
                     <Grow />
-                    <Button :variant="constraint ? 'accent' : 'regular'" @click="constraint = !constraint">Constrain
-                        Size Preview: {{ constraint ?
-                            'On' : 'Off' }}</Button>
+                    <ToggleSwitch v-model="constraint">
+                        Constrain Size Preview
+                    </ToggleSwitch>
                 </Flex>
                 <QRCodeRenderer ref="qrCode" class="rounded-2 border border-control-strong"
                     :class="constraint ? 'w-100 h-100' : ''" alt="" :value :mode :foreground :background :size

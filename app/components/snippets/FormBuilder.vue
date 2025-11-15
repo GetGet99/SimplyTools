@@ -8,11 +8,7 @@
                 </template>
                 
                 <!-- Boolean -->
-                <Button v-if="propDef === 'boolean' || propDef === true" 
-                    :variant="formData[propName] ? 'accent' : 'regular'"
-                    @click="formData[propName] = !formData[propName]">
-                    {{ formData[propName] ? 'True' : 'False' }}
-                </Button>
+                <ToggleSwitch v-if="propDef === 'boolean' || propDef === true" v-model="formData[propName]" />
                 
                 <!-- String -->
                 <TextBox v-else-if="propDef === 'string'" 
@@ -65,11 +61,7 @@
                                     :placeholder="`Enter ${toReadableName(nestedPropName)}`"
                                     mode="real" />
                                 
-                                <Button v-else-if="nestedPropDef === 'boolean' || nestedPropDef === true"
-                                    :variant="(formData[propName] as any[])[idx][nestedPropName] ? 'accent' : 'regular'"
-                                    @click="(formData[propName] as any[])[idx][nestedPropName] = !(formData[propName] as any[])[idx][nestedPropName]">
-                                    {{ (formData[propName] as any[])[idx][nestedPropName] ? 'True' : 'False' }}
-                                </Button>
+                                <ToggleSwitch v-else-if="nestedPropDef === 'boolean' || nestedPropDef === true" v-model="(formData[propName] as any[])[idx][nestedPropName]" />
                             </div>
                         </template>
                     </Flex>
