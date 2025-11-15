@@ -52,7 +52,7 @@
 
         </Grid>
         <ContentDialogPortal title="Template Source" class="w-[70vw] max-w-[70vw] h-[70vh] max-h-[70vh]">
-            <SnippetsEditor readonly class="grow" v-model="snippetCode" />
+            <SnippetsEditor readonly class="grow h-full" v-model="snippetCode" />
         </ContentDialogPortal>
     </DialogRoot>
 </template>
