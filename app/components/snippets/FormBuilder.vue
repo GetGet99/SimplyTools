@@ -45,25 +45,12 @@
                                 <Icon :icon="DeleteIcon" alt="Remove" />
                             </Button>
                         </Flex>
-                        <template v-for="(nestedPropDef, nestedPropName) in getObjectArraySchema(propDef)" :key="nestedPropName">
-                            <div class="flex flex-col gap-1">
-                                <label class="text-xs font-medium">{{ toReadableName(nestedPropName) }}</label>
-                                <template v-if="getNestedPropComment(propName, nestedPropName)">
-                                    <span class="text-xs text-muted-foreground">{{ getNestedPropComment(propName, nestedPropName) }}</span>
-                                </template>
-                                
-                                <TextBox v-if="nestedPropDef === 'string'" 
-                                    v-model="(formData[propName] as any[])[idx][nestedPropName]" 
-                                    :placeholder="`Enter ${toReadableName(nestedPropName)}`" />
-                                
-                                <NumberBox v-else-if="nestedPropDef === 'number'" 
-                                    v-model="(formData[propName] as any[])[idx][nestedPropName]" 
-                                    :placeholder="`Enter ${toReadableName(nestedPropName)}`"
-                                    mode="real" />
-                                
-                                <ToggleSwitch v-else-if="nestedPropDef === 'boolean' || nestedPropDef === true" v-model="(formData[propName] as any[])[idx][nestedPropName]" />
-                            </div>
-                        </template>
+                        <!-- Recursive FormBuilder for nested object -->
+                        <FormBuilder
+                            :properties="getObjectArraySchema(propDef)"
+                            v-model="(formData[propName] as any[])[idx]"
+                            :metaRaw="props.metaRaw ? props.metaRaw.get('properties', true)?.get(propName, true) : undefined"
+                        />
                     </Flex>
                     <Button variant="ghost" @click="addObjectArrayItem(propName, getObjectArraySchema(propDef))">
                         + Add Item
@@ -83,7 +70,14 @@ const props = defineProps<{
     metaRaw?: any
 }>()
 
-const input = defineModel<string>({ required: true })
+
+// Accept both string (YAML) and object v-models
+const input = defineModel<any>({ required: true })
+
+// Helper to check if v-model is YAML string or object
+function isYamlString(val: any): val is string {
+    return typeof val === 'string';
+}
 
 // Get the properties node from metaRaw for comment extraction
 const propertiesNode = computed(() => {
@@ -97,69 +91,79 @@ const propertiesNode = computed(() => {
     return null
 })
 
-// Form data - reactive object that mirrors the YAML structure
-const formData = ref<Record<string, any>>({})
-const isUpdatingFromYAML = ref(false)
 
-// Initialize form data from YAML or defaults
+// Form data - reactive object that mirrors the YAML/object structure
+const formData = ref<Record<string, any>>({})
+const isUpdatingFromInput = ref(false)
+
+// Initialize form data from YAML string or object
 function initializeFormData() {
-    isUpdatingFromYAML.value = true
+    isUpdatingFromInput.value = true
     try {
-        const parsed = input.value ? YAML.parse(input.value) : {}
-        const newFormData: Record<string, any> = {}
-        
+        let parsed: Record<string, any> = {};
+        if (isYamlString(input.value)) {
+            parsed = input.value ? YAML.parse(input.value) : {};
+        } else if (typeof input.value === 'object' && input.value !== null) {
+            parsed = input.value;
+        }
+        const newFormData: Record<string, any> = {};
         for (const [propName, propDef] of Object.entries(props.properties)) {
             if (parsed[propName] !== undefined) {
-                newFormData[propName] = parsed[propName]
+                newFormData[propName] = parsed[propName];
             } else {
                 // Set defaults based on type
                 if (propDef === 'boolean' || propDef === true) {
-                    newFormData[propName] = false
+                    newFormData[propName] = false;
                 } else if (propDef === 'string') {
-                    newFormData[propName] = ''
+                    newFormData[propName] = '';
                 } else if (propDef === 'number') {
-                    newFormData[propName] = undefined
+                    newFormData[propName] = undefined;
                 } else if (isStringArray(propDef)) {
-                    newFormData[propName] = []
+                    newFormData[propName] = [];
                 } else if (isObjectArray(propDef)) {
-                    newFormData[propName] = []
+                    newFormData[propName] = [];
                 }
             }
         }
-        
-        formData.value = newFormData
+        formData.value = newFormData;
     } finally {
-        isUpdatingFromYAML.value = false
+        isUpdatingFromInput.value = false;
     }
 }
 
-// Watch for external YAML changes
+// Watch for external input changes
 watch(input, () => {
-    if (!isUpdatingFromYAML.value) {
-        initializeFormData()
+    if (!isUpdatingFromInput.value) {
+        initializeFormData();
     }
 }, { immediate: true })
 
-// Watch form data changes and update YAML
+// Watch form data changes and update input
 watch(formData, () => {
-    if (!isUpdatingFromYAML.value) {
-        updateYAML()
+    if (!isUpdatingFromInput.value) {
+        updateInput();
     }
 }, { deep: true })
 
-function updateYAML() {
+function updateInput() {
     try {
         // Remove undefined values
         const cleaned = Object.fromEntries(
             Object.entries(formData.value).filter(([_, v]) => v !== undefined)
-        )
-        const yaml = YAML.stringify(cleaned)
-        // Only update if different to prevent loops
-        if (yaml !== input.value) {
-            input.value = yaml
+        );
+        if (isYamlString(input.value)) {
+            const yaml = YAML.stringify(cleaned);
+            if (yaml !== input.value) {
+                input.value = yaml;
+            }
+        } else if (typeof input.value === 'object' && input.value !== null) {
+            // Only update if different to prevent loops
+            if (JSON.stringify(cleaned) !== JSON.stringify(input.value)) {
+                input.value = { ...cleaned };
+            }
         }
     } catch (err) {
-        console.error('Error generating YAML:', err)
+        console.error('Error updating input:', err);
     }
 }
 
