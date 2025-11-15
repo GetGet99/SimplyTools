@@ -29,12 +29,12 @@ export const playingContext: Ref<PlayingContext> = ref({
         {
             kind: 'sequence', sequence:
                 [
-                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
-                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
+                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
+                    { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
                     { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'G4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'C4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() },
                     { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 4 },
                     { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() },
-                    { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
+                    { note: 'F4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 },
                     { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'D4', synthType: 'Synth', id: crypto.randomUUID() }, { note: 'E4', synthType: 'Synth', id: crypto.randomUUID() },
                     { note: 'D4', synthType: 'Synth', id: crypto.randomUUID(), length: 2 }, { note: 'G4', synthType: 'Synth', id: crypto.randomUUID() }
                 ]
