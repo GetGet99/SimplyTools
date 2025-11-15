@@ -16,7 +16,7 @@
                     </DialogClose>
                 </Control>
             </DialogTitle>
-            <div>
+            <div class="grow">
                 <slot></slot>
             </div>
             <Flex v-if="slots.footer" class="justify-end">
