@@ -71,7 +71,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
     </Grid>
 </template>
 <style>
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 .feature-root {
     @variant app {

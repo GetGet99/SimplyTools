@@ -43,5 +43,5 @@ const value = ref<bigint | undefined>(undefined)
     </Feature>
 </template>
 <style lang="css" scoped>
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 </style>

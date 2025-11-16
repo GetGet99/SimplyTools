@@ -1,6 +1,4 @@
 <script setup lang="ts" generic="T extends AcceptableValue | AcceptableValue[]">
-import { ref, computed, watch, onMounted } from 'vue'
-import Control from './Control.vue'
 import ChevronDown from '@fluentui/svg-icons/icons/chevron_down_24_regular.svg?raw'
 import type { AcceptableValue } from 'reka-ui';
 

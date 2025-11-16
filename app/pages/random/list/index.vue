@@ -32,7 +32,7 @@ const lists = await getListIdsAsync()
     </Feature>
 </template>
 <style scoped>
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 .random-list-root {
     @apply grid mx-10 lg:mx-30 gap-4;

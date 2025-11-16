@@ -51,7 +51,7 @@ onMounted(() => {
 })
 </script>
 <style>
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 .blocklySvg {
     background: transparent !important;

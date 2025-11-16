@@ -1,26 +1,23 @@
 <template>
   <Flex column class="gap-3">
-    <ContextInsertBar :index=0 />
+    <SimplySoundsContextInsertBar :index=0 />
 
     <div v-if="!statements.length" class="text-xs text-muted-foreground">
       No statements in context.
     </div>
 
     <template v-for="(stmt, idx) in statements" :key="idx">
-      <ContextSequence v-if="stmt.kind === 'sequence'" v-model:stmt="(stmt as SequenceStatement)" :index="idx"
+      <SimplySoundsContextSequence v-if="stmt.kind === 'sequence'" v-model:stmt="(stmt as SequenceStatement)" :index="idx"
         :path :is-selected="isSequenceSelected(idx)" />
 
-      <ContextLoop v-else v-model:stmt="(stmt as LoopStatement)" :index="idx" :path />
+      <SimplySoundsContextLoop v-else v-model:stmt="(stmt as LoopStatement)" :index="idx" :path />
 
-      <ContextInsertBar :index="idx + 1" />
+      <SimplySoundsContextInsertBar :index="idx + 1" />
     </template>
   </Flex>
 </template>
 
 <script setup lang="ts">
-import ContextSequence from './ContextSequence.vue'
-import ContextLoop from './ContextLoop.vue'
-import ContextInsertBar from './ContextInsertBar.vue'
 import { selectedSequencePath } from './shared'
 import type { ContextBlockAPIs, LoopStatement, SequenceStatement, Statement } from './shared'
 

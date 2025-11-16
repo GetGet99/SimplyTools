@@ -17,7 +17,7 @@ defineProps<{
     </div>
 </template>
 <style>
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 .style-textbox-group {
     @apply grid utils-style-textbox p-0 focus-within:utils-style-textbox-focus;

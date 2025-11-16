@@ -1,5 +1,5 @@
 @charset "utf-8";
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 @utility fluent-icon-img-* {
     background-image: none;

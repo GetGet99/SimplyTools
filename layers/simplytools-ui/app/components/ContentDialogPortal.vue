@@ -31,7 +31,7 @@ defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
 const slots = useSlots()
 </script>
 <style>
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 @layer components {
     .ContentDialogOverlay {

@@ -60,7 +60,7 @@ function postProcess(value: string | number | undefined) {
   </Primitive>
 </template>
 <style lang="css">
-@reference '~~/layers/simplytools-theme/app/app.css';
+@reference '~~/layers/simplytools-ui/app/app.css';
 
 .grid-component {
     --grid-component-columns: initial;
