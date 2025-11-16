@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
     devtools: { enabled: true },
-    modules: ['reka-ui/nuxt', 'nuxt-monaco-editor'],
+    modules: ['reka-ui/nuxt'],
     css: [
         '~~/layers/simplytools-theme/app/app.css'
     ],
@@ -14,4 +14,9 @@ export default defineNuxtConfig({
     imports: {
         dirs: ['types'],
     },
+    components: [
+        { path: './components/layout/', pathPrefix: false },
+        { path: './components/primitives/', pathPrefix: false },
+        './components'
+    ]
 })
