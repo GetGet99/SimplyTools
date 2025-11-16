@@ -51,7 +51,7 @@ onMounted(() => {
 })
 </script>
 <style>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .blocklySvg {
     background: transparent !important;

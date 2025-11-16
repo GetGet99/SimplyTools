@@ -17,7 +17,7 @@ defineProps<{
     </div>
 </template>
 <style>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .style-textbox-group {
     @apply grid utils-style-textbox p-0 focus-within:utils-style-textbox-focus;

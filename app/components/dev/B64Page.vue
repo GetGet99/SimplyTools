@@ -136,7 +136,7 @@ const w = window
     </Feature>
 </template>
 <style lang="css">
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .b64-textbox-controls {
     @apply rounded-control rounded-l-none border bg-control-primary border-border-control-primary border-l-0 border-b-2 border-b-control-strong peer-focus:border-b-textbox-accent-highlight peer-focus:bg-transparent;

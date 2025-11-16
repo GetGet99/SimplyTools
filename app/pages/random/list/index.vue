@@ -32,7 +32,7 @@ const lists = await getListIdsAsync()
     </Feature>
 </template>
 <style scoped>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .random-list-root {
     @apply grid mx-10 lg:mx-30 gap-4;

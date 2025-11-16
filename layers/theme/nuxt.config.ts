@@ -10,22 +10,8 @@ export default defineNuxtConfig({
     vite: {
         plugins: [tailwindcss()]
     },
-    app: {
-
-        head: {
-            meta: [
-                { name: 'color-scheme', content: 'dark light' }
-            ],
-        }
-    },
     // Important: make Nuxt aware of the custom types
     imports: {
         dirs: ['types'],
     },
-    components: [
-        '~/components',
-        '~/applications',
-        '~/pages/components',
-    ],
-    extends: ['./layers/theme'],
 })

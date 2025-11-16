@@ -56,7 +56,7 @@ onUnmounted(() => {
 })
 </script>
 <style>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 @layer base {
     .base-bg-control-primary {

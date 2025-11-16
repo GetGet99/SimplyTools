@@ -60,7 +60,7 @@ function postProcess(value: string | number | undefined) {
   </Primitive>
 </template>
 <style lang="css">
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .grid-component {
     --grid-component-columns: initial;

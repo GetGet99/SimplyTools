@@ -71,7 +71,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
     </Grid>
 </template>
 <style>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .feature-root {
     @variant app {

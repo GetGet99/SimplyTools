@@ -47,7 +47,7 @@ import { isMobileNavVisible } from '~/utils/navigation/mobile';
     </nav>
 </template>
 <style lang="css">
-@reference "~/app.css";
+@reference "~~/layers/theme/app/app.css";
 details.no-marker>summary {
     list-style: none;
 }

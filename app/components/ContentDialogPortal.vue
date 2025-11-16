@@ -31,7 +31,7 @@ defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
 const slots = useSlots()
 </script>
 <style>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 @layer components {
     .ContentDialogOverlay {

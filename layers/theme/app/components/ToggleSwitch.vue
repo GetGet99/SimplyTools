@@ -17,7 +17,7 @@ const model = defineModel<boolean>()
 const id = useId()
 </script>
 <style scoped>
-@reference '~/app.css';
+@reference '~~/layers/theme/app/app.css';
 
 .toggle-switch {
     @apply w-10 h-5 border border-control-strong;

@@ -101,7 +101,7 @@
     </Grid>
 </template>
 <style lang="css" scoped>
-    @reference '~/app.css';
+    @reference '~~/layers/theme/app/app.css';
 
     .hslBG {
         @apply focus:border-b-textbox-accent-highlight!;
