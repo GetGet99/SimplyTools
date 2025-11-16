@@ -13,14 +13,14 @@ const notes = await Promise.all(
         class="md:mx-12 my-12 flex flex-col shrink-0 gap-4">
         <AppSaveWarning />
         Recent Notes
-        <OurLink v-for="{ title, key } in notes" :key :href="`./${key}`" class="manual">
+        <OurLink v-for="{ title, key } in notes" :key :href="`/notes/${key}`" class="manual">
             <Control>
                 <div class="text-card-title">{{ title }}</div>
             </Control>
         </OurLink>
         <Button @click="async () => {
             let note = await createNewNoteAsync()
-            navigateTo(`notes/${note}`)
+            navigateTo(`/notes/${note}`)
         }">
             <div class="text-card-title"> + New</div>
         </Button>
