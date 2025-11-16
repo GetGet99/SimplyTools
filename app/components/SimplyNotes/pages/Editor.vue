@@ -1,8 +1,8 @@
 <template>
-    <NotesEditor v-model="note" class="grow h-full" />
+    <SimplyNotesEditor v-model="note" class="grow h-full" />
 </template>
 <script setup lang="ts">
-import { useNoteAsync, useNoteTitleAsync, type NoteFileName } from '~/utils/notes/manager';
+import { useNoteAsync, useNoteTitleAsync, type NoteFileName } from '../lib/manager';
 import type { PageInfo } from '~/utils/pages/_helper';
 import { Apps } from '~/utils/pages/app';
 const route = useRoute()

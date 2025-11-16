@@ -53,9 +53,9 @@ import QuoteIcon from '@fluentui/svg-icons/icons/text_quote_24_regular.svg?raw'
 import { toggleMark, setBlockType, wrapIn } from "prosemirror-commands"
 import { EditorView } from "prosemirror-view"
 import { EditorState, Plugin } from "prosemirror-state"
-import { OurSchema, OurMarkdownParser, OurMarkdownSErializer } from '~/utils/notes/markdown'
+import { OurSchema, OurMarkdownParser, OurMarkdownSErializer } from './lib/markdown'
 import 'prosemirror-example-setup/style/style.css'
-import { simplyToolsPlugins } from "~/utils/notes/plugin"
+import { simplyToolsPlugins } from "./lib/plugin"
 import type { MarkType, NodeType } from "prosemirror-model"
 const view = ref<'markdown' | 'rich'>('markdown')
 const model = defineModel<string>()

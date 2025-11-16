@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { createNewNoteAsync, getNotesAsync, getNoteTitleAsync } from '~/utils/notes/manager';
+import { createNewNoteAsync, getNotesAsync, getNoteTitleAsync } from '../lib/manager';
 import { Apps } from '~/utils/pages/app';
 usePageInfo(Apps.pages.find(x => x.path === 'notes'))
-import { ref, onMounted } from 'vue'
 
 const keys = await getNotesAsync()
 const notes = await Promise.all(
