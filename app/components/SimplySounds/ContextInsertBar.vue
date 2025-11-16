@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LoopStatement, SequenceStatement } from '~/utils/sounds/sounds';
+import type { LoopStatement, SequenceStatement } from '~/components/sounds/sounds';
 import { useContextBlockAPI } from './ContextBlocks.vue';
 
 const parent = useContextBlockAPI()

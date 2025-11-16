@@ -21,8 +21,8 @@
 import ContextSequence from './ContextSequence.vue'
 import ContextLoop from './ContextLoop.vue'
 import ContextInsertBar from './ContextInsertBar.vue'
-import { selectedSequencePath } from '~/utils/sounds/sounds'
-import type { LoopStatement, SequenceStatement, Statement } from '~/utils/sounds/sounds'
+import { selectedSequencePath } from '~/components/sounds/sounds'
+import type { LoopStatement, SequenceStatement, Statement } from '~/components/sounds/sounds'
 
 export type ContextBlockAPIs = {
   selectSequenceAt(index: number): void

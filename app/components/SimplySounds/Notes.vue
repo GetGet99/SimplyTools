@@ -4,27 +4,27 @@
         <div v-else class="italic">Tap/Left click to preview notes.</div>
         <Flex class="gap-4 items-center justify-center flex-wrap">
             <Flex class="gap-2">
-                <Button v-for="type in Sounds.synthTypes" :key="type"
+                <Button v-for="type in SimplySounds.synthTypes" :key="type"
                     :variant="synthType === type ? 'accent' : 'regular'" @click="synthType = type">
                     {{ type }}
                 </Button>
             </Flex>
         </Flex>
         <Flex class="gap-2">
-            <Button @click="previewMode ? handleSpecialPreview('Silent') : Sounds.addItemToSelected('Silent')"
+            <Button @click="previewMode ? handleSpecialPreview('Silent') : SimplySounds.addItemToSelected('Silent')"
                 :class="{ jumping: jumpingSpecial === 'Silent' }" @contextmenu.prevent="handleSpecialPreview('Silent')">
                 Silent
             </Button>
-            <Button @click="previewMode ? handleSpecialPreview('Hold') : Sounds.addItemToSelected('Hold')"
+            <Button @click="previewMode ? handleSpecialPreview('Hold') : SimplySounds.addItemToSelected('Hold')"
                 :class="{ jumping: jumpingSpecial === 'Hold' }" @contextmenu.prevent="handleSpecialPreview('Hold')">
                 Hold
             </Button>
         </Flex>
         <Grid :columns="7" class="gap-2 max-h-35 overflow-auto">
-            <template v-for="n in Sounds.notes" :key="n">
+            <template v-for="n in SimplySounds.notes" :key="n">
                 <Button v-if="!n.includes('#')" :class="{ jumping: jumpingNote === n }"
-                    @click="previewMode ? Sounds.playSpecificNote(n) : (Sounds.addItemToSelected(n), Sounds.playSpecificNote(n, undefined, undefined, false))"
-                    @contextmenu.prevent="Sounds.playSpecificNote(n)">
+                    @click="previewMode ? SimplySounds.playSpecificNote(n) : (SimplySounds.addItemToSelected(n), SimplySounds.playSpecificNote(n, undefined, undefined, false))"
+                    @contextmenu.prevent="SimplySounds.playSpecificNote(n)">
                     {{ n }}
                 </Button>
             </template>
@@ -32,17 +32,17 @@
     </Flex>
 </template>
 <script setup lang="ts">
-import * as Sounds from '~/utils/sounds/sounds';
-const previewMode = Sounds.previewMode
-const jumpingSpecial = Sounds.jumpingSpecial
-const jumpingNote = Sounds.jumpingNote
-const synthType = Sounds.synthType
+import * as SimplySounds from './shared';
+const previewMode = SimplySounds.previewMode
+const jumpingSpecial = SimplySounds.jumpingSpecial
+const jumpingNote = SimplySounds.jumpingNote
+const synthType = SimplySounds.synthType
 
-function handleSpecialPreview(s: Sounds.Special) {
+function handleSpecialPreview(s: SimplySounds.Special) {
     jumpingSpecial.value = s
     setTimeout(() => {
         if (jumpingSpecial.value === s) jumpingSpecial.value = null
-    }, Sounds.jumpDuration)
+    }, SimplySounds.jumpDuration)
     // no sound for silent/hold
 }
 </script>

@@ -8,7 +8,7 @@
       </Flex>
       <Flex class="items-center gap-2">
         <Button size="xs" @click="parent.selectSequenceAt(index)">{{ isSelected ? 'Hide Keyboard' : 'Add Notes' }}</Button>
-        <SoundsContextTools :index />
+        <SimplySoundsContextTools :index />
       </Flex>
     </Flex>
     <VueDraggable v-model="stmt.sequence" tag="div" class="mt-1 flex flex-wrap gap-1 bg-transparent" :animation="150">
@@ -36,7 +36,7 @@
       </button>
     </VueDraggable>
     <Flex column v-if="isSelected" class="items-center justify-center">
-      <SoundsNotes />
+      <SimplySoundsNotes />
     </Flex>
   </Flex>
 </template>
@@ -44,8 +44,7 @@
 <script setup lang="ts">
 import { ref, reactive, nextTick } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
-import SoundsContextTools from './SoundsContextTools.vue'
-import * as Sounds from '~/utils/sounds/sounds';
+import * as Sounds from '~/components/sounds/sounds';
 import { arraysEqual } from '~/utils/arrays';
 import { useContextBlockAPI } from './ContextBlocks.vue';
 
