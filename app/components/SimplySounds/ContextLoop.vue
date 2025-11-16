@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { LoopStatement } from '~/components/sounds/sounds';
-import { useContextBlockAPI } from './ContextBlocks.vue'
+import type { LoopStatement } from './shared';
+import { useContextBlockAPI } from './shared'
 
 
 const parent = useContextBlockAPI()

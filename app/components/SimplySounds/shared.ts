@@ -51,6 +51,17 @@ export const playingContext: Ref<PlayingContext> = ref({
         }
     ]
 })
+export type ContextBlockAPIs = {
+  selectSequenceAt(index: number): void
+  removeAt(index: number): void
+  duplicateAt(index: number): void
+  wrapInLoopAt(index: number): void
+  insertAt(index: number, stmt: Statement): void
+  updateAt<T extends Statement>(index: number, updateFn: (stmt: T) => T): void
+}
+export function useContextBlockAPI() {
+  return inject<ContextBlockAPIs>('ContextBlockAPIs')!
+}
 export const jumpDuration = 250 // ms
 export const jumpingIndex = ref<number | null>(null)
 export const selectedSequencePath = ref<number[] | null>(null)

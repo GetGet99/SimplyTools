@@ -21,20 +21,8 @@
 import ContextSequence from './ContextSequence.vue'
 import ContextLoop from './ContextLoop.vue'
 import ContextInsertBar from './ContextInsertBar.vue'
-import { selectedSequencePath } from '~/components/sounds/sounds'
-import type { LoopStatement, SequenceStatement, Statement } from '~/components/sounds/sounds'
-
-export type ContextBlockAPIs = {
-  selectSequenceAt(index: number): void
-  removeAt(index: number): void
-  duplicateAt(index: number): void
-  wrapInLoopAt(index: number): void
-  insertAt(index: number, stmt: Statement): void
-  updateAt<T extends Statement>(index: number, updateFn: (stmt: T) => T): void
-}
-export function useContextBlockAPI() {
-  return inject<ContextBlockAPIs>('ContextBlockAPIs')!
-}
+import { selectedSequencePath } from './shared'
+import type { ContextBlockAPIs, LoopStatement, SequenceStatement, Statement } from './shared'
 
 
 // keep name for recursion usage in ContextLoop

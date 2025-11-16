@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useContextBlockAPI } from './ContextBlocks.vue';
+import { useContextBlockAPI } from './shared';
 defineProps<{ index: number }>()
 const parent = useContextBlockAPI()
 </script>

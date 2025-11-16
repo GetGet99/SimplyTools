@@ -44,9 +44,9 @@
 <script setup lang="ts">
 import { ref, reactive, nextTick } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
-import * as Sounds from '~/components/sounds/sounds';
+import * as Sounds from './shared';
 import { arraysEqual } from '~/utils/arrays';
-import { useContextBlockAPI } from './ContextBlocks.vue';
+import { useContextBlockAPI } from './shared';
 
 const parent = useContextBlockAPI()
 

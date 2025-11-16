@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import type { LoopStatement, SequenceStatement } from '~/components/sounds/sounds';
-import { useContextBlockAPI } from './ContextBlocks.vue';
+import type { LoopStatement, SequenceStatement } from './shared';
+import { useContextBlockAPI } from './shared';
 
 const parent = useContextBlockAPI()
 const props = defineProps<{ index: number }>()
