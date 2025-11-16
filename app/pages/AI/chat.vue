@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Button from '~/components/Button.vue'
-import TextBox from '~/components/TextBox.vue'
 import type { } from '~/types/prompt.d.ts'
 import { AICategory } from '~/utils/pages/ai'
 usePageInfo(AICategory.pages.find(x => x.path === 'chat'))
