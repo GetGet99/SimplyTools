@@ -7,19 +7,10 @@
         <div v-else class="italic">Tap/Left click to preview notes.</div>
       </Flex>
       <Flex class="items-center gap-2">
-        <Button size="xs" @click="$emit('select', index)">{{ isSelected ? 'Hide Keyboard' : 'Add Notes' }}</Button>
-        <SoundsContextTools @duplicate="$emit('duplicate', index)" @wrap-in-loop="$emit('wrap-in-loop', index)"
-          @remove="$emit('remove', index)" />
+        <Button size="xs" @click="parent.selectSequenceAt(index)">{{ isSelected ? 'Hide Keyboard' : 'Add Notes' }}</Button>
+        <SoundsContextTools :index />
       </Flex>
     </Flex>
-    <!-- <Flex class="mt-1 flex-wrap gap-1">
-      <button v-for="(sn, i) in stmt.sequence" :key="i"
-        class="px-2 py-0.5 rounded border text-xs select-none transition-transform cursor-pointer"
-        :class="[chipClass(sn), { jumping: isChipJumping(i) }]" @click.stop="handleRemoveNote(i)"
-        @contextmenu.prevent.stop="handlePreviewNote(sn, i)" :title="'Left click: remove | Right click: preview'">
-        {{ renderItem(sn) }}
-      </button>
-    </Flex> -->
     <VueDraggable v-model="stmt.sequence" tag="div" class="mt-1 flex flex-wrap gap-1 bg-transparent" :animation="150">
       <button v-for="(element, index) in stmt.sequence" :key="element.id"
         :ref="el => { if (el) buttonRefs[index] = el as HTMLButtonElement }"
@@ -56,6 +47,9 @@ import { VueDraggable } from 'vue-draggable-plus'
 import SoundsContextTools from './SoundsContextTools.vue'
 import * as Sounds from '~/utils/sounds/sounds';
 import { arraysEqual } from '~/utils/arrays';
+import { useContextBlockAPI } from './ContextBlocks.vue';
+
+const parent = useContextBlockAPI()
 
 const previewMode = Sounds.previewMode
 
@@ -73,16 +67,7 @@ const props = defineProps<{
   isSelected: boolean
 }>()
 const stmt = defineModel<SequenceStatement>('stmt', { required: true })
-defineEmits<{
-  (e: 'select', index: number): void
-  (e: 'remove', index: number): void
-  (e: 'duplicate', index: number): void
-  (e: 'wrap-in-loop', index: number): void
-}>()
 
-const maxPreview = 32
-
-function previewSequence(seq: SequenceNote[]) { return seq.slice(0, maxPreview) }
 function renderItem(sn: SequenceNote) {
   const length = sn.length || 1
   let lengthSuffix = ''

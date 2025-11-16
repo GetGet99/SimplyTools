@@ -1,18 +1,15 @@
 <template>
   <Flex class="items-center gap-2">
-    <Button size="xs" variant="regular" @click="$emit('duplicate')">Duplicate</Button>
-    <Button size="xs" variant="regular" @click="$emit('wrap-in-loop')">Wrap in Loop</Button>
-    <Button size="xs" variant="regular" @click="$emit('remove')">Remove</Button>
+    <Button size="xs" variant="regular" @click="parent.duplicateAt(index)">Duplicate</Button>
+    <Button size="xs" variant="regular" @click="parent.wrapInLoopAt(index)">Wrap in Loop</Button>
+    <Button size="xs" variant="regular" @click="parent.removeAt(index)">Remove</Button>
   </Flex>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{
-  (e: 'duplicate'): void
-  (e: 'wrap-in-loop'): void
-  (e: 'remove'): void
-}>()
+import { useContextBlockAPI } from './ContextBlocks.vue';
+defineProps<{ index: number }>()
+const parent = useContextBlockAPI()
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

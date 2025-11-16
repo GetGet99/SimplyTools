@@ -3,26 +3,29 @@
     <Flex class="lg:flex-row items-center justify-between">
       <div class="font-semibold">Repeat {{ stmt.iterations }} time{{ stmt.iterations === 1 ? '' : 's' }}</div>
       <Flex class="items-center gap-2">
-        <Button size="xs" variant="regular" @click="$emit('update-iterations', index, Math.max(1, stmt.iterations - 1))" :disabled="stmt.iterations <= 1">-</Button>
-        <Button size="xs" variant="regular" @click="$emit('update-iterations', index, stmt.iterations + 1)">+</Button>
-        <SoundsContextTools
-          @duplicate="$emit('duplicate', index)"
-          @wrap-in-loop="$emit('wrap-in-loop', index)"
-          @remove="$emit('remove', index)"
-        />
+        <Button size="xs" variant="regular" @click="updateIterations(Math.max(1, stmt.iterations - 1))"
+          :disabled="stmt.iterations <= 1">-</Button>
+        <Button size="xs" variant="regular" @click="updateIterations(stmt.iterations + 1)">+</Button>
+        <SoundsContextTools :index />
       </Flex>
     </Flex>
     <div class="pl-3 border-l-2 border-control-primary/60">
-      <ContextBlocks :statements="stmt.statements" :path="[...path, index]" @update:statements="v => $emit('update-nested', index, v)" />
+      <ContextBlocks :statements="stmt.statements" :path="[...path, index]"
+        @update:statements="statements => parent.updateAt<LoopStatement>(index, stmt => ({ ...stmt, statements }))" />
     </div>
   </Flex>
 </template>
 
 <script setup lang="ts">
-import ContextBlocks from './ContextBlocks.vue'
+import type { LoopStatement } from '~/utils/sounds/sounds';
+import ContextBlocks, { useContextBlockAPI } from './ContextBlocks.vue'
 import SoundsContextTools from './SoundsContextTools.vue'
 
-export type LoopStatement = { kind: 'loop'; iterations: number; statements: any[] }
+
+const parent = useContextBlockAPI()
+function updateIterations(value: number) {
+  parent.updateAt<LoopStatement>(props.index, stmt => ({ ...stmt, iterations: value }))
+}
 
 const props = defineProps<{
   index: number
@@ -30,15 +33,6 @@ const props = defineProps<{
 }>()
 const stmt = defineModel<LoopStatement>('stmt', { required: true })
 
-
-const emit = defineEmits<{
-  (e: 'update-iterations', index: number, value: number): void
-  (e: 'update-nested', index: number, value: any[]): void
-  (e: 'remove', index: number): void
-  (e: 'duplicate', index: number): void
-  (e: 'wrap-in-loop', index: number): void
-}>()
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

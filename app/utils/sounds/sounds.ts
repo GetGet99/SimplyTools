@@ -18,9 +18,19 @@ export type Note = typeof notes[number]
 export type Special = 'Silent' | 'Hold'
 export type SequenceNote = { note: SequenceItem; synthType: SynthType, id: ReturnType<typeof crypto.randomUUID>, length?: number }
 export type SequenceItem = Note | Special
-export type SequenceStatement = { kind: 'sequence'; sequence: SequenceNote[] }
-export type LoopStatement = { kind: 'loop'; iterations: number; statements: Statement[] }
-export type Statement = SequenceStatement | LoopStatement
+export interface LoopStatement {
+    kind: 'loop'
+    iterations: number
+    statements: Statement[]
+}
+export interface SequenceStatement {
+    kind: 'sequence'
+    sequence: SequenceNote[]
+}
+export interface StartPosStatement {
+    kind: 'startpos'
+}
+export type Statement = LoopStatement | SequenceStatement | StartPosStatement
 export type PlayingContext = { statements: Statement[] }
 
 export const synthType: Ref<SynthType> = ref('Synth')
@@ -278,9 +288,9 @@ export function adjustNoteLength(path: number[], index: number, delta: number) {
     if (!note) return
     const currentLength = note.length || 1
     const isHoldNote = note.note === 'Hold'
-    
+
     let newLength: number
-    
+
     // Special transition: 1 <-> 0.5
     if (currentLength === 1 && delta < 0) {
         newLength = 0.5
@@ -305,7 +315,7 @@ export function adjustNoteLength(path: number[], index: number, delta: number) {
         }
         // If we end up at 1, we can keep it as 1 (will be stored as undefined)
     }
-    
+
     // Store as undefined if 1 (default), otherwise store the value
     note.length = newLength === 1 ? undefined : newLength
 }
@@ -315,17 +325,17 @@ export function adjustNotePitch(path: number[], index: number, direction: number
     if (!stmt || stmt.kind !== 'sequence') return
     const note = stmt.sequence[index]
     if (!note) return
-    
+
     // Only adjust pitch for actual notes (not Silent or Hold)
     if (note.note === 'Silent' || note.note === 'Hold') return
-    
+
     const currentNote = note.note as Note
     const currentIndex = notes.indexOf(currentNote)
-    
+
     if (currentIndex === -1) return
-    
+
     const newIndex = currentIndex + direction
-    
+
     // Check bounds
     if (newIndex >= 0 && newIndex < notes.length) {
         note.note = notes[newIndex] as Note
