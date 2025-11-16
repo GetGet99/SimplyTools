@@ -5,7 +5,7 @@
             minimap: {
                 enabled: false
             },
-            readOnly: readonly,
+            readOnly: props.readonly,
             scrollBeyondLastLine: false,
         }" v-model="code" class="base-bg-control-primary" v-get-element="disableContrlP" />
     </ClientOnly>

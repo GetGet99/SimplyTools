@@ -1,5 +1,5 @@
 <template>
-    <CodeEditor ref="editor" lang="liquid" :readonly v-model="code" />
+    <CodeEditor ref="editor" lang="liquid" :readonly="props.readonly" v-model="code" />
 </template>
 <script setup lang="ts">
     import * as YAML from "yaml";
