@@ -2,7 +2,7 @@
 
 </template>
 <script lang="ts">
-import type { Metadata } from '~/utils/snippets/metadata';
+import type { Metadata } from './lib/metadata';
 import * as YAML from "yaml";
 
 const props = defineProps<{ snippetKey: string }>()

@@ -3,7 +3,7 @@
         <!-- Template Editor -->
         <Flex column class="gap-2 row-span-2">
             <label class="font-bold p-button px-0">Template (autosaved)</label>
-            <SnippetsEditor class="grow" v-model="code" />
+            <SimplySnippetsEditor class="grow" v-model="code" />
         </Flex>
 
         <!-- Test Input Editor -->
@@ -34,9 +34,9 @@ import { Apps } from '~/utils/pages/app';
 import View from '@fluentui/svg-icons/icons/eye_24_regular.svg?raw'
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
-import { extractYamlComment, type Metadata } from "~/utils/snippets/metadata";
+import { extractYamlComment, type Metadata } from "./lib/metadata";
 import type { Uri } from "monaco-editor";
-import { getMetadataAsync, getMetadataExampleAsync, useLocalSnippetRefAsync } from "~/utils/snippets/manager";
+import { getMetadataAsync, getMetadataExampleAsync, useLocalSnippetRefAsync } from "./lib/manager";
 // --------------------
 // Refs
 // --------------------

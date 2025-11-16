@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Apps } from '~/utils/pages/app';
 usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
-import { createNewSnippetAsync } from '~/utils/snippets/manager';
+import { createNewSnippetAsync } from './lib/manager';
 if (import.meta.client) {
 
     const remix = useRequestURL().searchParams.get('remix') ?? 'builtin.examples.item'

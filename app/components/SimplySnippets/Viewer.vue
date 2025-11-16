@@ -4,7 +4,7 @@
             <Flex class="gap-2 items-center lg:-order-1">
                 <label class="font-bold">Input</label>
                 <Grow />
-                <SnippetsViewerButtons class="lg:hidden" :snippet-key :snippet-code />
+                <SimplySnippetsViewerButtons class="lg:hidden" :snippet-key :snippet-code />
             </Flex>
 
             <!-- Input Tabs -->
@@ -16,7 +16,7 @@
                 </NavigationTabs>
                 <!-- Form Tab -->
                 <ClientOnly>
-                    <SnippetsFormBuilder v-if="inputTab === 'form' && properties" :properties="properties"
+                    <SimplySnippetsFormBuilder v-if="inputTab === 'form' && properties" :properties="properties"
                         :meta-raw="metaRaw" v-model="input" class="overflow-y-auto" />
                     <div v-else-if="inputTab === 'form' && !properties"
                         class="flex items-center justify-center text-muted-foreground min-h-50">
@@ -42,7 +42,7 @@
             <Flex class="gap-2 items-center lg:-order-1">
                 <label class="font-bold">Output</label>
                 <Grow />
-                <SnippetsViewerButtons class="not-lg:hidden" :snippet-key :snippet-code />
+                <SimplySnippetsViewerButtons class="not-lg:hidden" :snippet-key :snippet-code />
             </Flex>
             <!-- Output Preview -->
             <ClientOnly>
@@ -52,7 +52,7 @@
 
         </Grid>
         <ContentDialogPortal title="Template Source" class="w-[70vw] max-w-[70vw] h-[70vh] max-h-[70vh]">
-            <SnippetsEditor readonly class="grow h-full" v-model="snippetCode" />
+            <SimplySnippetsEditor readonly class="grow h-full" v-model="snippetCode" />
         </ContentDialogPortal>
     </DialogRoot>
 </template>
@@ -74,8 +74,8 @@
 <script setup lang="ts">
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
-import { type Metadata } from "~/utils/snippets/metadata";
-import { getMetadataAsync, getMetadataSchemaAsync, getSnippetAsync, useSavedInput } from "~/utils/snippets/manager";
+import { type Metadata } from "./lib/metadata";
+import { getMetadataAsync, getMetadataSchemaAsync, getSnippetAsync, useSavedInput } from "./lib/manager";
 
 const props = defineProps<{ snippetKey: string, class?: string }>()
 

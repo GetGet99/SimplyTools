@@ -4,8 +4,8 @@
 <script setup lang="ts">
     import * as YAML from "yaml";
     import { ref, watch } from "vue";
-    import { useMonacoLiquidLanguage, setModelLiquidValidation } from "~/utils/snippets/liquid/language";
-    import { extractYamlComment, yamlToZod } from "~/utils/snippets/metadata";
+    import { useMonacoLiquidLanguage, setModelLiquidValidation } from "./lib/liquid/language";
+    import { extractYamlComment, yamlToZod } from "./lib/metadata";
     const props = defineProps<{ readonly?: boolean }>()
     const code = defineModel<string>()
 

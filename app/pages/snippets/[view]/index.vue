@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Apps } from '~/utils/pages/app';
-import { getBuiltInSnippets, getLocalSnippetsAsync, getMetadataAsync } from '~/utils/snippets/manager';
+import { getBuiltInSnippets, getLocalSnippetsAsync, getMetadataAsync } from './lib/manager';
 const url = useRoute()
 const view = computed(() => url.params.view as string)
 const item = Apps.pages.find(x => x.path === 'snippets')!
@@ -32,15 +32,15 @@ const snippets = await getLocalSnippetsAsync()
         <div class="snippets-root grow">
             <div class="snippets-list">
                 <ClientOnly>
-                    <SnippetsCard v-for="key in snippets" :snippet-key="key" />
+                    <SimplySnippetsCard v-for="key in snippets" :snippet-key="key" />
                 </ClientOnly>
-                <SnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
+                <SimplySnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
             </div>
             <!-- Render server side if it is built in -->
-            <SnippetsViewer v-if="view.startsWith('builtin.')" class="not-xl:-order-1 h-full" :snippetKey='view' />
+            <SimplySnippetsViewer v-if="view.startsWith('builtin.')" class="not-xl:-order-1 h-full" :snippetKey='view' />
             <!-- Render client side otherwise -->
             <ClientOnly v-else>
-                <SnippetsViewer class="not-xl:-order-1 h-full" :snippetKey='view' />
+                <SimplySnippetsViewer class="not-xl:-order-1 h-full" :snippetKey='view' />
             </ClientOnly>
         </div>
         <template #summary>
