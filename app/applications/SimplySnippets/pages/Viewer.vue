@@ -61,7 +61,7 @@ const snippets = await getLocalSnippetsAsync()
     </Feature>
 </template>
 <style scoped>
-@reference '~~/layers/theme/app/app.css';
+@reference '~~/layers/simplytools-theme/app/app.css';
 
 .snippets-root {
     @apply grid mx-10 lg:mx-30 gap-4;

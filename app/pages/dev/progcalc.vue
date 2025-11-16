@@ -178,7 +178,7 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
     </Feature>
 </template>
 <style lang="css" scoped>
-@reference '~~/layers/theme/app/app.css';
+@reference '~~/layers/simplytools-theme/app/app.css';
 
 [data-keyboardfocus="hidden"],
 [data-keyboardfocus="hidden"] * {

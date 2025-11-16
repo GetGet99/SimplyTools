@@ -57,7 +57,7 @@
     </DialogRoot>
 </template>
 <style scoped>
-@reference '~~/layers/theme/app/app.css';
+@reference '~~/layers/simplytools-theme/app/app.css';
 
 .snippet-viewer-root {
     @variant lg {

@@ -31,7 +31,7 @@ provide('toasts.generator', exports);
     <slot />
 </template>
 <style>
-@reference '~~/layers/theme/app/app.css';
+@reference '~~/layers/simplytools-theme/app/app.css';
 
 @theme reference {
     --animate-hide: hide 100ms ease-in;

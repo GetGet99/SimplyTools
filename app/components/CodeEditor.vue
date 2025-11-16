@@ -56,7 +56,7 @@ onUnmounted(() => {
 })
 </script>
 <style>
-@reference '~~/layers/theme/app/app.css';
+@reference '~~/layers/simplytools-theme/app/app.css';
 
 @layer base {
     .base-bg-control-primary {

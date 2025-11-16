@@ -144,7 +144,7 @@ watch(model, () => {
 })
 </script>
 <style lang="css">
-@reference '~~/layers/theme/app/app.css';
+@reference '~~/layers/simplytools-theme/app/app.css';
 
 .ProseMirror {
     outline: none;

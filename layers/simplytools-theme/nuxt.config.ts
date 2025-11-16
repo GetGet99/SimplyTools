@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     modules: ['reka-ui/nuxt', 'nuxt-monaco-editor'],
     css: [
-        '~~/layers/theme/app/app.css'
+        '~~/layers/simplytools-theme/app/app.css'
     ],
     vite: {
         plugins: [tailwindcss()]

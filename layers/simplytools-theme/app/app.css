@@ -1,6 +1,7 @@
 @layer properties, base, components, theme, utilities;
-@import "tailwindcss";
-@source 'error.vue';
+@import "tailwindcss" source('../../../');
+@source '~/layers/';
+@source '~~/app/error.vue';
 @custom-variant data-view (&[data-view="true"]);
 @custom-variant app (body.app &);
 /* @custom-variant not-data-view (&:not([data-view="true"])); */
@@ -318,4 +319,5 @@ body {
         @apply utils-style-textbox-focus;
     }
 }
+
 @import './styles/control.css';
