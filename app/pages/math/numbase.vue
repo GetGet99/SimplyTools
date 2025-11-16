@@ -43,5 +43,5 @@ const value = ref<bigint | undefined>(undefined)
     </Feature>
 </template>
 <style lang="css" scoped>
-@reference '../../app.css';
+@reference '~/app.css';
 </style>

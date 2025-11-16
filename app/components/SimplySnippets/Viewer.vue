@@ -57,7 +57,7 @@
     </DialogRoot>
 </template>
 <style scoped>
-@reference '../../app.css';
+@reference '~/app.css';
 
 .snippet-viewer-root {
     @variant lg {

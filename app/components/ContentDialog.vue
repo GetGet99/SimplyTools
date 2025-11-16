@@ -23,7 +23,7 @@
     const slots = useSlots()
 </script>
 <style>
-    @reference '../app.css';
+    @reference '~/app.css';
 
     @layer components {
         .ContentDialogPortal {

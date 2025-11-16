@@ -1,5 +1,5 @@
 @charset "utf-8";
-@reference '../../app.css';
+@reference '~/app.css';
 
 @utility fluent-icon-img-* {
     background-image: none;

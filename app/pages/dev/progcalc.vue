@@ -178,7 +178,7 @@ const display = computed(() => calc.error || calc.displayOf(calc.value))
     </Feature>
 </template>
 <style lang="css" scoped>
-@reference '../../app.css';
+@reference '~/app.css';
 
 [data-keyboardfocus="hidden"],
 [data-keyboardfocus="hidden"] * {

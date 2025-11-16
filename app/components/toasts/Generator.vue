@@ -31,7 +31,7 @@ provide('toasts.generator', exports);
     <slot />
 </template>
 <style>
-@reference '../../app.css';
+@reference '~/app.css';
 
 @theme reference {
     --animate-hide: hide 100ms ease-in;

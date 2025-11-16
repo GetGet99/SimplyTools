@@ -39,7 +39,7 @@ const snippets = await getLocalSnippetsAsync()
     </Feature>
 </template>
 <style scoped>
-@reference '../../app.css';
+@reference '~/app.css';
 
 .snippets-root {
     @apply grid mx-10 lg:mx-30 gap-4;
