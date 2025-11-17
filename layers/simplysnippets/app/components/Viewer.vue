@@ -74,8 +74,8 @@
 <script setup lang="ts">
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
-import { type Metadata } from "./lib/metadata";
-import { getMetadataAsync, getMetadataSchemaAsync, getSnippetAsync, useSavedInput } from "./lib/manager";
+import { type Metadata } from "../lib/metadata";
+import { getMetadataAsync, getMetadataSchemaAsync, getSnippetAsync, useSavedInput } from "../lib/manager";
 
 const props = defineProps<{ snippetKey: string, class?: string }>()
 

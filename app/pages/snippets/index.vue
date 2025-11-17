@@ -1,3 +1,0 @@
-<template>
-    <SimplySnippetsPagesLanding />
-</template>

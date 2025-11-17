@@ -19,9 +19,8 @@
     </Control>
 </template>
 <script setup lang="ts">
-    import OpenPopup from '@fluentui/svg-icons/icons/open_folder_24_regular.svg?raw'
-    import Edit from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
-    import Remix from '@fluentui/svg-icons/icons/save_copy_24_regular.svg?raw'
-    defineProps<{ snippetKey: string, snippetCode: string, class?: string }>()
-
+import OpenPopup from '@fluentui/svg-icons/icons/open_folder_24_regular.svg?raw'
+import Edit from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
+import Remix from '@fluentui/svg-icons/icons/save_copy_24_regular.svg?raw'
+defineProps<{ snippetKey: string, snippetCode: string, class?: string }>()
 </script>

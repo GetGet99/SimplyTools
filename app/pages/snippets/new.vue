@@ -1,3 +1,0 @@
-<template>
-    <SimplySnippetsPagesNew />
-</template>

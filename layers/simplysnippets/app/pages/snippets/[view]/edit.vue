@@ -34,9 +34,9 @@ import { Apps } from '~/utils/pages/app';
 import View from '@fluentui/svg-icons/icons/eye_24_regular.svg?raw'
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
-import { extractYamlComment, type Metadata } from "../lib/metadata";
+import { extractYamlComment, type Metadata } from "../../../lib/metadata";
 import type { Uri } from "monaco-editor";
-import { getMetadataAsync, getMetadataExampleAsync, useLocalSnippetRefAsync } from "../lib/manager";
+import { getMetadataAsync, getMetadataExampleAsync, useLocalSnippetRefAsync } from "../../../lib/manager";
 // --------------------
 // Refs
 // --------------------

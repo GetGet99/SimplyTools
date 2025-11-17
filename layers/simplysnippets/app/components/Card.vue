@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Delete from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
-import { deleteSnippetAsync, getMetadataAsync, getSnippetAsync } from './lib/manager';
+import { deleteSnippetAsync, getMetadataAsync } from '../lib/manager';
 const props = defineProps<{ snippetKey: string }>()
 const meta = await getMetadataAsync(props.snippetKey)
 const isDeleted = ref(false)
