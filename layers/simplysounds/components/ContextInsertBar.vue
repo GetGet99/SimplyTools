@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import type { LoopStatement, SequenceStatement } from './shared';
-import { useContextBlockAPI } from './shared';
+import type { LoopStatement, SequenceStatement } from '../lib/shared';
+import { useContextBlockAPI } from '../lib/shared';
 
 const parent = useContextBlockAPI()
 const props = defineProps<{ index: number }>()

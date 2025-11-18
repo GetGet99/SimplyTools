@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { LoopStatement } from './shared';
-import { useContextBlockAPI } from './shared'
+import type { LoopStatement } from '../lib/shared';
+import { useContextBlockAPI } from '../lib/shared'
 
 
 const parent = useContextBlockAPI()

@@ -92,7 +92,7 @@ import { Apps } from '~/utils/pages/app';
 usePageInfo(Apps.pages.find(x => x.path === 'sounds'))
 import { ref, computed, provide } from 'vue'
 import * as Tone from 'tone'
-import * as Sounds from './shared';
+import * as Sounds from '../../lib/shared';
 import PlayIcon from '@fluentui/svg-icons/icons/play_24_regular.svg?raw'
 import StopIcon from '@fluentui/svg-icons/icons/stop_24_regular.svg?raw'
 import TouchIcon from '@fluentui/svg-icons/icons/hand_point_24_regular.svg?raw'

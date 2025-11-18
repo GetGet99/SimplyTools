@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { selectedSequencePath } from './shared'
-import type { ContextBlockAPIs, LoopStatement, SequenceStatement, Statement } from './shared'
+import { selectedSequencePath } from '../lib/shared'
+import type { ContextBlockAPIs, LoopStatement, SequenceStatement, Statement } from '../lib/shared'
 
 
 // keep name for recursion usage in ContextLoop

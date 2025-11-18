@@ -32,7 +32,7 @@
     </Flex>
 </template>
 <script setup lang="ts">
-import * as SimplySounds from './shared';
+import * as SimplySounds from '../lib/shared';
 const previewMode = SimplySounds.previewMode
 const jumpingSpecial = SimplySounds.jumpingSpecial
 const jumpingNote = SimplySounds.jumpingNote

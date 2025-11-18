@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useContextBlockAPI } from './shared';
+import { useContextBlockAPI } from '../lib/shared';
 defineProps<{ index: number }>()
 const parent = useContextBlockAPI()
 </script>
