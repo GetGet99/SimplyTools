@@ -5,7 +5,7 @@ export default defineNuxtConfig({
         dirs: ['types'],
     },
     components: [
-        { path: './components', prefix: 'SimplySnippets' }
+        { path: './components', prefix: 'SimplySounds' }
     ],
     extends: [
         '../simplytools-ui',
