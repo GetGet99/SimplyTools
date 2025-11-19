@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'cases'))
-import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-import Lowercase from '@fluentui/svg-icons/icons/text_case_lowercase_24_regular.svg?raw'
-import Uppercase from '@fluentui/svg-icons/icons/text_case_uppercase_24_regular.svg?raw'
-import Swappingcase from '@fluentui/svg-icons/icons/text_change_case_24_regular.svg?raw'
 
 const text = ref('')
 function copy() {
     navigator.clipboard.writeText(text.value)
 }
-function apply(fn : (x: string) => string) {
+function apply(fn: (x: string) => string) {
     const tb = tbref.value
     if (!tb) return
     let sel = tb.getSelectionText()
@@ -29,17 +25,17 @@ const tbref = useTemplateRef('tbref')
             <template #tools>
                 <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.lowercase)"
                     title="lowercase">
-                    <Icon alt="" :icon=Lowercase />
+                    <IconTextCaseLowercase />
                     <span>lowercase</span>
                 </Button>
                 <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.uppercase)"
                     title="UPPERCASE">
-                    <Icon alt="" :icon=Uppercase />
+                    <IconTextCaseUppercase />
                     <span>UPPERCASE</span>
                 </Button>
                 <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.swappingcase)"
                     title="swappingCASE">
-                    <Icon alt="" :icon=Swappingcase />
+                    <IconTextChangeCase />
                     <span>swappingCASE</span>
                 </Button>
                 <Button variant="ghost" class="border-0 flex gap-1 justify-center" @click="apply(cases.randomcase)"
@@ -48,9 +44,8 @@ const tbref = useTemplateRef('tbref')
                     <span>rANdOmcAse</span>
                 </Button>
                 <Grow />
-                <Button variant="ghost" class="border-0 pr-[11px] flex gap-1 justify-center" @click="copy"
-                    title="Copy">
-                    <Icon alt="" :icon=CopyIcon />
+                <Button variant="ghost" class="border-0 pr-[11px] flex gap-1 justify-center" @click="copy" title="Copy">
+                    <IconCopy />
                     <span>Copy</span>
                 </Button>
             </template>
