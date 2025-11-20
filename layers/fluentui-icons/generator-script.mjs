@@ -145,6 +145,27 @@ async function clearAutogenDirectory(dir) {
   }
 }
 
+/**
+ * Generate a barrel file (_barrel.ts) exporting all PascalCase .vue components.
+ *
+ * @param {string} dir
+ * @returns {Promise<void>}
+ */
+async function generateBarrelFile(dir) {
+  const files = await fs.readdir(dir, { withFileTypes: true });
+
+  const vueFiles = files
+    .filter(f => f.isFile() && f.name.endsWith(".vue"))
+    .map(f => f.name.replace(".vue", "")); // PascalCase names
+
+  let content = "";
+  for (const name of vueFiles) {
+    content += `export { default as ${name} } from "./${name}.vue";\n`;
+  }
+
+  const outPath = path.join(dir, "_barrel.ts");
+  await fs.writeFile(outPath, content, "utf8");
+}
 
 /**
  * Main generator routine.
@@ -240,6 +261,10 @@ async function main() {
 
   console.log("✨ Done! Generated components:");
   console.log("➡", OUTPUT_DIR);
+
+  console.log("🧾 Generating _barrel.ts barrel file...");
+  await generateBarrelFile(OUTPUT_DIR);
+  console.log("✅ All done!");
 }
 
 main().catch((err) => {

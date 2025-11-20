@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AICategory } from '~/utils/pages/ai';
 import simplyToolsIcon from '~/assets/SimplyToolsIcon.png';
-const props = defineProps<{ class?: string, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
+const props = defineProps<{ class?: string, style?: any, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
@@ -19,7 +19,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                 unlikely to work correctly.</noscript>
         </Flex>
         <div class="mt-4 app:mt-0 not-app:mb-8 w-full"
-            :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']">
+            :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']" :style>
             <div v-if="tool.category === AICategory" class="text-center mb-8">
                 <span class="app:hidden">Note: This tool is powered by browsers' built-in AI.<br /></span>
                 <span class="hidden app:inline">Note: This tool is powered by WebView2 browser's built-in
@@ -29,7 +29,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                 and
                 comply with your browsers' AI terms.
             </div>
-            <div v-if="!limitScreen" :class>
+            <div v-if="!limitScreen" :class :style>
                 <slot></slot>
             </div>
             <slot v-else></slot>

@@ -6,6 +6,7 @@ import { MathCategory } from "./math"
 import { Uncategorized } from "./uncategorized"
 import { RandomCategory } from "./random"
 import { TimeCategory } from "./time"
+import { InDevCategory } from "~~/layers/simplytools-dev-pages/app/utils/pages/in-dev"
 
 export const Categories = {
     uncategorized: Uncategorized,
@@ -15,4 +16,5 @@ export const Categories = {
     AI: AICategory,
     random: RandomCategory,
     time: TimeCategory,
-} satisfies { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time']: Category } as { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time']: Category }
+    "in-dev": InDevCategory,
+} satisfies { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time' | 'in-dev']: Category } as { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time' | 'in-dev']: Category }
