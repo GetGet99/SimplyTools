@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import PlayIcon from '@fluentui/svg-icons/icons/play_24_regular.svg?raw'
-import PauseIcon from '@fluentui/svg-icons/icons/pause_24_regular.svg?raw'
-import ResetIcon from '@fluentui/svg-icons/icons/arrow_clockwise_24_regular.svg?raw'
-import EditIcon from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
 
 import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'timer'))
@@ -149,7 +145,7 @@ watch(minutesInput, (val, oldVal) => {
                     />
                 </Flex>
                 <Button variant="accent" @click="start" :disabled="timeLeftMs <= 0" class="mt-4 flex">
-                    <Icon :icon="PlayIcon" alt="Start" class="w-5 h-5 mr-2" />
+                    <IconPlay alt="Start" class="w-5 h-5 mr-2" />
                     Start Timer
                 </Button>
             </Flex>
@@ -159,16 +155,16 @@ watch(minutesInput, (val, oldVal) => {
                 </div>
                 <Flex class="gap-4 mt-2">
                     <Button v-if="!running" @click="editing = true" title="Edit Time" class="p-4 rounded-full">
-                        <Icon :icon="EditIcon" alt="Edit" class="w-5 h-5" />
+                        <IconEdit alt="Edit" class="w-5 h-5" />
                     </Button>
                     <Button v-if="!running" variant="accent" @click="start" title="Continue Timer" class="p-4 rounded-full">
-                        <Icon :icon="PlayIcon" alt="Continue" class="w-5 h-5" />
+                        <IconPlay alt="Continue" class="w-5 h-5" />
                     </Button>
                     <Button v-else variant="accent" @click="stop" title="Pause" class="p-4 rounded-full">
-                        <Icon :icon="PauseIcon" alt="Pause" class="w-5 h-5" />
+                        <IconPause alt="Pause" class="w-5 h-5" />
                     </Button>
                     <Button v-if="!running" @click="reset" title="Reset" class="p-4 rounded-full">
-                        <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
+                        <IconArrowClockwise alt="Reset" class="w-5 h-5" />
                     </Button>
                 </Flex>
             </Flex>

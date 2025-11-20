@@ -28,7 +28,7 @@
                             :placeholder="`Item ${idx + 1}`" 
                             class="flex-1" />
                         <Button variant="ghost" icon @click="removeArrayItem(propName, idx)">
-                            <Icon :icon="DeleteIcon" alt="Remove" />
+                            <IconDelete alt="Remove" />
                         </Button>
                     </Flex>
                     <Button variant="ghost" @click="addArrayItem(propName)">
@@ -42,7 +42,7 @@
                         <Flex class="items-center justify-between">
                             <span class="text-sm font-medium">Item {{ idx + 1 }}</span>
                             <Button variant="ghost" icon @click="removeArrayItem(propName, idx)">
-                                <Icon :icon="DeleteIcon" alt="Remove" />
+                                <IconDelete alt="Remove" />
                             </Button>
                         </Flex>
                         <!-- Recursive FormBuilder for nested object -->
@@ -63,7 +63,6 @@
 
 <script setup lang="ts">
 import * as YAML from "yaml";
-import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw';
 
 const props = defineProps<{
     properties: Record<string, any>

@@ -6,11 +6,11 @@
                 <TextBox :model-value multiline readonly placeholder='Press "Generate" button above!' />
                 <template #tools>
                     <Button icon="left" title="Copy" variant="ghost" @click="copyHistory">
-                        <Icon alt="" :icon=CopyIcon />
+                        <IconCopy alt="" />
                         Copy All
                     </Button>
                     <Button icon="left" title="Clear" variant="ghost" @click="modelValue = ''">
-                        <Icon alt="" :icon=DeleteIcon />
+                        <IconDelete alt="" />
                         Clear History
                     </Button>
                 </template>
@@ -19,8 +19,6 @@
     </details>
 </template>
 <script setup lang="ts">
-import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
 
 const modelValue = defineModel<string>({ required: true })
 function copyHistory() {

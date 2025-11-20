@@ -1,5 +1,4 @@
 <script setup lang="ts" generic="T extends AcceptableValue | AcceptableValue[]">
-import ChevronDown from '@fluentui/svg-icons/icons/chevron_down_24_regular.svg?raw'
 import type { AcceptableValue } from 'reka-ui';
 
 const props = defineProps<{
@@ -55,7 +54,7 @@ const btn = useTemplateRef('btn')
                     <slot :option="selected">
                         {{ selected }}
                     </slot>
-                    <Icon :icon="ChevronDown" alt="" class="w-2 scale-50" />
+                    <IconChevronDown alt="" class="w-2 scale-50" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuPortal>

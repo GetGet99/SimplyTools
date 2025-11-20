@@ -10,12 +10,12 @@
                 <Flex class="gap-2 items-center">
                     <Button v-if="!isPlaying" class="pl-1.25 flex gap-1" @click="Sounds.playContext"
                         :disabled="playingContext.statements.length === 0">
-                        <Icon :icon=PlayIcon alt="" />
+                        <IconPlay alt="" />
                         Play Sound
                     </Button>
                     <Button v-else variant="regular" title="Stop Playback" class="pl-1.25 flex gap-1"
                         @click="Sounds.stopSequence">
-                        <Icon :icon=StopIcon alt="" />
+                        <IconStop alt="" />
                         Stop Sound
                     </Button>
                     <Button class="flex gap-1" @click="Sounds.exportAsWAV()">
@@ -38,7 +38,7 @@
             </Flex>
             <ToggleButton v-model="toolsExpanded" :aria-label="toolsExpanded ? 'Close Tools' : 'Open Tools'"
                 class="pl-1.25 flex gap-1">
-                <Icon :icon="TouchIcon" alt="" />
+                <IconHandPoint alt="" />
                 Touchscreen Compatibility
             </ToggleButton>
             <Flex class="gap-2">
@@ -93,9 +93,6 @@ usePageInfo(Apps.pages.find(x => x.path === 'sounds'))
 import { ref, computed, provide } from 'vue'
 import * as Tone from 'tone'
 import * as Sounds from '../../lib/shared';
-import PlayIcon from '@fluentui/svg-icons/icons/play_24_regular.svg?raw'
-import StopIcon from '@fluentui/svg-icons/icons/stop_24_regular.svg?raw'
-import TouchIcon from '@fluentui/svg-icons/icons/hand_point_24_regular.svg?raw'
 const synthType = Sounds.synthType
 const playingContext = Sounds.playingContext
 const isPlaying = Sounds.isPlaying

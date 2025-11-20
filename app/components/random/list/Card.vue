@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import Delete from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
 import { getListNameAsync, deleteListAsync } from '~/utils/random/listManager';
 const props = defineProps<{ id: UUID }>()
 const name = await getListNameAsync(props.id)
 const isDeleted = ref(false)
-import Edit from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
 </script>
 <template>
     <OurLink :href='`/random/list/${id}`'
@@ -23,7 +21,7 @@ import Edit from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
             </LinkButton>
             <Control>
                 <OurLink class="manual flex gap-1 pl-2" :href="`/random/list/${id}/edit`">
-                    <Icon alt="" :icon=Edit />
+                    <IconEdit alt="" />
                     Edit
                 </OurLink>
             </Control>
@@ -31,7 +29,7 @@ import Edit from '@fluentui/svg-icons/icons/edit_24_regular.svg?raw'
                 <template #trigger>
                     <DialogTrigger as-child>
                         <Button class="p-button-icon" title="Delete" @click.stop.prevent>
-                            <Icon :icon="Delete" alt="" />
+                            <IconDelete alt="Close" />
                         </Button>
                     </DialogTrigger>
                 </template>

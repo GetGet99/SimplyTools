@@ -7,7 +7,7 @@
                 <Grow />
                 <Control>
                     <OurLink class="manual flex gap-1 pl-2" :href="`/random/list/${id}`">
-                        <Icon alt="" :icon=View />
+                        <IconEye alt="" />
                         Continue to main app
                     </OurLink>
                 </Control>
@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import View from '@fluentui/svg-icons/icons/eye_24_regular.svg?raw'
 import type { Uri } from "monaco-editor";
 import { useListRawEditableAsync, useRandomListItemPageAsync } from "~/utils/random/listManager";
 // --------------------

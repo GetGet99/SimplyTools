@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { getListAsync, useRandomListItemPageAsync, createNewListAsync, getListNameAsync, type RandomListTools } from '~/utils/random/listManager'
-import ArrowSync from '@fluentui/svg-icons/icons/arrow_sync_24_regular.svg?raw'
-import Save from '@fluentui/svg-icons/icons/save_24_regular.svg?raw'
 
 const props = defineProps<{ tool: RandomListTools, randomText?: string }>()
 const selectedIndex = defineModel<number | undefined>()
@@ -24,7 +22,7 @@ watch(selectedIndex, () => {
     <Feature class="flex flex-col gap-4 justify-center items-center">
         <Flex v-if="list.length !== orignalLen" class="gap-2">
             <Button icon="left" @click="async () => list = await getListAsync(id)">
-                <Icon :icon="ArrowSync" alt="" />
+                <IconArrowSync alt="" />
                 Reset List
             </Button>
             <Button icon="left" @click='async () => {
@@ -32,7 +30,7 @@ watch(selectedIndex, () => {
                 const newId = await createNewListAsync(undefined, `# Remaining items from list "${name}"\n${list.join("\n")}`, `Remaining items from ${name}`)
                 await navigateTo(`/random/list/${encodeURIComponent(newId)}/edit`)
             }'>
-                <Icon :icon="Save" alt="" />
+                <IconSave alt="" />
                 Save remaining list
             </Button>
         </Flex>

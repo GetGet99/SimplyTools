@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Categories } from '~/utils/pages/info';
 const curPage = useCurrentPage()
-import ChevronUp from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
+import ChevronUp16 from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
 import { Apps } from '~/utils/pages/app';
 import { isMobileNavVisible } from '~/utils/navigation/mobile';
 </script>
@@ -29,7 +29,7 @@ import { isMobileNavVisible } from '~/utils/navigation/mobile';
                                     {{ category.shortName }}
                                     <Grow />
                                     <div class="group-open:-rotate-180 transition-transform duration-300">
-                                        <Icon :icon="ChevronUp" alt="" />
+                                        <Icon :icon="ChevronUp16" alt="" />
                                     </div>
                                 </div>
                             </Control>

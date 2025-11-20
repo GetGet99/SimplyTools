@@ -12,7 +12,7 @@
 
                 <Control class="p-button-icon">
                     <DialogClose as-child>
-                        <Icon alt="" :icon=CloseIcon />
+                        <IconClose alt="Close" />
                     </DialogClose>
                 </Control>
             </DialogTitle>
@@ -26,7 +26,6 @@
     </DialogPortal>
 </template>
 <script setup lang="ts">
-import CloseIcon from '@fluentui/svg-icons/icons/dismiss_24_regular.svg?raw'
 defineProps<{ class?: string, title?: string, closeButton?: boolean }>()
 const slots = useSlots()
 </script>

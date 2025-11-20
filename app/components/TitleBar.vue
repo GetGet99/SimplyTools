@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Home from '@fluentui/svg-icons/icons/home_24_regular.svg?raw'
-import ChevronRight from '@fluentui/svg-icons/icons/chevron_right_24_regular.svg?raw'
-import SettingsIcon from '@fluentui/svg-icons/icons/settings_24_regular.svg?raw'
-import NavigationIcon from '@fluentui/svg-icons/icons/navigation_24_regular.svg?raw'
 import { isMobileNavVisible } from '~/utils/navigation/mobile'
 import simplyToolsIcon from '~/assets/SimplyToolsIcon.png'
 const tool = usePageInfo()
@@ -17,18 +13,18 @@ const tool = usePageInfo()
                     <img :src="simplyToolsIcon" alt="" class="w-5.25 h-5.25 not-app:hidden" />
                 </div>
                 <Button @click="isMobileNavVisible = !isMobileNavVisible" variant="ghost" class="px-0 py-0 h-full flex gap-1 items-center rounded-0 border-transparent lg:hidden w-8 justify-center">
-                    <Icon :icon=NavigationIcon alt="Toggle navigation sidebar" class="scale-[87.5%]" />
+                    <IconNavigation alt="Toggle navigation sidebar" class="scale-[87.5%]" />
                 </Button>
                 <Control variant="ghost" class="px-2 app:pl-1 py-0 h-full flex gap-1 items-center rounded-0 border-transparent">
                     <OurLink class="manual flex gap-1 not-lg:pl-1" tabindex="0" href="/">
-                        <Icon :icon=Home alt="Home" class="scale-[87.5%] not-lg:hidden app:hidden" />
+                        <IconHome alt="Home" class="scale-[87.5%] not-lg:hidden app:hidden" />
                         <img :src="simplyToolsIcon" alt="" class="w-5.25 h-5.25 not-app:hidden not-lg:hidden" />
                         SimplyTools
                     </OurLink>
                 </Control>
                 <template v-for="(breadcrumbItem, index) in tool.breadcrumb" :key="index">
                     <Flex v-titlebar-draggable class="h-full items-center px-1">
-                        <Icon :icon=ChevronRight alt="to" />
+                        <IconChevronRight alt="to" />
                     </Flex>
                     <Control variant="ghost" v-if="breadcrumbItem.type === 'link'" class="px-2 py-0 h-full flex items-center rounded-0 border-transparent">
                         <OurLink class="manual" :href="breadcrumbItem.href">
@@ -62,7 +58,7 @@ const tool = usePageInfo()
                     <template #trigger>
                         <DialogTrigger as-child>
                             <Button class="hidden p-[3px] bg-transparent border-transparent" title="Settings">
-                                <Icon :icon=SettingsIcon alt="" />
+                                <IconSettings alt="" />
                             </Button>
                         </DialogTrigger>
                     </template>

@@ -4,27 +4,27 @@
         <Flex>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarToggle('markdown.bold', OurSchema.marks.strong)">
-                <Icon :icon="BoldIcon" alt="" />
+                <IconTextBold alt="" />
             </Button>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarToggle('markdown.italic', OurSchema.marks.em)">
-                <Icon :icon="ItalicIcon" alt="" />
+                <IconTextItalic alt="" />
             </Button>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarToggle('markdown.underline', OurSchema.marks.underline)">
-                <Icon :icon="UnderlineIcon" alt="" />
+                <IconTextUnderline alt="" />
             </Button>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarToggle('markdown.strikethrough', OurSchema.marks.strikethrough)">
-                <Icon :icon="StrikethroughIcon" alt="" />
+                <IconTextStrikethrough alt="" />
             </Button>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarBlock('markdown.quote', OurSchema.nodes.blockquote)">
-                <Icon :icon="QuoteIcon" alt="" />
+                <IconTextQuote alt="" />
             </Button>
             <Button class="p-button-icon bg-transparent border-transparent"
                 @click="toolbarBlock('markdown.quote', OurSchema.nodes.blockquote)">
-                <Icon :icon="QuoteIcon" alt="" />
+                <IconTextQuote alt="" />
             </Button>
             
         </Flex>
@@ -45,12 +45,7 @@
     </Grid>
 </template>
 <script setup lang="ts">
-import BoldIcon from '@fluentui/svg-icons/icons/text_bold_24_regular.svg?raw'
-import ItalicIcon from '@fluentui/svg-icons/icons/text_italic_24_regular.svg?raw'
-import UnderlineIcon from '@fluentui/svg-icons/icons/text_underline_24_regular.svg?raw'
-import StrikethroughIcon from '@fluentui/svg-icons/icons/text_strikethrough_24_regular.svg?raw'
-import QuoteIcon from '@fluentui/svg-icons/icons/text_quote_24_regular.svg?raw'
-import { toggleMark, setBlockType, wrapIn } from "prosemirror-commands"
+import { toggleMark, setBlockType } from "prosemirror-commands"
 import { EditorView } from "prosemirror-view"
 import { EditorState, Plugin } from "prosemirror-state"
 import { OurSchema, OurMarkdownParser, OurMarkdownSErializer } from '../lib/markdown'

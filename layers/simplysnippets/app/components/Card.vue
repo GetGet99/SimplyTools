@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Delete from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
 import { deleteSnippetAsync, getMetadataAsync } from '../lib/manager';
 const props = defineProps<{ snippetKey: string }>()
 const meta = await getMetadataAsync(props.snippetKey)
@@ -17,7 +16,7 @@ const isDeleted = ref(false)
                     <template #trigger>
                         <DialogTrigger as-child>
                             <Button class="p-button-icon" title="Delete" @click.stop.prevent>
-                                <Icon :icon="Delete" alt="" />
+                                <IconDelete alt="" />
                             </Button>
                         </DialogTrigger>
                     </template>

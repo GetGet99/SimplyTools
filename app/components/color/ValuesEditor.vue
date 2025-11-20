@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
     const color = defineModel<Color>()
     function rgbInputUpdate(r: number | undefined, g: number | undefined, b: number | undefined) {
         let col = color.value?.RGB ?? new RGB(0, 0, 0)
@@ -47,7 +46,7 @@
         <Button class="p-button-icon" title="Copy"
             @click="copyText((color?.RGB ?? RGB.Empty()).copyable('css'))"
         >
-            <Icon :icon=CopyIcon alt="" />
+            <IconCopy alt="" />
         </Button>
         <span>HSL</span>
         <NumberBox :model-value="color?.HSL.H ?? undefined"
@@ -71,7 +70,7 @@
         <Button class="p-button-icon" title="Copy"
             @click="copyText((color?.HSL ?? HSL.Empty()).copyable('css'))"
         >
-            <Icon :icon=CopyIcon alt="" />
+            <IconCopy alt="" />
         </Button>
         <span>HSV</span>
         <NumberBox :model-value="color?.HSV.H ?? undefined"
@@ -96,7 +95,7 @@
         <Button class="p-button-icon" title="Copy"
             @click="copyText((color?.HSV ?? HSV.Empty()).copyable('css'))"
         >
-            <Icon :icon=CopyIcon alt="" />
+            <IconCopy alt="" />
         </Button>
     </Grid>
 </template>

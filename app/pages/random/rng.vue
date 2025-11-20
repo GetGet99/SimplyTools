@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-import DeleteIcon from '@fluentui/svg-icons/icons/delete_24_regular.svg?raw'
 import { RandomCategory } from '~/utils/pages/random'
 usePageInfo(RandomCategory.pages.find(x => x.path === 'rng'))
 const mode = ref<'integer' | 'real'>('integer')
@@ -84,7 +82,7 @@ const displayRef = useTemplateRef('display')
                     <Flex class="gap-2 mt-2">
                         <Button title="Copy" icon="left" class="rounded-control" @click="copyValue"
                             :disabled="latestNumber === undefined">
-                            <Icon alt="" :icon=CopyIcon />
+                            <IconCopy alt="" />
                             Copy
                         </Button>
                         <Button class="p-button rounded-control" @click="generate">Generate</Button>

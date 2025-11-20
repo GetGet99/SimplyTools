@@ -13,7 +13,7 @@
                 <Grow />
                 <Control>
                     <OurLink class="manual flex gap-1 pl-2" :href="`/snippets/${view}`">
-                        <Icon alt="" :icon=View />
+                        <IconEye alt="" />
                         View in Main App
                     </OurLink>
                 </Control>
@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { Apps } from '~/utils/pages/app';
-import View from '@fluentui/svg-icons/icons/eye_24_regular.svg?raw'
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
 import { extractYamlComment, type Metadata } from "../../../lib/metadata";

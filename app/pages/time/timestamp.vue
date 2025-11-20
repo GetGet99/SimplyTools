@@ -22,7 +22,7 @@
 
                     <DatePickerTrigger as-child>
                         <Button class="p-0 -my-1 -mr-1" title="Open Calendar">
-                            <Icon :icon="CalendarIcon" alt="" />
+                            <IconCalendar alt="" />
                         </Button>
                     </DatePickerTrigger>
                     <template #fallback>
@@ -38,14 +38,14 @@
                     <DatePickerHeader class="flex items-center justify-between">
                         <DatePickerPrev as-child>
                             <Button class="p-button-icon">
-                                <Icon :icon="ChevronLeft" alt="" />
+                                <IconChevronLeft alt="" />
                             </Button>
                         </DatePickerPrev>
 
                         <DatePickerHeading class="font-medium" />
                         <DatePickerNext as-child>
                             <Button class="p-button-icon">
-                                <Icon :icon="ChevronRight" alt="" />
+                                <IconChevronRight alt="" />
                             </Button>
                         </DatePickerNext>
                     </DatePickerHeader>
@@ -102,7 +102,7 @@
                     </div>
                     <Button @click="copyToClipboard(option.example(dt?.toDate() ?? new Date(), currentTime))"
                         class="p-button-icon" title="Copy Preview Text">
-                        <Icon alt="Copy Preview Text" :icon="CopyIcon" />
+                        <IconCopy alt="Copy Preview Text" />
                     </Button>
                 </Flex>
                 <Flex class="gap-2">
@@ -135,10 +135,6 @@
 </template>
 
 <script setup lang="ts">
-import ChevronLeft from '@fluentui/svg-icons/icons/chevron_left_24_regular.svg?raw'
-import ChevronRight from '@fluentui/svg-icons/icons/chevron_right_24_regular.svg?raw'
-import CalendarIcon from '@fluentui/svg-icons/icons/calendar_24_regular.svg?raw'
-import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
 import { ZonedDateTime, now, getLocalTimeZone } from '@internationalized/date'
 
 import { Uncategorized } from '~/utils/pages/uncategorized'

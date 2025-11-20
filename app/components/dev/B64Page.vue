@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-import FileIcon from '@fluentui/svg-icons/icons/document_24_regular.svg?raw'
-import SaveFileIcon from '@fluentui/svg-icons/icons/document_arrow_down_24_regular.svg?raw'
-import PasteIcon from '@fluentui/svg-icons/icons/clipboard_paste_24_regular.svg?raw'
-import { DevCategory } from '~/utils/pages/dev'
-// const mode = ref<'atob' | 'btoa'>(route.params.mode === 'encoder' ? 'btoa' : 'atob')
 const mode = defineModel<'atob' | 'btoa'>('mode')
 const input = ref('')
 function safeBToA(val: string) {
@@ -67,7 +61,7 @@ const w = window
             <!-- <Grid columns="grow auto">
                 <Flex column class="b64-textbox-controls overflow-hidden order-1">
                     <Button class="b64-textbox-button bg-transparent" @click="paste">
-                        <Icon :icon=PasteIcon alt="Paste" />
+                        <IconClipboardPaste alt="Paste" />
                     </Button>
                     <Button class="b64-textbox-button bg-transparent" @click="fromFile">
                         <Icon :icon=FileIcon alt="From file" />
@@ -81,10 +75,10 @@ const w = window
                     class="resize-none" multiline />
                 <template #tools>
                     <Button variant="ghost" icon class="b64-textbox-button" @click="paste">
-                        <Icon :icon=PasteIcon alt="Paste" />
+                        <IconClipboardPaste alt="Paste" />
                     </Button>
                     <Button variant="ghost" icon @click="fromFile">
-                        <Icon :icon=FileIcon alt="From file" />
+                        <IconDocument alt="From file" />
                     </Button>
                 </template>
             </TextBoxTools>
@@ -104,7 +98,7 @@ const w = window
                     class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none" multiline />
                 <Flex column class="b64-textbox-controls overflow-hidden">
                     <Button class="b64-textbox-button bg-transparent" @click="copy">
-                        <Icon :icon=CopyIcon alt="Copy" />
+                        <IconCopy alt="Copy" />
                     </Button>
                     <Button class="b64-textbox-button bg-transparent" @click="toFile">
                         <Icon :icon=SaveFileIcon alt="Save file" />
@@ -117,10 +111,10 @@ const w = window
                     class="resize-none" multiline />
                 <template #tools>
                     <Button variant="ghost" icon class="b64-textbox-button" @click="copy">
-                        <Icon :icon=CopyIcon alt="Copy" />
+                        <IconCopy alt="Copy" />
                     </Button>
                     <Button variant="ghost" icon @click="toFile">
-                        <Icon :icon=SaveFileIcon alt="Save file" />
+                        <IconDocumentArrowDown alt="Save file" />
                     </Button>
                 </template>
             </TextBoxTools>

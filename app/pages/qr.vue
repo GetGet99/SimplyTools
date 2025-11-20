@@ -36,19 +36,19 @@
                 <Flex class="gap-2">
                     <Grow />
                     <Button @click="downloadQr" title="Download" class="pl-1.5 flex gap-1">
-                        <Icon :icon="DownloadIcon" alt="" />
+                        <IconArrowDownload alt="" />
                         Download
                     </Button>
                     <Button @click="copyQrData" class="pl-1.5 flex gap-1" title="Copy Source">
-                        <Icon :icon="CopyIcon" alt="Copy" />
+                        <IconCopy alt="Copy" />
                         Data URL
                     </Button>
                     <Button v-if="mode === 'svg'" @click="copyQr" class="pl-1.5 flex gap-1" title="Copy Source">
-                        <Icon :icon="CopyIcon" alt="Copy" />
+                        <IconCopy alt="Copy" />
                         Source
                     </Button>
                     <Button v-if="mode === 'img'" @click="copyQr" class="pl-1.5 flex gap-1" title="Copy Source">
-                        <Icon :icon="CopyIcon" alt="Copy" />
+                        <IconCopy alt="Copy" />
                         Image
                     </Button>
                 </Flex>
@@ -57,11 +57,6 @@
     </Feature>
 </template>
 <script setup lang="ts">
-import CopyIcon from '@fluentui/svg-icons/icons/copy_24_regular.svg?raw'
-import DownloadIcon from '@fluentui/svg-icons/icons/arrow_download_24_regular.svg?raw'
-
-
-
 import { Uncategorized } from '~/utils/pages/uncategorized';
 setPageInfo(Uncategorized.pages.find(x => x.path === 'qr'))
 const value = ref('Add text or link here!')

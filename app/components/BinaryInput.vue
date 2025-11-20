@@ -41,8 +41,6 @@ function onPaste(e : ClipboardEvent) {
         // data.files[0]!.
     }
 }
-import PasteIcon from '@fluentui/svg-icons/icons/clipboard_paste_24_regular.svg?raw'
-import FileIcon from '@fluentui/svg-icons/icons/document_24_regular.svg?raw'
 </script>
 <template>
     <TextBoxTools>
@@ -51,10 +49,10 @@ import FileIcon from '@fluentui/svg-icons/icons/document_24_regular.svg?raw'
             :placeholder class="resize-none" multiline @paste="onPaste" />
         <template #tools>
             <Button variant="ghost" icon class="border-none rounded-none" @click="paste">
-                <Icon :icon=PasteIcon alt="Paste" />
+                <IconClipboardPaste alt="Paste" />
             </Button>
             <Button variant="ghost" icon="left" class="border-none rounded-none" @click="fromFile">
-                <Icon :icon=FileIcon alt="From file" />
+                <IconDocument alt="From file" />
                 From File
             </Button>
         </template>

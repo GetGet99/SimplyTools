@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import PlayIcon from '@fluentui/svg-icons/icons/play_24_regular.svg?raw'
-import PauseIcon from '@fluentui/svg-icons/icons/pause_24_regular.svg?raw'
-import ResetIcon from '@fluentui/svg-icons/icons/arrow_clockwise_24_regular.svg?raw'
 import aud from '~/assets/beep-313342.mp3'
 import { ref, computed, watch } from 'vue'
 
@@ -130,13 +127,13 @@ onUnmounted(() => {
                 </div>
                 <Flex class="gap-4">
                     <Button variant="accent" v-if="!running" @click="start" :disabled="running" title="Start" class="p-4 rounded-full">
-                        <Icon :icon="PlayIcon" alt="Start" class="w-5 h-5" />
+                        <IconPlay alt="Start" class="w-5 h-5" />
                     </Button>
                     <Button variant="accent" v-else @click="stop" :disabled="!running" title="Pause" class="p-4 rounded-full">
-                        <Icon :icon="PauseIcon" alt="Pause" class="w-5 h-5" />
+                        <IconPause alt="Pause" class="w-5 h-5" />
                     </Button>
                     <Button @click="reset" title="Reset" class="p-4 rounded-full">
-                        <Icon :icon="ResetIcon" alt="Reset" class="w-5 h-5" />
+                        <IconArrowClockwise alt="Reset" class="w-5 h-5" />
                     </Button>
                 </Flex>
             </Flex>
