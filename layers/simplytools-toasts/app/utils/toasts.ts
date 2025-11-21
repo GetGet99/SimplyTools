@@ -1,4 +1,4 @@
-import type { ToastErrorsExports } from "~/components/toasts/Generator.vue";
+import type { ToastErrorsExports } from "../components/Generator.vue";
 
 export function useToasts() {
     return inject<ToastErrorsExports>('toasts.generator')!
