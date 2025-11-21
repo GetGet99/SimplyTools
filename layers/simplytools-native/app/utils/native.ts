@@ -12,7 +12,6 @@ interface API<APIName extends NativeFeatures> {
     $api: APIName
 }
 const isNativeAvaliable = nativeLowLevelAPIMessager !== undefined
-type UUID = ReturnType<typeof crypto.randomUUID>
 const _nativeCalls: { [key in UUID]: [(value: any | PromiseLike<any>) => void, (reason?: any) => void] } = {}
 function nativeCallAsync<T>($api: NativeFeatures, args: any): Promise<T> {
     if (!import.meta.client) {
