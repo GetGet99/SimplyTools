@@ -8,6 +8,10 @@ import { RandomCategory } from "./random"
 import { TimeCategory } from "./time"
 import { InDevCategory } from "~~/layers/simplytools-dev-pages/app/utils/pages/in-dev"
 
+type CategoriesType = { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time']: Category } & {
+    readonly "in-dev"?: Category
+}
+
 export const Categories = {
     uncategorized: Uncategorized,
     dev: DevCategory,
@@ -16,5 +20,7 @@ export const Categories = {
     AI: AICategory,
     random: RandomCategory,
     time: TimeCategory,
-    "in-dev": InDevCategory,
-} satisfies { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time' | 'in-dev']: Category } as { readonly [key in 'uncategorized' | 'dev' | 'math' | 'apps' | 'AI' | 'random' | 'time' | 'in-dev']: Category }
+    ... (process.env.NODE_ENV === 'production' ? {} : {
+        "in-dev": InDevCategory,
+    })
+} satisfies CategoriesType as CategoriesType

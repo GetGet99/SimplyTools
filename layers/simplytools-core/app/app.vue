@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import simplyToolsIconFit from '~/assets/SimplyToolsIcon_fit.png';
+import simplyToolsIconFit from './assets/SimplyToolsIcon_fit.png';
 useHead({
     bodyAttrs: {
         style: {

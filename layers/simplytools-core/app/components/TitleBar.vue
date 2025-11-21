@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { isMobileNavVisible } from '~/utils/navigation/mobile'
-import simplyToolsIcon from '~/assets/SimplyToolsIcon.png'
+import { isMobileNavVisible } from '../utils/navigation/mobile'
 const tool = usePageInfo()
 </script>
 <template>
@@ -10,7 +9,7 @@ const tool = usePageInfo()
             <div style="width: var(--app-titlebar-reserved-area-left, 0px);" v-titlebar-draggable></div>
             <Flex class="items-center backdrop-blur-lg rounded-br-md pr-2">
                 <div class="not-app:hidden lg:hidden px-1.5 h-full flex items-center" v-titlebar-draggable>
-                    <img :src="simplyToolsIcon" alt="" class="w-5.25 h-5.25 not-app:hidden" />
+                    <SimplyToolsIcon alt="" class="w-5.25 h-5.25 not-app:hidden" />
                 </div>
                 <Button @click="isMobileNavVisible = !isMobileNavVisible" variant="ghost" class="px-0 py-0 h-full flex gap-1 items-center rounded-0 border-transparent lg:hidden w-8 justify-center">
                     <IconNavigation alt="Toggle navigation sidebar" class="scale-[87.5%]" />
@@ -18,7 +17,7 @@ const tool = usePageInfo()
                 <Control variant="ghost" class="px-2 app:pl-1 py-0 h-full flex gap-1 items-center rounded-0 border-transparent">
                     <OurLink class="manual flex gap-1 not-lg:pl-1" tabindex="0" href="/">
                         <IconHome alt="Home" class="scale-[87.5%] not-lg:hidden app:hidden" />
-                        <img :src="simplyToolsIcon" alt="" class="w-5.25 h-5.25 not-app:hidden not-lg:hidden" />
+                        <SimplyToolsIcon alt="" class="w-5.25 h-5.25 not-app:hidden not-lg:hidden" />
                         SimplyTools
                     </OurLink>
                 </Control>

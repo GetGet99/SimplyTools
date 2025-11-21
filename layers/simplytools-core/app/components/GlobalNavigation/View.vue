@@ -3,7 +3,7 @@ import { Categories } from '~/utils/pages/info';
 const curPage = useCurrentPage()
 import ChevronUp16 from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
 import { Apps } from '~/utils/pages/app';
-import { isMobileNavVisible } from '~/utils/navigation/mobile';
+import { isMobileNavVisible } from '../../utils/navigation/mobile';
 </script>
 <template>
     <nav class="global-nav-view fixed h-mainarea-height w-80 pr-2 min-h-full" :data-mobile-nav-visible="isMobileNavVisible">
