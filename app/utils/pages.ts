@@ -1,6 +1,4 @@
-import type { ShallowRef } from "vue"
-import type { Page, PageInfo } from "./pages/_helper"
-import { Categories } from "./pages/info"
+import type { PageInfo } from "./pages/_helper"
 import { Uncategorized } from "./pages/uncategorized"
 import { Apps, type AppPage } from "./pages/app"
 
