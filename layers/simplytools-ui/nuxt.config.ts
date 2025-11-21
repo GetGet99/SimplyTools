@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     alias: {
         '@simplytools-theme': '~~/layers/simplytools-ui/app/'
     },
-    devtools: { enabled: true },
     modules: ['reka-ui/nuxt'],
     css: [
         '~~/layers/simplytools-ui/app/app.css'
