@@ -16,10 +16,5 @@ export default defineNuxtConfig({
     // Important: make Nuxt aware of the custom types
     imports: {
         dirs: ['types'],
-    },
-    components: [
-        '~/components',
-        '~/applications',
-        '~/pages/components',
-    ],
+    }
 })
