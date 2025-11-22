@@ -233,7 +233,7 @@ type SupportedBaseBigInt = 16n | 10n | 8n | 2n
 type SupportedBase = 16 | 10 | 8 | 2
 type BinaryOperator = '&' | '|' | '>>' | '<<' | '%' | '+' | '-' | '×' | '÷'
 class ProgrammerCalculator {
-    base: 16n | 10n | 8n | 2n = 10n
+    base: SupportedBaseBigInt= 10n
     private numType: NumType = 'qword'
     shiftMode: 'logical' | 'arith' = 'arith'
     negativeDisplay: 'signed' | 'complement' = 'complement'
