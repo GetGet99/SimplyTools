@@ -107,7 +107,7 @@ const w = window
             </Grid> -->
 
             <TextBoxTools toolbar-position="right">
-                <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
+                <TextBox :model-value="output" readonly :placeholder="mode === 'btoa' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="resize-none" multiline />
                 <template #tools>
                     <Button variant="ghost" icon class="b64-textbox-button" @click="copy">
