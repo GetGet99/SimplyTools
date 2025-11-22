@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import type { } from '~/types/summarizer'
-import { AICategory } from '~/utils/pages/ai'
 usePageInfo(AICategory.pages.find(x => x.path === 'summarizer'))
 
 const input = ref('')

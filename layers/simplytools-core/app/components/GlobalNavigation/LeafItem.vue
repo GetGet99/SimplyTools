@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Page, PageInfo } from '~/utils/pages/_helper';
-import { Apps, type AppPage } from '~/utils/pages/app';
 import { isMobileNavVisible } from '../../utils/navigation/mobile';
 
 const props = defineProps<{ curPage: PageInfo | undefined, page: Page, innerClass?: string }>()

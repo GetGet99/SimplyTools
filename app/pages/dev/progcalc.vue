@@ -135,7 +135,6 @@
 <script setup lang="ts">
 import type { ComponentAttrs, ComponentProps } from 'vue-component-type-helpers'
 import type { Button } from '#components'
-import { DevCategory } from '~/utils/pages/dev'
 usePageInfo(DevCategory.pages.find(x => x.path === 'progcalc'))
 
 function postprocessNumberKey(key: string, base?: bigint): ComponentProps<typeof Button> & ComponentAttrs<typeof Button> {

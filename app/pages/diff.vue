@@ -20,7 +20,6 @@
     </Feature>
 </template>
 <script setup lang="ts">
-import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'diff'))
 await useMonacoWithOurTheme()
 // Function to apply the appropriate theme

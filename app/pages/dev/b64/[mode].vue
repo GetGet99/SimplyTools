@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { DevB64Page } from '#components';
-import { DevCategory } from '~/utils/pages/dev';
 
 usePageInfo(DevCategory.pages.find(x => x.path === `b64/${useRoute().params.mode ?? 'encoder'}`))
 if (!useRoute().params.mode) {

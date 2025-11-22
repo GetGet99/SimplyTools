@@ -35,21 +35,7 @@ const tool = usePageInfo()
                     </div>
                     <TextBox v-else-if="breadcrumbItem.type === 'textbox'" v-model="breadcrumbItem.text.value"
                         class="mx-1 px-1 py-0 flex items-center" />
-
                 </template>
-                <!-- <template v-if="tool.breadcrumb.length >= 2 && tool.toolName">
-                    <Icon :icon=ChevronRight alt="to" />
-                    <OurLink class="manual p-2" :class="tool.category === Apps ? undefined : 'pointer-events-none'"
-                        :href="tool.category === Apps ? `${tool.catPath}/${tool.toolPath}` : `${tool.catPath}`">
-                        {{ tool.breadcrumb[0] }}
-                    </OurLink>
-                </template>
-                <template v-if="tool.breadcrumb.length >= 1">
-                    <Icon :icon=ChevronRight alt="to" />
-                    <OurLink class="manual p-2" :href="`${tool.catPath}/${tool.toolPath}`">
-                        {{ tool.breadcrumb[tool.breadcrumb.length - 1]! }}
-                    </OurLink>
-                </template> -->
             </Flex>
             <div class="grow h-full" v-titlebar-draggable></div>
             <Flex class="backdrop-blur-lg rounded-bl-md"> <!--pl-2-->

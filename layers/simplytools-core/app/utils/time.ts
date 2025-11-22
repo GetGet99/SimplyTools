@@ -1,4 +1,4 @@
-import { createCategory } from "./_helper"
+import { createCategory } from "./pages/_helper"
 
 export const TimeCategory = createCategory({
     type: 'category',

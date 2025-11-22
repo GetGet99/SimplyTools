@@ -57,7 +57,6 @@
     </Feature>
 </template>
 <script setup lang="ts">
-import { Uncategorized } from '~/utils/pages/uncategorized';
 setPageInfo(Uncategorized.pages.find(x => x.path === 'qr'))
 const value = ref('Add text or link here!')
 const constraint = ref(true)

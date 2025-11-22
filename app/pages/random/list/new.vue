@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Apps } from '~/utils/pages/app';
 usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
 import { createNewListAsync } from '~/utils/random/listManager';
 if (import.meta.client) {

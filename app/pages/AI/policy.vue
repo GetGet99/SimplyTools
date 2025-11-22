@@ -65,6 +65,5 @@ By using SimplyAITools, you acknowledge that you have read, understood, and agre
     </Feature>
 </template>
 <script setup lang="ts">
-import { AIPolicyPage } from '~/utils/pages/ai'
 usePageInfo(AIPolicyPage)
 </script>

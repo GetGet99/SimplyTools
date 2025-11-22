@@ -3,8 +3,6 @@
 </template>
 <script setup lang="ts">
 import { useNoteAsync, useNoteTitleAsync, type NoteFileName } from '../lib/manager';
-import type { PageInfo } from '~/utils/pages/_helper';
-import { Apps } from '~/utils/pages/app';
 const route = useRoute()
 const page = Apps.pages.find(x => x.path === 'notes')!
 const note = await useNoteAsync(route.params.fileName as NoteFileName)

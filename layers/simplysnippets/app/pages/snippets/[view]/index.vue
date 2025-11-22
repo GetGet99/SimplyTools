@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Apps } from '~/utils/pages/app';
 import { getBuiltInSnippets, getLocalSnippetsAsync, getMetadataAsync } from '../../../lib/manager';
 const url = useRoute()
 const view = computed(() => url.params.view as string)

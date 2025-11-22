@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { Categories } from '~/utils/pages/info';
 const curPage = useCurrentPage()
 import ChevronUp16 from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw'
-import { Apps } from '~/utils/pages/app';
 import { isMobileNavVisible } from '../../utils/navigation/mobile';
 </script>
 <template>
     <nav class="global-nav-view fixed h-mainarea-height w-80 pr-2 min-h-full" :data-mobile-nav-visible="isMobileNavVisible">
         <ul>
-            <template v-for="category in Categories" :key="category.name">
-                <template v-if="!category.shortName && category !== Apps">
+            <template v-for="category in Categories" :key="category?.name">
+                <template v-if="category && !category.shortName && category !== Apps">
                     <!-- <li class="list-none w-full h-10 mx-0 flex">
                         <Control variant="ghost" class="w-full text-left grow" :class="curPage?.path === page.path && curPage.parent === category ? 'bg-control-secondary hover:bg-control-tertiary' : ''">
                             <OurLink :to="`${category.path}/${page.path}`" class="manual border-transparent! pl-3 py-0 flex items-center">{{ page.title }}</OurLink>
@@ -19,8 +17,8 @@ import { isMobileNavVisible } from '../../utils/navigation/mobile';
                         :page="page" />
                 </template>
             </template>
-            <template v-for="category in Categories" :key="category.name">
-                <li v-if="category.shortName && category !== Apps" class="list-none w-full mx-0 flex flex-col">
+            <template v-for="category in Categories" :key="category?.name">
+                <li v-if="category && category.shortName && category !== Apps" class="list-none w-full mx-0 flex flex-col">
                     <details class="no-marker group">
                         <summary>
                             <Control variant="ghost"

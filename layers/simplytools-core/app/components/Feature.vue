@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { AICategory } from '~/utils/pages/ai';
-const props = defineProps<{ class?: string, style?: any, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
+defineProps<{ class?: string, style?: any, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import type { } from '~/types/prompt.d.ts'
-import { AICategory } from '~/utils/pages/ai'
 usePageInfo(AICategory.pages.find(x => x.path === 'chat'))
 const userInput = ref('')
 const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])

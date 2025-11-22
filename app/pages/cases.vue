@@ -53,7 +53,6 @@
     </Feature>
 </template>
 <script setup lang="ts">
-import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'cases'))
 
 const text = ref('')

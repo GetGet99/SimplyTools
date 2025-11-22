@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { MathCategory } from '~/utils/pages/math';
 
 usePageInfo(MathCategory.pages.find(x => x.path === 'numbase'))
 const value = ref<bigint | undefined>(undefined)

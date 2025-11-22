@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RandomCategory } from '~/utils/pages/random'
 usePageInfo(RandomCategory.pages.find(x => x.path === 'rng'))
 const mode = ref<'integer' | 'real'>('integer')
 const valFrom = ref<number | undefined>(1)

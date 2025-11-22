@@ -2,7 +2,6 @@
 import aud from '~/assets/beep-313342.mp3'
 import { ref, computed, watch } from 'vue'
 
-import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'pomodoro'))
 const MODES = [
     { name: 'Pomodoro', duration: 25 * 60 * 1000 },

@@ -1,4 +1,4 @@
-import { createCategory, type Page } from "./_helper"
+import { createCategory } from "./pages/_helper"
 
 export type AppPage = {
     appName: string

@@ -1,7 +1,3 @@
-import type { PageInfo } from "./pages/_helper"
-import { Uncategorized } from "./pages/uncategorized"
-import { Apps, type AppPage } from "./pages/app"
-
 const currentPage = shallowRef<PageInfo | undefined>(undefined)
 const pageInfo = computed(() => {
     if (!currentPage.value) {

@@ -60,6 +60,5 @@
     </Feature>
 </template>
 <script setup lang="ts">
-import { PrivacyPage } from '~/utils/pages/uncategorized';
 usePageInfo(PrivacyPage)
 </script>

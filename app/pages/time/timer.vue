@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'timer'))
 const DEFAULT_HOURS = 0
 const DEFAULT_MINUTES = 5

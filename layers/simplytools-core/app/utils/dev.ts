@@ -1,4 +1,4 @@
-import { createCategory } from "./_helper"
+import { createCategory } from "./pages/_helper"
 export const DevCategory = createCategory({
     type: 'category',
     name: "SimplyDevTools",

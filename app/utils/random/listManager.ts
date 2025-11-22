@@ -1,5 +1,3 @@
-import { RandomCategory } from "../pages/random"
-
 export async function getListIdsAsync(): Promise<UUID[]> {
     if (!import.meta.client) {
         return []

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Apps, type AppPage } from '~/utils/pages/app';
-import { Categories } from '~/utils/pages/info';
 useHead({
     title: 'SimplyTools'
 })

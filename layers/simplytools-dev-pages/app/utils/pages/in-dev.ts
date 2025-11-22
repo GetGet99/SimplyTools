@@ -1,4 +1,4 @@
-import { createCategory } from "~~/app/utils/pages/_helper"
+import { createCategory } from "@simplytools-pages-utils";
 export const InDevCategory = createCategory({
     type: 'category',
     name: "In Development Utilities",

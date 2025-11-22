@@ -30,7 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { Apps } from '~/utils/pages/app';
 import * as YAML from "yaml";
 import { Liquid } from "liquidjs";
 import { extractYamlComment, type Metadata } from "../../../lib/metadata";

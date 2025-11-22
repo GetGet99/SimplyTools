@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Uncategorized } from '~/utils/pages/uncategorized'
 setPageInfo(Uncategorized.pages.find(x => x.path === 'colors'))
 const color = ref<Color>(HEX.fromString("7b2929")!) as Ref<Color>
 </script>

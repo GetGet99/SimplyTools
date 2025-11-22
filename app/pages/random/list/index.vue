@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RandomCategory } from '~/utils/pages/random';
 import { getListIdsAsync } from '~/utils/random/listManager';
 usePageInfo(RandomCategory.pages.find(x => x.path === 'list'))
 const lists = await getListIdsAsync()

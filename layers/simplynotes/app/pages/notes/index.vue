@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { createNewNoteAsync, getNotesAsync, getNoteTitleAsync } from '../../lib/manager';
-import { Apps } from '~/utils/pages/app';
 usePageInfo(Apps.pages.find(x => x.path === 'notes'))
 
 const keys = await getNotesAsync()

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Apps } from '~/utils/pages/app';
 import { getBuiltInSnippets, getLocalSnippetsAsync } from '../../lib/manager';
 usePageInfo(Apps.pages.find(x => x.path === 'snippets'))
 const snippets = await getLocalSnippetsAsync()
