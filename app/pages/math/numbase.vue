@@ -1,7 +1,10 @@
 <script setup lang="ts">
-
+type SupportedBaseBigInt = 16n | 10n | 8n | 2n
 usePageInfo(MathCategory.pages.find(x => x.path === 'numbase'))
 const value = ref<bigint | undefined>(undefined)
+function copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text)
+}
 </script>
 <template>
     <Feature category="math" tool="Base Converter" class="flex flex-col px-4 sm:items-center gap-8">
@@ -17,10 +20,24 @@ const value = ref<bigint | undefined>(undefined)
                                     'Binary (Base 2)')) }}
                     </span>
                 </Flex>
-                <BigIntBox class="w-full" :placeholder="b === 16n ? 'Hexadecimal (Base 16)' :
-                    (b === 10n ? 'Decimal (Base 10)' :
-                        (b === 8n ? 'Octal (Base 8)' :
-                            'Binary (Base 2)'))" :mode=b v-model="value" />
+                <TextBoxTools toolbar-position="right">
+                    <BigIntBox class="w-full" :placeholder="b === 16n ? 'Hexadecimal (Base 16)' :
+                        (b === 10n ? 'Decimal (Base 10)' :
+                            (b === 8n ? 'Octal (Base 8)' :
+                                'Binary (Base 2)'))" :mode=b v-model="value" />
+                    <template #tools>
+                        <TextBoxToolsButton @click="() => {
+                            if (value !== undefined) {
+                                copyToClipboard(value.toString(Number(b)))
+                            }
+                        }" :title="`Copy ${b === 16n ? 'Hexadecimal' :
+                            (b === 10n ? 'Decimal' :
+                                (b === 8n ? 'Octal' :
+                                    'Binary'))} to Clipboard`">
+                            <IconCopy />
+                        </TextBoxToolsButton>
+                    </template>
+                </TextBoxTools>
             </div>
         </Flex>
         <aside class="text-center italic">

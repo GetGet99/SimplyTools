@@ -154,8 +154,10 @@ async function generateSummary() {
 
 
         <!-- Output -->
-        <TextBox :model-value="summary" placeholder="Summary will appear here" class="w-full lg:w-3/4 min-h-[100px]"
-            readonly multiline />
+        <OutputTextBoxTools :output="summary" filename-hint="summary.txt" class="w-full lg:w-3/4 min-h-[100px]">
+            <TextBox :model-value="summary" placeholder="Summary will appear here"
+                readonly multiline />
+        </OutputTextBoxTools>
 
         <template #summary>
             AI-powered summarization using Browser’s Summarizer API, with configurable type, format, and length.
