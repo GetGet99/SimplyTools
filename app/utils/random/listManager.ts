@@ -88,11 +88,12 @@ export async function deleteListAsync(key: UUID) {
         await Native.KeyValueStorage.removeAsync(`/random/list/${key}/name`)
     }
 }
-export type RandomListTools = 'spinner' | 'wheel'
+export type RandomListTools = 'spinner' | 'wheel' | 'card'
 export async function useRandomListItemPageAsync(forPage: 'viewer' | 'editor' | RandomListTools) {
     const key = useRoute().params.fileName as UUID
     const name = await useListNameEditable(key)
     const page = RandomCategory.pages.find(x => x.path === 'list')!
+    const capitalize = `${forPage.charAt(0).toUpperCase()}${forPage.slice(1)}`
     // Client Only Area
     if (import.meta.client) {
         if (name.value === null) {
@@ -110,10 +111,11 @@ export async function useRandomListItemPageAsync(forPage: 'viewer' | 'editor' | 
                     },
                     ...((forPage !== 'editor' && forPage !== 'viewer') ? [{
                         type: 'link',
-                        text: `${forPage.charAt(0).toUpperCase()}${forPage.slice(1)}`,
+                        text: capitalize,
                         href: `/random/list/${key}/${forPage}`
-                    }] satisfies TitleBarBreadcrumbItem[] : [])
-                ]
+                    }] satisfies TitleBarBreadcrumbItem[] : []),
+                ],
+                // inPageTitle: capitalize
             })
         }
     } else {

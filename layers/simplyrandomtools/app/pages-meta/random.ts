@@ -30,4 +30,10 @@ export const RandomCategory = createCategory({
         path: 'wheel',
         desc: 'Randomly picking items with a wheel'
     },
+    {
+        title: 'Card (Alpha)',
+        inPageTitle: 'Card (Alpha)',
+        path: 'card',
+        desc: 'Randomly picking items with SimplyRandomTools cards system'
+    },
 ])
