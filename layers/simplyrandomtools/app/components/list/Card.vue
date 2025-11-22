@@ -19,6 +19,10 @@ const isDeleted = ref(false)
                 <RandomWheelIcon />
                 Wheel
             </LinkButton>
+            <LinkButton icon="left" :href="`/random/list/${id}/card`">
+                <RandomCardIcon />
+                Card
+            </LinkButton>
             <Control>
                 <OurLink class="manual flex gap-1 pl-2" :href="`/random/list/${id}/edit`">
                     <IconEdit alt="" />

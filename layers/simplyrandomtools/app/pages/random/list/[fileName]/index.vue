@@ -13,6 +13,10 @@
                 <RandomWheelIcon />
                 Wheel
             </LinkButton>
+            <LinkButton icon="left" :href="`/random/list/${id}/card`">
+                <RandomCardIcon />
+                Card
+            </LinkButton>
         </Flex>
     </feature>
 </template>
