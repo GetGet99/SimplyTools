@@ -4,15 +4,10 @@ import ChevronUp16 from '@fluentui/svg-icons/icons/chevron_up_16_regular.svg?raw
 import { isMobileNavVisible } from '../../utils/navigation/mobile';
 </script>
 <template>
-    <nav class="global-nav-view fixed h-mainarea-height w-80 pr-2 min-h-full" :data-mobile-nav-visible="isMobileNavVisible">
+    <nav class="global-nav-view fixed max-h-mainarea-height h-mainarea-height w-80 pr-2" :data-mobile-nav-visible="isMobileNavVisible">
         <ul>
             <template v-for="category in Categories" :key="category?.name">
                 <template v-if="category && !category.shortName && category !== Apps">
-                    <!-- <li class="list-none w-full h-10 mx-0 flex">
-                        <Control variant="ghost" class="w-full text-left grow" :class="curPage?.path === page.path && curPage.parent === category ? 'bg-control-secondary hover:bg-control-tertiary' : ''">
-                            <OurLink :to="`${category.path}/${page.path}`" class="manual border-transparent! pl-3 py-0 flex items-center">{{ page.title }}</OurLink>
-                        </Control>
-                    </li> -->
                     <GlobalNavigationLeafItem v-for="page in category.pages" :key="page.path" :cur-page="curPage"
                         :page="page" />
                 </template>
@@ -54,9 +49,9 @@ details.no-marker>summary::-webkit-details-marker {
     display: none;
 }
 .global-nav-view {
-    @apply transition-transform duration-500 overflow-y-auto ease-theme;
+    @apply transition-transform duration-500 overflow-y-auto ease-theme mt-titlebar-height top-0 bottom-0 z-100;
     @variant not-lg {
-        @apply bg-solid-primary -translate-x-full mt-titlebar-height top-0 bottom-0 z-100;
+        @apply bg-solid-primary -translate-x-full;
         @variant data-[mobile-nav-visible=true] {
             @apply translate-x-0;
         }
