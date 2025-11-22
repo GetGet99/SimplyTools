@@ -7,7 +7,7 @@
             },
             readOnly: props.readonly,
             scrollBeyondLastLine: false,
-        }" v-model="code" class="base-bg-control-primary" v-get-element="disableContrlP" />
+        }" v-model="code" class="style-textbox" v-get-element="disableContrlP" />
     </ClientOnly>
 </template>
 <script setup lang="ts">
@@ -91,5 +91,8 @@ onUnmounted(() => {
 
 .monaco-editor .sticky-line-content:nth-last-child(1) {
     opacity: 0.5;
+}
+.style-textbox:has(.monaco-editor.focused) {
+    @apply utils-style-textbox-focus;
 }
 </style>
