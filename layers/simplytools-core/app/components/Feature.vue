@@ -17,7 +17,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                 unlikely to work correctly.</noscript>
         </Flex>
         <div class="mt-4 app:mt-0 not-app:mb-8 w-full"
-            :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']" :style>
+            :class="[limitScreen ? $props.class : '', app !== 'do-not-center' ? 'app:flex app:flex-col app:justify-center' : '']" :style="limitScreen ? $props.style : ''">
             <div v-if="tool.category === AICategory" class="text-center mb-8">
                 <span class="app:hidden">Note: This tool is powered by browsers' built-in AI.<br /></span>
                 <span class="hidden app:inline">Note: This tool is powered by WebView2 browser's built-in
