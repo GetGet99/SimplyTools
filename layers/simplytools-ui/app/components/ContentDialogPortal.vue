@@ -12,7 +12,7 @@
 
                 <Control class="p-button-icon">
                     <DialogClose as-child>
-                        <IconClose alt="Close" />
+                        <IconDismiss alt="Close" />
                     </DialogClose>
                 </Control>
             </DialogTitle>
