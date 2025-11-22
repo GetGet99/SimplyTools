@@ -64,7 +64,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                     </div>
                 </Flex>
             </details>
-            <Footer class="mt-1! app:hidden" />
+            <Footer class="mt-1! app:not-app-browser:hidden" />
         </div>
     </Grid>
 </template>

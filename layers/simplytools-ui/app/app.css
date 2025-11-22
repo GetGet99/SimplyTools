@@ -4,6 +4,7 @@
 @source '~~/app/error.vue';
 @custom-variant data-view (&[data-view="true"]);
 @custom-variant app (body.app &);
+@custom-variant app-browser (body.app-browser &);
 /* @custom-variant not-data-view (&:not([data-view="true"])); */
 
 @theme reference {
@@ -78,7 +79,7 @@
     --ease-theme: cubic-bezier(0.41, 0.52, 0, 0.94);
 }
 
-body:not(.app) {
+body:not(.app), body.app-browser {
     --app-titlebar-reserved-area-left: 0px;
     --app-titlebar-reserved-area-right: 0px;
 
@@ -105,7 +106,7 @@ body:not(.app) {
     }
 }
 
-body.app {
+body.app:not(.app-browser) {
     --background-color-root: transparent;
 }
 
