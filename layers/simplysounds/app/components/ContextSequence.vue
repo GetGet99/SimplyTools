@@ -79,7 +79,7 @@ function renderItem(sn: SequenceNote) {
       const numerator = whole * 2 + 1
       lengthSuffix = ` (${numerator}/2)`
     } else {
-      lengthSuffix = ` (${length}x)`
+      lengthSuffix = ` (${'~'.repeat(length - Math.ceil(Math.log10(length + 1)))}${length})`
     }
   }
   if (sn.note === 'Hold') return `Hold${lengthSuffix}`
