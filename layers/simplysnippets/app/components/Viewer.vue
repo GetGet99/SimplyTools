@@ -25,11 +25,15 @@
                 </ClientOnly>
 
                 <!-- YAML Tab -->
-                <CodeEditor v-if="inputTab === 'yaml'" lang="yaml" v-model="input" class="not-lg:min-h-50 h-full" />
+                <InputTextBoxTools v-if="inputTab === 'yaml'" v-model="input" class="not-lg:min-h-50 h-full" >
+                    <CodeEditor lang="yaml" v-model="input" />
+                </InputTextBoxTools>
 
                 <!-- JSON Tab -->
-                <CodeEditor v-if="inputTab === 'json'" lang="json" :model-value="inputJson"
-                    @update:model-value="updateFromJson" class="not-lg:min-h-50 h-full" />
+                <InputTextBoxTools v-if="inputTab === 'json'" :model-value="inputJson" @update:model-value="updateFromJson" class="not-lg:min-h-50 h-full" >
+                    <CodeEditor v-if="inputTab === 'json'" lang="json" :model-value="inputJson"
+                        @update:model-value="updateFromJson" />
+                </InputTextBoxTools>
             </Flex>
 
             <!-- Input Format (only show for YAML and JSON tabs) -->
@@ -46,8 +50,11 @@
             </Flex>
             <!-- Output Preview -->
             <ClientOnly>
-                <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output"
-                    class="lg:row-span-3 not-lg:min-h-50" />
+                <OutputTextBoxTools :output="output" :filename-hint="`output.${fileExtension}`"
+                    class="lg:row-span-3 not-lg:min-h-50">
+                    <CodeEditor ref="outputME" :lang=outputLang readonly v-model="output"
+                        class="lg:row-span-3 not-lg:min-h-50" />
+                </OutputTextBoxTools>
             </ClientOnly>
 
         </Grid>
@@ -186,4 +193,27 @@ async function render() {
 
 // Watch editors
 watch([snippetCode, input], render, { immediate: true });
+
+const fileExtension = computed(() => {
+    const lang = outputLang.value
+    switch (lang) {
+        case 'plaintext':
+            return 'txt'
+        case 'javascript':
+            return 'js'
+        case 'typescript':
+            return 'ts'
+        case 'python':
+            return 'py'
+        case 'csharp':
+            return 'cs'
+        case 'json':
+        case 'yaml':
+        case 'html':
+        case 'css':
+            return lang
+        default:
+            return 'txt'
+    }
+})
 </script>
