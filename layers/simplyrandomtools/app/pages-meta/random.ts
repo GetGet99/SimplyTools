@@ -1,4 +1,4 @@
-import { createCategory } from "./pages/_helper"
+import { createCategory } from "../../../simplytools-core/app/utils/pages/_helper"
 
 export const RandomCategory = createCategory({
     type: 'category',
