@@ -20,26 +20,6 @@ const output = computed(() => (mode.value === 'atob' ? safeAToB : safeBToA)(inpu
 function copy() {
     navigator.clipboard.writeText(output.value)
 }
-function paste() {
-    navigator.clipboard.readText().then(text => {
-        input.value = text
-    })
-}
-function fromFile() {
-    const inputElement = document.createElement('input')
-    inputElement.type = 'file'
-    inputElement.onchange = (e) => {
-        const file = (e.target as HTMLInputElement).files?.[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-                input.value = e.target?.result as string
-            }
-            reader.readAsText(file)
-        }
-    }
-    inputElement.click()
-}
 function toFile() {
     const blob = new Blob([output.value], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
@@ -52,72 +32,23 @@ function toFile() {
 const w = window
 </script>
 <template>
-    <Feature category="dev" tool="Base 64 Converter" class="flex flex-col gap-5" limit-screen="xl">
-        <Flex column class="items-center gap-5">
+    <Feature category="dev" tool="Base 64 Converter" class="flex flex-col gap-2 p-2" limit-screen="xl">
+        <Flex column class="items-center gap-2">
             <Button @click="mode = mode === 'atob' ? 'btoa' : 'atob'; w.location">Switch to Base 64 {{ mode !== 'atob' ?
                 'decoder' : 'encoder' }}</Button>
         </Flex>
-        <Grid :rows=2 :lg-rows=1 :lg-columns=2 class="grow gap-15 mx-2 lg:mx-10 app:mb-4">
-            <!-- <Grid columns="grow auto">
-                <Flex column class="b64-textbox-controls overflow-hidden order-1">
-                    <Button class="b64-textbox-button bg-transparent" @click="paste">
-                        <IconClipboardPaste alt="Paste" />
-                    </Button>
-                    <Button class="b64-textbox-button bg-transparent" @click="fromFile">
-                        <Icon :icon=FileIcon alt="From file" />
-                    </Button>
-                </Flex>
-                <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
-                    class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none" multiline />
-            </Grid> -->
-            <TextBoxTools toolbar-position="right">
+        <Grid :rows=2 :lg-rows=1 :lg-columns=2 class="grow gap-2 app:mb-4">
+            <InputTextBoxTools v-model="input">
                 <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="resize-none" multiline />
-                <template #tools>
-                    <Button variant="ghost" icon class="b64-textbox-button" @click="paste">
-                        <IconClipboardPaste alt="Paste" />
-                    </Button>
-                    <Button variant="ghost" icon @click="fromFile">
-                        <IconDocument alt="From file" />
-                    </Button>
-                </template>
-            </TextBoxTools>
+            </InputTextBoxTools>
             <!-- <BinaryInput placeholder="Test" :model-value="{ editingType: 'utf8', value: '' }">
 
             </BinaryInput> -->
-
-            <!-- <Flex class="items-center justify-center">
-                <Button class="w-fit p-button-icon" @click="mode = mode === 'atob' ? 'btoa' : 'atob'"
-                    :title="`Swap to ${mode === 'atob' ? 'Normal to Base64' : 'Base64 to Normal'} mode`">
-                    <Icon :icon=ArrowSwap alt="" />
-                </Button>
-            </Flex> -->
-
-            <!-- <Grid columns="grow auto">
-                <TextBox :model-value="output" :placeholder="mode !== 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
-                    class="peer focus:hover:bg-transparent rounded-r-none! border-r-0! h-full resize-none" multiline />
-                <Flex column class="b64-textbox-controls overflow-hidden">
-                    <Button class="b64-textbox-button bg-transparent" @click="copy">
-                        <IconCopy alt="Copy" />
-                    </Button>
-                    <Button class="b64-textbox-button bg-transparent" @click="toFile">
-                        <Icon :icon=SaveFileIcon alt="Save file" />
-                    </Button>
-                </Flex>
-            </Grid> -->
-
-            <TextBoxTools toolbar-position="right">
+            <OutputTextBoxTools :output filename-hint="mode === 'btoa' ? 'base64.txt' : 'decoded.txt'">
                 <TextBox :model-value="output" readonly :placeholder="mode === 'btoa' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="resize-none" multiline />
-                <template #tools>
-                    <Button variant="ghost" icon class="b64-textbox-button" @click="copy">
-                        <IconCopy alt="Copy" />
-                    </Button>
-                    <Button variant="ghost" icon @click="toFile">
-                        <IconDocumentArrowDown alt="Save file" />
-                    </Button>
-                </template>
-            </TextBoxTools>
+            </OutputTextBoxTools>
         </Grid>
         <template #summary>
             Encoding and decoding base64 without opening DevTools.

@@ -1,10 +1,15 @@
 <template>
     <Feature limit-screen="all">
-        <Grid :columns="2" rows="auto grow" class="grow h-full">
+        <Grid :columns="2" rows="auto grow" class="grow h-full gap-2 p-2">
             <div>JSON</div>
             <div>YAML</div>
-            <CodeEditor lang="json" v-model="input" />
-            <CodeEditor :lang="output.result === 'ok' ? 'yaml' : 'plaintext'" readonly :model-value="output.yaml ?? output.message" />
+            <InputTextBoxTools v-model="input">
+                <CodeEditor lang="json" v-model="input" />
+            </InputTextBoxTools>
+            <OutputTextBoxTools :output="output.yaml ?? output.message" :filename-hint="output.result === 'ok' ? 'output.yaml' : 'error.txt'">
+                <CodeEditor :lang="output.result === 'ok' ? 'yaml' : 'plaintext'" readonly
+                    :model-value="output.yaml ?? output.message" />
+            </OutputTextBoxTools>
         </Grid>
     </Feature>
 </template>
@@ -13,8 +18,8 @@ import * as YAML from 'yaml'
 const input = ref(`{
     "items": [
         {
-        "name": "Example",
-        "value": 42
+            "name": "Example",
+            "value": 42
         }
     ]
 }`)

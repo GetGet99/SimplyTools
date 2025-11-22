@@ -1,10 +1,16 @@
 <template>
     <Feature limit-screen="all">
-        <Grid :columns="2" rows="auto grow" class="grow h-full">
+        <Grid :columns="2" rows="auto grow" class="grow h-full gap-2 p-2">
             <div>YAML</div>
             <div>JSON</div>
-            <CodeEditor lang="yaml" v-model="input" />
-            <CodeEditor :lang="output.result === 'ok' ? 'json' : 'plaintext'" readonly :model-value="output.json ?? output.message" />
+            <InputTextBoxTools v-model="input">
+                <CodeEditor lang="yaml" v-model="input" />
+            </InputTextBoxTools>
+            <OutputTextBoxTools :output="output.json ?? output.message"
+                :filename-hint="output.result === 'ok' ? 'output.json' : 'error.txt'">
+                <CodeEditor :lang="output.result === 'ok' ? 'json' : 'plaintext'" readonly
+                    :model-value="output.json ?? output.message" />
+            </OutputTextBoxTools>
         </Grid>
     </Feature>
 </template>
