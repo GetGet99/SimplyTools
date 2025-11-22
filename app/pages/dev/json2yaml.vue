@@ -1,6 +1,6 @@
 <template>
-    <Feature class="flex flex-col h-full">
-        <Grid :columns="2" rows="auto grow" class="grow">
+    <Feature limit-screen="all">
+        <Grid :columns="2" rows="auto grow" class="grow h-full">
             <div>JSON</div>
             <div>YAML</div>
             <CodeEditor lang="json" v-model="input" />
