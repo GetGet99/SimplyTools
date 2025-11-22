@@ -11,7 +11,9 @@ const newListText = ref(`${defaultDescription}\n${defaultList.join('\n')}`)
     <Feature class="flex flex-col gap-2 items-center">
         <slot :list="defaultList" />
         <div class="text-center">Randomly choosing your items with {{ toolname }} machine!</div>
-        <CodeEditor lang="plaintext" v-model="newListText" class="h-100 w-full max-w-200 mx-2" />
+        <InputTextBoxTools v-model="newListText">
+            <CodeEditor lang="plaintext" v-model="newListText" class="h-100 w-full max-w-200 mx-2" />
+        </InputTextBoxTools>
         <Button @click="async () => {
             const newList = await createNewListAsync(undefined, newListText, `New Items for ${toolname}`)
             navigateTo(`/random/list/${newList}/${toolname}`)
