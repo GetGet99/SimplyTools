@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as IconComponents from "~~/layers/fluentui-icons/components-autogen/_barrel";
-import { InDevCategory } from "../../utils/pages/in-dev";
 function copyToClipboard(text: string) {
   navigator.clipboard.writeText(text);
 }

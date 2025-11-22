@@ -2,7 +2,7 @@ export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
     // Important: make Nuxt aware of the custom types
     imports: {
-        dirs: ['types'],
+        dirs: ['types', 'pages-meta'],
     },
     components: [
         { path: './components', prefix: 'SimplySounds' }
