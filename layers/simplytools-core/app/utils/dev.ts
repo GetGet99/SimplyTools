@@ -16,6 +16,16 @@ export const DevCategory = createCategory({
         desc: 'A simple base64 decoder.'
     },
     {
+        title: 'JSON to YAML Converter',
+        path: 'json2yaml',
+        desc: 'A simple JSON to YAML converter.'
+    },
+    {
+        title: 'YAML to JSON Converter',
+        path: 'yaml2json',
+        desc: 'A simple YAML to JSON converter.'
+    },
+    {
         title: 'Programmer Calculator',
         path: 'progcalc',
         desc: 'Calculator in many number bases.'
