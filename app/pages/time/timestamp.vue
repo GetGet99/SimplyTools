@@ -137,7 +137,7 @@
 <script setup lang="ts">
 import { ZonedDateTime, now, getLocalTimeZone } from '@internationalized/date'
 
-setPageInfo(Uncategorized.pages.find(x => x.path === 'timestamp'))
+setPageInfo(TimeCategory.pages.find(x => x.path === 'timestamp'))
 
 interface Time {
     hours: number

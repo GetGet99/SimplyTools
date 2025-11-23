@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-setPageInfo(Uncategorized.pages.find(x => x.path === 'stopwatch'))
+setPageInfo(TimeCategory.pages.find(x => x.path === 'stopwatch'))
 
 const running = ref(false)
 const rafId: { value: number | null } = { value: null }

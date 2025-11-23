@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-setPageInfo(Uncategorized.pages.find(x => x.path === 'timer'))
+setPageInfo(TimeCategory.pages.find(x => x.path === 'timer'))
 const DEFAULT_HOURS = 0
 const DEFAULT_MINUTES = 5
 const DEFAULT_SECONDS = 0
