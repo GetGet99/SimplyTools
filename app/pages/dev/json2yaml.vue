@@ -11,6 +11,14 @@
                     :model-value="output.yaml ?? output.message" />
             </OutputTextBoxTools>
         </Grid>
+        <template #summary>
+            Easily convert JSON to YAML format.
+        </template>
+        <template #details>
+            <p>This tool allows you to convert JSON formatted text into YAML format. Simply paste your JSON into the
+                left editor, and the corresponding YAML will be generated on the right. If there are any errors in the
+                JSON syntax, an error message will be displayed instead.</p>
+        </template>
     </Feature>
 </template>
 <script setup lang="ts">

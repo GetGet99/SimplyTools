@@ -106,7 +106,7 @@ onMounted(() => {
 
 </script>
 <template>
-    <Feature class="flex flex-col gap-4 justify-center items-center">
+    <Feature class="flex flex-col gap-4 justify-center items-center" details-visible="hidden">
         <div class="w-full max-w-3xl p-4">
             <h2 class="text-lg font-semibold mb-2">Card Picker</h2>
 

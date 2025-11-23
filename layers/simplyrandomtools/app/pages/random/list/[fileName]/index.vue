@@ -1,5 +1,5 @@
 <template>
-    <feature class="flex flex-col gap-2 items-center justify-center">
+    <feature class="flex flex-col gap-2 items-center justify-center" details-visible="hidden">
         <Flex column class="gap-2 bg-card border rounded-control control-border-control max-h-40 overflow-y-auto">
             <div v-for="item in list" class="h-16 p-control min-w-40 flex items-center justify-center select-text">{{ item }}</div>
         </Flex>

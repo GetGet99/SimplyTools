@@ -54,6 +54,15 @@
                 </Flex>
             </Flex>
         </Flex>
+        <template #summary>
+            Generate QR codes from text or links.
+        </template>
+        <template #details>
+            <p>This tool allows you to create QR codes easily by entering text or links. Customize the appearance of
+                your QR code by adjusting the foreground and background colors, padding, and size. You can choose to
+                generate the QR code as a PNG image or an SVG file. Once generated, you can download the QR code or copy
+                it directly to your clipboard for easy sharing.</p>
+        </template>
     </Feature>
 </template>
 <script setup lang="ts">

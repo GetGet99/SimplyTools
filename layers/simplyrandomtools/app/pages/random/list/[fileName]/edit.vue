@@ -1,5 +1,5 @@
 <template>
-    <Grid :columns="1" :rows="1" class="gap-4 h-screen overflow-hidden p-2">
+    <Grid :columns="1" :rows="1" class="gap-4 h-screen overflow-hidden p-2" details-visible="hidden">
         <!-- Template Editor -->
         <Flex column class="gap-2 row-span-2">
             <Flex class="items-center gap-1">

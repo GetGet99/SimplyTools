@@ -19,7 +19,7 @@ watch(selectedIndex, () => {
 })
 </script>
 <template>
-    <Feature class="flex flex-col gap-4 justify-center items-center">
+    <Feature class="flex flex-col gap-4 justify-center items-center" details-visible="hidden">
         <Flex v-if="list.length !== orignalLen" class="gap-2">
             <Button icon="left" @click="async () => list = await getListAsync(id)">
                 <IconArrowSync alt="" />

@@ -14,19 +14,13 @@ const lists = await getListIdsAsync()
             </ClientOnly>
         </Flex>
         <template #summary>
-            Quickly find and use code templates for your projects, or create your own custom snippets.
+            Manage your random lists.
         </template>
         <template #details>
-            <p>
-                The Quick Templates feature lets you browse built-in code snippets or add your own reusable templates.
-                Streamline your workflow by copying and customizing snippets for any use case.
-                All templates are managed in one place for easy access and editing.
-            </p>
-            <p>
-                Built-in snippets cover common patterns and best practices, while custom snippets allow you to tailor
-                solutions to your needs.
-                Perfect for developers who want to save time and avoid repetitive coding tasks.
-            </p>
+            <p>This page allows you to manage your lists that you've created to use with SimplyRandomTools.
+                You can view all your lists here, edit them, or create new ones. These lists can be used with various
+                randomization tools available in the application to generate random selections based on your
+                predefined data.</p>
         </template>
     </Feature>
 </template>
