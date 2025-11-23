@@ -14,7 +14,7 @@ import { isMobileNavVisible } from '../../utils/navigation/mobile';
             </template>
             <template v-for="category in Categories" :key="category?.name">
                 <li v-if="category && category.shortName && category !== Apps" class="list-none w-full mx-0 flex flex-col">
-                    <details class="no-marker group">
+                    <GlobalNavigationDetails class="no-marker group" :default-open="curPage && category.pages.some(page => page === curPage)">
                         <summary>
                             <Control variant="ghost"
                                 class="h-10 w-full text-left grow border-transparent! items-center flex">
@@ -31,7 +31,7 @@ import { isMobileNavVisible } from '../../utils/navigation/mobile';
                             <GlobalNavigationLeafItem v-for="page in category.pages" :key="page.path"
                                 :cur-page="curPage" :page="page" inner-class="pl-6" />
                         </ul>
-                    </details>
+                    </GlobalNavigationDetails>
                 </li>
             </template>
             <GlobalNavigationLeafItem v-for="page in Apps.pages" :key="page.path" :cur-page="curPage"
