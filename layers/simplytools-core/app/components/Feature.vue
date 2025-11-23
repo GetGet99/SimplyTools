@@ -2,6 +2,7 @@
 defineProps<{ class?: string, style?: any, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
+useSeoMeta(tool.value.seo)
 </script>
 <template>
     <Grid class="feature-root min-h-full xl:data-[limit-screen='xl']:h-full data-[limit-screen='all']:h-full"

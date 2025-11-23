@@ -1,3 +1,4 @@
+type UseSeoMetaInput = Parameters<typeof useSeoMeta>[0]
 const currentPage = shallowRef<PageInfo | undefined>(undefined)
 const pageInfo = computed(() => {
     if (!currentPage.value) {
@@ -8,7 +9,8 @@ const pageInfo = computed(() => {
             category: Uncategorized,
             catPath: Uncategorized.path,
             toolPath: '/',
-            isApp: false
+            isApp: false,
+            seo: {} satisfies UseSeoMetaInput
         }
     } else {
         let toolName = currentPage.value.inPageTitle ?? currentPage.value.title
@@ -50,7 +52,13 @@ const pageInfo = computed(() => {
             category: currentPage.value.parent,
             catPath: currentPage.value.parent.path,
             toolPath: `${currentPage.value.parent.path}/${currentPage.value.path}`,
-            isApp
+            isApp,
+            seo: {
+                title: `${appName} - ${toolName}`,
+                ogTitle: `${toolName}`,
+                description: currentPage.value.desc,
+                ogDescription: currentPage.value.desc,
+            } satisfies UseSeoMetaInput
         }
     }
 })
