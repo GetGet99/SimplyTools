@@ -23,11 +23,6 @@ export const Uncategorized = createCategory({
         desc: 'Compare between two pieces of text to see what are the differences.'
     },
     {
-        title: 'Pomodoro Timer',
-        path: 'pomodoro',
-        desc: 'Simple Pomodoro timer to boost your productivity with work and break intervals.'
-    },
-    {
         title: 'QR Code Generator',
         path: 'qr',
         desc: 'Quickly create a QR code.'

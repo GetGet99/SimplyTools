@@ -2,7 +2,7 @@
 import aud from '~/assets/beep-313342.mp3'
 import { ref, computed, watch } from 'vue'
 
-setPageInfo(Uncategorized.pages.find(x => x.path === 'pomodoro'))
+setPageInfo(TimeCategory.pages.find(x => x.path === 'pomodoro'))
 const MODES = [
     { name: 'Pomodoro', duration: 25 * 60 * 1000 },
     { name: 'Short Break', duration: 5 * 60 * 1000 },

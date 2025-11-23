@@ -17,5 +17,10 @@ export const TimeCategory = createCategory({
     title: 'Timestamp Converter',
     path: 'timestamp',
     desc: 'Convert dates and times to UNIX timestamps and Discord timestamp formats, with instant previews and copy buttons.'
+},
+{
+    title: 'Pomodoro Timer',
+    path: 'pomodoro',
+    desc: 'Simple Pomodoro timer to boost your productivity with work and break intervals.'
 }])
 
