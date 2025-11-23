@@ -14,6 +14,7 @@
     </Feature>
 </template>
 <script setup lang="ts">
+usePageInfo(DevCategory.pages.find(p => p.path === 'json2yaml')!)
 import * as YAML from 'yaml'
 const input = ref(`{
     "items": [
