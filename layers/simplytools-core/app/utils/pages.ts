@@ -65,6 +65,7 @@ const pageInfo = computed(() => {
 
 export function setPageInfo(page?: PageInfo) {
     currentPage.value = page
+    useSeoMeta(pageInfo.value.seo)
     return pageInfo
 }
 export function useCurrentPage() {
@@ -73,6 +74,7 @@ export function useCurrentPage() {
 export function usePageInfo(page?: PageInfo) {
     if (page) {
         currentPage.value = page
+        useSeoMeta(pageInfo.value.seo)
     }
     return pageInfo
 }
