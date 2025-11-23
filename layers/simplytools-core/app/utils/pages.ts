@@ -60,12 +60,12 @@ const pageInfo = computed(() => {
                 ogSiteName: appName === 'SimplyTools' ? appName : `${appName} (SimplyTools)`,
                 ogImage: {
                     url: SimplyToolsIcon,
-                    width: 32,
-                    height: 32,
+                    width: 128,
+                    height: 128,
                     alt: 'SimplyTools Icon'
                 },
                 description: currentPage.value.desc,
-                ogDescription: currentPage.value.desc,
+                ogDescription: currentPage.value.desc
             } satisfies UseSeoMetaInput
         }
     }
