@@ -24,22 +24,25 @@ getMetadataAsync(view.value).then(x => {
 const snippets = await getLocalSnippetsAsync()
 </script>
 <template>
-    <Feature category="snippets" tool="Quick Templates" kind="app" class="flex flex-col gap-4" limit-screen='xl'>
+    <Feature category="snippets" tool="Quick Templates" kind="app" class="flex flex-col gap-4" limit-screen="xl">
         <p class="text-center">Find templates you wish to use, or
             <OurLink href="/snippets/new">Create your own!</OurLink>
         </p>
-        <div class="snippets-root grow">
-            <div class="snippets-list">
-                <ClientOnly>
-                    <SimplySnippetsCard v-for="key in snippets" :snippet-key="key" />
-                </ClientOnly>
-                <SimplySnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" />
-            </div>
+        <div class="snippets-root grow overflow-y-auto">
+            <details class="w-full overflow-x-auto">
+                <summary>Available Snippets</summary>
+                <div class="snippets-list">
+                    <ClientOnly>
+                        <SimplySnippetsCard v-for="key in snippets" :snippet-key="key" class="w-96" />
+                    </ClientOnly>
+                    <SimplySnippetsCard v-for="key in getBuiltInSnippets()" :snippet-key="key" class="w-96" />
+                </div>
+            </details>
             <!-- Render server side if it is built in -->
-            <SimplySnippetsViewer v-if="view.startsWith('builtin.')" class="not-xl:-order-1 h-full" :snippetKey='view' />
+            <SimplySnippetsViewer v-if="view.startsWith('builtin.')" class="-order-1 h-full" :snippetKey='view' />
             <!-- Render client side otherwise -->
             <ClientOnly v-else>
-                <SimplySnippetsViewer class="not-xl:-order-1 h-full" :snippetKey='view' />
+                <SimplySnippetsViewer class="-order-1 h-full" :snippetKey='view' />
             </ClientOnly>
         </div>
         <template #summary>
@@ -63,22 +66,23 @@ const snippets = await getLocalSnippetsAsync()
 @reference '~~/layers/simplytools-ui/app/app.css';
 
 .snippets-root {
-    @apply grid mx-10 lg:mx-30 gap-4;
+    @apply grid mx-2 gap-4;
 
-    @variant xl {
+    /* @variant xl {
         @apply overflow-hidden;
         grid-template-columns: calc(var(--spacing) * 80) minmax(0, 1fr);
-    }
+    } */
 }
 
 .snippets-list {
-    @apply sm:mx-1 xl:mx-2 my-2 gap-4;
+    @apply my-2 gap-4;
 
 
-    @apply grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
+    /* @apply grid sm:grid-cols-1 md:grid-cols-2; */
+    @apply flex w-max;
 
-    @variant xl {
+    /* @variant xl {
         @apply flex flex-col overflow-y-auto;
-    }
+    } */
 }
 </style>
