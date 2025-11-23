@@ -7,6 +7,9 @@ useHead({
             'overflow': 'hidden'
         }
     },
+    htmlAttrs: {
+        lang: 'en'
+    },
     link: [
         { rel: 'icon', type: 'image/png', href: simplyToolsIconFit }
     ],
