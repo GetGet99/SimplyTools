@@ -1,9 +1,7 @@
 @layer properties, base, components, theme, utilities;
 @import "tailwindcss";
-@source '../../../';
-/* @source '~/layers/';
-@source '~/app/error.vue';
-@source '~/app/'; */
+@source '../../';
+@source '../../../app/';
 @custom-variant data-view (&[data-view="true"]);
 @custom-variant app (body.app &);
 @custom-variant app-browser (body.app-browser &);
