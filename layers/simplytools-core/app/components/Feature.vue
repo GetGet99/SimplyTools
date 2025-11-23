@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ class?: string, style?: any, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: boolean | 'no-app' }>()
+defineProps<{ class?: string, style?: any, noDetails?: boolean, limitScreen?: 'xl' | 'all', app?: 'do-not-center', detailsVisible?: 'always' | 'hidden' }>()
 const tool = usePageInfo()
 useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
 </script>
@@ -32,7 +32,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
             </div>
             <slot v-else></slot>
         </div>
-        <div :class="detailsVisible ? (detailsVisible === 'no-app' ? 'app:hidden' : '') : 'hidden'">
+        <div :class="detailsVisible !== 'hidden' ? (detailsVisible === 'always' ? '' : 'app:hidden') : 'hidden'">
             <details v-if="!noDetails" class="text-center app:mb-2">
                 <summary><span class="italic">Extra Info: <slot name="summary">We are working on this tool. 🔨
                         </slot>

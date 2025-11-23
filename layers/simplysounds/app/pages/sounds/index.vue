@@ -1,5 +1,5 @@
 <template>
-    <Feature category="sounds" tool="Make your own sounds!" details-visible>
+    <Feature category="sounds" tool="Make your own sounds!" details-visible="always">
         <Flex column class="gap-8 group" :data-touch="toolsExpanded">
             <Flex column class="items-center gap-6 w-full p-8">
                 <div class="mb-4">Make Sounds! Add notes! Make loops! And listen!</div>
@@ -31,7 +31,7 @@
             <Flex v-show="toolsExpanded" class="gap-2 items-center shadow-lg">
                 <ToggleButton v-model="previewMode" class="flex items-center gap-1 text-base min-w-[40px]"
                     :aria-pressed="previewMode">
-                    <Icon :icon=PlayIcon alt="Play Sound" />
+                    <IconPlay alt="Play Sound" />
                     Tap to Preview Notes
                 </ToggleButton>
                 <!-- Add more tool buttons here -->
@@ -44,12 +44,12 @@
             <Flex class="gap-2">
                 <Button v-if="!isPlaying" class="pl-1.25 flex gap-1 border-accent-primary" @click="Sounds.playContext"
                     :disabled="playingContext.statements.length === 0">
-                    <Icon :icon=PlayIcon alt="Play Sound" />
+                    <IconPlay alt="Play Sound" />
                     Play
                 </Button>
                 <Button v-else variant="regular" title="Stop Playback" class="pl-1.25 flex gap-1"
                     @click="Sounds.stopSequence">
-                    <Icon :icon=StopIcon alt="Stop Playback" />
+                    <IconStop alt="Stop Playback" />
                     Stop
                 </Button>
             </Flex>
