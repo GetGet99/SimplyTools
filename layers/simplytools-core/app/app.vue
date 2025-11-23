@@ -9,6 +9,39 @@ useHead({
     },
     link: [
         { rel: 'icon', type: 'image/png', href: simplyToolsIconFit }
+    ],
+    style: [
+        {
+            tagPosition: 'head',
+            innerHTML: '@layer properties, base, components, theme, utilities;'
+        }
+    ],
+    script: [
+        {
+            textContent: `(function () {
+      try {
+        var ua = navigator.userAgent;
+        if (ua.indexOf('SimplyTools/Windows') !== -1) {
+          document.documentElement.classList.add('app');
+          document.body.classList.add('app');
+        } else {
+          function isPWA() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+              window.navigator.standalone === true ||
+              document.referrer.includes('android-app://');
+          }
+
+          if (isPWA()) {
+            document.documentElement.classList.add('app');
+            document.body.classList.add('app');
+            document.documentElement.classList.add('app-browser');
+            document.body.classList.add('app-browser');
+          }
+        }
+      } catch (e) { }
+    })();`,
+            tagPosition: 'head'
+        }
     ]
 })
 </script>

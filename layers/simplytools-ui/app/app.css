@@ -1,5 +1,6 @@
-@layer properties, base, components, theme, utilities;
+/* @layer properties, base, components, theme, utilities; */
 @import "tailwindcss";
+@source not './app.css';
 @source '../../';
 @source '../../../app/';
 @custom-variant data-view (&[data-view="true"]);
