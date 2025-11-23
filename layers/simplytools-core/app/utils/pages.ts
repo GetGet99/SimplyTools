@@ -1,3 +1,4 @@
+import SimplyToolsIcon from '../assets/SimplyToolsIcon.png'
 type UseSeoMetaInput = Parameters<typeof useSeoMeta>[0]
 const currentPage = shallowRef<PageInfo | undefined>(undefined)
 const pageInfo = computed(() => {
@@ -56,6 +57,13 @@ const pageInfo = computed(() => {
             seo: {
                 title: `${appName} - ${toolName}`,
                 ogTitle: `${toolName}`,
+                ogSiteName: appName === 'SimplyTools' ? appName : `${appName} (SimplyTools)`,
+                ogImage: {
+                    url: SimplyToolsIcon,
+                    width: 32,
+                    height: 32,
+                    alt: 'SimplyTools Icon'
+                },
                 description: currentPage.value.desc,
                 ogDescription: currentPage.value.desc,
             } satisfies UseSeoMetaInput
