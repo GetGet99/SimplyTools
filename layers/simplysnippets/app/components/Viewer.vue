@@ -80,9 +80,9 @@
 
 <script setup lang="ts">
 import * as YAML from "yaml";
-import { Liquid } from "liquidjs";
 import { type Metadata } from "../lib/metadata";
 import { getMetadataAsync, getMetadataSchemaAsync, getSnippetAsync, useSavedInput } from "../lib/manager";
+import { useLiquidEngine } from "../lib/liquid/engine";
 
 const props = defineProps<{ snippetKey: string, class?: string }>()
 
@@ -144,30 +144,7 @@ watch(() => props.snippetKey, async () => {
 // --------------------
 // Liquid Engine
 // --------------------
-const engine = import.meta.client ? new Liquid() : undefined;
-if (engine) {
-    engine.registerTag('meta', {
-        parse: function (tagToken, remainTokens) {
-            this.templates = []
-
-            let token
-            const stream = engine.parser.parseStream(remainTokens)
-            stream.on('tag:endmeta', () => {
-                stream.stop()
-            })
-                .on('template', (tpl) => {
-                    this.templates.push(tpl)
-                })
-            stream.start()
-        },
-
-        render: function* (ctx, hash) {
-            // Just like comment: don't render anything
-            return ''
-        }
-    })
-
-}
+const engine = useLiquidEngine();
 // --------------------
 // Watch and Render
 // --------------------
@@ -184,7 +161,8 @@ async function render() {
         );
 
         // Render with Liquid
-        output.value = await engine.parseAndRender(template, vars);
+        const out = await engine.parseAndRender(template, vars);
+        output.value = out;
 
     } catch (err: any) {
         output.value = `⚠️ Error: ${err.message}`;

@@ -19,6 +19,7 @@
     "@types/markdown-it": "13.0.7",
     "@types/qrcode": "^1.5.5",
     "blockly": "^12.3.0",
+    "change-case": "^5.4.4",
     "liquidjs": "^10.21.1",
     "markdown-it": "^14.1.0",
     "markdown-it-table": "^4.1.1",

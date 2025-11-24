@@ -1,0 +1,23 @@
+name: JSON/YAML to C#
+description: Generates C# classes with properties from a structured data. Handles nested classes and arrays automatically.
+lang: csharp
+properties:
+  input:
+    type: structured
+  root_class:
+    type: string
+  usage_hint:
+    type: bool
+    default: true
+  record:
+    type: bool
+example:
+  input:
+    order_items:
+    - name: "Book"
+      price: 12
+    - name: "Pen"
+      price: 5
+    - name: "Bag"
+      price: 25
+  root_class: RootClass

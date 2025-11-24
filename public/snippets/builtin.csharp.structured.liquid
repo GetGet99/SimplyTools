@@ -1,0 +1,86 @@
+{%- meta -%}
+name: JSON/YAML to C#
+description: Generates C# classes with properties from a structured data. Handles nested classes and arrays automatically.
+lang: csharp
+properties:
+  input:
+    type: structured
+  root_class:
+    type: string
+  usage_hint:
+    type: bool
+    default: true
+  record:
+    type: bool
+example:
+  input:
+    order_items:
+    - name: "Book"
+      price: 12
+    - name: "Pen"
+      price: 5
+    - name: "Bag"
+      price: 25
+  root_class: RootClass
+{%- endmeta -%}
+
+{%- assign schema = input | schema_flatten: root_class -%}
+{%- assign classNames = schema | keys -%}
+
+using System.Text.Json;
+{% if usage_hint != false -%}
+// Sample Usage
+// Serialize: JsonSerializer.Serialize(yourObject)
+// Deserialize: JsonSerializer.Deserialize<{{ root_class }}>("...")
+{% endif %}
+{% for className in classNames -%}
+{%- if className == root_class -%}
+  {%- assign finalClassName = className -%}
+{%- else -%}
+  {%- assign finalClassName = className | pascal_case -%}
+{%- endif -%}
+{%- if record -%}
+{%- assign propsKeys = schema[className] | keys -%}
+{%- comment %} Build positional parameter list {% endcomment -%}
+{%- assign paramList = '' -%}
+{%- for propName in propsKeys %}
+  {%- assign type = schema[className][propName] -%}
+  {%- if type == 'string' or type == 'int' or type == 'double' or type == 'bool' or
+        type == 'string[]' or type == 'int[]' or type == 'double[]' or type == 'bool[]' -%}
+  {%- elsif type endswith '[]' -%}
+    {%- assign type = type | pascal_case | append: '[]' -%}
+  {%- else -%}
+    {%- assign type = type | pascal_case -%}
+  {%- endif -%}
+
+  {%- assign pascalProp = propName | pascal_case -%}
+  {%- assign param = '[property: JsonPropertyName("' | append: propName | append: '")] ' | append: type | append: ' ' | append: pascalProp -%}
+
+  {%- if forloop.first -%}
+    {%- assign paramList = param -%}
+  {%- else -%}
+    {%- assign paramList = paramList | append: ',\n    ' | append: param -%}
+  {%- endif -%}
+{%- endfor -%}
+public record {{ finalClassName }}(
+    {{ paramList }}
+);
+{% else -%}
+public class {{ finalClassName }} {
+{%- assign propsKeys = schema[className] | keys -%}
+{%- for propName in propsKeys %}
+  {% assign type = schema[className][propName] -%}
+  {%- if type == 'string' or type == 'int' or type == 'double' or type == 'bool' or
+  type == 'string[]' or type == 'int[]' or type == 'double[]' or type == 'bool[]' -%}
+  {%- elsif type endswith '[]' -%}
+    {%- assign type = type | pascal_case -%}
+    {%- assign type = type | append: '[]' -%}
+  {%- else -%}
+    {%- assign type = type | pascal_case -%}
+  {%- endif -%}
+  [JsonPropertyName("{{ propName }}")]
+  public {{ type }} {{ propName | pascal_case }} { get; set; }
+{%- endfor %}
+}
+{% endif %}
+{% endfor -%}

@@ -31,10 +31,10 @@
 
 <script setup lang="ts">
 import * as YAML from "yaml";
-import { Liquid } from "liquidjs";
 import { extractYamlComment, type Metadata } from "../../../lib/metadata";
 import type { Uri } from "monaco-editor";
 import { getMetadataAsync, getMetadataExampleAsync, useLocalSnippetRefAsync } from "../../../lib/manager";
+import { useLiquidEngine } from "../../../lib/liquid/engine";
 // --------------------
 // Refs
 // --------------------
@@ -85,30 +85,8 @@ if (import.meta.client) {
 // --------------------
 // Liquid Engine
 // --------------------
-const engine = import.meta.client ? new Liquid() : undefined;
-if (engine) {
-    engine.registerTag('meta', {
-        parse: function (tagToken, remainTokens) {
-            this.templates = []
+const engine = useLiquidEngine()
 
-            let token
-            const stream = engine.parser.parseStream(remainTokens)
-            stream.on('tag:endmeta', () => {
-                stream.stop()
-            })
-                .on('template', (tpl) => {
-                    this.templates.push(tpl)
-                })
-            stream.start()
-        },
-
-        render: function* (ctx, hash) {
-            // Just like comment: don't render anything
-            return ''
-        }
-    })
-
-}
 // --------------------
 // Watch and Render
 // --------------------

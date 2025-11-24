@@ -1,0 +1,25 @@
+name: JSON/YAML to TypeScript interface
+description: Generates TypeScript interface with properties from a structured data. Handles nested classes and arrays automatically.
+lang: typescript
+properties:
+  input:
+    type: structured
+  root_class:
+    type: string
+  usage_hint:
+    type: bool
+    default: true
+  export:
+    type: bool
+  comma:
+    type: bool
+example:
+  input:
+    order_items:
+    - name: "Book"
+      price: 12
+    - name: "Pen"
+      price: 5
+    - name: "Bag"
+      price: 25
+  root_class: RootClass
