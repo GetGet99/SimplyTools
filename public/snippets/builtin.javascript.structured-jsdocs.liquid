@@ -1,0 +1,90 @@
+{%- meta -%}
+name: JSON/YAML to JSDoc typedef
+description: Generates JSDoc typedefs from structured data. Handles nested classes and arrays automatically.
+lang: javascript
+properties:
+  input:
+    type: structured
+  root_class:
+    type: string
+  usage_hint:
+    type: bool
+    default: true
+  export:
+    type: bool
+example:
+  input:
+    order_items:
+    - name: "Book"
+      price: 12
+    - name: "Pen"
+      price: 5
+    - name: "Bag"
+      price: 25
+  root_class: RootClass
+{%- endmeta -%}
+
+{%- assign schema = input | schema_flatten: root_class -%}
+{%- assign classNames = schema | keys -%}
+
+{% if usage_hint != false -%}
+/**
+ * Sample Usage
+ * const obj = /** @type { {{ root_class }} } *\/ (JSON.parse("..."));
+ * JSON.stringify(obj);
+ */
+{%- endif %}
+
+{% for className in classNames -%}
+{%- if className == root_class -%}
+  {%- assign finalClassName = className -%}
+{%- else -%}
+  {%- assign finalClassName = className | pascal_case -%}
+{%- endif -%}
+
+/**
+ * @typedef {Object} {{ finalClassName }}
+{%- assign propsKeys = schema[className] | keys -%}
+{%- for propName in propsKeys %}
+  {%- assign type = schema[className][propName] -%}
+
+  {%- if type == 'string' or type == 'bool' or type == 'string[]' or type == 'bool[]' -%}
+  {%- elsif type == 'double' or type == 'int' %}
+    {%- assign type = 'number' -%}
+  {%- elsif type == 'double[]' or type == 'int[]' %}
+    {%- assign type = 'number[]' -%}
+  {%- elsif type endswith '[]' -%}
+    {%- assign type = type | pascal_case -%}
+    {%- assign type = type | append: '[]' -%}
+  {%- else -%}
+    {%- assign type = type | pascal_case -%}
+  {%- endif -%}
+
+  {%- comment -%} Convert TypeScript types → JSDoc types {%- endcomment -%}
+  {%- if type == 'string' -%}
+    {%- assign jsdocType = 'string' -%}
+  {%- elsif type == 'bool' -%}
+    {%- assign jsdocType = 'boolean' -%}
+  {%- elsif type == 'string[]' -%}
+    {%- assign jsdocType = 'string[]' -%}
+  {%- elsif type == 'bool[]' -%}
+    {%- assign jsdocType = 'boolean[]' -%}
+  {%- elsif type == 'number' -%}
+    {%- assign jsdocType = 'number' -%}
+  {%- elsif type == 'number[]' -%}
+    {%- assign jsdocType = 'number[]' -%}
+  {%- elsif type endswith '[]' -%}
+    {%- assign inner = type | remove: '[]' -%}
+    {%- assign jsdocType = inner | append: '[]' -%}
+  {%- else -%}
+    {%- assign jsdocType = type -%}
+  {%- endif -%}
+{{""}}
+ * @property { {{ jsdocType }} } {{ propName | camel_case }}
+{%- endfor %}
+ */
+
+{% endfor -%}
+
+
+{% if export %}export {};{% endif %}
