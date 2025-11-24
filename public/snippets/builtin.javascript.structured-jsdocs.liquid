@@ -43,11 +43,15 @@ example:
 {%- for propName in propsKeys %}
   {%- assign type = schema[className][propName] -%}
 
-  {%- if type == 'string' or type == 'bool' or type == 'string[]' or type == 'bool[]' -%}
+  {%- if type == 'string' or type == 'string[]' -%}
   {%- elsif type == 'double' or type == 'int' %}
     {%- assign type = 'number' -%}
   {%- elsif type == 'double[]' or type == 'int[]' %}
     {%- assign type = 'number[]' -%}
+  {%- elsif type == 'bool' %}
+    {%- assign type = 'boolean' -%}
+  {%- elsif type == 'bool[]' %}
+    {%- assign type = 'boolean[]' -%}
   {%- elsif type endswith '[]' -%}
     {%- assign type = type | pascal_case -%}
     {%- assign type = type | append: '[]' -%}
