@@ -2,15 +2,10 @@ name: JSON/YAML to JSDoc typedef
 description: Generates JSDoc typedefs from structured data. Handles nested classes and arrays automatically.
 lang: javascript
 properties:
-  input:
-    type: structured
-  root_class:
-    type: string
-  usage_hint:
-    type: bool
-    default: true
-  export:
-    type: bool
+  input: structured
+  root_class: string
+  usage_hint: bool
+  export: bool
 example:
   input:
     order_items:
