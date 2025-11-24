@@ -6,26 +6,24 @@
                 <template v-if="getPropComment(propName)">
                     <span class="text-xs text-muted-foreground">{{ getPropComment(propName) }}</span>
                 </template>
-                
+
                 <!-- Boolean -->
-                <ToggleSwitch v-if="propDef === 'boolean' || propDef === true" v-model="formData[propName]" />
-                
+                <ToggleSwitch v-if="propDef === 'boolean' || propDef === 'bool' || propDef === true"
+                    :model-value="formData[propName] ?? (propDef === true ? true : false)"
+                    @update:modelValue="formData[propName] = $event ?? false" />
+
                 <!-- String -->
-                <TextBox v-else-if="propDef === 'string'" 
-                    v-model="formData[propName]" 
+                <TextBox v-else-if="propDef === 'string'" v-model="formData[propName]"
                     :placeholder="`Enter ${toReadableName(propName)}`" />
-                
+
                 <!-- Number -->
-                <NumberBox v-else-if="propDef === 'number'" 
-                    v-model="formData[propName]" 
-                    :placeholder="`Enter ${toReadableName(propName)}`"
-                    mode="real" />
-                
+                <NumberBox v-else-if="propDef === 'number'" v-model="formData[propName]"
+                    :placeholder="`Enter ${toReadableName(propName)}`" mode="real" />
+
                 <!-- String Array -->
                 <Flex v-else-if="isStringArray(propDef)" column class="gap-2">
                     <Flex v-for="(item, idx) in (formData[propName] as string[])" :key="idx" class="gap-2 items-center">
-                        <TextBox v-model="(formData[propName] as string[])[idx]" 
-                            :placeholder="`Item ${idx + 1}`" 
+                        <TextBox v-model="(formData[propName] as string[])[idx]" :placeholder="`Item ${idx + 1}`"
                             class="flex-1" />
                         <Button variant="ghost" icon @click="removeArrayItem(propName, idx)">
                             <IconDelete alt="Remove" />
@@ -35,10 +33,11 @@
                         + Add Item
                     </Button>
                 </Flex>
-                
+
                 <!-- Array of Objects (like props) -->
                 <Flex v-else-if="isObjectArray(propDef)" column class="gap-3 border-l-2 pl-3">
-                    <Flex v-for="(item, idx) in (formData[propName] as any[])" :key="idx" column class="gap-2 border rounded p-2">
+                    <Flex v-for="(item, idx) in (formData[propName] as any[])" :key="idx" column
+                        class="gap-2 border rounded p-2">
                         <Flex class="items-center justify-between">
                             <span class="text-sm font-medium">Item {{ idx + 1 }}</span>
                             <Button variant="ghost" icon @click="removeArrayItem(propName, idx)">
@@ -46,15 +45,18 @@
                             </Button>
                         </Flex>
                         <!-- Recursive FormBuilder for nested object -->
-                        <FormBuilder
-                            :properties="getObjectArraySchema(propDef)"
+                        <FormBuilder :properties="getObjectArraySchema(propDef)"
                             v-model="(formData[propName] as any[])[idx]"
-                            :metaRaw="props.metaRaw ? props.metaRaw.get('properties', true)?.get(propName, true) : undefined"
-                        />
+                            :metaRaw="props.metaRaw ? props.metaRaw.get('properties', true)?.get(propName, true) : undefined" />
                     </Flex>
                     <Button variant="ghost" @click="addObjectArrayItem(propName, getObjectArraySchema(propDef))">
                         + Add Item
                     </Button>
+                </Flex>
+
+                <!-- Structured -->
+                <Flex v-else-if="propDef === 'structured'" column class="gap-3 border-l-2 pl-3">
+                    <SimplySnippetsStructuredCodeEditor lang="yaml" v-model="formData[propName]" />
                 </Flex>
             </div>
         </template>
@@ -229,20 +231,20 @@ function getNestedPropComment(propName: string, nestedPropName: string): string 
 // Check if propDef represents a string array
 function isStringArray(propDef: any): boolean {
     // Check for "string[]" notation or array with string as first element
-    return propDef === 'string[]' || 
-           (Array.isArray(propDef) && propDef[0] === 'string')
+    return propDef === 'string[]' ||
+        (Array.isArray(propDef) && propDef[0] === 'string')
 }
 
 // Check if propDef represents an array of objects
 function isObjectArray(propDef: any): boolean {
     // If it's an object (not a string type, not an array of primitives), it's an array of objects
-    return typeof propDef === 'object' && 
-           propDef !== null && 
-           !Array.isArray(propDef) &&
-           propDef !== 'boolean' &&
-           propDef !== 'string' &&
-           propDef !== 'number' &&
-           propDef !== 'string[]'
+    return typeof propDef === 'object' &&
+        propDef !== null &&
+        !Array.isArray(propDef) &&
+        propDef !== 'boolean' &&
+        propDef !== 'string' &&
+        propDef !== 'number' &&
+        propDef !== 'string[]'
 }
 
 // Get the schema for an array of objects
@@ -262,15 +264,15 @@ function getObjectArraySchema(propDef: any): Record<string, any> {
 function toReadableName(name: string): string {
     // Handle snake_case: replace underscores with spaces
     let result = name.replace(/_/g, ' ')
-    
+
     // Handle camelCase and PascalCase: insert space before uppercase letters
     // But not if it's already separated or at the start
     result = result.replace(/([a-z])([A-Z])/g, '$1 $2')
-    
+
     // Handle consecutive uppercase letters (like "HTML" or "XML")
     // Insert space between consecutive uppercase followed by lowercase
     result = result.replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-    
+
     // Capitalize first letter of each word
     return result.split(' ').map(word => {
         if (word.length === 0) return word
@@ -278,4 +280,3 @@ function toReadableName(name: string): string {
     }).join(' ')
 }
 </script>
-

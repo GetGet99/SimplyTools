@@ -4,8 +4,8 @@ lang: typescript
 properties:
   input: structured
   root_class: string
-  usage_hint: bool
-  export: bool
+  usage_hint: true
+  export: true
   comma: bool
 example:
   input:

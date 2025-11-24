@@ -4,7 +4,7 @@ lang: csharp
 properties:
   input: structured
   root_class: string
-  usage_hint: bool
+  usage_hint: true
   record: bool
 example:
   input:
