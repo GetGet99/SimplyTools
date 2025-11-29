@@ -1,8 +1,8 @@
 <template>
-    <div v-if="error" class="p-2 bg-control-primary border-border-control-primary rounded-1">
+    <Layer v-if="error" class="p-2">
         <template v-if="error === 'Error: No input text'">Please type text and the QR Code will show up here</template>
         <template v-else>{{ error }}</template>
-    </div>
+    </Layer>
     <img v-else-if="mode === 'img'" :alt="`QR Code for ${props.value}`" :src :class />
     <img v-else-if="mode === 'svg'" :alt="`QR Code for ${props.value}`" :src="`data:image/svg+xml,${encodeURIComponent(svg)}`" :class />
     <!-- <div v-else v-html="svg" :class></div> -->

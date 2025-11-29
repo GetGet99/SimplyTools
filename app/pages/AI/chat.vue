@@ -147,8 +147,9 @@ function clearChat() {
                     <span :class="msg.role === 'user' ? 'font-bold' : 'italic'">
                         {{ msg.role === 'user' ? 'You' : msg.role === 'assistant' ? 'Assistant' : 'System' }}:
                     </span>
-                    <pre
-                        class="p-2 bg-control-primary border-border-control-primary rounded-1 w-fit font-[system-ui] select-text text-wrap">{{ msg.content }}</pre>
+                    <CardBase>
+                        <pre class="p-2 w-fit font-[system-ui] select-text text-wrap">{{ msg.content }}</pre>
+                    </CardBase>
                 </Flex>
             </Flex>
 

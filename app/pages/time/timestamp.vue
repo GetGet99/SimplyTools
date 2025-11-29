@@ -91,14 +91,14 @@
                 <div>{{ option.label }}</div>
                 <Flex class="gap-2 items-center">
                     <div class="select-text">
-                        <span class="bg-control-primary w-min p-1 rounded-1">
+                        <Layer class="w-min p-1 rounded-1">
                             <ClientOnly>
                                 {{ option.example(dt?.toDate() ?? new Date(), currentTime) }}
                                 <template #fallback>
                                     Loading...
                                 </template>
                             </ClientOnly>
-                        </span>
+                        </Layer>
                     </div>
                     <Button @click="copyToClipboard(option.example(dt?.toDate() ?? new Date(), currentTime))"
                         class="p-button-icon" title="Copy Preview Text">

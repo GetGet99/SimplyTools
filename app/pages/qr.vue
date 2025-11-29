@@ -1,59 +1,61 @@
 <template>
     <Feature category="none" tool="QRCode" class="flex justify-center">
-        <Flex column class="bg-control-primary border-border-control-primary w-fit p-4 rounded-2 gap-3 lg:flex-row">
-            <Flex column class="gap-2">
-                <div>QR Code Content</div>
-                <TextBox multiline class="w-min-100" v-model="value" placeholder="Add text or link here!" />
-                <Grid :columns="2" class="gap-2 justify-center items-center">
-                    <div>Foreground Color</div>
-                    <div>Background Color</div>
-                    <ColorHexEditorShared v-model="foreground" />
-                    <ColorHexEditorShared v-model="background" />
-                    <div>Padding</div>
-                    <div>QR Size</div>
-                    <NumberBox placeholder="Padding" mode="integer_positive" v-model="padding" />
-                    <NumberBox placeholder="QR Size" mode="integer_positive" v-model="size" />
-                    <div>Image Kind</div>
-                    <ComboBox :options="(['img', 'svg'] as const)" v-model="mode">
-                        <template v-slot="{ option }">
-                            <template v-if="option === 'img'">PNG</template>
-                            <template v-if="option === 'svg'">SVG</template>
-                        </template>
-                    </ComboBox>
-                </Grid>
-            </Flex>
-            <Flex column class="gap-2">
-                <Flex>
-                    <div>Preview</div>
-                    <Grow />
-                    <ToggleSwitch v-model="constraint">
-                        Constrain Size Preview
-                    </ToggleSwitch>
+        <CardBase>
+            <Flex column class="w-fit p-4 gap-3 lg:flex-row">
+                <Flex column class="gap-2">
+                    <div>QR Code Content</div>
+                    <TextBox multiline class="w-min-100" v-model="value" placeholder="Add text or link here!" />
+                    <Grid :columns="2" class="gap-2 justify-center items-center">
+                        <div>Foreground Color</div>
+                        <div>Background Color</div>
+                        <ColorHexEditorShared v-model="foreground" />
+                        <ColorHexEditorShared v-model="background" />
+                        <div>Padding</div>
+                        <div>QR Size</div>
+                        <NumberBox placeholder="Padding" mode="integer_positive" v-model="padding" />
+                        <NumberBox placeholder="QR Size" mode="integer_positive" v-model="size" />
+                        <div>Image Kind</div>
+                        <ComboBox :options="(['img', 'svg'] as const)" v-model="mode">
+                            <template v-slot="{ option }">
+                                <template v-if="option === 'img'">PNG</template>
+                                <template v-if="option === 'svg'">SVG</template>
+                            </template>
+                        </ComboBox>
+                    </Grid>
                 </Flex>
-                <QRCodeRenderer ref="qrCode" class="rounded-2 border border-control-strong"
-                    :class="constraint ? 'w-100 h-100' : ''" alt="" :value :mode :foreground :background :size
-                    :padding />
-                <Flex class="gap-2">
-                    <Grow />
-                    <Button @click="downloadQr" title="Download" class="pl-1.5 flex gap-1">
-                        <IconArrowDownload alt="" />
-                        Download
-                    </Button>
-                    <Button @click="copyQrData" class="pl-1.5 flex gap-1" title="Copy Source">
-                        <IconCopy alt="Copy" />
-                        Data URL
-                    </Button>
-                    <Button v-if="mode === 'svg'" @click="copyQr" class="pl-1.5 flex gap-1" title="Copy Source">
-                        <IconCopy alt="Copy" />
-                        Source
-                    </Button>
-                    <Button v-if="mode === 'img'" @click="copyQr" class="pl-1.5 flex gap-1" title="Copy Source">
-                        <IconCopy alt="Copy" />
-                        Image
-                    </Button>
+                <Flex column class="gap-2">
+                    <Flex>
+                        <div>Preview</div>
+                        <Grow />
+                        <ToggleSwitch v-model="constraint">
+                            Constrain Size Preview
+                        </ToggleSwitch>
+                    </Flex>
+                    <QRCodeRenderer ref="qrCode" class="rounded-2 border border-control-strong"
+                        :class="constraint ? 'w-100 h-100' : ''" alt="" :value :mode :foreground :background :size
+                        :padding />
+                    <Flex class="gap-2">
+                        <Grow />
+                        <Button @click="downloadQr" title="Download" class="pl-1.5 flex gap-1">
+                            <IconArrowDownload alt="" />
+                            Download
+                        </Button>
+                        <Button @click="copyQrData" class="pl-1.5 flex gap-1" title="Copy Source">
+                            <IconCopy alt="Copy" />
+                            Data URL
+                        </Button>
+                        <Button v-if="mode === 'svg'" @click="copyQr" class="pl-1.5 flex gap-1" title="Copy Source">
+                            <IconCopy alt="Copy" />
+                            Source
+                        </Button>
+                        <Button v-if="mode === 'img'" @click="copyQr" class="pl-1.5 flex gap-1" title="Copy Source">
+                            <IconCopy alt="Copy" />
+                            Image
+                        </Button>
+                    </Flex>
                 </Flex>
             </Flex>
-        </Flex>
+        </CardBase>
         <template #summary>
             Generate QR codes from text or links.
         </template>

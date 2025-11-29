@@ -1,19 +1,21 @@
 <template>
-  <Flex class="gap-2 rounded-md border border-control-primary bg-card p-3 shadow-sm">
-    <Flex class="lg:flex-row items-center justify-between">
-      <div class="font-semibold">Repeat {{ stmt.iterations }} time{{ stmt.iterations === 1 ? '' : 's' }}</div>
-      <Flex class="items-center gap-2">
-        <Button size="xs" variant="regular" @click="updateIterations(Math.max(1, stmt.iterations - 1))"
-          :disabled="stmt.iterations <= 1">-</Button>
-        <Button size="xs" variant="regular" @click="updateIterations(stmt.iterations + 1)">+</Button>
-        <SimplySoundsContextTools :index />
+  <CardBase>
+    <Flex class="gap-2">
+      <Flex class="lg:flex-row items-center justify-between">
+        <div class="font-semibold">Repeat {{ stmt.iterations }} time{{ stmt.iterations === 1 ? '' : 's' }}</div>
+        <Flex class="items-center gap-2">
+          <Button size="xs" variant="regular" @click="updateIterations(Math.max(1, stmt.iterations - 1))"
+            :disabled="stmt.iterations <= 1">-</Button>
+          <Button size="xs" variant="regular" @click="updateIterations(stmt.iterations + 1)">+</Button>
+          <SimplySoundsContextTools :index />
+        </Flex>
       </Flex>
+      <div class="pl-3 border-l-2 border-control-primary/60">
+        <SimplySoundsContextBlocks :statements="stmt.statements" :path="[...path, index]"
+          @update:statements="statements => parent.updateAt<LoopStatement>(index, stmt => ({ ...stmt, statements }))" />
+      </div>
     </Flex>
-    <div class="pl-3 border-l-2 border-control-primary/60">
-      <SimplySoundsContextBlocks :statements="stmt.statements" :path="[...path, index]"
-        @update:statements="statements => parent.updateAt<LoopStatement>(index, stmt => ({ ...stmt, statements }))" />
-    </div>
-  </Flex>
+  </CardBase>
 </template>
 
 <script setup lang="ts">

@@ -56,7 +56,7 @@ const displayRef = useTemplateRef('display')
 </script>
 <template>
     <Feature category="none" tool="RNG" class="flex justify-center">
-        <div class="p-5 bg-control-primary rounded-lg">
+        <Card class="p-5">
             <Grid columns="auto" md-columns="auto 200px" class="gap-2">
                 <!-- NavigationTabs -->
                 <NavigationTabs v-model="mode" :options="['integer', 'real']" class="md:col-span-2" />
@@ -89,7 +89,7 @@ const displayRef = useTemplateRef('display')
                 </Flex>
             </Grid>
             <RandomHistory v-model="history" />
-        </div>
+        </Card>
         <template #summary>
             Generate random integers or real numbers within a custom range.
         </template>

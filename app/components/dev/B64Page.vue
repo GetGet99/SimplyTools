@@ -42,9 +42,6 @@ const w = window
                 <TextBox v-model="input" :placeholder="mode === 'atob' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="resize-none" multiline />
             </InputTextBoxTools>
-            <!-- <BinaryInput placeholder="Test" :model-value="{ editingType: 'utf8', value: '' }">
-
-            </BinaryInput> -->
             <OutputTextBoxTools :output filename-hint="mode === 'btoa' ? 'base64.txt' : 'decoded.txt'">
                 <TextBox :model-value="output" readonly :placeholder="mode === 'btoa' ? 'Base 64 (A)' : 'Normal Text (B)'"
                     class="resize-none" multiline />
@@ -60,16 +57,3 @@ const w = window
         </template>
     </Feature>
 </template>
-<style lang="css">
-@reference '~~/layers/simplytools-ui/app/app.css';
-
-.b64-textbox-controls {
-    @apply rounded-control rounded-l-none border bg-control-primary border-border-control-primary border-l-0 border-b-2 border-b-control-strong peer-focus:border-b-textbox-accent-highlight peer-focus:bg-transparent;
-}
-
-@layer components {
-    .b64-textbox-button {
-        @apply p-button-icon pt-1 border-none rounded-none;
-    }
-}
-</style>

@@ -130,7 +130,7 @@ const finalTranslation = computed(() => {
 </script>
 
 <template>
-  <div class="relative h-40 overflow-hidden border border-border-control-primary rounded-2xl bg-control-primary">
+  <Card class="p-0 relative h-40 overflow-hidden rounded-2xl">
     <div class="w-max inset-0 flex flex-col items-center will-change-transform" :style="{
       transform: `translateY(${finalTranslation}px)`
     }">
@@ -145,5 +145,5 @@ const finalTranslation = computed(() => {
     <!-- Center highlight -->
     <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-16 border-y-4 border-accent-primary pointer-events-none">
     </div>
-  </div>
+  </Card>
 </template>

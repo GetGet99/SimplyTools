@@ -1,44 +1,42 @@
 <template>
-  <Flex column class="gap-2 rounded-md border border-control-primary bg-card p-3 shadow-sm">
-    <Flex column class="lg:flex-row items-center justify-between">
-      <Flex class="gap-2">
-        <div class="font-semibold text-nowrap">Play Notes</div>
-        <div v-if="!previewMode" class="italic">Tap/Left click to remove. Right click to preview notes.</div>
-        <div v-else class="italic">Tap/Left click to preview notes.</div>
+  <CardBase>
+    <Flex column class="gap-2">
+      <Flex column class="lg:flex-row items-center justify-between">
+        <Flex class="gap-2">
+          <div class="font-semibold text-nowrap">Play Notes</div>
+          <div v-if="!previewMode" class="italic">Tap/Left click to remove. Right click to preview notes.</div>
+          <div v-else class="italic">Tap/Left click to preview notes.</div>
+        </Flex>
+        <Flex class="items-center gap-2">
+          <Button size="xs" @click="parent.selectSequenceAt(index)">{{ isSelected ? 'Hide Keyboard' : 'Add Notes'
+          }}</Button>
+          <SimplySoundsContextTools :index />
+        </Flex>
       </Flex>
-      <Flex class="items-center gap-2">
-        <Button size="xs" @click="parent.selectSequenceAt(index)">{{ isSelected ? 'Hide Keyboard' : 'Add Notes' }}</Button>
-        <SimplySoundsContextTools :index />
+      <VueDraggable v-model="stmt.sequence" tag="div" class="mt-1 flex flex-wrap gap-1 bg-transparent" :animation="150">
+        <button v-for="(element, index) in stmt.sequence" :key="element.id"
+          :ref="el => { if (el) buttonRefs[index] = el as HTMLButtonElement }"
+          class="px-4 py-2 md:px-2 md:py-0.5 md:group-data-[touch='true']:px-4 md:group-data-[touch='true']:py-2 rounded border text-xs select-none transition-transform cursor-move bg-transparent"
+          :class="[chipClass(element), { jumping: isChipJumping(index) }]" @mousedown="isMouseInteraction = true"
+          @contextmenu.prevent="isMouseInteraction = true; handlePreviewNote(element, index)"
+          @click="previewMode ? handlePreviewNote(element, index) : handleRemoveNote(index)"
+          @wheel.prevent="handleWheel($event, index)" @focus="handleFocus(element, index)"
+          @keydown.enter.prevent="previewMode ? handlePreviewNote(element, index) : handleRemoveNote(index)"
+          @keydown.delete.prevent="handleRemoveNote(index)" @keydown.backspace.prevent="handleRemoveNote(index)"
+          @keydown.d.prevent="handleDuplicate(index)" @keydown.space.prevent="handlePreviewNote(element, index)"
+          @keydown.arrow-left.prevent="handleArrowKey($event, index, -1)"
+          @keydown.arrow-right.prevent="handleArrowKey($event, index, 1)"
+          @keydown.arrow-up.prevent="handleArrowKeyVertical($event, index, -1)"
+          @keydown.arrow-down.prevent="handleArrowKeyVertical($event, index, 1)" type="button"
+          :title="'Drag to reorder | Left click: remove | Right click: preview | Shift + scroll: adjust length | Tab/Arrows: navigate | Shift+Left/Right: adjust length | Shift+Up/Down: adjust pitch | Alt+Arrows: reorder | D: duplicate | Enter: activate'">
+          {{ renderItem(element) }}
+        </button>
+      </VueDraggable>
+      <Flex column v-if="isSelected" class="items-center justify-center">
+        <SimplySoundsNotes />
       </Flex>
     </Flex>
-    <VueDraggable v-model="stmt.sequence" tag="div" class="mt-1 flex flex-wrap gap-1 bg-transparent" :animation="150">
-      <button v-for="(element, index) in stmt.sequence" :key="element.id"
-        :ref="el => { if (el) buttonRefs[index] = el as HTMLButtonElement }"
-        class="px-4 py-2 md:px-2 md:py-0.5 md:group-data-[touch='true']:px-4 md:group-data-[touch='true']:py-2 rounded border text-xs select-none transition-transform cursor-move bg-transparent"
-        :class="[chipClass(element), { jumping: isChipJumping(index) }]"
-        @mousedown="isMouseInteraction = true"
-        @contextmenu.prevent="isMouseInteraction = true; handlePreviewNote(element, index)"
-        @click="previewMode ? handlePreviewNote(element, index) : handleRemoveNote(index)"
-        @wheel.prevent="handleWheel($event, index)"
-        @focus="handleFocus(element, index)"
-        @keydown.enter.prevent="previewMode ? handlePreviewNote(element, index) : handleRemoveNote(index)"
-        @keydown.delete.prevent="handleRemoveNote(index)"
-        @keydown.backspace.prevent="handleRemoveNote(index)"
-        @keydown.d.prevent="handleDuplicate(index)"
-        @keydown.space.prevent="handlePreviewNote(element, index)"
-        @keydown.arrow-left.prevent="handleArrowKey($event, index, -1)"
-        @keydown.arrow-right.prevent="handleArrowKey($event, index, 1)"
-        @keydown.arrow-up.prevent="handleArrowKeyVertical($event, index, -1)"
-        @keydown.arrow-down.prevent="handleArrowKeyVertical($event, index, 1)"
-        type="button"
-        :title="'Drag to reorder | Left click: remove | Right click: preview | Shift + scroll: adjust length | Tab/Arrows: navigate | Shift+Left/Right: adjust length | Shift+Up/Down: adjust pitch | Alt+Arrows: reorder | D: duplicate | Enter: activate'">
-        {{ renderItem(element) }}
-      </button>
-    </VueDraggable>
-    <Flex column v-if="isSelected" class="items-center justify-center">
-      <SimplySoundsNotes />
-    </Flex>
-  </Flex>
+  </CardBase>
 </template>
 
 <script setup lang="ts">

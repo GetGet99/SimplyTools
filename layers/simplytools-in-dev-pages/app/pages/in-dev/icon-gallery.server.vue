@@ -10,14 +10,14 @@ components.sort((a, b) => a[0].localeCompare(b[0]));
 
 <template>
   <Feature class="grid gap-4 overflow-scroll" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-    <Flex column v-for="[name, Component] in components" :key="name"
-      class="items-center gap-2 p-4 border rounded bg-card border-border-control-primary">
-      <component :is="Component" />
-      <code class="text-xs">&lt;{{ name }} /&gt;</code>
-      <Button @click="copyToClipboard(`<${name} />`)">
-        <IconCopy alt="Copy" />
-      </Button>
-    </Flex>
-    ABC
+    <CardBase>
+      <Flex column v-for="[name, Component] in components" :key="name" class="items-center">
+        <component :is="Component" />
+        <code class="text-xs">&lt;{{ name }} /&gt;</code>
+        <Button @click="copyToClipboard(`<${name} />`)">
+          <IconCopy alt="Copy" />
+        </Button>
+      </Flex>
+    </CardBase>
   </Feature>
 </template>

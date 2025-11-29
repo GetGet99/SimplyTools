@@ -320,6 +320,12 @@ body {
     .style-textbox-focus:not(.style-textbox-group > .style-textbox-focus) {
         @apply utils-style-textbox-focus;
     }
+    .style-layer {
+        @apply bg-control-primary border rounded-control control-border-control;
+    }
+    .style-card {
+        @apply p-4 border control-border-control bg-card rounded-2;
+    }
 }
 
 @import './styles/control.css';

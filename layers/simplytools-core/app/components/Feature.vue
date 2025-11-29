@@ -38,7 +38,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                         </slot>
                     </span></summary>
                 <Flex class="justify-center mt-2">
-                    <div class="p-2 border control-border-control bg-card rounded-2 text-left max-w-max">
+                    <Card class="text-left max-w-max">
                         <slot name="details">
                             That means unfortunately, I have not written the details yet. 😅
                         </slot>
@@ -61,7 +61,7 @@ useHead({ title: `${tool.value.appName} - ${tool.value.toolName}` })
                                 browser's
                                 privacy policy for more details.
                             </template></p>
-                    </div>
+                    </Card>
                 </Flex>
             </details>
             <Footer class="mt-1! app:not-app-browser:hidden" />
